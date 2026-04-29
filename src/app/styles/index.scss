@@ -1,0 +1,22 @@
+@use "./reset.scss";
+@use "./variables/global.scss";
+@use "./themes/light.scss";
+@use "./themes/dark.scss";
+
+body {
+    font: var(--font-m);
+    color: var(--primary-color);
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    background: var(--bg-color);
+}
+
+#root {
+    width: 100%;
+}
+
+.App {
+    width: 100%;
+
+}

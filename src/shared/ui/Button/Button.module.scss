@@ -1,0 +1,41 @@
+.Button {
+    box-sizing: border-box;
+    cursor: pointer;
+    padding: 0;
+    border: none;
+    background: none;
+    font: inherit;
+}
+
+.default {
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+.clear {
+    border: none;
+}
+
+.outline {
+
+}
+
+.size_s {
+    font: var(--font-s);
+    height: var(--font-line-s);
+}
+
+.size_m {
+    font: var(--font-m);
+    height: var(--font-line-m);
+}
+
+.size_l {
+    font: var(--font-l);
+    height: var(--font-line-l);
+}
+
+.size_xl {
+    font: var(--font-xl);
+    height: var(--font-line-xl);
+}
