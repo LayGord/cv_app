@@ -1,0 +1,32 @@
+.Select {
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0px 0px 3px 0px var(--shadow-color);
+    height: 40px;
+    padding: 8px 7px;
+    appearance: none;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.Select:hover,
+.Select:focus {
+    background-color: var(--light-bg-color);
+    transition: background-color 0.2s;
+}
+
+.Select:focus {
+    box-shadow: 0px 0px 3px 0px var(--accent-shadow-color);
+}
+
+.SelectOption {
+    color: var(--primary-color);
+}
+
+.placeholder,
+.placeholder:disabled {
+    display: none;
+    opacity: 1;
+}

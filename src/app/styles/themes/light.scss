@@ -5,10 +5,17 @@ body.light {
 
     /* Background */
     --bg-color: #EFF5F6;
-    --light-bg-color: #E2EEF1;
+    --light-bg-color: #eef3fd;
     --dark-bg-color: #FFFFFF;
 
     /* Skeleton */
     --skeleton-shadow: #dbdbdb;
     --skeleton-color: rgba(255, 255, 255, 0.2);
+
+    /* borders, shadows */
+    --shadow-color: #595959;
+
+    /* Other colors */
+    --accent-color: #e1ebff;
+    --accent-shadow-color: #1559eb;
 }

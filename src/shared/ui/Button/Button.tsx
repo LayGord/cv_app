@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 import { classNames } from "shared/lib/classNames/classNames";
 import cls from "./Button.module.scss";
 
@@ -6,7 +6,8 @@ import cls from "./Button.module.scss";
 export enum ButtonTheme {
     'DEFAULT' = 'default',
     'CLEAR' = 'clear',
-    'OUTLINE' = 'outline'
+    'OUTLINE' = 'outline',
+    'ACCENT' = 'accent',
 };
 
 export enum ButtonSize {
@@ -16,7 +17,7 @@ export enum ButtonSize {
     'XL' = 'size_xl'
 };
 
-interface ButtonProps {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     className?: string;
     theme?: ButtonTheme;
     size?: ButtonSize;

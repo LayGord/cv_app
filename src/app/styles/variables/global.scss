@@ -1,5 +1,5 @@
 :root {
-    // fonts
+    /* fonts */
     --font-family-main: system-ui, -apple-system, "Segoe UI", serif;
     --font-family-code: consolas, 'Times New Roman', serif;
 
@@ -23,4 +23,9 @@
     --font-xl: var(--font-size-xl) / var(--font-line-xl) var(--font-family-main);
     --font-xl-code: var(--font-size-xl) / var(--font-line-xl) var(--font-family-code);
 
+
+    /* Z-indexes */
+    --multi-select-list-z-index: 20;
+    --multi-select-input-z-index: 21;
+    --multi-select-closeBtn-z-index: 22;
 }

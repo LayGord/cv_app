@@ -1,0 +1,46 @@
+import { memo, useCallback, useLayoutEffect, useRef } from "react";
+import { classNames } from "shared/lib/classNames/classNames";
+import cls from "./TextArea.module.scss";
+
+
+interface TextAreaProps {
+    className?: string;
+    value?: string;
+    onChange?: (value: string) => void;
+    minHeight?: number; // 24 * rownum + 14;
+}
+
+export const TextArea = memo((props: TextAreaProps) =>{
+    const {
+        className,
+        value,
+        onChange,
+        minHeight=62,
+        ...otherProps
+    } = props;
+
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
+    const onChangeHandler = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        return onChange?.(e.target.value);
+    }, [onChange]);
+
+    // dynamically adjust textarea height
+    useLayoutEffect(() => {
+        console.log(textareaRef.current?.scrollHeight);
+        if (textareaRef.current) {
+            textareaRef.current.style.height = "inherit";
+            textareaRef.current.style.height = `${Math.max(textareaRef.current.scrollHeight, minHeight)}px`;
+        }
+    }, [minHeight, value]);
+
+    return(
+        <textarea
+            className={ classNames(cls.TextArea, {}, [className]) }
+            ref={textareaRef}
+            value={value}
+            onChange={onChangeHandler}
+            style={{minHeight: minHeight}}
+            {...otherProps}
+        />
+    );
+});

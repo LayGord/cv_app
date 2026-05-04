@@ -1,55 +1,56 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 
-import { Button, ButtonSize, ButtonTheme } from './Button';
+import { MultiSelect } from './MultiSelect';
+
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-    title: 'shared/Button',
-    component: Button,
+    title: 'shared/MultiSelect',
+    component: MultiSelect,
     parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
         layout: 'centered',
+        docs: {
+            story: {
+                inline: false,
+                iframeHeight: 450,
+            },
+        },
     },
     // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
     tags: ['autodocs'],
     // More on argTypes: https://storybook.js.org/docs/api/argtypes
-    argTypes: {},
+    argTypes: {
+    },
     // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#story-args
     args: { },
-} satisfies Meta<typeof Button>;
+} satisfies Meta<typeof MultiSelect>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const options = {
+    '1': {displayName: "option1", id: '1'},
+    '2':{displayName: "option2", id: '2'},
+    '3':{displayName: "option3", id: '3'},
+    '4':{displayName: "option4", id: '4'},
+    '5':{displayName: "option5", id: '5'},
+    '6':{displayName: "option6", id: '6'},
+    '7':{displayName: "option7", id: '7'},
+    '8':{displayName: "option8", id: '8'},
+    '9':{displayName: "option9", id: '9'},
+    '10':{displayName: "option10", id: '10'},
+    '11':{displayName: "option11", id: '11'},
+    '12':{displayName: "option12", id: '12'},
+}
+
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Default: Story = {
     args: {
-        children: 'text',
-        theme: ButtonTheme.DEFAULT,
-        size: ButtonSize.M
+        id: 'str',
+        options: options,
+        value: []
     },
 };
 
-export const Clear: Story = {
-    args: {
-        children: 'text',
-        theme: ButtonTheme.CLEAR,
-        size: ButtonSize.M
-    },
-};
 
-export const Outline: Story = {
-    args: {
-        children: 'text',
-        theme: ButtonTheme.OUTLINE,
-        size: ButtonSize.M
-    },
-};
-
-export const Accent: Story = {
-    args: {
-        children: 'text',
-        theme: ButtonTheme.ACCENT,
-        size: ButtonSize.M
-    },
-};

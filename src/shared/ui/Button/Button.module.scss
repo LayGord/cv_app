@@ -5,37 +5,61 @@
     border: none;
     background: none;
     font: inherit;
+    border-radius: 4px;
+    text-align: center;
+
+    &:hover {
+        background-color: var(--light-bg-color);
+        transition: background-color 0.3s;
+    }
 }
 
 .default {
     color: var(--primary-color);
-    border: 1px solid var(--primary-color);
+    //border: 1px solid var(--primary-color);
+    background-color: var(--dark-bg-color);
+    padding: 8px 10px;
+    box-shadow: 0px 0px 3px 0px var(--shadow-color);
 }
 
 .clear {
+    color: var(--primary-color);
     border: none;
+    background: none;
+    padding: 8px 8px;
 }
 
 .outline {
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    box-shadow: 0px 0px 3px 0px var(--shadow-color);
+    background: none;
+    padding: 7px 10px;
+}
 
+.accent {
+    color: var(--accent-shadow-color);
+    background-color: var(--accent-color);
+    padding: 8px 10px;
+    box-shadow: 0px 0px 3px 0px var(--accent-shadow-color);
 }
 
 .size_s {
     font: var(--font-s);
-    height: var(--font-line-s);
+    height: calc(var(--font-line-s) + 16px);
 }
 
 .size_m {
     font: var(--font-m);
-    height: var(--font-line-m);
+    height: calc(var(--font-line-m) + 16px);
 }
 
 .size_l {
     font: var(--font-l);
-    height: var(--font-line-l);
+    height: calc(var(--font-line-l) + 16px);
 }
 
 .size_xl {
     font: var(--font-xl);
-    height: var(--font-line-xl);
+    height: calc(var(--font-line-xl) + 16px);
 }

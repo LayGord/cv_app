@@ -1,0 +1,52 @@
+.Input {
+    width: 100%;
+    position: relative;
+    height: 40px;
+};
+
+
+.inputField {
+    width: 100%;
+    font: var(--font-m);
+    outline: none;
+    padding: 8px;
+    border-radius: 4px;
+    border:  none;
+    box-shadow: 0px 0px 3px 0px var(--shadow-color);
+    background-color: var(--dark-bg-color);
+}
+
+.inputField:hover,
+.inputField:focus {
+    background-color: var(--light-bg-color);
+    transition: background-color 0.2s;
+}
+
+.inputField:focus {
+    box-shadow: 0px 0px 3px 0px var(--accent-shadow-color);
+}
+
+.hasLabel {
+    .inputField {
+        padding: 14px 8px 2px 8px;
+    }
+    .inputLabel {
+        position: absolute;
+        color: var(--shadow-color);
+        font: var(--font-m);
+        top: 7px;
+        left: 9px;
+        transition: top, font 0.2s;
+        cursor: text;
+    }
+
+    .inputField:focus + .inputLabel,
+    .inputField:not(:placeholder-shown) + .inputLabel  {
+        font: var(--font-s);
+        top: -1px;
+
+        transition: top, font 0.2s;
+    }
+}
+
+
