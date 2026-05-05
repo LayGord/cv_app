@@ -30,16 +30,16 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const options = {
-    '1': {displayName: "option1", id: '1'},
-    '2':{displayName: "option2", id: '2'},
-    '3':{displayName: "option3", id: '3'},
-    '4':{displayName: "option4", id: '4'},
-    '5':{displayName: "option5", id: '5'},
-    '6':{displayName: "option6", id: '6'},
-    '7':{displayName: "option7", id: '7'},
-    '8':{displayName: "option8", id: '8'},
-    '9':{displayName: "option9", id: '9'},
-    '10':{displayName: "option10", id: '10'},
+    '1': {displayName: "option1", id: '1', category: 'category1'},
+    '2':{displayName: "option2", id: '2', category: 'category1'},
+    '3':{displayName: "option3", id: '3', category: 'category1'},
+    '4':{displayName: "option4", id: '4', category: 'category1'},
+    '5':{displayName: "option5", id: '5', category: 'category1'},
+    '6':{displayName: "option6", id: '6', category: 'category2'},
+    '7':{displayName: "option7", id: '7', category: 'category2'},
+    '8':{displayName: "option8", id: '8', category: 'category1'},
+    '9':{displayName: "option9", id: '9', category: 'category2'},
+    '10':{displayName: "option10", id: '10', category: 'category2'},
     '11':{displayName: "option11", id: '11'},
     '12':{displayName: "option12", id: '12'},
 }
@@ -49,7 +49,16 @@ export const Default: Story = {
     args: {
         id: 'str',
         options: options,
-        value: []
+        value: [],
+    },
+};
+
+export const GroupedByCategory: Story = {
+    args: {
+        id: 'str',
+        options: options,
+        value: [],
+        groupByCategories: true,
     },
 };
 

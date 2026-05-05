@@ -12,6 +12,7 @@ interface MultiSelectData {
 }
 
 type MultiSelectOptions = Record<string, MultiSelectData>;
+type GroupedMultiSelectOptions = Record<string, MultiSelectData[]>
 
 type MultiSelectVisibility = 'opening' | 'opened' | 'closing' | 'closed';
 
@@ -21,6 +22,7 @@ interface MultiSelectProps {
     options: MultiSelectOptions;
     value?: string[]; // id`s of options
     onChange?: (value: string[]) => void;
+    groupByCategories?: boolean;
 }
 
 export const MultiSelect = (props: MultiSelectProps) => {
@@ -29,11 +31,29 @@ export const MultiSelect = (props: MultiSelectProps) => {
         options,
         //value=[],
         //onChange,
+        groupByCategories=false,
     } = props;
 
     const [value, onChange] = useState<string[]>([]);
 
+    // display logic 
+    const [visibility, setVisibility] = useState<MultiSelectVisibility>('closed');
 
+    const onOpenClick = useCallback(() => {
+        if (visibility !== 'opened') {setVisibility('opening')};
+        setTimeout(() => {
+            setVisibility('opened');
+        }, 10)
+    }, [visibility]);
+
+    const onCloseClick = useCallback(() => {
+        setVisibility('closing');
+        setTimeout(() => {
+            setVisibility('closed');
+        }, 250)
+    }, []);
+
+    // filtration logic
     const [search, setSearch] = useState('');
     const onSearchChange = useCallback((value: string) => {
         setSearch(value);
@@ -48,21 +68,7 @@ export const MultiSelect = (props: MultiSelectProps) => {
         [options, search]
     );
 
-    const [visibility, setVisibility] = useState<MultiSelectVisibility>('closed');
-
-    const onOpenClick = useCallback(() => {
-        if (visibility !== 'opened') {setVisibility('opening')};
-        setTimeout(() => {
-            setVisibility('opened');
-        }, 10)
-    }, [visibility]);
-    const onCloseClick = useCallback(() => {
-        setVisibility('closing');
-        setTimeout(() => {
-            setVisibility('closed');
-        }, 250)
-    }, []);
-
+    // render logic
     const onOptionClick = useCallback((optionId: string) => {
         let optionsIds;
         if (value.includes(optionId)) {
@@ -75,11 +81,28 @@ export const MultiSelect = (props: MultiSelectProps) => {
         onChange?.(optionsIds);
     }, [onChange, value]);
 
+    const groupOptionsByCategory = useCallback((options: MultiSelectData[]): GroupedMultiSelectOptions  => {
+        return options.reduce<GroupedMultiSelectOptions>(
+            (acc, option) => {
+                const category = option.category ?? 'Other';
+
+                if (!acc[category]) {
+                    acc[category] = [];
+                }
+
+                acc[category].push(option);
+                return acc;
+            },
+            {}
+        );
+    }, []);
+
     const renderOption = useCallback((option: MultiSelectData) => {
         const onClick = () => onOptionClick(option.id);
 
         return (
             <Button
+                key={option.id}
                 className={cls.option}
                 theme={ value.includes(option.id) ? ButtonTheme.ACCENT : ButtonTheme.DEFAULT}
                 onClick={onClick} 
@@ -87,7 +110,24 @@ export const MultiSelect = (props: MultiSelectProps) => {
                 { option?.displayName }
             </Button>
         )
-    }, [onOptionClick, value])
+    }, [onOptionClick, value]);
+
+    const renderOptionsList = useCallback((options: MultiSelectData[], grouped: boolean) => {
+        if (grouped) {
+            return Object.entries(groupOptionsByCategory(options)).map(([category, options]) => {
+                return (
+                    <>
+                        <div className={cls.categoryName}>{ category }</div>
+                        {
+                            options.map((option) => renderOption(option))
+                        }
+                    </>
+                )
+            })
+        } else {
+            return options.map((option) => renderOption(option))
+        }
+    }, [groupOptionsByCategory, renderOption]);
 
     return(
         <div className={ classNames(cls.MultiSelect, {}, [className, cls[visibility]]) }>
@@ -113,14 +153,14 @@ export const MultiSelect = (props: MultiSelectProps) => {
                     <CloseIcon />
                 </Button>
             </div>
-
+ 
             <div
                 className={cls.optionsList}
             >
                 { !filteredOptions.length && <span className={cls.searchNotFound}>не найдено записей</span> }
-                { filteredOptions.map((option) => renderOption(option)) }
+                { renderOptionsList(filteredOptions, groupByCategories) }
             </div>
-
+   
         </div>
     );
 };

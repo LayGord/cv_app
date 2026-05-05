@@ -104,3 +104,10 @@
         transition: opacity 0.3s;
     }
 }
+
+.categoryName {
+    width: 100%;
+    padding: 8px;
+    color: var(--shadow-color);
+    border-bottom: 1px solid rgb(from var(--shadow-color) r g b / 0.6);
+}
