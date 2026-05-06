@@ -28,4 +28,8 @@
     --multi-select-list-z-index: 20;
     --multi-select-input-z-index: 21;
     --multi-select-closeBtn-z-index: 22;
+
+    /* heights */
+    --navbar-height: 60px;
+    --page-wrapper-height: calc(100vh - var(--navbar-height));
 }

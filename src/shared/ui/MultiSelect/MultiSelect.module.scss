@@ -30,6 +30,13 @@
     }
 }
 
+.closeBtn:hover {
+    & path {
+        stroke: rgb(from var(--accent-shadow-color) r g b / 0.7);
+        transition: stroke 0.2s;
+    }
+}
+
 
 .optionsList {
     width: 450px;

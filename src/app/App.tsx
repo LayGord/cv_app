@@ -1,9 +1,14 @@
-import React from 'react';
+import { MainPage } from 'pages/MainPage';
+import React, { Suspense } from 'react';
+import { Navbar } from 'widgets/Navbar';
 
 function App() {
     return (
         <div className="App">
-          hello world
+            <Navbar />
+            <Suspense fallback={<div>Loading...</div>}>
+                <MainPage />
+            </Suspense>
         </div>
     );
 }

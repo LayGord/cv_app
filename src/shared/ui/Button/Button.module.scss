@@ -3,6 +3,7 @@
     cursor: pointer;
     padding: 0;
     border: none;
+    box-shadow: none;
     background: none;
     font: inherit;
     border-radius: 4px;
@@ -20,6 +21,11 @@
     background-color: var(--dark-bg-color);
     padding: 8px 10px;
     box-shadow: 0px 0px 3px 0px var(--shadow-color);
+
+    &:active {
+        box-shadow: 0px 0px 3px 0px var(--accent-shadow-color);
+    }
+
 }
 
 .clear {
@@ -35,6 +41,10 @@
     box-shadow: 0px 0px 3px 0px var(--shadow-color);
     background: none;
     padding: 7px 10px;
+
+    &:active {
+        box-shadow: 0px 0px 3px 0px var(--accent-shadow-color);
+    }
 }
 
 .accent {
