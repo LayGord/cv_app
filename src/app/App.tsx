@@ -1,14 +1,11 @@
-import { MainPage } from 'pages/MainPage';
-import React, { Suspense } from 'react';
 import { Navbar } from 'widgets/Navbar';
+import { AppRouter } from './providers/RouterProvider';
 
 function App() {
     return (
         <div className="App">
             <Navbar />
-            <Suspense fallback={<div>Loading...</div>}>
-                <MainPage />
-            </Suspense>
+            <AppRouter />
         </div>
     );
 }

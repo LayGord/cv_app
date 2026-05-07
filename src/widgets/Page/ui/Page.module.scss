@@ -1,6 +1,8 @@
 .Page {
     width: 100vw;
     height: var(--page-wrapper-height);
-
     overflow-y: auto;
+
+    display: flex;
+    justify-content: center;
 };
