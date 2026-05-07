@@ -14,7 +14,17 @@ export const ThemeProvider = ({ initialTheme, children }: ThemeProviderProps) =>
     const [theme, setTheme] = useState<AppTheme>(initialTheme || defaultTheme);
 
     useEffect(() => {
-        document.body.className += ` ${theme}`
+        const container = document.getElementById('theme-container');
+
+        if (!container) {
+            // default, expected case
+            document.body.className = `${theme}`;
+        } else {
+            // sb only case
+            console.log('ENV=Storybook. set theme to #theme-container');
+            container.className = `${theme}`;
+        };
+
         localStorage.setItem(LOCAL_STORAGE_THEME_KEY, theme);
     }, [theme]);
 

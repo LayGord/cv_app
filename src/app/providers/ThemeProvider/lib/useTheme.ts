@@ -13,7 +13,12 @@ export function useTheme(): UseThemeResult {
     const {theme, setTheme} = useContext(ThemeContext);
 
     const applyTheme = (theme: AppTheme) => {
-        document.body.className = theme;
+        const container = document.getElementById('theme-container');
+        if (!container) {
+            document.body.className = theme;
+        } else {
+            container.className = theme;
+        };
         localStorage.setItem(LOCAL_STORAGE_THEME_KEY, theme);
     };
 

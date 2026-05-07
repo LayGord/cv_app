@@ -6,4 +6,13 @@
 
     background-color: var(--dark-bg-color);
     box-shadow: 0px 0px 3px 0px var(--shadow-color);
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.switchers {
+    margin-left: auto;
+    margin-right: calc((100vw - 1280px) / 2 + 15px);
 }
