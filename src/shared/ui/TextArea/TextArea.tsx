@@ -7,7 +7,7 @@ interface TextAreaProps {
     className?: string;
     value?: string;
     onChange?: (value: string) => void;
-    minHeight?: number; // 24 * rownum + 14;
+    minHeight?: number; // 24 * rownum + 26;
 }
 
 export const TextArea = memo((props: TextAreaProps) =>{
@@ -15,7 +15,7 @@ export const TextArea = memo((props: TextAreaProps) =>{
         className,
         value,
         onChange,
-        minHeight=62,
+        minHeight=76,
         ...otherProps
     } = props;
 

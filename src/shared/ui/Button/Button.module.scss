@@ -19,7 +19,7 @@
     color: var(--primary-color);
     //border: 1px solid var(--primary-color);
     background-color: var(--dark-bg-color);
-    padding: 8px 10px;
+    padding: 13px;
     box-shadow: 0px 0px 3px 0px var(--shadow-color);
 
     &:active {
@@ -32,7 +32,7 @@
     color: var(--primary-color);
     border: none;
     background: none;
-    padding: 8px 8px;
+    padding: 13px;
 }
 
 .outline {
@@ -40,7 +40,7 @@
     border: 1px solid var(--primary-color);
     box-shadow: 0px 0px 3px 0px var(--shadow-color);
     background: none;
-    padding: 7px 10px;
+    padding: 12px 13px;
 
     &:active {
         box-shadow: 0px 0px 3px 0px var(--accent-shadow-color);
@@ -50,26 +50,26 @@
 .accent {
     color: var(--accent-shadow-color);
     background-color: var(--accent-color);
-    padding: 8px 10px;
+    padding: 13px;
     box-shadow: 0px 0px 3px 0px var(--accent-shadow-color);
 }
 
 .size_s {
     font: var(--font-s);
-    height: calc(var(--font-line-s) + 16px);
+    height: calc(var(--font-line-s) + 26px);
 }
 
 .size_m {
     font: var(--font-m);
-    height: calc(var(--font-line-m) + 16px);
+    height: calc(var(--font-line-m) + 26px);
 }
 
 .size_l {
     font: var(--font-l);
-    height: calc(var(--font-line-l) + 16px);
+    height: calc(var(--font-line-l) + 26px);
 }
 
 .size_xl {
     font: var(--font-xl);
-    height: calc(var(--font-line-xl) + 16px);
+    height: calc(var(--font-line-xl) + 26px);
 }

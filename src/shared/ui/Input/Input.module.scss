@@ -1,7 +1,7 @@
 .Input {
     width: 100%;
     position: relative;
-    height: 40px;
+    height: 50px;
 };
 
 
@@ -9,7 +9,7 @@
     width: 100%;
     font: var(--font-m);
     outline: none;
-    padding: 8px;
+    padding: 13px;
     border-radius: 4px;
     border:  none;
     box-shadow: 0px 0px 3px 0px var(--shadow-color);
@@ -28,24 +28,24 @@
 
 .hasLabel {
     .inputField {
-        padding: 14px 8px 2px 8px;
+        padding: 19px 13px 7px 13px;
     }
     .inputLabel {
         position: absolute;
         color: var(--shadow-color);
         font: var(--font-m);
-        top: 7px;
-        left: 9px;
-        transition: top, font 0.2s;
+        top: 13px;
+        left: 13px;
+        transition: top 0.2s, font 0.2s;
         cursor: text;
     }
 
     .inputField:focus + .inputLabel,
     .inputField:not(:placeholder-shown) + .inputLabel  {
         font: var(--font-s);
-        top: -1px;
+        top: 0px;
 
-        transition: top, font 0.2s;
+        transition: top 0.2s, font 0.2s;
     }
 }
 

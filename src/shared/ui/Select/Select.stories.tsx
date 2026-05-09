@@ -34,14 +34,26 @@ export const Default: Story = {
     },
 };
 
-export const WithPlaceholder: Story = {
+export const WithEmptyValue: Story = {
     args: {
         value: '',
-        placeholder: 'select an item',
+        emptyValue: 'select an item',
         options: [
             {displayValue: 'Option 1', value: '1'},
             {displayValue: 'Option 2', value: '2'},
             {displayValue: 'Option 3', value: '3'},
+        ]
+    },
+};
+
+export const WithPlaceholder: Story = {
+    args: {
+        value: '',
+        placeholder: 'Color',
+        options: [
+            {displayValue: 'Red', value: '1'},
+            {displayValue: 'Green', value: '2'},
+            {displayValue: 'Blue', value: '3'},
         ]
     },
 };

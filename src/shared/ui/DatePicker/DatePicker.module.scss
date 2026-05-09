@@ -1,0 +1,50 @@
+.DatePicker {
+    box-sizing: border-box;
+    cursor: pointer;
+    height: 50px;
+    padding: 13px;
+    border: none;
+    box-shadow: 0 0 3px 0 var(--shadow-color);
+    background: var(--dark-bg-color);
+  
+    border-radius: 4px;
+    text-align: center;
+
+    &:hover {
+        background-color: var(--light-bg-color);
+        transition: background-color 0.3s;
+    }
+
+    &:focus {
+        background-color: var(--light-bg-color);
+        box-shadow: 0 0 3px 0 var(--accent-shadow-color);
+        outline: none;
+    }
+
+    appearance: none;
+}
+
+.datePickerWrapper {
+    position: relative;
+}
+
+
+.hasLabel {
+    .label {
+        position: absolute;
+        top: 1px;
+        left: 13px;
+        font: var(--font-s);
+        color: var(--shadow-color)
+    }
+
+    .DatePicker {
+        padding: 19px 32px 7px 13px;
+    }
+
+    .DatePicker::-webkit-calendar-picker-indicator {
+        position: absolute;
+        top: 13px;
+        right: 13px;
+    }
+}

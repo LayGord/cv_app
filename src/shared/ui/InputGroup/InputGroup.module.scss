@@ -1,0 +1,10 @@
+.InputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.title {
+    color: var(--shadow-color);
+}
