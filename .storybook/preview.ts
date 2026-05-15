@@ -1,5 +1,6 @@
 import type { Preview } from '@storybook/react-webpack5'
 import { ThemeDecorator } from '../src/shared/config/storybook/ThemeDecorator';
+import { RouterDecorator } from '../src/shared/config/storybook/RouterDecorator';
 import { AppTheme } from '../src/app/providers/ThemeProvider';
 
 //@ts-ignore
@@ -13,7 +14,7 @@ const preview: Preview = {
       },
     },
   },
-  decorators: [ThemeDecorator(AppTheme.LIGHT)]
+  decorators: [ThemeDecorator(AppTheme.LIGHT), RouterDecorator]
 };
 
 export default preview;

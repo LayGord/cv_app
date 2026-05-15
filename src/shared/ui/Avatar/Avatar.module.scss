@@ -4,21 +4,36 @@
     box-shadow: 0 0 3px 0 var(--shadow-color);
 }
 
-.Avatar > img{
-    object-fit: contain;
+.Avatar > img {
+    object-fit: cover;
 }
 
 .size_s {
     width: 100px;
     height: 100px;
+
+    & img {
+        width: 80px;
+        height: 80px;
+    }
 }
 
 .size_m {
     width: 200px;
     height: 200px;
+    
+    & img {
+        width: 180px;
+        height: 180px;
+    }
 }
 
 .size_l {
     width: 300px;
     height: 300px;
+
+    & img {
+        width: 280px;
+        height: 280px;
+    }
 }

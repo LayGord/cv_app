@@ -6,9 +6,11 @@
     border: none;
     box-shadow: 0 0 3px 0 var(--shadow-color);
     background: var(--dark-bg-color);
-  
+    width: 100%;
     border-radius: 4px;
     text-align: center;
+    color: var(--primary-color);
+    text-align: left;
 
     &:hover {
         background-color: var(--light-bg-color);
@@ -21,11 +23,13 @@
         outline: none;
     }
 
+
     appearance: none;
 }
 
 .datePickerWrapper {
     position: relative;
+    width: 100%;
 }
 
 
@@ -48,3 +52,16 @@
         right: 13px;
     }
 }
+
+.DatePicker::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+.icon {
+    position: absolute;
+    top: 13px;
+    right: 13px;
+    pointer-events: none;
+    fill: var(--primary-color)
+}
+

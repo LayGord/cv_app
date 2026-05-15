@@ -29,12 +29,11 @@ export const MultiSelect = (props: MultiSelectProps) => {
     const {
         className,
         options,
-        //value=[],
-        //onChange,
+        value=[],
+        onChange,
         groupByCategories=false,
     } = props;
 
-    const [value, onChange] = useState<string[]>([]);
 
     // display logic 
     const [visibility, setVisibility] = useState<MultiSelectVisibility>('closed');

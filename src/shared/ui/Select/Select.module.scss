@@ -7,6 +7,9 @@
     padding: 13px;
     appearance: none;
 
+    color: var(--primary-color);
+    background-color: var(--dark-bg-color);
+
     &:focus {
         outline: none;
     }

@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, memo, useCallback } from "react";
+import { InputHTMLAttributes, memo, useCallback, useMemo } from "react";
 import { classNames, Mods } from "shared/lib/classNames/classNames";
 import cls from "./Input.module.scss";
 
@@ -27,9 +27,9 @@ export const Input = memo((props: InputProps) =>{
 
     const isLabel = Boolean(placeholder && id);
 
-    const mods: Mods = {
+    const mods: Mods = useMemo(() => ({
         [cls.hasLabel]: isLabel,
-    }
+    }), [isLabel]);
 
     return(
         <div className={ classNames(cls.Input, mods, [className]) } >
@@ -52,3 +52,4 @@ export const Input = memo((props: InputProps) =>{
         </div>
     );
 });
+Input.displayName = 'Input';

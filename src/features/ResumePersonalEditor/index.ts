@@ -1,0 +1,1 @@
+export { ResumePersonalEditor } from './ui/ResumePersonalEditor';

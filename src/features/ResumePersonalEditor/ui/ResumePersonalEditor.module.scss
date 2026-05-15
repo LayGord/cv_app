@@ -1,0 +1,25 @@
+.ResumePersonalEditor {
+    width: 100%;
+}
+
+.inputGroupRow {
+    display: flex;
+    flex-direction: row;
+    gap: 18px;
+}
+
+.inputGroupRow > * {
+    flex-grow: 1;
+}
+
+.avatarEditor {
+    width: 50%;
+}
+
+.nextStepBtn {
+    max-width: 25%;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -4,6 +4,7 @@ import App from 'app/App';
 import 'app/styles/index.scss';
 import { ThemeProvider } from 'app/providers/ThemeProvider';
 import { BrowserRouter } from 'react-router';
+import { StoreProvider } from 'app/providers/StoreProvider';
 
 
 const root = ReactDOM.createRoot(
@@ -12,9 +13,11 @@ const root = ReactDOM.createRoot(
 root.render(
     <React.StrictMode>
         <BrowserRouter>
-            <ThemeProvider >
-                <App />
-            </ThemeProvider>
+            <StoreProvider>
+                <ThemeProvider >
+                    <App />
+                </ThemeProvider>
+            </StoreProvider>
         </BrowserRouter>
     </React.StrictMode>
 );

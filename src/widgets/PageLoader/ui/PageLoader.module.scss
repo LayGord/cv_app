@@ -1,0 +1,20 @@
+.PageLoader {
+    width: 100vw;
+    height: var(--page-wrapper-height);
+    overflow-y: scroll;
+
+    display: flex;
+    justify-content: center;
+}
+
+
+.content {
+    width: 800px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background-color: var(--dark-bg-color);
+}

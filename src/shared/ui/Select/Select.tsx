@@ -1,6 +1,6 @@
 import { classNames, Mods } from "shared/lib/classNames/classNames";
 import cls from "./Select.module.scss";
-import { useCallback } from "react";
+import { HTMLAttributes, memo, useCallback } from "react";
 
 
 interface SelectOption {
@@ -8,7 +8,8 @@ interface SelectOption {
     value: string | undefined;
 }
 
-interface SelectProps {
+interface SelectProps extends Omit<HTMLAttributes<HTMLSelectElement>, 'onChange'> {
+    id?: string;
     className?: string;
     options: SelectOption[];
     value?: string;
@@ -17,8 +18,9 @@ interface SelectProps {
     placeholder?: string;
 };
 
-export const Select = (props: SelectProps) => {
+export const Select = memo((props: SelectProps) => {
     const {
+        id,
         className,
         options,
         value,
@@ -32,8 +34,6 @@ export const Select = (props: SelectProps) => {
         return onChange?.(e.target.value);
     }, [onChange]);
     
-    
-
     const mods: Mods = {[cls.hasPlaceholder]: Boolean(placeholder)}
 
     return(
@@ -42,6 +42,7 @@ export const Select = (props: SelectProps) => {
                 <div className={cls.placeholder}>{ placeholder }</div>
             }
             <select
+                id={id}
                 className={ classNames(cls.Select, {}, [className]) }
                 value={value}
                 onChange={onChangeHandler}
@@ -64,4 +65,5 @@ export const Select = (props: SelectProps) => {
             </select>
         </div>
     );
-};
+});
+Select.displayName = 'Select';
