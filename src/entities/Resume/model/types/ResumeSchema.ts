@@ -4,10 +4,10 @@ export interface ResumeSchema {
 }
 
 export interface Resume {
-    personal: ResumePersonalData;
-    contacts: ResumeContactsData;
-    experience: ResumeExperienceData;
-}
+    personal: ResumePersonalData,
+    contacts: ResumeContactsData,
+    experience: ResumeExperienceData,
+};
 
 export interface ResumePersonalData {
     firstname: string;
@@ -24,32 +24,33 @@ export interface ResumePersonalData {
 export interface ResumeContactsData {
     email: string;
     phone?: string;
-    others?: ContactLink[];
+    links: ContactLink[];
 }
 
 export interface ResumeExperienceData {
-    skills?: Skill[];
-    jobs?: Job[];
-    projects?: Project[];
-    educations?: Education[];
-    langs?: Language[]
+    skills: Skill[];
+    jobs: Job[];
+    projects: Project[];
+    educations: Education[];
+    langs: Language[]
 }
 
 
-interface ContactLink {
+export interface ContactLink {
+    id: string;
     title: string;
     link: string;
 }
 
 
-interface Skill {
+export interface Skill {
     id: string;
     displayName: string;
     category?: string;
 }
 
 
-interface Job {
+export interface Job {
     id: string;
     position: string;
     company: string;
@@ -60,7 +61,7 @@ interface Job {
 }
 
 
-interface Project {
+export interface Project {
     id: string;
     title: string;
     link: string;
@@ -68,7 +69,7 @@ interface Project {
 }
 
 
-interface Education {
+export interface Education {
     id: string;
     grade: 'Bachelor' | 'Master' | 'PhD' | 'Lower post-secondary';
     completed: boolean;
@@ -78,7 +79,7 @@ interface Education {
 }
 
 
-interface Language {
+export interface Language {
     id: string;
     language: string;
     level?: 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2';

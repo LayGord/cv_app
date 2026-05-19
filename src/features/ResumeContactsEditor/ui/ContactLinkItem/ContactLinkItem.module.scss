@@ -1,0 +1,14 @@
+.ContactLinkItem {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+}
+
+.deleteBtn {
+    color: var(--shadow-color);
+
+    & svg {
+        color: var(--shadow-color);
+    }
+}

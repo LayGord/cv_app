@@ -1,7 +1,7 @@
 import { ChangeEvent, InputHTMLAttributes, memo, useCallback } from "react";
 import { classNames } from "shared/lib/classNames/classNames";
 import cls from "./FileUploader.module.scss";
-import { ReactComponent as UploadIcon } from 'shared/assets/icons/box-upload-icon.svg';
+import { ReactComponent as UploadIcon } from 'shared/assets/icons/upload.svg';
 import { ReactComponent as DeleteIcon } from 'shared/assets/icons/x-icon.svg';
 import { Button, ButtonTheme } from "../Button/Button";
 

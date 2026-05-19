@@ -5,23 +5,20 @@ import { Input } from "../Input/Input";
 import { Button, ButtonTheme } from "../Button/Button";
 import { ReactComponent as CloseIcon } from 'shared/assets/icons/x-icon.svg';
 
-interface MultiSelectData {
+interface MultiSelectOption {
     id: string;
     displayName: string;
     category?: string;
 }
-
-type MultiSelectOptions = Record<string, MultiSelectData>;
-type GroupedMultiSelectOptions = Record<string, MultiSelectData[]>
 
 type MultiSelectVisibility = 'opening' | 'opened' | 'closing' | 'closed';
 
 interface MultiSelectProps {
     id: string
     className?: string;
-    options: MultiSelectOptions;
-    value?: string[]; // id`s of options
-    onChange?: (value: string[]) => void;
+    options: MultiSelectOption[];
+    value?: MultiSelectOption[]; // id`s of options
+    onChange?: (value: MultiSelectOption[]) => void;
     groupByCategories?: boolean;
 }
 
@@ -68,20 +65,20 @@ export const MultiSelect = (props: MultiSelectProps) => {
     );
 
     // render logic
-    const onOptionClick = useCallback((optionId: string) => {
-        let optionsIds;
-        if (value.includes(optionId)) {
-            optionsIds = value.filter(
-                (optionIdfromValue) => optionIdfromValue !== optionId
+    const onOptionClick = useCallback((option: MultiSelectOption) => {
+        let valueDraft;
+        if (value.includes(option)) {
+            valueDraft = value.filter(
+                (optionFromValue) => optionFromValue.id !== option.id
             );
         } else {
-            optionsIds = [...value, optionId];
+            valueDraft = [...value, option];
         }
-        onChange?.(optionsIds);
+        onChange?.(valueDraft);
     }, [onChange, value]);
 
-    const groupOptionsByCategory = useCallback((options: MultiSelectData[]): GroupedMultiSelectOptions  => {
-        return options.reduce<GroupedMultiSelectOptions>(
+    const groupOptionsByCategory = useCallback((options: MultiSelectOption[]): Record<string, MultiSelectOption[]>  => {
+        return options.reduce<Record<string, MultiSelectOption[]>>(
             (acc, option) => {
                 const category = option.category ?? 'Other';
 
@@ -96,14 +93,14 @@ export const MultiSelect = (props: MultiSelectProps) => {
         );
     }, []);
 
-    const renderOption = useCallback((option: MultiSelectData) => {
-        const onClick = () => onOptionClick(option.id);
+    const renderOption = useCallback((option: MultiSelectOption) => {
+        const onClick = () => onOptionClick(option);
 
         return (
             <Button
                 key={option.id}
                 className={cls.option}
-                theme={ value.includes(option.id) ? ButtonTheme.ACCENT : ButtonTheme.DEFAULT}
+                theme={ value.includes(option) ? ButtonTheme.ACCENT : ButtonTheme.DEFAULT}
                 onClick={onClick} 
             >
                 { option?.displayName }
@@ -111,7 +108,7 @@ export const MultiSelect = (props: MultiSelectProps) => {
         )
     }, [onOptionClick, value]);
 
-    const renderOptionsList = useCallback((options: MultiSelectData[], grouped: boolean) => {
+    const renderOptionsList = useCallback((options: MultiSelectOption[], grouped: boolean) => {
         if (grouped) {
             return Object.entries(groupOptionsByCategory(options)).map(([category, options]) => {
                 return (
@@ -131,9 +128,11 @@ export const MultiSelect = (props: MultiSelectProps) => {
     return(
         <div className={ classNames(cls.MultiSelect, {}, [className, cls[visibility]]) }>
 
-            <div className={cls.selectedList}>
-                { value?.map((optionId) => renderOption(options[optionId])) }
-            </div>
+            { value && 
+                <div className={cls.selectedList}>
+                    { value.map((option) => renderOption(option)) }
+                </div>
+            }
 
             <div className={cls.searchBlock}>
                 <Input
@@ -153,11 +152,11 @@ export const MultiSelect = (props: MultiSelectProps) => {
                 </Button>
             </div>
  
-            <div
-                className={cls.optionsList}
-            >
-                { !filteredOptions.length && <span className={cls.searchNotFound}>не найдено записей</span> }
-                { renderOptionsList(filteredOptions, groupByCategories) }
+            <div className={cls.optionsList} >
+                { filteredOptions.length
+                    ? renderOptionsList(filteredOptions, groupByCategories)
+                    : <span className={cls.searchNotFound}>не найдено записей</span> 
+                }
             </div>
    
         </div>

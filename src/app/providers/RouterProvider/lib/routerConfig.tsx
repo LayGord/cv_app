@@ -1,11 +1,11 @@
 import { MainPage } from "pages/MainPage";
 import { NotFoundPage } from "pages/NotFoundPage";
 import { ResumeEditorPage } from "pages/ResumeEditorPage";
-import { RouteProps } from "react-router"
+import { RouteProps } from "react-router";
 import { AppRoutes, RouterPaths } from "shared/config/router/paths";
 
 
-export type AppRouteProps = RouteProps & {};
+export type AppRouteProps = RouteProps & { };
 
 export const routerConfig: Record<AppRoutes, AppRouteProps> = {
     [AppRoutes.MAIN]: {
@@ -13,8 +13,8 @@ export const routerConfig: Record<AppRoutes, AppRouteProps> = {
         element: <MainPage />,
     },
     [AppRoutes.EDITOR]: {
-        path: RouterPaths.editor,
-        element: <ResumeEditorPage />
+        path: `${RouterPaths.editor}/:step`,
+        element: <ResumeEditorPage />,
     },
     [AppRoutes.NOT_FOUND]: {
         path: RouterPaths.not_found,

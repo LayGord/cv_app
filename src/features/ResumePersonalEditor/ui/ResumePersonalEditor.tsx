@@ -1,30 +1,29 @@
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
-import { resumeActions, ResumeSchema, getResumePersonal } from "entities/Resume";
+import { resumeActions, getResumePersonal } from "entities/Resume";
 import { classNames } from "shared/lib/classNames/classNames";
-import { AppLink } from "shared/ui/AppLink/AppLink";
 import { FileUploader } from "shared/ui/FileUploader/FileUploader";
 import { Input } from "shared/ui/Input/Input";
-import { InputGroup } from "shared/ui/InputGroup/InputGroup";
+import { Group } from "shared/ui/Group/Group";
 import { Select } from "shared/ui/Select/Select";
 import { DatePicker } from "shared/ui/DatePicker/DatePicker";
 import { Avatar, AvatarSize } from "shared/ui/Avatar/Avatar";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
-import { ReactComponent as ChevronRight } from 'shared/assets/icons/chevron-right.svg';
 import cls from "./ResumePersonalEditor.module.scss";
+import { NavLinks } from "shared/ui/NavLinks/NavLinks";
+import { ResumePersonalData } from "entities/Resume/model/types/ResumeSchema";
 
 
 interface ResumePersonalEditorProps {
     className?: string;
 }
 
-
 export const ResumePersonalEditor = ({ className }: ResumePersonalEditorProps) => {
     const personalData = useSelector(getResumePersonal);
     const dispatch = useAppDispatch();
 
     const onChangeTextField = useCallback(
-        (field: keyof ResumeSchema['resumeDraft']['personal']) => 
+        (field: keyof ResumePersonalData, validateFn?: (value: string) => boolean) => 
             (value: string) => dispatch(resumeActions.updatePersonalData({[field]: value})), 
         [dispatch]);
 
@@ -40,7 +39,7 @@ export const ResumePersonalEditor = ({ className }: ResumePersonalEditorProps) =
 
     return (
         <div className={ classNames(cls.ResumePersonalEditor, {}, [className]) }>
-            <InputGroup title="Основная информация">
+            <Group title="Основная информация">
                 <Input
                     id="lastname"
                     placeholder="Фамилия"
@@ -59,7 +58,7 @@ export const ResumePersonalEditor = ({ className }: ResumePersonalEditorProps) =
                     value={personalData.patronymic}
                     onChange={onChangeTextField('patronymic')}
                 />
-                <div className={cls.inputGroupRow}>
+                <Group direction={'row'}>
                     <Select
                         id="sex"
                         placeholder="Пол"
@@ -84,8 +83,8 @@ export const ResumePersonalEditor = ({ className }: ResumePersonalEditorProps) =
                         onChange={onChangeTextField('birthdate')}
                     />
 
-                </div>
-                <div className={cls.inputGroupRow}>
+                </Group>
+                <Group direction={'row'}>
                     
                     <Input
                         id="country"
@@ -99,9 +98,9 @@ export const ResumePersonalEditor = ({ className }: ResumePersonalEditorProps) =
                         value={personalData.city}
                         onChange={onChangeTextField('city')}
                     />
-                </div>
-            </InputGroup>
-            <InputGroup title="Фото для резюме" align={'center'}>
+                </Group>
+            </Group>
+            <Group title="Фото для резюме" align={'center'}>
                 <Avatar
                     src={personalData.photo}
                     size={AvatarSize.L}
@@ -112,18 +111,8 @@ export const ResumePersonalEditor = ({ className }: ResumePersonalEditorProps) =
                     onChange={onChangePhoto}
                     onClear={onClearPhoto}
                 />
-            </InputGroup>
-            <InputGroup align={'right'}>
-                <div className={cls.inputGroupRow}>
-                    <AppLink
-                        className={cls.nextStepBtn}
-                        to={'/'}
-                    >
-                        Далее
-                        <ChevronRight />
-                    </AppLink>
-                </div>
-            </InputGroup>
+            </Group>
+            <NavLinks next={'/edit/contacts'}/>
         </div>
     );
 };

@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 
-import { InputGroup } from './InputGroup';
+import { Group } from './Group';
 import { Input } from '../Input/Input';
 
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-    title: 'shared/InputGroup',
-    component: InputGroup,
+    title: 'shared/Group',
+    component: Group,
     parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
         layout: 'centered',
@@ -18,7 +18,7 @@ const meta = {
     argTypes: {},
     // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#story-args
     args: { },
-} satisfies Meta<typeof InputGroup>;
+} satisfies Meta<typeof Group>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

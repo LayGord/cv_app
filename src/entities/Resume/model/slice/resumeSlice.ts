@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Resume, ResumePersonalData, ResumeSchema } from "../types/ResumeSchema";
+import { ContactLink, ResumeContactsData, ResumePersonalData, ResumeSchema, Skill } from "../types/ResumeSchema";
 
 const initialState: ResumeSchema = {
     id: '',
@@ -18,7 +18,7 @@ const initialState: ResumeSchema = {
         contacts: {
             email: 'example@mail.com',
             phone: undefined,
-            others: [],
+            links: [],
         },
         experience: {
             skills: [],
@@ -26,7 +26,7 @@ const initialState: ResumeSchema = {
             projects: [],
             educations: [],
             langs: [],
-        },
+        }
     }
 }
 
@@ -34,11 +34,37 @@ export const resumeSlice = createSlice({
     name: 'resume',
     initialState: initialState,
     reducers: {
-        updatePersonalData: (state, action: PayloadAction<DeepPartial<ResumePersonalData>>) => {
+        // personalData
+        updatePersonalData: (state, action: PayloadAction<Partial<ResumePersonalData>>) => {
             state.resumeDraft.personal = {
                 ...state.resumeDraft.personal,
                 ...action.payload,
             }
+        },
+
+        //contactsData
+        updateContactsData: (state, action: PayloadAction<Partial<ResumeContactsData>>) => {
+            state.resumeDraft.contacts = {
+                ...state.resumeDraft.contacts,
+                ...action.payload,
+            }
+        },
+        addContactLink: (state, action: PayloadAction<string>) => {
+            state.resumeDraft.contacts.links.push({id: action.payload, title: '', link: ''});
+        },
+        updateContactLink: (state, action: PayloadAction<ContactLink>) => {
+            state.resumeDraft.contacts.links = state.resumeDraft.contacts.links.map(
+                item => item.id === action.payload.id ? action.payload : item
+            )
+        },
+        deleteContactLink: (state, action: PayloadAction<string>) => {
+            state.resumeDraft.contacts.links = 
+                state.resumeDraft.contacts.links?.filter(item => item.id !== action.payload);
+        },
+
+        //experienceData
+        updateSkillsList: (state, action: PayloadAction<Skill[]>) => {
+            state.resumeDraft.experience.skills = action.payload
         }
     },
 })

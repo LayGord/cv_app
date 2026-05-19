@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 
-import { AppLink } from './AppLink';
+import { AppLink, AppLinkTheme } from './AppLink';
 
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -27,5 +27,13 @@ export const Default: Story = {
     args: {
         to: '/',
         children: 'link'
+    }
+};
+
+export const Clear: Story = {
+    args: {
+        to: '/',
+        children: 'link',
+        theme: AppLinkTheme.CLEAR
     }
 };
