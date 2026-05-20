@@ -1,1 +1,1 @@
-export { ResumeExperienceEditor } from './ui/ResumeExperienceEditor';
+export { ResumeExperienceEditor } from './ui/ResumeExperienceEditor/ResumeExperienceEditor';

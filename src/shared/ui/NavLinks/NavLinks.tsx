@@ -3,6 +3,7 @@ import cls from "./NavLinks.module.scss";
 import { AppLink, AppLinkTheme } from "../AppLink/AppLink";
 import { ReactComponent as ChevronRight } from 'shared/assets/icons/chevron-right.svg';
 import { ReactComponent as ChevronLeft } from 'shared/assets/icons/chevron-left.svg';
+import { useTranslation } from "react-i18next";
 
 interface NavLinksProps {
     className?: string;
@@ -17,6 +18,8 @@ export const NavLinks = (props: NavLinksProps) => {
         next,
     } = props;
 
+    const { t } = useTranslation();
+
     return (
         <div className={ classNames(cls.NavLinks, {}, [className]) }>
             { prev && 
@@ -26,7 +29,7 @@ export const NavLinks = (props: NavLinksProps) => {
                     theme={AppLinkTheme.CLEAR}
                 >
                     <ChevronLeft />
-                    <span>Назад</span>
+                    <span>{t('NavLinks.previous')}</span>
                 </AppLink>
             }
             { next && 
@@ -35,7 +38,7 @@ export const NavLinks = (props: NavLinksProps) => {
                     to={next}
                     theme={AppLinkTheme.CLEAR}
                 >
-                    <span>Далее</span>
+                    <span>{t('NavLinks.next')}</span>
                     <ChevronRight />
                 </AppLink>
             }

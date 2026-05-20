@@ -1,14 +1,12 @@
+import { useTranslation } from 'react-i18next';
+import { ContactLink } from 'entities/Resume';
 import { ReactComponent as DeleteItemIcon } from 'shared/assets/icons/x-icon.svg';
 import { Input } from "shared/ui/Input/Input";
-import { Button, ButtonTheme } from "shared/ui/Button/Button";
-//import { classNames } from "shared/lib/classNames/classNames";
+import { Button } from "shared/ui/Button/Button";
 import cls from "./ContactLinkItem.module.scss";
-import { useState } from 'react';
-import { ContactLink } from 'entities/Resume/model/types/ResumeSchema';
 
 
 interface ContactLinkItemItemProps {
-    className?: string;
     contact: ContactLink;
     onUpdate: (value: string, field: 'title' | 'link') => void;
     onDelete: () => void;
@@ -16,11 +14,12 @@ interface ContactLinkItemItemProps {
 
 export const ContactLinkItem = (props: ContactLinkItemItemProps) => {
     const {
-        className,
         contact,
         onUpdate,
         onDelete
     } = props;
+
+    const { t } = useTranslation('resume');
 
     return (
         <div className={cls.ContactLinkItem}>
@@ -28,13 +27,13 @@ export const ContactLinkItem = (props: ContactLinkItemItemProps) => {
                 className={cls.title}
                 value={contact.title}
                 onChange={(value) => onUpdate(value, 'title')}
-                placeholder='Описание'
+                placeholder={t("ResumeContactsEditor.linkItemName")}
             />
             <Input 
                 className={cls.link}
                 value={contact.link}
                 onChange={(value) => onUpdate(value, 'link')}
-                placeholder='Ссылка'
+                placeholder={t("ResumeContactsEditor.linkItemLink")}
             />
             <Button
                 className={cls.deleteBtn}

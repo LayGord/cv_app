@@ -4,6 +4,7 @@ import { useCallback, useMemo, useState } from "react";
 import { Input } from "../Input/Input";
 import { Button, ButtonTheme } from "../Button/Button";
 import { ReactComponent as CloseIcon } from 'shared/assets/icons/x-icon.svg';
+import { useTranslation } from "react-i18next";
 
 interface MultiSelectOption {
     id: string;
@@ -31,6 +32,7 @@ export const MultiSelect = (props: MultiSelectProps) => {
         groupByCategories=false,
     } = props;
 
+    const { t, i18n } = useTranslation();
 
     // display logic 
     const [visibility, setVisibility] = useState<MultiSelectVisibility>('closed');
@@ -80,7 +82,7 @@ export const MultiSelect = (props: MultiSelectProps) => {
     const groupOptionsByCategory = useCallback((options: MultiSelectOption[]): Record<string, MultiSelectOption[]>  => {
         return options.reduce<Record<string, MultiSelectOption[]>>(
             (acc, option) => {
-                const category = option.category ?? 'Other';
+                const category = option.category ?? i18n.t('MultiSelect.others');
 
                 if (!acc[category]) {
                     acc[category] = [];
@@ -91,7 +93,7 @@ export const MultiSelect = (props: MultiSelectProps) => {
             },
             {}
         );
-    }, []);
+    }, [i18n]);
 
     const renderOption = useCallback((option: MultiSelectOption) => {
         const onClick = () => onOptionClick(option);
@@ -137,7 +139,7 @@ export const MultiSelect = (props: MultiSelectProps) => {
             <div className={cls.searchBlock}>
                 <Input
                     className={cls.searchInput}
-                    placeholder={"Search"}
+                    placeholder={t('MultiSelect.search')}
                     value={search}
                     onChange={onSearchChange}
                     onClick={onOpenClick}
@@ -155,7 +157,7 @@ export const MultiSelect = (props: MultiSelectProps) => {
             <div className={cls.optionsList} >
                 { filteredOptions.length
                     ? renderOptionsList(filteredOptions, groupByCategories)
-                    : <span className={cls.searchNotFound}>не найдено записей</span> 
+                    : <span className={cls.searchNotFound}>{t('MultiSelect.notFound')}</span> 
                 }
             </div>
    

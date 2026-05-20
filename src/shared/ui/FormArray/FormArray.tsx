@@ -1,7 +1,6 @@
 import { classNames } from "shared/lib/classNames/classNames";
 import cls from "./FormArray.module.scss";
 import { ReactNode } from "react";
-import { Group } from "../Group/Group";
 import { Button, ButtonTheme } from "../Button/Button";
 import { ReactComponent as AddItemIcon } from 'shared/assets/icons/plus-square.svg';
 

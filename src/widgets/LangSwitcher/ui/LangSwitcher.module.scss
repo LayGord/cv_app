@@ -1,0 +1,12 @@
+.LangSwitcher {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    fill: var(--primary-color);
+}
+
+.LangSwitcher:hover {
+    color: var(--accent-shadow-color);
+    fill: var(--accent-shadow-color);
+}

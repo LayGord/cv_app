@@ -1,17 +1,17 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { useSelector } from "react-redux";
-import { resumeActions, getResumePersonal } from "entities/Resume";
-import { classNames } from "shared/lib/classNames/classNames";
+import { useTranslation } from "react-i18next";
+import { resumeActions, getResumePersonal, ResumePersonalData } from "entities/Resume";
 import { FileUploader } from "shared/ui/FileUploader/FileUploader";
 import { Input } from "shared/ui/Input/Input";
 import { Group } from "shared/ui/Group/Group";
 import { Select } from "shared/ui/Select/Select";
 import { DatePicker } from "shared/ui/DatePicker/DatePicker";
 import { Avatar, AvatarSize } from "shared/ui/Avatar/Avatar";
-import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
-import cls from "./ResumePersonalEditor.module.scss";
 import { NavLinks } from "shared/ui/NavLinks/NavLinks";
-import { ResumePersonalData } from "entities/Resume/model/types/ResumeSchema";
+import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
+import { classNames } from "shared/lib/classNames/classNames";
+import cls from "./ResumePersonalEditor.module.scss";
 
 
 interface ResumePersonalEditorProps {
@@ -19,11 +19,19 @@ interface ResumePersonalEditorProps {
 }
 
 export const ResumePersonalEditor = ({ className }: ResumePersonalEditorProps) => {
+
+    const { t, i18n } = useTranslation('resume');
+
+    const sexOptions = useMemo(() => [
+        {displayValue: i18n.t("male"), value: 'male'},
+        {displayValue: i18n.t("female"), value: 'female'}
+    ], [i18n]);
+
     const personalData = useSelector(getResumePersonal);
     const dispatch = useAppDispatch();
 
     const onChangeTextField = useCallback(
-        (field: keyof ResumePersonalData, validateFn?: (value: string) => boolean) => 
+        (field: keyof ResumePersonalData) => 
             (value: string) => dispatch(resumeActions.updatePersonalData({[field]: value})), 
         [dispatch]);
 
@@ -39,68 +47,64 @@ export const ResumePersonalEditor = ({ className }: ResumePersonalEditorProps) =
 
     return (
         <div className={ classNames(cls.ResumePersonalEditor, {}, [className]) }>
-            <Group title="Основная информация">
+            <Group title={t('ResumePersonalEditor.titleMainInfo')}>
                 <Input
                     id="lastname"
-                    placeholder="Фамилия"
+                    placeholder={t("ResumePersonalEditor.lastname")}
                     value={personalData.lastname}
                     onChange={onChangeTextField('lastname')}
                 />
                 <Input
                     id="firstname"
-                    placeholder="Имя"
+                    placeholder={t("ResumePersonalEditor.firstname")}
                     value={personalData.firstname}
                     onChange={onChangeTextField('firstname')}
                 />
                 <Input
                     id="patronymic"
-                    placeholder="Отчество"
+                    placeholder={t("ResumePersonalEditor.patronymic")}
                     value={personalData.patronymic}
                     onChange={onChangeTextField('patronymic')}
                 />
                 <Group direction={'row'}>
                     <Select
                         id="sex"
-                        placeholder="Пол"
-                        options={
-                            [{displayValue: 'Мужской', value: 'male'}, {displayValue: 'Женский', value: 'female'}]
-                        }
+                        placeholder={t("ResumePersonalEditor.sex")}
+                        options={sexOptions}
                         value={personalData.sex}
                         onChange={onChangeTextField('sex')}
-                    />
-                    
-                    <Input
-                        id="citizenship"
-                        placeholder="Гражданство"
-                        value={personalData.citizenship}
-                        onChange={onChangeTextField('citizenship')}
                     />
 
                     <DatePicker
                         id="birthdate"
-                        label="Дата рождения"
+                        label={t("ResumePersonalEditor.birthdate")}
                         value={personalData.birthdate}
                         onChange={onChangeTextField('birthdate')}
                     />
 
                 </Group>
                 <Group direction={'row'}>
-                    
+                    <Input
+                        id="citizenship"
+                        placeholder={t("ResumePersonalEditor.citizenship")}
+                        value={personalData.citizenship}
+                        onChange={onChangeTextField('citizenship')}
+                    />
                     <Input
                         id="country"
-                        placeholder="Страна"
+                        placeholder={t("ResumePersonalEditor.country")}
                         value={personalData.country}
                         onChange={onChangeTextField('country')}
                     />
                     <Input
                         id="city"
-                        placeholder="Город"
+                        placeholder={t("ResumePersonalEditor.city")}
                         value={personalData.city}
                         onChange={onChangeTextField('city')}
                     />
                 </Group>
             </Group>
-            <Group title="Фото для резюме" align={'center'}>
+            <Group title={t("ResumePersonalEditor.titlePhoto")} align={'center'}>
                 <Avatar
                     src={personalData.photo}
                     size={AvatarSize.L}

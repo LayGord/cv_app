@@ -1,16 +1,14 @@
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { getResumeContacts, resumeActions, ContactLink } from "entities/Resume";
 import { classNames } from "shared/lib/classNames/classNames";
-import cls from "./ResumeContactsEditor.module.scss";
 import { Group } from "shared/ui/Group/Group";
 import { Input } from "shared/ui/Input/Input";
 import { NavLinks } from "shared/ui/NavLinks/NavLinks";
-import { getResumeContacts } from "entities/Resume/model/selectors/getResumeContacts";
-import { useSelector } from "react-redux";
-
-import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
-import { resumeActions } from "entities/Resume";
-import { ContactLinkItem } from "../ContactLinkItem/ContactLinkItem";
 import { FormArray } from "shared/ui/FormArray/FormArray";
-import { ContactLink } from "entities/Resume/model/types/ResumeSchema";
+import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
+import { ContactLinkItem } from "../ContactLinkItem/ContactLinkItem";
+import cls from "./ResumeContactsEditor.module.scss";
 
 
 interface ResumeContactsEditorProps {
@@ -18,6 +16,7 @@ interface ResumeContactsEditorProps {
 }
 
 export const ResumeContactsEditor = ({ className }: ResumeContactsEditorProps) => {
+    const { t } = useTranslation('resume');
     const contactsData = useSelector(getResumeContacts);
     const dispatch = useAppDispatch();
     const newId = crypto.randomUUID();
@@ -66,23 +65,23 @@ export const ResumeContactsEditor = ({ className }: ResumeContactsEditorProps) =
 
     return (
         <div className={ classNames(cls.ResumeContactsEditor, {}, [className]) }>
-            <Group title={"Контактная информация"}>
+            <Group title={t('ResumeContactsEditor.titleContacts')}>
                 <Input 
                     id={'email'}
-                    placeholder={"E-mail *"}
+                    placeholder={t('ResumeContactsEditor.email')}
                     value={contactsData.email}
                     onChange={onChangeEmail}
                 />
                 <Input 
                     id={'phone'}
-                    placeholder={"Телефонный номер"}
+                    placeholder={t('ResumeContactsEditor.phone')}
                     value={contactsData.phone}
                     onChange={onChangePhone}
                 />
 
             </Group>
             <FormArray 
-                title={"Ссылки на мессенджеры / соц-сети"}
+                title={t('ResumeContactsEditor.titleLinks')}
                 value={contactsData.links}
                 onAddNew={onAddContactLink}
                 renderFunction={renderContactLinks}

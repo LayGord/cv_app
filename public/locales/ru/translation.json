@@ -1,0 +1,17 @@
+{
+    "language": "Рус",
+    "male": "Мужской",
+    "female": "Женский",
+    "NavLinks": {
+        "previous": "Назад",
+        "next": "Далее"
+    },
+    "MultiSelect": {
+        "others": "Другое",
+        "search": "Поиск",
+        "notFound": "Не найдено подходящих вариантов"
+    },
+    "FileUploader": {
+        "chooseFile": "Выбрать файл"
+    }
+}

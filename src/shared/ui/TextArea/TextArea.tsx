@@ -1,9 +1,9 @@
-import { memo, useCallback, useLayoutEffect, useRef } from "react";
+import { HTMLAttributes, memo, useCallback, useLayoutEffect, useRef } from "react";
 import { classNames } from "shared/lib/classNames/classNames";
 import cls from "./TextArea.module.scss";
 
 
-interface TextAreaProps {
+interface TextAreaProps extends Omit<HTMLAttributes<HTMLTextAreaElement>, 'onChange'> {
     className?: string;
     value?: string;
     onChange?: (value: string) => void;

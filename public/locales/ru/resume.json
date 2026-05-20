@@ -1,0 +1,26 @@
+{
+    "ResumePersonalEditor": {
+        "titleMainInfo": "Основная информация",
+        "lastname": "Фамилия",
+        "firstname": "Имя",
+        "patronymic": "Отчество",
+        "sex": "Пол",
+        "birthdate": "Дата рождения",
+        "citizenship": "Гражданство",
+        "country": "Страна",
+        "city": "Город",
+        "titlePhoto": "Фото для резюме"
+    },
+    "ResumeContactsEditor": {
+        "titleContacts": "Контактная информация",
+        "email": "E-mail",
+        "phone": "Мобильный номер",
+        "titleLinks": "Ссылки на мессендежры | соц-сети",
+        "linkItemName": "Название",
+        "linkItemLink": "Ссылка"
+    },
+    "ResumeExperienceEditor": {
+        "titleSkills": "Выберите навыки из предложенных",
+        "titleJobs": "Расскажите о своем карьерном пути"
+    }
+}

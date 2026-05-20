@@ -1,16 +1,26 @@
 import { classNames } from "shared/lib/classNames/classNames";
 import cls from "./Navbar.module.scss";
-import { ThemeSwitcher } from "widgets/ThemeSwitcher";
+import { ReactNode } from "react";
+
 
 interface NavbarProps {
     className?: string;
+    ThemeSwitcher?: ReactNode;
+    LangSwitcher?: ReactNode;
 }
 
-export const Navbar = ({ className }: NavbarProps) =>{
-    return(
+export const Navbar = (props: NavbarProps) => {
+    const {
+        className,
+        ThemeSwitcher,
+        LangSwitcher
+    } = props;
+
+    return (
         <div className={ classNames(cls.Navbar, {}, [className]) }>
             <div className={cls.switchers}>
-                <ThemeSwitcher />
+                { LangSwitcher }
+                { ThemeSwitcher }
             </div>
         </div>
     );

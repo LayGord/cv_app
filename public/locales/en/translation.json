@@ -1,0 +1,17 @@
+{
+    "language": "Eng",
+    "male": "Male",
+    "female": "Female",
+    "NavLinks": {
+        "previous": "Back",
+        "next": "Next"
+    },
+    "MultiSelect": {
+        "others": "Other",
+        "search": "Search",
+        "notFound": "Not found matching options"
+    },
+    "FileUploader": {
+        "chooseFile": "Choose file to upload"
+    }
+}

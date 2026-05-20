@@ -1,13 +1,14 @@
-import { classNames } from "shared/lib/classNames/classNames";
-import cls from "./ResumeExperienceEditor.module.scss";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { Skill, getResumeExperience, resumeActions } from "entities/Resume";
 import { NavLinks } from "shared/ui/NavLinks/NavLinks";
 import { Group } from "shared/ui/Group/Group";
 import { MultiSelect } from "shared/ui/MultiSelect/MultiSelect";
-import { Skill } from "entities/Resume/model/types/ResumeSchema";
-import { getResumeExperience } from "entities/Resume/model/selectors/getResumeExperience";
-import { useSelector } from "react-redux";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
-import { resumeActions } from "entities/Resume";
+import { classNames } from "shared/lib/classNames/classNames";
+import { JobItem } from "../JobItem/JobItem";
+import cls from "./ResumeExperienceEditor.module.scss";
+
 
 interface ResumeExperienceEditorProps {
     className?: string;
@@ -18,9 +19,8 @@ const skills = [
    
 ]
 
-
 export const ResumeExperienceEditor = ({ className }: ResumeExperienceEditorProps) => {
-
+    const { t } = useTranslation('resume');
     const exp = useSelector(getResumeExperience);
     const dispatch = useAppDispatch();
 
@@ -30,7 +30,7 @@ export const ResumeExperienceEditor = ({ className }: ResumeExperienceEditorProp
 
     return (
         <div className={ classNames(cls.ResumeExperienceEditor, {}, [className]) }>
-            <Group title="Выберите навыки из предложенных">
+            <Group title={t("ResumeExperienceEditor.titleSkills")}>
                 <MultiSelect
                     id={"skills"}
                     options={skills}
@@ -39,7 +39,8 @@ export const ResumeExperienceEditor = ({ className }: ResumeExperienceEditorProp
                     groupByCategories
                 />
             </Group>
-            <Group title="Выберите навыки из предложенных">
+            <Group title={t("ResumeExperienceEditor.titleJobs")}>
+                
             </Group>
             <NavLinks prev={'/edit/contacts'} />
         </div>

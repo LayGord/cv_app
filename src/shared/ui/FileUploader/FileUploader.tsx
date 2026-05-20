@@ -4,6 +4,7 @@ import cls from "./FileUploader.module.scss";
 import { ReactComponent as UploadIcon } from 'shared/assets/icons/upload.svg';
 import { ReactComponent as DeleteIcon } from 'shared/assets/icons/x-icon.svg';
 import { Button, ButtonTheme } from "../Button/Button";
+import { useTranslation } from "react-i18next";
 
 interface FileUploaderProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'value'> {
   id: string;
@@ -22,6 +23,8 @@ export const FileUploader = memo((props: FileUploaderProps) => {
         onClear,
         ...otherProps
     } = props;
+
+    const { t } = useTranslation();
 
     const onChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         onChange?.(e);
@@ -56,7 +59,7 @@ export const FileUploader = memo((props: FileUploaderProps) => {
                 </label>
             ) : (
                 <label htmlFor={id} className={cls.label}>
-                    Выберите файл
+                    {t('FileUploader.chooseFile')}
                     <UploadIcon />
                 </label>
             )}

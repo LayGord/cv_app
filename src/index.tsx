@@ -5,6 +5,7 @@ import 'app/styles/index.scss';
 import { ThemeProvider } from 'app/providers/ThemeProvider';
 import { BrowserRouter } from 'react-router';
 import { StoreProvider } from 'app/providers/StoreProvider';
+import 'shared/config/i18n/i18n';
 
 
 const root = ReactDOM.createRoot(
