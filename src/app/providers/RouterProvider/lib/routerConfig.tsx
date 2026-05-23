@@ -13,7 +13,7 @@ export const routerConfig: Record<AppRoutes, AppRouteProps> = {
         element: <MainPage />,
     },
     [AppRoutes.EDITOR]: {
-        path: `${RouterPaths.editor}/:step`,
+        path: `${RouterPaths.editor}`,
         element: <ResumeEditorPage />,
     },
     [AppRoutes.NOT_FOUND]: {

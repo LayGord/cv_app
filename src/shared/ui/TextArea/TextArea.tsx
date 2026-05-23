@@ -7,6 +7,7 @@ interface TextAreaProps extends Omit<HTMLAttributes<HTMLTextAreaElement>, 'onCha
     className?: string;
     value?: string;
     onChange?: (value: string) => void;
+    placeholder?: string,
     minHeight?: number; // 24 * rownum + 26;
 }
 
@@ -15,6 +16,7 @@ export const TextArea = memo((props: TextAreaProps) =>{
         className,
         value,
         onChange,
+        placeholder,
         minHeight=76,
         ...otherProps
     } = props;
@@ -39,6 +41,7 @@ export const TextArea = memo((props: TextAreaProps) =>{
             ref={textareaRef}
             value={value}
             onChange={onChangeHandler}
+            placeholder={placeholder}
             style={{minHeight: minHeight}}
             {...otherProps}
         />

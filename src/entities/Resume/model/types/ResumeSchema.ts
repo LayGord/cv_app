@@ -54,10 +54,10 @@ export interface Job {
     id: string;
     position: string;
     company: string;
-    location: string;
+    location?: string;
     dateFrom: string;
     dateTo?: string;
-    comment: string;
+    comment?: string;
 }
 
 
@@ -65,14 +65,15 @@ export interface Project {
     id: string;
     title: string;
     link: string;
-    description: string;
+    description?: string;
 }
 
 
 export interface Education {
     id: string;
-    grade: 'Bachelor' | 'Master' | 'PhD' | 'Lower post-secondary';
-    completed: boolean;
+    faculty: string;
+    program: string;
+    grade: 'bachelor' | 'master' | 'phd' | 'ad_fe' | 'specialist';
     org: string;
     dateFrom: string;
     dateTo?: string;
@@ -82,5 +83,5 @@ export interface Education {
 export interface Language {
     id: string;
     language: string;
-    level?: 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2';
+    level?: 'a1' | 'a2' | 'b1' | 'b2' | 'c1' | 'c2';
 }

@@ -1,1 +1,0 @@
-export { ResumeContactsEditor } from './ui/ResumeContactsEditor/ResumeContactsEditor';

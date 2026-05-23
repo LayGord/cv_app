@@ -1,0 +1,73 @@
+import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
+import { Project } from "entities/Resume";
+import { Input } from "shared/ui/Input/Input";
+import { Button } from "shared/ui/Button/Button";
+import { TextArea } from "shared/ui/TextArea/TextArea";
+import { ReactComponent as DeleteItemIcon } from 'shared/assets/icons/x-icon.svg';
+import { classNames } from "shared/lib/classNames/classNames";
+import cls from "./ProjectItem.module.scss";
+
+
+interface ProjectItemProps {
+    className?: string;
+    data: Project;
+    onUpdate: (value: string, field: keyof Project) => void;
+    onDelete: () => void;
+    index?: number;
+}
+
+export const ProjectItem = (props: ProjectItemProps) => {
+    const {
+        className,
+        data,
+        onUpdate,
+        onDelete,
+        index
+    } = props;
+
+    const { t } = useTranslation('resume');
+
+    const onUpdateTitle = useCallback((value: string) => {
+        onUpdate(value, 'title')
+    }, [onUpdate]);
+
+    const onUpdateLink= useCallback((value: string) => {
+        onUpdate(value, 'link')
+    }, [onUpdate]);
+
+    const onUpdateDescription = useCallback((value: string) => {
+        onUpdate(value, 'description')
+    }, [onUpdate]);
+
+    return (
+        <div className={ classNames(cls.ProjectItem, {}, [className]) }>
+            <div className={cls.row}>
+                { index && <div className={cls.index}>{index}</div>}
+                <Input 
+                    id={`title_${data.id}`}
+                    placeholder={t('ProjectsEditor.projectTitle')}
+                    value={data.title}
+                    onChange={onUpdateTitle}
+                />
+                <Button
+                    onClick={onDelete}
+                >
+                    <DeleteItemIcon />
+                </Button>
+            </div>
+            <Input 
+                id={`link_${data.id}`}
+                placeholder={t('ProjectsEditor.projectLink')}
+                value={data.link}
+                onChange={onUpdateLink}
+            />
+            <TextArea 
+                id={`description_${data.id}`}
+                placeholder={t('ProjectsEditor.projectDescription')}
+                value={data.description}
+                onChange={onUpdateDescription}
+            />
+        </div>
+    );
+};

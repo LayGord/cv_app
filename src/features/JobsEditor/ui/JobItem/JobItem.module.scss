@@ -1,0 +1,27 @@
+.JobItem {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+
+    box-shadow: 0px 0px 3px 0px var(--shadow-color);
+    border-radius: 4px;
+    padding: 20px;
+}
+
+.row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.index {
+    color: var(--shadow-color);
+    font: var(--font-l);
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

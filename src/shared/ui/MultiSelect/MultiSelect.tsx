@@ -115,7 +115,7 @@ export const MultiSelect = (props: MultiSelectProps) => {
             return Object.entries(groupOptionsByCategory(options)).map(([category, options]) => {
                 return (
                     <>
-                        <div className={cls.categoryName}>{ category }</div>
+                        <div key={category} className={cls.categoryName}>{ category }</div>
                         {
                             options.map((option) => renderOption(option))
                         }

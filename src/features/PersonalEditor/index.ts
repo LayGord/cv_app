@@ -1,0 +1,1 @@
+export { PersonalEditor } from './ui/PersonalEditor';

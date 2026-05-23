@@ -1,5 +1,5 @@
 {
-    "ResumePersonalEditor": {
+    "PersonalEditor": {
         "titleMainInfo": "Основная информация",
         "lastname": "Фамилия",
         "firstname": "Имя",
@@ -11,16 +11,37 @@
         "city": "Город",
         "titlePhoto": "Фото для резюме"
     },
-    "ResumeContactsEditor": {
+    "ContactsEditor": {
         "titleContacts": "Контактная информация",
         "email": "E-mail",
         "phone": "Мобильный номер",
-        "titleLinks": "Ссылки на мессендежры | соц-сети",
+        "titleLinks": "Ссылки на мессендежры \\ соц-сети",
         "linkItemName": "Название",
         "linkItemLink": "Ссылка"
     },
-    "ResumeExperienceEditor": {
+    "JobsEditor": {
         "titleSkills": "Выберите навыки из предложенных",
-        "titleJobs": "Расскажите о своем карьерном пути"
+        "titleJobs": "Расскажите о своем карьерном пути",
+        "jobItemCompany": "Компания",
+        "jobItemPosition": "Должность",
+        "jobItemDateFrom": "Дата с",
+        "jobItemDateTo": "дата по",
+        "jobItemLocation": "Место нахождения",
+        "jobItemComment": "Кратко опишите свои обязанности на указанной работе"
+    },
+    "ProjectsEditor": {
+        "titleProjects": "Расскажите о pet-проектах которые завершили \\ над которыми работаете",
+        "projectTitle": "Название",
+        "projectLink": "Ссылка",
+        "projectDescription": "Краткое описание проекта \\ какую проблему решает?"
+    },
+    "EducationEditor": {
+        "titleEducations": "Раскажите о вашем образовании",
+        "educationGrade": "Степень",
+        "educationOrg": "Наименование организации",
+        "educationFaculty": "Фаультет / Отделение",
+        "educationProgram": "Напрвление обучения",
+        "educationDateFrom": "Дата с",
+        "educationDateTo": "Дата по"
     }
 }

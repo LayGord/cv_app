@@ -2,7 +2,7 @@
     "language": "Рус",
     "male": "Мужской",
     "female": "Женский",
-    "NavLinks": {
+    "NavButtons": {
         "previous": "Назад",
         "next": "Далее"
     },

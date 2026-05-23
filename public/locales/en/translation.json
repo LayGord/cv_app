@@ -2,7 +2,7 @@
     "language": "Eng",
     "male": "Male",
     "female": "Female",
-    "NavLinks": {
+    "NavButtons": {
         "previous": "Back",
         "next": "Next"
     },

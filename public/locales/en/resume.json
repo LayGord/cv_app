@@ -1,5 +1,5 @@
 {
-    "ResumePersonalEditor": {
+    "PersonalEditor": {
         "titleMainInfo": "Main information",
         "lastname": "Lastname",
         "firstname": "Firstname",
@@ -11,16 +11,37 @@
         "city": "City",
         "titlePhoto": "Photo for resume"
     },
-    "ResumeContactsEditor": {
+    "ContactsEditor": {
         "titleContacts": "Contacts information",
         "email": "E-mail",
         "phone": "Phone number",
-        "titleLinks": "Messengers | SocialMedia links",
+        "titleLinks": "Messengers \\ SocialMedia links",
         "linkItemName": "Name",
         "linkItemLink": "Link"
     },
-    "ResumeExperienceEditor": {
+    "JobsEditor": {
         "titleSkills": "Select skills from list",
-        "titleJobs": "Write about your career path"
+        "titleJobs": "Write about your career path",
+        "jobItemCompany": "Company name",
+        "jobItemPosition": "Position",
+        "jobItemDateFrom": "Date from",
+        "jobItemDateTo": "Date to",
+        "jobItemLocation": "Location",
+        "jobItemComment": "Describe your responsibilities at this job"
+    },
+    "ProjectsEditor": {
+        "titleProjects": "Write about pet-projects you complete \\ working on",
+        "projectName": "Project name",
+        "projectLink": "Link",
+        "projectDescription": "Short description \\ problem it solves?"
+    },
+    "EducationEditor": {
+        "titleEducations": "List your education",
+        "educationGrade": "Grade",
+        "educationOrg": "Organization name",
+        "educationFaculty": "Faculty / department",
+        "educationProgram": "Program",
+        "educationDateFrom": "DateFrom",
+        "educationDateTo": "DateTo"
     }
 }
