@@ -5,7 +5,7 @@ import { Input } from "shared/ui/Input/Input";
 import { DatePicker } from "shared/ui/DatePicker/DatePicker";
 import { TextArea } from "shared/ui/TextArea/TextArea";
 import { Button } from "shared/ui/Button/Button";
-import { ReactComponent as DeleteItemIcon } from 'shared/assets/icons/x-icon.svg';
+import { ReactComponent as DeleteIcon } from 'shared/assets/icons/delete-outline.svg';
 import { classNames } from "shared/lib/classNames/classNames";
 import cls from "./JobItem.module.scss";
 
@@ -66,7 +66,7 @@ export const JobItem = (props: JobItemProps) => {
                 <Button
                     onClick={onDelete}
                 >
-                    <DeleteItemIcon />
+                    <DeleteIcon />
                 </Button>
             </div>
             <div className={cls.row}>

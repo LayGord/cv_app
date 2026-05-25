@@ -1,0 +1,39 @@
+.checkboxWrapper {
+    position: relative;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+
+    width: 100%;
+
+    padding: 13px 13px 13px 13px;
+
+    box-shadow: 0 0 3px 0 var(--shadow-color);
+    border-radius: 4px;
+    outline: none;
+
+    font: var(--font-m);
+    background-color: none;
+
+    &:hover {
+        background-color: var(--light-bg-color);
+    };
+
+    &.checked {
+        box-shadow: 0 0 3px 0 var(--accent-shadow-color);
+        background-color: var(--accent-bg-color);
+        color: var(--accent-color);
+    }
+}
+
+
+
+.Checkbox {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}

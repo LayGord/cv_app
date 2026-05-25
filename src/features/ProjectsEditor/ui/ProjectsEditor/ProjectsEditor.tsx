@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { Project, getResumeExperience, resumeActions } from "entities/Resume";
+import { Project, getResumeProjects, resumeActions } from "entities/Resume";
 import { FormArray } from "shared/ui/FormArray/FormArray";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { classNames } from "shared/lib/classNames/classNames";
@@ -15,7 +15,7 @@ interface ProjectsEditorProps {
 
 export const ProjectsEditor = ({ className }: ProjectsEditorProps) => {
     const { t } = useTranslation('resume');
-    const exp = useSelector(getResumeExperience);
+    const projects = useSelector(getResumeProjects);
     const dispatch = useAppDispatch();
 
     const onAddProject = useCallback(() => {
@@ -54,7 +54,7 @@ export const ProjectsEditor = ({ className }: ProjectsEditorProps) => {
             <FormArray
                 title={t("ProjectsEditor.titleProjects")}
                 renderFunction={renderProjects}
-                value={exp.projects}
+                value={projects}
                 onAddNew={onAddProject}
             />
         </div>

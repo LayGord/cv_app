@@ -1,7 +1,11 @@
 {
     "language": "Рус",
-    "male": "Мужской",
-    "female": "Женский",
+    "currency": "Валюта",
+    "currencyOptions": {
+        "eur": "EUR",
+        "usd": "USD",
+        "rub": "РУБ"
+    },
     "NavButtons": {
         "previous": "Назад",
         "next": "Далее"

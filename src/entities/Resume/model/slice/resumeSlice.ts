@@ -4,11 +4,13 @@ import {
     Education,
     Job,
     Project,
-    ResumeContactsData,
-    ResumeExperienceData,
-    ResumePersonalData,
+    ContactsData,
+    ExperienceData,
+    PersonalData,
     ResumeSchema,
     Skill,
+    ObjectiveData,
+    Position,
 } from "../types/ResumeSchema";
 
 const initialState: ResumeSchema = {
@@ -20,7 +22,7 @@ const initialState: ResumeSchema = {
             patronymic: undefined,
             birthdate: undefined,
             photo: undefined,
-            sex: '',
+            sex: 'male',
             citizenship: '',
             country: '',
             city: '',
@@ -30,11 +32,16 @@ const initialState: ResumeSchema = {
             phone: undefined,
             links: [{id: '1', title: 'Telegram', link: ''}, {id: '2', title: 'LinkedIn', link: ''}],
         },
+        objective: {
+            positions: [{id: '1', name: ''}],
+            typeOfEmpl: [],
+            format: 'any',
+        },
         experience: {
             skills: [],
             jobs: [{id: '1', company: '', position: '', dateFrom: ''}],
             projects: [{id: '1', title: '', link: '', description: ''}],
-            educations: [{id: '1', org: '', grade: 'bachelor', faculty: '', program: '', dateFrom: ''}],
+            education: [{id: '1', org: '', grade: 'bachelor', faculty: '', program: '', dateFrom: ''}],
             langs: [],
         }
     }
@@ -45,7 +52,7 @@ export const resumeSlice = createSlice({
     initialState: initialState,
     reducers: {
         // personalData
-        updatePersonalData: (state, action: PayloadAction<Partial<ResumePersonalData>>) => {
+        updatePersonalData: (state, action: PayloadAction<Partial<PersonalData>>) => {
             state.resumeDraft.personal = {
                 ...state.resumeDraft.personal,
                 ...action.payload,
@@ -53,7 +60,7 @@ export const resumeSlice = createSlice({
         },
 
         //contactsData
-        updateContactsData: (state, action: PayloadAction<Partial<ResumeContactsData>>) => {
+        updateContactsData: (state, action: PayloadAction<Partial<ContactsData>>) => {
             state.resumeDraft.contacts = {
                 ...state.resumeDraft.contacts,
                 ...action.payload,
@@ -70,6 +77,29 @@ export const resumeSlice = createSlice({
         deleteContactLink: (state, action: PayloadAction<string>) => {
             state.resumeDraft.contacts.links = 
                 state.resumeDraft.contacts.links?.filter(item => item.id !== action.payload);
+        },
+
+        // objective Data
+        addPosition: (state, action: PayloadAction<string>) => {
+            state.resumeDraft.objective.positions.push({id: action.payload, name: ''})
+        },
+        updatePosition: (state, action: PayloadAction<Position>) => {
+            state.resumeDraft.objective.positions = 
+            state.resumeDraft.objective.positions.map(
+                (item) => item.id === action.payload.id ? action.payload : item
+            );
+        },
+        deletePosition: (state, action: PayloadAction<string>) => {
+            state.resumeDraft.objective.positions = 
+            state.resumeDraft.objective.positions.filter(
+                (item) => item.id !== action.payload
+            );
+        },
+        updateObjectiveData: (state, action: PayloadAction<Partial<ObjectiveData>>) => {
+            state.resumeDraft.objective = {
+                ...state.resumeDraft.objective,
+                ...action.payload
+            };
         },
 
         //experienceData
@@ -106,23 +136,19 @@ export const resumeSlice = createSlice({
         },
 
         addEducation: (state, action: PayloadAction<string>) => {
-            state.resumeDraft.experience.educations.push({
+            state.resumeDraft.experience.education.push({
                 id: action.payload, org: '', faculty: '', program: '', dateFrom: '', grade: 'bachelor'
             })
         },
         updateEducation: (state, action: PayloadAction<Education>) => {
-            state.resumeDraft.experience.educations = state.resumeDraft.experience.educations.map(
+            state.resumeDraft.experience.education = state.resumeDraft.experience.education.map(
                 (item) => item.id === action.payload.id ? action.payload : item
             )
         },
         deleteEducation: (state, action: PayloadAction<string>) => {
-            state.resumeDraft.experience.educations = state.resumeDraft.experience.educations.filter(
+            state.resumeDraft.experience.education = state.resumeDraft.experience.education.filter(
                 (item) => item.id !== action.payload
             )
-        },
-
-        updateExperienceData: (state, action: PayloadAction<Partial<ResumeExperienceData>>) => {
-            state.resumeDraft.experience = {...state.resumeDraft.experience, ...action.payload};
         }
 
     },

@@ -1,12 +1,13 @@
 .light {
     /* Font */
     --primary-color: #141C1F;
-    --secondary-color: #ADBCC0;
+    --secondary-color: #595959;
 
     /* Background */
-    --bg-color: #EFF5F6;
+    --bg-color: #f1f3f7;
     --light-bg-color: #eef3fd;
     --dark-bg-color: #FFFFFF;
+    --input-bg-color: #FFFFFF;
 
     /* Skeleton */
     --skeleton-shadow: #dbdbdb;
@@ -16,6 +17,7 @@
     --shadow-color: #595959;
 
     /* Other colors */
-    --accent-color: #e1ebff;
+    --accent-color: #1559eb;
+    --accent-bg-color: #e1ebff;
     --accent-shadow-color: #1559eb;
 }

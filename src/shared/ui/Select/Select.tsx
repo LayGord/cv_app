@@ -3,8 +3,8 @@ import cls from "./Select.module.scss";
 import { HTMLAttributes, memo, useCallback } from "react";
 
 
-interface SelectOption {
-    displayValue: string;
+export interface SelectOption {
+    displayName: string;
     value: string | undefined;
 }
 
@@ -59,7 +59,7 @@ export const Select = memo((props: SelectProps) => {
                 }
                 {
                     options.map(opt => {
-                        return <option key={opt.value} value={opt.value}>{opt.displayValue}</option>
+                        return <option key={opt.value} value={opt.value}>{opt.displayName}</option>
                     })
                 }
             </select>

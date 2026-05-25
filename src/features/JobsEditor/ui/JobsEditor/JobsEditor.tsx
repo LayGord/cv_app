@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { Job, Skill, getResumeExperience, resumeActions } from "entities/Resume";
+import { Job, Skill, getResumeJobs, getResumeSkills, resumeActions } from "entities/Resume";
 import { Group } from "shared/ui/Group/Group";
 import { MultiSelect } from "shared/ui/MultiSelect/MultiSelect";
 import { FormArray } from "shared/ui/FormArray/FormArray";
@@ -15,14 +15,16 @@ interface JobsEditorProps {
     className?: string;
 };
 
-const skills = [
+const skillsList = [
     {"id": "test", "displayName": "test", "category": "test"},
    
 ];
 
 export const JobsEditor = ({ className }: JobsEditorProps) => {
     const { t } = useTranslation('resume');
-    const exp = useSelector(getResumeExperience);
+
+    const skills = useSelector(getResumeSkills);
+    const jobs = useSelector(getResumeJobs);
     const dispatch = useAppDispatch();
 
     const onUpdateSkills = useCallback((value: Skill[]) => {
@@ -66,8 +68,8 @@ export const JobsEditor = ({ className }: JobsEditorProps) => {
             <Group title={t("JobsEditor.titleSkills")}>
                 <MultiSelect
                     id={"skills"}
-                    options={skills}
-                    value={exp.skills}
+                    options={skillsList}
+                    value={skills}
                     onChange={onUpdateSkills}
                     groupByCategories
                 />
@@ -75,7 +77,7 @@ export const JobsEditor = ({ className }: JobsEditorProps) => {
             <FormArray
                 title={t("JobsEditor.titleJobs")}
                 renderFunction={renderJobs}
-                value={exp.jobs}
+                value={jobs}
                 onAddNew={onAddJob}
             />
         </div>

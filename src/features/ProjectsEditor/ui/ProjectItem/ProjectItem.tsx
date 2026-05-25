@@ -4,7 +4,7 @@ import { Project } from "entities/Resume";
 import { Input } from "shared/ui/Input/Input";
 import { Button } from "shared/ui/Button/Button";
 import { TextArea } from "shared/ui/TextArea/TextArea";
-import { ReactComponent as DeleteItemIcon } from 'shared/assets/icons/x-icon.svg';
+import { ReactComponent as DeleteIcon } from 'shared/assets/icons/delete-outline.svg';
 import { classNames } from "shared/lib/classNames/classNames";
 import cls from "./ProjectItem.module.scss";
 
@@ -46,14 +46,14 @@ export const ProjectItem = (props: ProjectItemProps) => {
                 { index && <div className={cls.index}>{index}</div>}
                 <Input 
                     id={`title_${data.id}`}
-                    placeholder={t('ProjectsEditor.projectTitle')}
+                    placeholder={t('ProjectsEditor.projectName')}
                     value={data.title}
                     onChange={onUpdateTitle}
                 />
                 <Button
                     onClick={onDelete}
                 >
-                    <DeleteItemIcon />
+                    <DeleteIcon />
                 </Button>
             </div>
             <Input 

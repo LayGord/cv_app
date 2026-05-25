@@ -1,45 +1,80 @@
+import { Currency } from "entities/Currency";
+
 export interface ResumeSchema {
     id: string;
     resumeDraft: Resume;
 }
 
 export interface Resume {
-    personal: ResumePersonalData,
-    contacts: ResumeContactsData,
-    experience: ResumeExperienceData,
+    personal: PersonalData,
+    contacts: ContactsData,
+    objective: ObjectiveData,
+    experience: ExperienceData,
 };
 
-export interface ResumePersonalData {
+// main info
+
+export interface PersonalData {
     firstname: string;
     lastname: string;
     patronymic?: string;
     birthdate?: string;
     photo?: string;
-    sex: string;
+    sex: 'male' | 'female';
     citizenship: string;
     country: string;
     city: string;
 }
 
-export interface ResumeContactsData {
+// contacts
+
+export interface ContactsData {
     email: string;
     phone?: string;
     links: ContactLink[];
 }
 
-export interface ResumeExperienceData {
-    skills: Skill[];
-    jobs: Job[];
-    projects: Project[];
-    educations: Education[];
-    langs: Language[]
-}
-
-
 export interface ContactLink {
     id: string;
     title: string;
     link: string;
+}
+
+// search options
+
+export interface ObjectiveData {
+    positions: Position[];
+    typeOfEmpl: TypeOfEmpl[];
+    format: 'office' | 'remote' | 'hybrid' | 'any';
+    salary?: string;
+    currency?: Currency;
+    readyToRelocate?: boolean;
+    readyToBTrip?: boolean;
+    workweek?: string;
+}
+
+
+interface TypeOfEmpl {
+    id: string;
+    displayName: string;
+    value: 'fulltime' | 'partial' | 'internship' | 'watch'
+};
+
+
+export interface Position {
+    id: string;
+    name: string;
+}
+
+
+// experience info
+
+export interface ExperienceData {
+    skills: Skill[];
+    jobs: Job[];
+    projects: Project[];
+    education: Education[];
+    langs: Language[]
 }
 
 

@@ -9,7 +9,11 @@
         "citizenship": "Гражданство",
         "country": "Страна",
         "city": "Город",
-        "titlePhoto": "Фото для резюме"
+        "titlePhoto": "Фото для резюме",
+        "sexOptions": {
+            "male": "Мужской",
+            "female": "Женский"
+        }
     },
     "ContactsEditor": {
         "titleContacts": "Контактная информация",
@@ -18,6 +22,39 @@
         "titleLinks": "Ссылки на мессендежры \\ соц-сети",
         "linkItemName": "Название",
         "linkItemLink": "Ссылка"
+    },
+    "ObjectiveEditor": {
+        "titlePositions": "Ожидаемая позиция \\ Профессия",
+        "PositionItem": {
+            "position": "Позиция"
+        },
+        "titleTypeOfEmpl": "Тип занятости",
+        "typeOfEmplOptions": {
+            "fulltime": "Полная",
+            "partial": "Частичная",
+            "internship": "Стажировка",
+            "watch": "Вахта"
+        },
+        "titleSalary": "Ожидаемый уровень заработной платы",
+        "salary": "",
+        "titleAdditionalInfo": "Дополнительная информация",
+        "FormatSelect": {
+            "format": "Формат работы",
+            "formatOptions": {
+                "any": "Любой",
+                "hybrid": "Гибридный",
+                "office": "Офис",
+                "remote": "Удалённо"
+            }
+        },
+        "WorkweekInput": {
+            "workweek": "Рабочая неделя (часы)",
+            "40hrs": "40 часов",
+            "35hrs": "35 часов",
+            "26hrs": "26 часов"
+        },
+        "readyToTrip": "Готов к коммандировкам",
+        "readyToRelocate": "Готов к переезду"
     },
     "JobsEditor": {
         "titleSkills": "Выберите навыки из предложенных",
@@ -31,17 +68,24 @@
     },
     "ProjectsEditor": {
         "titleProjects": "Расскажите о pet-проектах которые завершили \\ над которыми работаете",
-        "projectTitle": "Название",
+        "projectName": "Название",
         "projectLink": "Ссылка",
         "projectDescription": "Краткое описание проекта \\ какую проблему решает?"
     },
     "EducationEditor": {
         "titleEducations": "Раскажите о вашем образовании",
-        "educationGrade": "Степень",
-        "educationOrg": "Наименование организации",
-        "educationFaculty": "Фаультет / Отделение",
-        "educationProgram": "Напрвление обучения",
-        "educationDateFrom": "Дата с",
-        "educationDateTo": "Дата по"
+        "grade": "Степень",
+        "org": "Наименование организации",
+        "faculty": "Факультет / Отделение",
+        "program": "Направление обучения",
+        "dateFrom": "Дата с",
+        "dateTo": "Дата по",
+        "gradeOptions": {
+            "bachelor": "Бакалавриат",
+            "master": "Магистратура",
+            "ad_fe": "Среднее профессиональное образование",
+            "phd": "Аспирантура",
+            "specialist": "Специалитет"
+        }
     }
 }

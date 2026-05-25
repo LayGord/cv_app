@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router";
 import { Page } from "widgets/Page";
 import { PersonalEditor } from "features/PersonalEditor";
 import { ContactsEditor } from 'features/ContactsEditor';
+import { ObjectiveEditor } from "features/ObjectiveEditor";
 import { JobsEditor } from 'features/JobsEditor';
 import { ProjectsEditor } from 'features/ProjectsEditor';
 import { EducationEditor } from 'features/EducationEditor';
@@ -15,14 +16,15 @@ interface ResumeEditorPageProps {
     className?: string;
 }
 
-type ResumeEditorStep = 'personal' | 'contacts' | 'skills_jobs' | 'projects' | 'educations_langs';
+type ResumeEditorStep = 'personal' | 'contacts' | 'objective' | 'jobs' | 'projects' | 'education';
 
 const resumeEditorConfig: Record<ResumeEditorStep, {prev?: ResumeEditorStep, next?: ResumeEditorStep}> = {
     personal: { next: 'contacts' },
-    contacts: { prev: 'personal', next: 'skills_jobs' },
-    skills_jobs: { prev: 'contacts', next: 'projects' },
-    projects: { prev: 'skills_jobs', next: 'educations_langs' },
-    educations_langs: { prev: 'projects' }
+    contacts: { prev: 'personal', next: 'objective' },
+    objective: { prev: 'contacts', next: 'jobs'},
+    jobs: { prev: 'objective', next: 'projects' },
+    projects: { prev: 'jobs', next: 'education' },
+    education: { prev: 'projects' }
 }
 
 const ResumeEditorPage = ({ className }: ResumeEditorPageProps) => {
@@ -39,10 +41,11 @@ const ResumeEditorPage = ({ className }: ResumeEditorPageProps) => {
         <Page>
             <div className={ classNames(cls.ResumeEditorPage, {}, [className]) }>
                 { step === 'personal' && <PersonalEditor /> }
-                { step === 'contacts' && <ContactsEditor/> }
-                { step === 'skills_jobs' && <JobsEditor /> }
+                { step === 'contacts' && <ContactsEditor /> }
+                { step === 'objective' && <ObjectiveEditor /> }
+                { step === 'jobs' && <JobsEditor /> }
                 { step === 'projects' && <ProjectsEditor /> }
-                { step === 'educations_langs' && <EducationEditor /> }
+                { step === 'education' && <EducationEditor /> }
                 <NavButtons 
                     {...resumeEditorConfig[step as ResumeEditorStep]}
                     onSwitchStep={switchStep}

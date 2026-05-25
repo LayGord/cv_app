@@ -1,15 +1,15 @@
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { resumeActions, getResumePersonal, ResumePersonalData } from "entities/Resume";
+import { resumeActions, getResumePersonal, PersonalData } from "entities/Resume";
 import { FileUploader } from "shared/ui/FileUploader/FileUploader";
 import { Input } from "shared/ui/Input/Input";
 import { Group } from "shared/ui/Group/Group";
-import { Select } from "shared/ui/Select/Select";
 import { DatePicker } from "shared/ui/DatePicker/DatePicker";
 import { Avatar, AvatarSize } from "shared/ui/Avatar/Avatar";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { classNames } from "shared/lib/classNames/classNames";
+import { SexSelect } from "./SexSelect/SexSelect";
 import cls from "./PersonalEditor.module.scss";
 
 
@@ -19,18 +19,13 @@ interface PersonalEditorProps {
 
 export const PersonalEditor = ({ className }: PersonalEditorProps) => {
 
-    const { t, i18n } = useTranslation('resume');
-
-    const sexOptions = useMemo(() => [
-        {displayValue: i18n.t("male"), value: 'male'},
-        {displayValue: i18n.t("female"), value: 'female'}
-    ], [i18n]);
+    const { t } = useTranslation('resume');
 
     const personalData = useSelector(getResumePersonal);
     const dispatch = useAppDispatch();
 
     const onChangeTextField = useCallback(
-        (field: keyof ResumePersonalData) => 
+        (field: keyof PersonalData) => 
             (value: string) => dispatch(resumeActions.updatePersonalData({[field]: value})), 
         [dispatch]);
 
@@ -66,14 +61,10 @@ export const PersonalEditor = ({ className }: PersonalEditorProps) => {
                     onChange={onChangeTextField('patronymic')}
                 />
                 <Group direction={'row'}>
-                    <Select
-                        id="sex"
-                        placeholder={t("PersonalEditor.sex")}
-                        options={sexOptions}
+                    <SexSelect 
                         value={personalData.sex}
                         onChange={onChangeTextField('sex')}
                     />
-
                     <DatePicker
                         id="birthdate"
                         label={t("PersonalEditor.birthdate")}

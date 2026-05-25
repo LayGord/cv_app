@@ -20,20 +20,20 @@
 
 .closeBtn {
     z-index:  var(--multi-select-closeBtn-z-index);;
-    color: var(--shadow-color);
+    color: var(--secondary-color);
 
     position: absolute;
     right: 1px;
     top: 0;
 
     & path {
-        stroke: var(--shadow-color);
+        stroke: var(--secondary-color);
     }
 }
 
 .closeBtn:hover {
     & path {
-        stroke: rgb(from var(--accent-shadow-color) r g b / 0.7);
+        stroke: rgb(from var(--accent-color) r g b / 0.7);
         transition: stroke 0.2s;
     }
 }
@@ -116,6 +116,6 @@
 .categoryName {
     width: 100%;
     padding: 8px;
-    color: var(--shadow-color);
+    color: var(--secondary-color);
     border-bottom: 1px solid rgb(from var(--shadow-color) r g b / 0.6);
 }

@@ -9,7 +9,11 @@
         "citizenship": "Citizenship",
         "country": "Country",
         "city": "City",
-        "titlePhoto": "Photo for resume"
+        "titlePhoto": "Photo for resume",
+        "sexOptions": {
+            "male": "Male",
+            "female": "Female"
+        }
     },
     "ContactsEditor": {
         "titleContacts": "Contacts information",
@@ -18,6 +22,39 @@
         "titleLinks": "Messengers \\ SocialMedia links",
         "linkItemName": "Name",
         "linkItemLink": "Link"
+    },
+    "ObjectiveEditor": {
+        "titlePositions": "Expected position",
+        "PositionItem": {
+            "position": "Position"
+        },
+        "titleTypeOfEmpl": "Type of employment",
+        "typeOfEmplOptions": {
+            "fulltime": "Full-time",
+            "partial": "Partial",
+            "internship": "Internship",
+            "watch": "Watch"
+        },
+        "titleSalary": "Expected salary level",
+        "salary": "Salary",
+        "titleAdditionalInfo": "Additional information",
+        "FormatSelect": {
+            "format": "Job format",
+            "formatOptions": {
+                "any": "Any",
+                "hybrid": "Hybrid",
+                "office": "Office",
+                "remote": "Remote"
+            }
+        },
+        "WorkweekInput": {
+            "workweek": "Workweek (hours)",
+            "40hrs": "40 hours",
+            "35hrs": "35 hours",
+            "26hrs": "26 hours"
+        },
+        "readyToTrip": "Ready to business trip",
+        "readyToRelocate": "Ready to relocate"
     },
     "JobsEditor": {
         "titleSkills": "Select skills from list",
@@ -37,11 +74,18 @@
     },
     "EducationEditor": {
         "titleEducations": "List your education",
-        "educationGrade": "Grade",
-        "educationOrg": "Organization name",
-        "educationFaculty": "Faculty / department",
-        "educationProgram": "Program",
-        "educationDateFrom": "DateFrom",
-        "educationDateTo": "DateTo"
+        "grade": "Grade",
+        "org": "Organization name",
+        "faculty": "Faculty / department",
+        "program": "Program",
+        "dateFrom": "DateFrom",
+        "dateTo": "DateTo",
+        "gradeOptions": {
+            "bachelor": "Bachelor",
+            "master": "Master",
+            "ad_fe": "College / Further Education",
+            "phd": "PhD",
+            "specialist": "Specialist"
+        }
     }
 }

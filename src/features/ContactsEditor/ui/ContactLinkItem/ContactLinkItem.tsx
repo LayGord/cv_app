@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { ContactLink } from 'entities/Resume';
 import { Input } from "shared/ui/Input/Input";
 import { Button } from "shared/ui/Button/Button";
-import { ReactComponent as DeleteItemIcon } from 'shared/assets/icons/x-icon.svg';
+import { ReactComponent as DeleteIcon } from 'shared/assets/icons/delete-outline.svg';
 import cls from "./ContactLinkItem.module.scss";
 
 
@@ -48,7 +48,7 @@ export const ContactLinkItem = memo((props: ContactLinkItemItemProps) => {
                 className={cls.deleteBtn}
                 onClick={onDelete}
             >
-                <DeleteItemIcon />
+                <DeleteIcon />
             </Button>
         </div>
     );

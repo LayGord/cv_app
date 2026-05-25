@@ -1,7 +1,11 @@
 {
     "language": "Eng",
-    "male": "Male",
-    "female": "Female",
+    "currency": "Currency",
+    "currencyOptions": {
+        "eur": "EUR",
+        "usd": "USD",
+        "rub": "RUB"
+    },
     "NavButtons": {
         "previous": "Back",
         "next": "Next"

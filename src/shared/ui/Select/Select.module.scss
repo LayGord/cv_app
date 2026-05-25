@@ -47,7 +47,9 @@
     left: 13px;
     top: 2px;
     font: var(--font-s);
-    color: var(--shadow-color)
+    color: var(--shadow-color);
+    pointer-events: none;
+    
 }
 
 .hasPlaceholder {

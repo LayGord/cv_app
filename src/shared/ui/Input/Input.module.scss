@@ -13,7 +13,7 @@
     border-radius: 4px;
     border:  none;
     box-shadow: 0px 0px 3px 0px var(--shadow-color);
-    background-color: var(--dark-bg-color);
+    background-color: var(--input-bg-color);
     color: var(--primary-color);
 }
 
@@ -25,11 +25,11 @@
 
 .inputField:focus {
     box-shadow: 0px 0px 3px 0px var(--accent-shadow-color);
-    color: var(--accent-shadow-color);
+    color: var(--accent-color);
 }
 
 .inputField:focus + .inputLabel {
-    color: var(--accent-shadow-color);
+    color: var(--accent-color);
 }
 
 .hasLabel {
@@ -38,7 +38,7 @@
     }
     .inputLabel {
         position: absolute;
-        color: var(--shadow-color);
+        color: var(--secondary-color);
         font: var(--font-m);
         top: 13px;
         left: 13px;

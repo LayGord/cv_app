@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { Education, getResumeExperience, resumeActions } from "entities/Resume";
+import { Education, getResumeEducation, resumeActions } from "entities/Resume";
 import { FormArray } from "shared/ui/FormArray/FormArray";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { classNames } from "shared/lib/classNames/classNames";
@@ -15,7 +15,7 @@ interface EducationEditorProps {
 
 export const EducationEditor = ({ className }: EducationEditorProps) => {
     const { t } = useTranslation('resume');
-    const exp = useSelector(getResumeExperience);
+    const educations = useSelector(getResumeEducation);
     const dispatch = useAppDispatch();
 
     const onAddEducation = useCallback(() => {
@@ -54,7 +54,7 @@ export const EducationEditor = ({ className }: EducationEditorProps) => {
             <FormArray
                 title={t("EducationEditor.titleEducations")}
                 renderFunction={renderEducation}
-                value={exp.educations}
+                value={educations}
                 onAddNew={onAddEducation}
             />
         </div>
