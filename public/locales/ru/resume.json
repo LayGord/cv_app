@@ -4,15 +4,17 @@
         "lastname": "Фамилия",
         "firstname": "Имя",
         "patronymic": "Отчество",
-        "sex": "Пол",
         "birthdate": "Дата рождения",
         "citizenship": "Гражданство",
         "country": "Страна",
         "city": "Город",
         "titlePhoto": "Фото для резюме",
-        "sexOptions": {
-            "male": "Мужской",
-            "female": "Женский"
+        "SexSelect": {
+            "sex": "Пол",
+            "sexOptions": {
+                "male": "Мужской",
+                "female": "Женский"
+            }
         }
     },
     "ContactsEditor": {
@@ -20,8 +22,10 @@
         "email": "E-mail",
         "phone": "Мобильный номер",
         "titleLinks": "Ссылки на мессендежры \\ соц-сети",
-        "linkItemName": "Название",
-        "linkItemLink": "Ссылка"
+        "ContactLinkItem": {
+            "name": "Название",
+            "link": "Ссылка"
+        }
     },
     "ObjectiveEditor": {
         "titlePositions": "Ожидаемая позиция \\ Профессия",
@@ -59,33 +63,41 @@
     "JobsEditor": {
         "titleSkills": "Выберите навыки из предложенных",
         "titleJobs": "Расскажите о своем карьерном пути",
-        "jobItemCompany": "Компания",
-        "jobItemPosition": "Должность",
-        "jobItemDateFrom": "Дата с",
-        "jobItemDateTo": "дата по",
-        "jobItemLocation": "Место нахождения",
-        "jobItemComment": "Кратко опишите свои обязанности на указанной работе"
+        "JobItem": {
+            "company": "Компания",
+            "position": "Должность",
+            "dateFrom": "Дата с",
+            "dateTo": "Дата по",
+            "location": "Место нахождения",
+            "comment": "Кратко опишите свои обязанности на указанной работе"
+        }
     },
     "ProjectsEditor": {
         "titleProjects": "Расскажите о pet-проектах которые завершили \\ над которыми работаете",
-        "projectName": "Название",
-        "projectLink": "Ссылка",
-        "projectDescription": "Краткое описание проекта \\ какую проблему решает?"
+        "ProjectItem": {
+            "name": "Название",
+            "link": "Ссылка",
+            "description": "Краткое описание проекта \\ какую проблему решает?"
+        }
     },
     "EducationEditor": {
         "titleEducations": "Раскажите о вашем образовании",
-        "grade": "Степень",
-        "org": "Наименование организации",
-        "faculty": "Факультет / Отделение",
-        "program": "Направление обучения",
-        "dateFrom": "Дата с",
-        "dateTo": "Дата по",
-        "gradeOptions": {
-            "bachelor": "Бакалавриат",
-            "master": "Магистратура",
-            "ad_fe": "Среднее профессиональное образование",
-            "phd": "Аспирантура",
-            "specialist": "Специалитет"
+        "EducationItem": {
+            "org": "Наименование организации",
+            "faculty": "Факультет / Отделение",
+            "program": "Направление обучения",
+            "dateFrom": "Дата с",
+            "dateTo": "Дата по"
+        },
+        "GradeSelect": {
+            "grade": "Степень",
+            "gradeOptions": {
+                "bachelor": "Бакалавриат",
+                "master": "Магистратура",
+                "ad_fe": "Среднее профессиональное образование",
+                "phd": "Аспирантура",
+                "specialist": "Специалитет"
+            }
         }
     }
 }

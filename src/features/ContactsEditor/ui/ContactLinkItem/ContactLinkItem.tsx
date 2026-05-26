@@ -36,13 +36,13 @@ export const ContactLinkItem = memo((props: ContactLinkItemItemProps) => {
                 className={cls.title}
                 value={contact.title}
                 onChange={onUpdateTitle}
-                placeholder={t("ContactsEditor.linkItemName")}
+                placeholder={t("ContactsEditor.ContactLinkItem.name")}
             />
             <Input 
                 className={cls.link}
                 value={contact.link}
                 onChange={onUpdateLink}
-                placeholder={t("ContactsEditor.linkItemLink")}
+                placeholder={t("ContactsEditor.ContactLinkItem.link")}
             />
             <Button
                 className={cls.deleteBtn}

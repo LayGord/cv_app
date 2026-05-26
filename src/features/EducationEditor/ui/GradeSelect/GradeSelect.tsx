@@ -33,7 +33,7 @@ export const GradeSelect = (props: GradeSelectProps) => {
         <Select
             className={ classNames('', {}, [className]) }
             id={id}
-            placeholder={t('EducationEditor.grade')}
+            placeholder={t('EducationEditor.GradeSelect.grade')}
             value={value}
             onChange={onChange as (value: string) => void}
             options={options}

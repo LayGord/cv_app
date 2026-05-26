@@ -4,24 +4,29 @@
         "lastname": "Lastname",
         "firstname": "Firstname",
         "patronymic": "Patronymic",
-        "sex": "Sex",
         "birthdate": "Birthdate",
         "citizenship": "Citizenship",
         "country": "Country",
         "city": "City",
         "titlePhoto": "Photo for resume",
-        "sexOptions": {
-            "male": "Male",
-            "female": "Female"
+        "SexSelect": {
+            "sex": "Sex",
+            "sexOptions": {
+                "male": "Male",
+                "female": "Female"
+            }
         }
+        
     },
     "ContactsEditor": {
         "titleContacts": "Contacts information",
         "email": "E-mail",
         "phone": "Phone number",
         "titleLinks": "Messengers \\ SocialMedia links",
-        "linkItemName": "Name",
-        "linkItemLink": "Link"
+        "ContactLinkItem": {
+            "name": "Name",
+            "link": "Link"
+        }
     },
     "ObjectiveEditor": {
         "titlePositions": "Expected position",
@@ -59,33 +64,41 @@
     "JobsEditor": {
         "titleSkills": "Select skills from list",
         "titleJobs": "Write about your career path",
-        "jobItemCompany": "Company name",
-        "jobItemPosition": "Position",
-        "jobItemDateFrom": "Date from",
-        "jobItemDateTo": "Date to",
-        "jobItemLocation": "Location",
-        "jobItemComment": "Describe your responsibilities at this job"
+        "JobItem": {
+            "company": "Company name",
+            "position": "Position",
+            "dateFrom": "Date from",
+            "dateTo": "Date to",
+            "location": "Location",
+            "comment": "Describe your responsibilities at this job"
+        }
     },
     "ProjectsEditor": {
         "titleProjects": "Write about pet-projects you complete \\ working on",
-        "projectName": "Project name",
-        "projectLink": "Link",
-        "projectDescription": "Short description \\ problem it solves?"
+        "ProjectItem": {
+            "name": "Project name",
+            "link": "Link",
+            "description": "Short description \\ problem it solves?"
+        }
     },
     "EducationEditor": {
         "titleEducations": "List your education",
-        "grade": "Grade",
-        "org": "Organization name",
-        "faculty": "Faculty / department",
-        "program": "Program",
-        "dateFrom": "DateFrom",
-        "dateTo": "DateTo",
-        "gradeOptions": {
-            "bachelor": "Bachelor",
-            "master": "Master",
-            "ad_fe": "College / Further Education",
-            "phd": "PhD",
-            "specialist": "Specialist"
+        "EducationItem": {
+            "org": "Organization name",
+            "faculty": "Faculty / department",
+            "program": "Program",
+            "dateFrom": "DateFrom",
+            "dateTo": "DateTo"
+        },
+        "GradeSelect": {
+            "grade": "Grade",
+            "gradeOptions": {
+                "bachelor": "Bachelor",
+                "master": "Master",
+                "ad_fe": "College / Further Education",
+                "phd": "PhD",
+                "specialist": "Specialist"
+            }
         }
     }
 }

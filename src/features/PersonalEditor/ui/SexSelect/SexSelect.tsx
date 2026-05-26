@@ -23,13 +23,14 @@ export const SexSelect = (props: SexSelectProps) => {
 
     const options = useMemo(() => sexOptions.map(
         (option) =>  ({ displayName: i18n.t(option.displayName, {ns: 'resume'}), value: option.value})
-    ), [i18n]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    ), [i18n.language]);
 
     return (
         <Select
             className={classNames('', {}, [className])}
             id="sex"
-            placeholder={t("PersonalEditor.sex")}
+            placeholder={t("PersonalEditor.SexSelect.sex")}
             options={options}
             value={value}
             onChange={onChange as (value: string) => void}

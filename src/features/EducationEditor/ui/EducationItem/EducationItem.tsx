@@ -64,7 +64,7 @@ export const EducationItem = (props: EducationItemProps) => {
                 />
                 <Input
                     id={`org_${data.id}`}
-                    placeholder={t('EducationEditor.org')}
+                    placeholder={t('EducationEditor.EducationItem.org')}
                     value={data.org}
                     onChange={onUpdateOrg}
                 />
@@ -76,26 +76,26 @@ export const EducationItem = (props: EducationItemProps) => {
             </div>
             <Input
                 id={`faculty_${data.id}`}
-                placeholder={t('EducationEditor.faculty')}
+                placeholder={t('EducationEditor.EducationItem.faculty')}
                 value={data.faculty}
                 onChange={onUpdateFaculty}
             />
             <Input
                 id={`program_${data.id}`}
-                placeholder={t('EducationEditor.program')}
+                placeholder={t('EducationEditor.EducationItem.program')}
                 value={data.program}
                 onChange={onUpdateProgram}
             />
             <div className={cls.row}>
                 <DatePicker
                     id={`dateFrom_${data.id}`}
-                    label={t('EducationEditor.dateFrom')}
+                    label={t('EducationEditor.EducationItem.dateFrom')}
                     value={data.dateFrom}
                     onChange={onUpdateDateFrom}
                 />
                 <DatePicker
                     id={`dateTo_${data.id}`}
-                    label={t('EducationEditor.dateTo')}
+                    label={t('EducationEditor.EducationItem.dateTo')}
                     value={data.dateTo}
                     onChange={onUpdateDateTo}
                 />

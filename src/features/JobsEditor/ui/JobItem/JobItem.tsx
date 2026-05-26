@@ -59,7 +59,7 @@ export const JobItem = (props: JobItemProps) => {
                 { index && <span className={cls.index}>{index}</span>}
                 <Input
                     id={`company_${data.id}`}
-                    placeholder={t('JobsEditor.jobItemCompany')}
+                    placeholder={t('JobsEditor.JobItem.company')}
                     value={data.company}
                     onChange={onUpdateCompany}
                 />
@@ -72,13 +72,13 @@ export const JobItem = (props: JobItemProps) => {
             <div className={cls.row}>
                 <Input
                     id={`position_${data.id}`}
-                    placeholder={t('JobsEditor.jobItemPosition')}
+                    placeholder={t('JobsEditor.JobItem.position')}
                     value={data.position}
                     onChange={onUpdatePosition}
                 />
                 <Input
                     id={`location_${data.id}`}
-                    placeholder={t('JobsEditor.jobItemLocation')}
+                    placeholder={t('JobsEditor.JobItem.location')}
                     value={data.location}
                     onChange={onUpdateLocation}
                 />
@@ -86,13 +86,13 @@ export const JobItem = (props: JobItemProps) => {
             <div className={cls.row}>
                 <DatePicker
                     id={`dateFrom_${data.id}`}
-                    label={t('JobsEditor.jobItemDateFrom')}
+                    label={t('JobsEditor.JobItem.dateFrom')}
                     value={data.dateFrom}
                     onChange={onUpdateDateFrom}
                 />
                 <DatePicker
                     id={`dateTo_${data.id}`}
-                    label={t('JobsEditor.jobItemDateTo')}
+                    label={t('JobsEditor.JobItem.dateTo')}
                     value={data.dateTo}
                     onChange={onUpdateDateTo}
                 />
@@ -100,7 +100,7 @@ export const JobItem = (props: JobItemProps) => {
             <TextArea
                 id={`comment_${data.id}`}
                 className={cls.row}
-                placeholder={t('JobsEditor.jobItemComment')}
+                placeholder={t('JobsEditor.JobItem.comment')}
                 value={data.comment}
                 onChange={onUpdateComment}
             />

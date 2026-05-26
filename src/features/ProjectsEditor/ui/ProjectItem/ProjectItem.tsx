@@ -46,7 +46,7 @@ export const ProjectItem = (props: ProjectItemProps) => {
                 { index && <div className={cls.index}>{index}</div>}
                 <Input 
                     id={`title_${data.id}`}
-                    placeholder={t('ProjectsEditor.projectName')}
+                    placeholder={t('ProjectsEditor.ProjectItem.name')}
                     value={data.title}
                     onChange={onUpdateTitle}
                 />
@@ -58,13 +58,13 @@ export const ProjectItem = (props: ProjectItemProps) => {
             </div>
             <Input 
                 id={`link_${data.id}`}
-                placeholder={t('ProjectsEditor.projectLink')}
+                placeholder={t('ProjectsEditor.ProjectItem.link')}
                 value={data.link}
                 onChange={onUpdateLink}
             />
             <TextArea 
                 id={`description_${data.id}`}
-                placeholder={t('ProjectsEditor.projectDescription')}
+                placeholder={t('ProjectsEditor.ProjectItem.description')}
                 value={data.description}
                 onChange={onUpdateDescription}
             />

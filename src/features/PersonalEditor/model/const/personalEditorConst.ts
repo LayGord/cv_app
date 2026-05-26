@@ -1,5 +1,5 @@
 
 export const sexOptions = [
-    {displayName: 'PersonalEditor.sexOptions.male', value: 'male'},
-    {displayName: 'PersonalEditor.sexOptions.female', value: 'female'}
+    {displayName: 'PersonalEditor.SexSelect.sexOptions.male', value: 'male'},
+    {displayName: 'PersonalEditor.SexSelect.sexOptions.female', value: 'female'}
 ];
