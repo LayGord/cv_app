@@ -1,11 +1,11 @@
 import { Currency } from "entities/Currency";
 
 export interface ResumeSchema {
-    id: string;
     resumeDraft: Resume;
 }
 
 export interface Resume {
+    id: string;
     personal: PersonalData,
     contacts: ContactsData,
     objective: ObjectiveData,

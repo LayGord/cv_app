@@ -1,0 +1,1 @@
+export { ResumePdfTemplate } from './ui/ResumePdfTemplate/ResumePdfTemplate';

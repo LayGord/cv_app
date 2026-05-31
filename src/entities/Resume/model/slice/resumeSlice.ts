@@ -5,7 +5,6 @@ import {
     Job,
     Project,
     ContactsData,
-    ExperienceData,
     PersonalData,
     ResumeSchema,
     Skill,
@@ -14,8 +13,8 @@ import {
 } from "../types/ResumeSchema";
 
 const initialState: ResumeSchema = {
-    id: '',
     resumeDraft: {
+        id: '',
         personal: {
             firstname: '',
             lastname: '',
@@ -45,12 +44,16 @@ const initialState: ResumeSchema = {
             langs: [],
         }
     }
-}
+};
+
 
 export const resumeSlice = createSlice({
     name: 'resume',
     initialState: initialState,
     reducers: {
+        setResumeId: (state, action: PayloadAction<string>) => {
+            state.resumeDraft.id = action.payload;
+        },
         // personalData
         updatePersonalData: (state, action: PayloadAction<Partial<PersonalData>>) => {
             state.resumeDraft.personal = {

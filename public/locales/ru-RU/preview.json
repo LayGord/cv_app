@@ -1,0 +1,9 @@
+{
+    "male": "Мужчина",
+    "female": "Женщина",
+    "personalInfo": {
+        "sexEmpty": "Пол не указан",
+        "birthdate": ", родился\\-лась {{ birthdate }}",
+        "birthdateEmpty": ", день рождения не указан"
+    }
+}

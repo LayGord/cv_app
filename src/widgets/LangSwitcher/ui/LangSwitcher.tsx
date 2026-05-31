@@ -14,9 +14,9 @@ export const LangSwitcher = ({ className }: LangSwitcherProps) => {
     const { t, i18n } = useTranslation();
 
     const onChangeLanguage = useCallback(() => {
-        i18n.language === 'en'
-            ? i18n.changeLanguage('ru')
-            : i18n.changeLanguage('en')
+        i18n.language === 'en-EN'
+            ? i18n.changeLanguage('ru-RU')
+            : i18n.changeLanguage('en-EN')
     }, [i18n]);
 
     return (

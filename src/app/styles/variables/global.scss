@@ -1,11 +1,13 @@
+@use "./fonts.scss";
+
 :root {
     /* fonts */
-    --font-family-main: system-ui, -apple-system, "Segoe UI", serif;
+    --font-family-main: 'Roboto', sans-serif;
     --font-family-code: consolas, 'Times New Roman', serif;
-    --font-weight-s: 500;
-    --font-weight-m: 500;
-    --font-weight-l: 500;
-    --font-weight-xl: 500;
+    --font-weight-s: 700;
+    --font-weight-m: 700;
+    --font-weight-l: 700;
+    --font-weight-xl: 700;
 
     --font-size-s: 14px;
     --font-line-s: 22px;

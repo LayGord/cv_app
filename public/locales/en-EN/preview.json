@@ -1,0 +1,13 @@
+{
+    "male": "Male",
+    "female": "Female",
+    "personalInfo": {
+        "sexEmpty": "Sex not specified",
+        "birthdate": ", born in {{ birthdate }}",
+        "birthdateEmpty": ", birthday not specified",
+        "location": "Lives in: {{ city }}, {{ country }}",
+        "locationEmpty": "Location not specified",
+        "citizenship": "Citizenship: {{ citizenship }}",
+        "citizenshipEmpty": "Citizenship not specified"
+    }
+}

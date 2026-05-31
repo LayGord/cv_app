@@ -1,5 +1,5 @@
 export type {
-    ResumeSchema,
+    ResumeSchema, Resume,
     PersonalData,
     ContactsData, ContactLink,
     ObjectiveData, Position,
