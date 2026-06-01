@@ -1,9 +1,24 @@
 {
-    "male": "Мужчина",
-    "female": "Женщина",
+    "male": "Мужчина, ",
+    "female": "Женщина, ",
     "personalInfo": {
         "sexEmpty": "Пол не указан",
-        "birthdate": ", родился\\-лась {{ birthdate }}",
-        "birthdateEmpty": ", день рождения не указан"
+        "birthdateMale": "{{ years }} лет, родился {{ birthdate }}",
+        "birthdateFemale": "{{ years }} лет, родилась {{ birthdate }}",
+        "birthdateEmpty": "дата рождения не указана",
+
+        "email": "E-mail",
+        "phone": "Телефон",
+        "preferredContact": " - предпочитаемый способ связи",
+
+        "location": "Город проживания: {{ city }}, {{ country }}.",
+        "locationEmpty": "Город проживания: не указан.",
+        "citizenship": "Гражданство: {{ citizenship }}",
+        "citizenshipEmpty": "Гражданство: не указано",
+
+        "readyToRelocate": "Готов к переезду,",
+        "notReadyToRelocate": "Не готов к переезду,",
+        "readyToBTrip": "готов к коммандировкам.",
+        "notReadyToBTrip": "не готов к коммандировкам."
     }
 }

@@ -2,6 +2,11 @@
     width: 100%;
 }
 
+.row {
+    display: flex;
+    gap: 10px;
+}
+
 .links {
     position: relative;
 }

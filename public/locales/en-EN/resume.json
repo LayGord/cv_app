@@ -25,7 +25,7 @@
         "titleLinks": "Messengers \\ SocialMedia links",
         "ContactLinkItem": {
             "name": "Name",
-            "link": "Link"
+            "link": "Id \\ Link"
         }
     },
     "ObjectiveEditor": {

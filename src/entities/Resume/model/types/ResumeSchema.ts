@@ -32,6 +32,7 @@ export interface ContactsData {
     email: string;
     phone?: string;
     links: ContactLink[];
+    preferred?: string; //  'email' | 'phone' or id of link
 }
 
 export interface ContactLink {
@@ -48,8 +49,8 @@ export interface ObjectiveData {
     format: 'office' | 'remote' | 'hybrid' | 'any';
     salary?: string;
     currency?: Currency;
-    readyToRelocate?: boolean;
-    readyToBTrip?: boolean;
+    readyToRelocate: boolean;
+    readyToBTrip: boolean;
     workweek?: string;
 }
 

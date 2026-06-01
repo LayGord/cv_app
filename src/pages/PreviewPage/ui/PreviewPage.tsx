@@ -13,7 +13,7 @@ interface PreviewPageProps {
 }
 
 
-const resume: DeepPartial<Resume> = {
+const resume: Resume = {
     id: '1',
     personal: {
         lastname: 'Lastname',
@@ -27,15 +27,24 @@ const resume: DeepPartial<Resume> = {
         photo: '',
     },
     contacts: {
-        phone: '',
-        email: '',
-        links: []
+        phone: '+7 900 99 99 99',
+        email: 'example@mail.com',
+        links: [],
+        preferred: 'email'
     },
     objective: {
-
+        readyToRelocate: true,
+        readyToBTrip: false,
+        format: 'any',
+        positions: [{ id: '1', name: 'Trainee'}],
+        typeOfEmpl: [{id: '1', displayName: 'Fulltime', value: 'fulltime'}]
     },
     experience: {
-        
+        education: [],
+        jobs: [],
+        langs: [],
+        projects: [],
+        skills: []
     },
 }
 
@@ -45,7 +54,7 @@ export const PreviewPage = ({ className }: PreviewPageProps) => {
         <Page >
             <div className={ classNames(cls.PreviewPage, {}, [className]) }>
                 <PDFViewer style={{ width: '100%', height: '100%' }}>
-                    <ResumePdfTemplate data={resume}/>
+                    <ResumePdfTemplate data={resumeData}/>
                 </PDFViewer>
             </div>
         </Page>

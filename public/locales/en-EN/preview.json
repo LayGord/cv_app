@@ -1,13 +1,24 @@
 {
-    "male": "Male",
-    "female": "Female",
+    "male": "Male, ",
+    "female": "Female, ",
     "personalInfo": {
-        "sexEmpty": "Sex not specified",
-        "birthdate": ", born in {{ birthdate }}",
-        "birthdateEmpty": ", birthday not specified",
-        "location": "Lives in: {{ city }}, {{ country }}",
-        "locationEmpty": "Location not specified",
+        "sexEmpty": "Sex not specified,",
+        "birthdateMale": "{{ years}} y.o, born in {{ birthdate }}",
+        "birthdateFemale": "{{ years}} y.o, born in {{ birthdate }}",
+        "birthdateEmpty": "birthdate not specified",
+
+        "email": "E-mail",
+        "phone": "Phone",
+        "preferredContact": " - preferred contact",
+
+        "location": "Lives in: {{ city }}, {{ country }}.",
+        "locationEmpty": "Location: not specified.",
         "citizenship": "Citizenship: {{ citizenship }}",
-        "citizenshipEmpty": "Citizenship not specified"
+        "citizenshipEmpty": "Citizenship: not specified",
+
+        "readyToRelocate": "Ready to relocate,",
+        "notReadyToRelocate": "Not ready to relocate,",
+        "readyToBTrip": "ready to business trips.",
+        "notReadyToBTrip": "not ready to business trips."
     }
 }

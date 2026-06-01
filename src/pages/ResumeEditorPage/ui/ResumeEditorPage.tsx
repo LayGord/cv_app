@@ -10,6 +10,7 @@ import { EducationEditor } from 'features/EducationEditor';
 import { NavButtons } from "shared/ui/NavButtons/NavButtons";
 import { classNames } from "shared/lib/classNames/classNames";
 import cls from "./ResumeEditorPage.module.scss";
+import { AppRoutes } from "shared/config/router/paths";
 
 
 interface ResumeEditorPageProps {
@@ -48,6 +49,7 @@ const ResumeEditorPage = ({ className }: ResumeEditorPageProps) => {
                 { step === 'education' && <EducationEditor /> }
                 <NavButtons 
                     {...resumeEditorConfig[step as ResumeEditorStep]}
+                    lastLink={`/${AppRoutes.PREVIEW}`}
                     onSwitchStep={switchStep}
                 />
             </div>

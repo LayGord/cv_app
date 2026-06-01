@@ -1,15 +1,18 @@
-import { classNames } from "shared/lib/classNames/classNames";
-import cls from "./NavButtons.module.scss";
+import { useTranslation } from "react-i18next";
 import { ReactComponent as ChevronRight } from 'shared/assets/icons/chevron-right.svg';
 import { ReactComponent as ChevronLeft } from 'shared/assets/icons/chevron-left.svg';
-import { useTranslation } from "react-i18next";
+import { classNames } from "shared/lib/classNames/classNames";
 import { Button, ButtonTheme } from "../Button/Button";
+import { AppLink, AppLinkTheme } from "../AppLink/AppLink";
+import cls from "./NavButtons.module.scss";
+
 
 interface NavButtonsProps {
     className?: string;
     prev?: string;
     next?: string;
     onSwitchStep: (step: string) => void;
+    lastLink?: string;
 }
 
 export const NavButtons = (props: NavButtonsProps) => {
@@ -17,7 +20,8 @@ export const NavButtons = (props: NavButtonsProps) => {
         className,
         prev,
         next,
-        onSwitchStep
+        onSwitchStep,
+        lastLink,
     } = props;
 
     const { t } = useTranslation();
@@ -47,6 +51,16 @@ export const NavButtons = (props: NavButtonsProps) => {
                     <span>{t('NavButtons.next')}</span>
                     <ChevronRight />
                 </Button>
+            }
+            { !next && lastLink &&
+                <AppLink 
+                    to={lastLink}
+                    className={cls.preview}
+                    theme={AppLinkTheme.CLEAR}
+                >
+                    <span>{t('NavButtons.preview')}</span>
+                    <ChevronRight />
+                </AppLink>
             }
         </div>
     );

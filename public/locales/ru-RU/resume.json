@@ -24,7 +24,7 @@
         "titleLinks": "Ссылки на мессендежры \\ соц-сети",
         "ContactLinkItem": {
             "name": "Название",
-            "link": "Ссылка"
+            "link": "Id \\ Ссылка"
         }
     },
     "ObjectiveEditor": {

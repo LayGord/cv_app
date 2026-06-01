@@ -30,11 +30,14 @@ const initialState: ResumeSchema = {
             email: 'example@mail.com',
             phone: undefined,
             links: [{id: '1', title: 'Telegram', link: ''}, {id: '2', title: 'LinkedIn', link: ''}],
+            preferred: 'email',
         },
         objective: {
             positions: [{id: '1', name: ''}],
             typeOfEmpl: [],
             format: 'any',
+            readyToRelocate: false,
+            readyToBTrip: false,
         },
         experience: {
             skills: [],
@@ -80,6 +83,14 @@ export const resumeSlice = createSlice({
         deleteContactLink: (state, action: PayloadAction<string>) => {
             state.resumeDraft.contacts.links = 
                 state.resumeDraft.contacts.links?.filter(item => item.id !== action.payload);
+            if (action.payload === state.resumeDraft.contacts.preferred) {
+                state.resumeDraft.contacts.preferred = undefined
+            }
+        },
+        preferContact: (state, action: PayloadAction<string>) => {
+            state.resumeDraft.contacts.preferred === action.payload 
+                ? state.resumeDraft.contacts.preferred = undefined
+                : state.resumeDraft.contacts.preferred = action.payload
         },
 
         // objective Data
