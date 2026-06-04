@@ -4,7 +4,7 @@ import { Job } from "entities/Resume";
 import { Input } from "shared/ui/Input/Input";
 import { DatePicker } from "shared/ui/DatePicker/DatePicker";
 import { TextArea } from "shared/ui/TextArea/TextArea";
-import { Button } from "shared/ui/Button/Button";
+import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import { ReactComponent as DeleteIcon } from 'shared/assets/icons/delete-outline.svg';
 import { classNames } from "shared/lib/classNames/classNames";
 import cls from "./JobItem.module.scss";
@@ -64,6 +64,7 @@ export const JobItem = (props: JobItemProps) => {
                     onChange={onUpdateCompany}
                 />
                 <Button
+                    theme={ButtonTheme.SECONDARY}
                     onClick={onDelete}
                 >
                     <DeleteIcon />

@@ -11,7 +11,7 @@ import { useCallback, useMemo } from "react";
 import { Position } from "entities/Resume";
 import { PositionItem } from "../PositionItem/PositionItem";
 import { Currency, CurrencySelect } from "entities/Currency";
-import { Checkbox } from "shared/ui/Checkbox/Checkbox";
+import { Checkbox, CheckboxTheme } from "shared/ui/Checkbox/Checkbox";
 import { FormatSelect } from "../FormatSelect/FormatSelect";
 import { WorkweekInput } from "../WorkweekInput/WorkweekInput";
 import { MultiSelect } from "shared/ui/MultiSelect/MultiSelect";
@@ -135,11 +135,15 @@ export const ObjectiveEditor = ({ className }: ObjectiveEditorProps) => {
                     />
                     <div className={cls.inputRow}>
                         <Checkbox
+                            theme={CheckboxTheme.SECONDARY}
+                            className={cls.checkbox}
                             label={t('ObjectiveEditor.readyToTrip')}
                             checked={objective.readyToBTrip}
                             onChange={onChangeReadyToTrip}
                         />
                         <Checkbox
+                            theme={CheckboxTheme.SECONDARY}
+                            className={cls.checkbox}
                             label={t('ObjectiveEditor.readyToRelocate')}
                             checked={objective.readyToRelocate}
                             onChange={onChangeReadyToRelocate}

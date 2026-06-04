@@ -5,8 +5,14 @@ import { classNames, Mods } from "shared/lib/classNames/classNames";
 import cls from "./Checkbox.module.scss";
 
 
+export enum CheckboxTheme {
+    'DEFAULT' = 'default',
+    'SECONDARY' = 'secondary',
+}
+
 interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' >{
     className?: string;
+    theme?: CheckboxTheme;
     checked?: boolean;
     onChange?: (checked: boolean) => void;
     label?: string;
@@ -15,6 +21,7 @@ interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'val
 export const Checkbox = (props: CheckboxProps) => {
     const {
         className,
+        theme = CheckboxTheme.DEFAULT,
         checked = false,
         onChange,
         label,
@@ -28,7 +35,7 @@ export const Checkbox = (props: CheckboxProps) => {
     }
 
     return (
-        <label className={classNames(cls.checkboxWrapper, mods, [])}>
+        <label className={classNames(cls.checkboxWrapper, mods, [cls[theme]])}>
             <input
                 className={cls.Checkbox}
                 type="checkbox"

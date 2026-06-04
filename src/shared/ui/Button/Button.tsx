@@ -5,6 +5,7 @@ import cls from "./Button.module.scss";
 
 export enum ButtonTheme {
     'DEFAULT' = 'default',
+    'SECONDARY' = 'secondary',
     'CLEAR' = 'clear',
     'OUTLINE' = 'outline',
     'ACCENT' = 'accent',

@@ -20,5 +20,12 @@
         "notReadyToRelocate": "Not ready to relocate,",
         "readyToBTrip": "ready to business trips.",
         "notReadyToBTrip": "not ready to business trips."
+    },
+    "objectiveInfo": {
+        "title": "Expected position and salary",
+        "typeOfEmpl": "Type of employment: {{ toe }}",
+        "format": "Format: {{ format }}",
+        "workweek": "Workweek: {{ workweek }} hrs.",
+        "workweekEmpty": "Workweek: not specified"
     }
 }

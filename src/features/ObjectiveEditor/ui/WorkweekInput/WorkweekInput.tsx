@@ -2,7 +2,7 @@ import { classNames } from "shared/lib/classNames/classNames";
 import { Input } from "shared/ui/Input/Input";
 import cls from './WorkweekInput.module.scss';
 import { useTranslation } from "react-i18next";
-import { Button } from "shared/ui/Button/Button";
+import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import { memo, useCallback } from "react";
 
 
@@ -45,16 +45,19 @@ export const WorkweekInput = memo((props: WorkweekInputProps) => {
             />
             <div className={cls.commonOptions}>
                 <Button
+                    theme={ButtonTheme.SECONDARY}
                     onClick={onSet40}
                 >
                     {t('ObjectiveEditor.WorkweekInput.40hrs')}
                 </Button>
                 <Button
+                    theme={ButtonTheme.SECONDARY}
                     onClick={onSet35}
                 >
                     {t('ObjectiveEditor.WorkweekInput.35hrs')}
                 </Button>
                 <Button
+                    theme={ButtonTheme.SECONDARY}
                     onClick={onSet26}
                 >
                     {t('ObjectiveEditor.WorkweekInput.26hrs')}

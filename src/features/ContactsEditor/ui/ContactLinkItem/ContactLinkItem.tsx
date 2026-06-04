@@ -1,10 +1,11 @@
-import { memo, useCallback } from 'react';
+import { memo, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ContactLink } from 'entities/Resume';
 import { Input } from "shared/ui/Input/Input";
 import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import { ReactComponent as DeleteIcon } from 'shared/assets/icons/delete-outline.svg';
 import { ReactComponent as HeartIcon  } from 'shared/assets/icons/heart-outline.svg';
+import { classNames } from 'shared/lib/classNames/classNames';
 import cls from "./ContactLinkItem.module.scss";
 
 
@@ -35,6 +36,10 @@ export const ContactLinkItem = memo((props: ContactLinkItemItemProps) => {
         onUpdate(value, 'link') 
     }, [onUpdate])
 
+    const mods = useMemo(() => {
+        return {[cls.preferred]: prefer}
+    }, [prefer]);
+
     return (
         <div className={cls.ContactLinkItem}>
             <Input
@@ -51,6 +56,7 @@ export const ContactLinkItem = memo((props: ContactLinkItemItemProps) => {
             />
             { onPrefer && 
                 <Button
+                    className={classNames(cls.preferBtn, mods, [])}
                     theme={ prefer ? ButtonTheme.ACCENT : ButtonTheme.DEFAULT }
                     onClick={onPrefer}
                 >

@@ -20,5 +20,12 @@
         "notReadyToRelocate": "Не готов к переезду,",
         "readyToBTrip": "готов к коммандировкам.",
         "notReadyToBTrip": "не готов к коммандировкам."
+    },
+    "objectiveInfo": {
+        "title": "Ожидаемая должность и условия",
+        "typeOfEmpl": "Тип занятости: {{ toe }}",
+        "format": "Формат работы: {{ format }}",
+        "workweek": "Рабочая неделя: {{ workweek }} ч.",
+        "workweekEmpty": "Рабочая неделя: не указано"
     }
 }

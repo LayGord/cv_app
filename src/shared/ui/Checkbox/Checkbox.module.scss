@@ -10,7 +10,6 @@
 
     padding: 13px 13px 13px 13px;
 
-    box-shadow: 0 0 3px 0 var(--shadow-color);
     border-radius: 4px;
     outline: none;
 
@@ -26,6 +25,10 @@
         background-color: var(--accent-bg-color);
         color: var(--accent-color);
     }
+
+    &.checked > svg {
+        color: var(--accent-color);
+    }
 }
 
 
@@ -36,4 +39,23 @@
     cursor: pointer;
     height: 0;
     width: 0;
+}
+
+
+.default {
+    box-shadow: 0 0 3px 0 var(--shadow-color);
+    color: var(--primary-color);
+
+    & svg {
+        color: var(--primary-color);
+    }
+}
+
+.secondary {
+    box-shadow: 0 0 3px 0 var(--shadow-color);
+    color: var(--secondary-color);
+
+    & svg {
+        color: var(--secondary-color);
+    }
 }

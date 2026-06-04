@@ -85,6 +85,7 @@ export const ContactsEditor = ({ className }: ContactsEditorProps) => {
                     />
                 
                     <Button
+                        className={classNames(cls.preferBtn, {[cls.preferred]: contactsData.preferred === 'email'}, [])}
                         theme={ contactsData.preferred === 'email' ? ButtonTheme.ACCENT : ButtonTheme.DEFAULT }
                         onClick={onPreferContact('email')}
                     >
@@ -100,6 +101,7 @@ export const ContactsEditor = ({ className }: ContactsEditorProps) => {
                     />
 
                     <Button
+                        className={classNames(cls.preferBtn, {[cls.preferred]: contactsData.preferred === 'phone'}, [])}
                         theme={ contactsData.preferred === 'phone' ? ButtonTheme.ACCENT : ButtonTheme.DEFAULT }
                         onClick={onPreferContact('phone')}
                     >

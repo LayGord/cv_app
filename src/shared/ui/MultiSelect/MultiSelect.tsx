@@ -130,7 +130,7 @@ export const MultiSelect = (props: MultiSelectProps) => {
     return(
         <div className={ classNames(cls.MultiSelect, {}, [className, cls[visibility]]) }>
 
-            { value && 
+            { value.length > 0 && 
                 <div className={cls.selectedList}>
                     { value.map((option) => renderOption(option)) }
                 </div>

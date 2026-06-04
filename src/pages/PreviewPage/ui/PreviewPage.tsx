@@ -29,15 +29,21 @@ const resume: Resume = {
     contacts: {
         phone: '+7 900 99 99 99',
         email: 'example@mail.com',
-        links: [],
+        links: [
+            { id: '1', title: 'link1', link: '1'},
+            { id: '2', title: 'link2', link: '2'},
+            { id: '3', title: 'link3', link: '3'}
+        ],
         preferred: 'email'
     },
     objective: {
         readyToRelocate: true,
         readyToBTrip: false,
         format: 'any',
-        positions: [{ id: '1', name: 'Trainee'}],
-        typeOfEmpl: [{id: '1', displayName: 'Fulltime', value: 'fulltime'}]
+        positions: [{ id: '1', name: 'Trainee'}, { id: '1', name: 'Engineer'}],
+        typeOfEmpl: [{id: '1', displayName: 'Fulltime', value: 'fulltime'}],
+        currency: 'RUB',
+        salary: '200 000'
     },
     experience: {
         education: [],
@@ -54,7 +60,7 @@ export const PreviewPage = ({ className }: PreviewPageProps) => {
         <Page >
             <div className={ classNames(cls.PreviewPage, {}, [className]) }>
                 <PDFViewer style={{ width: '100%', height: '100%' }}>
-                    <ResumePdfTemplate data={resumeData}/>
+                    <ResumePdfTemplate data={resume}/>
                 </PDFViewer>
             </div>
         </Page>

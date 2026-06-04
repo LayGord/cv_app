@@ -18,6 +18,7 @@
     box-shadow: 0 0 3px 0 var(--shadow-color);
     padding: 13px;
     background-color: var(--dark-bg-color);
+    text-overflow: ellipsis;
 }
 
 .cancelButton:hover {

@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Education } from "entities/Resume";
 import { Input } from "shared/ui/Input/Input";
 import { ReactComponent as DeleteIcon } from 'shared/assets/icons/delete-outline.svg';
-import { Button } from "shared/ui/Button/Button";
+import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import { DatePicker } from "shared/ui/DatePicker/DatePicker";
 import { classNames } from "shared/lib/classNames/classNames";
 import { GradeSelect } from "../GradeSelect/GradeSelect";
@@ -69,6 +69,7 @@ export const EducationItem = (props: EducationItemProps) => {
                     onChange={onUpdateOrg}
                 />
                 <Button
+                    theme={ButtonTheme.SECONDARY}
                     onClick={onDelete}
                 >
                     <DeleteIcon />

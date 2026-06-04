@@ -2,7 +2,7 @@ import { classNames } from "shared/lib/classNames/classNames";
 import cls from "./PositionItem.module.scss";
 import { Input } from "shared/ui/Input/Input";
 import { Position } from "entities/Resume";
-import { Button } from "shared/ui/Button/Button";
+import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import { ReactComponent as DeleteIcon } from 'shared/assets/icons/delete-outline.svg';
 import { useTranslation } from "react-i18next";
 import { memo } from "react";
@@ -34,6 +34,7 @@ export const PositionItem = memo((props: PositionItemProps) => {
                 onChange={onUpdate}
             />
             <Button
+                theme={ButtonTheme.SECONDARY}
                 onClick={onDelete}
             >
                 <DeleteIcon />

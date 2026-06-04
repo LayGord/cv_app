@@ -30,6 +30,14 @@ export const Default: Story = {
     },
 };
 
+export const Secondary: Story = {
+    args: {
+        children: 'text',
+        theme: ButtonTheme.SECONDARY,
+        size: ButtonSize.M
+    },
+};
+
 export const Clear: Story = {
     args: {
         children: 'text',

@@ -17,3 +17,17 @@
     right: 0;
     color: var(--secondary-color)
 }
+
+.preferBtn {
+    color: var(--secondary-color);
+
+    & svg {
+        color: var(--secondary-color);
+    }
+}
+
+.preferred {
+     & svg {
+        color: var(--accent-shadow-color);
+    }
+}

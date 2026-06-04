@@ -21,7 +21,6 @@
 
 .default {
     color: var(--primary-color);
-    //border: 1px solid var(--primary-color);
     background-color: var(--dark-bg-color);
     padding: 13px;
     box-shadow: 0px 0px 3px 0px var(--shadow-color);
@@ -30,6 +29,16 @@
         box-shadow: 0px 0px 3px 0px var(--accent-shadow-color);
     }
 
+}
+
+.secondary {
+    color: var(--secondary-color);
+    padding: 13px;
+    box-shadow: 0px 0px 3px 0px var(--shadow-color);
+
+    & svg {
+        color: var(--secondary-color);
+    }
 }
 
 .clear {

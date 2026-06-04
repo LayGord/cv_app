@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { Project } from "entities/Resume";
 import { Input } from "shared/ui/Input/Input";
-import { Button } from "shared/ui/Button/Button";
+import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import { TextArea } from "shared/ui/TextArea/TextArea";
 import { ReactComponent as DeleteIcon } from 'shared/assets/icons/delete-outline.svg';
 import { classNames } from "shared/lib/classNames/classNames";
@@ -51,6 +51,7 @@ export const ProjectItem = (props: ProjectItemProps) => {
                     onChange={onUpdateTitle}
                 />
                 <Button
+                    theme={ButtonTheme.SECONDARY}
                     onClick={onDelete}
                 >
                     <DeleteIcon />
