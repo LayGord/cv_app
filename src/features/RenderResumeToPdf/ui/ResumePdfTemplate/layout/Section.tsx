@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
     },
     title: {
-        fontSize: 16,
+        fontSize: 14,
         color: '#595959',
         borderBottom: '0.2mm solid #595959',
         paddingBottom: 4,

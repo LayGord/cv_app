@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { Education, getResumeEducation, resumeActions } from "entities/Resume";
+import { EducationData, getResumeEducation, resumeActions } from "entities/Resume";
 import { FormArray } from "shared/ui/FormArray/FormArray";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { classNames } from "shared/lib/classNames/classNames";
@@ -23,11 +23,11 @@ export const EducationEditor = ({ className }: EducationEditorProps) => {
         dispatch(resumeActions.addEducation(id))
     }, [dispatch]);
 
-    const renderEducation = useCallback((items: Education[]) => {
+    const renderEducation = useCallback((items: EducationData[]) => {
         let withIndexes = items.length > 1;
 
         return items?.map((item, index) => {
-            const onUpdateEducation = (value: string, field: keyof Education) => {
+            const onUpdateEducation = (value: string, field: keyof EducationData) => {
                 dispatch(resumeActions.updateEducation({
                     ...item,
                     [field]: value,

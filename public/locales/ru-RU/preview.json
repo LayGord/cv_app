@@ -2,19 +2,19 @@
     "male": "Мужчина, ",
     "female": "Женщина, ",
     "personalInfo": {
-        "sexEmpty": "Пол не указан",
-        "birthdateMale": "{{ years }} лет, родился {{ birthdate }}",
-        "birthdateFemale": "{{ years }} лет, родилась {{ birthdate }}",
-        "birthdateEmpty": "дата рождения не указана",
+        "sex_empty": "Пол не указан",
+        "birthdate_male": "{{ years }} лет, родился {{ birthdate }}",
+        "birthdate_female": "{{ years }} лет, родилась {{ birthdate }}",
+        "birthdate_empty": "дата рождения не указана",
 
         "email": "E-mail",
         "phone": "Телефон",
         "preferredContact": " - предпочитаемый способ связи",
 
         "location": "Город проживания: {{ city }}, {{ country }}.",
-        "locationEmpty": "Город проживания: не указан.",
+        "location_empty": "Город проживания: не указан.",
         "citizenship": "Гражданство: {{ citizenship }}",
-        "citizenshipEmpty": "Гражданство: не указано",
+        "citizenship_empty": "Гражданство: не указано",
 
         "readyToRelocate": "Готов к переезду,",
         "notReadyToRelocate": "Не готов к переезду,",
@@ -26,6 +26,15 @@
         "typeOfEmpl": "Тип занятости: {{ toe }}",
         "format": "Формат работы: {{ format }}",
         "workweek": "Рабочая неделя: {{ workweek }} ч.",
-        "workweekEmpty": "Рабочая неделя: не указано"
+        "workweek_empty": "Рабочая неделя: не указано"
+    },
+    "educationInfo": {
+        "title": "Образование",
+        "dateTo_empty": "не окончено",
+        "bachelor": "Бакалавр",
+        "master": "Магистр",
+        "ad_fe_short": "Среднее (СПО)",
+        "phd": "Кандидат наук",
+        "specialist": "Специалист"
     }
 }

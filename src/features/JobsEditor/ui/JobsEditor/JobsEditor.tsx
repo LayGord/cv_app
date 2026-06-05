@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { Job, Skill, getResumeJobs, getResumeSkills, resumeActions } from "entities/Resume";
+import { JobData, SkillData, getResumeJobs, getResumeSkills, resumeActions } from "entities/Resume";
 import { Group } from "shared/ui/Group/Group";
 import { MultiSelect } from "shared/ui/MultiSelect/MultiSelect";
 import { FormArray } from "shared/ui/FormArray/FormArray";
@@ -21,13 +21,13 @@ const skillsList = [
 ];
 
 export const JobsEditor = ({ className }: JobsEditorProps) => {
-    const { t } = useTranslation('resume');
+    const { t } = useTranslation('resume', {keyPrefix: 'JobsEditor'});
 
     const skills = useSelector(getResumeSkills);
     const jobs = useSelector(getResumeJobs);
     const dispatch = useAppDispatch();
 
-    const onUpdateSkills = useCallback((value: Skill[]) => {
+    const onUpdateSkills = useCallback((value: SkillData[]) => {
         dispatch(resumeActions.updateSkillsList(value))
     }, [dispatch]);
 
@@ -37,11 +37,11 @@ export const JobsEditor = ({ className }: JobsEditorProps) => {
     }, [dispatch]);
     
 
-    const renderJobs = useCallback((items: Job[]) => {
+    const renderJobs = useCallback((items: JobData[]) => {
         let withIndexes = items.length > 1;
 
         return items?.map((item, index) => {
-            const onUpdateJob = (value: string, field: keyof Job) => {
+            const onUpdateJob = (value: string, field: keyof JobData) => {
                 dispatch(resumeActions.updateJob({
                     ...item,
                     [field]: value,
@@ -65,7 +65,7 @@ export const JobsEditor = ({ className }: JobsEditorProps) => {
 
     return (
         <div className={ classNames(cls.JobsEditor, {}, [className]) }>
-            <Group title={t("JobsEditor.titleSkills")}>
+            <Group title={t("titleSkills")}>
                 <MultiSelect
                     id={"skills"}
                     options={skillsList}
@@ -75,7 +75,7 @@ export const JobsEditor = ({ className }: JobsEditorProps) => {
                 />
             </Group>
             <FormArray
-                title={t("JobsEditor.titleJobs")}
+                title={t("titleJobs")}
                 renderFunction={renderJobs}
                 value={jobs}
                 onAddNew={onAddJob}

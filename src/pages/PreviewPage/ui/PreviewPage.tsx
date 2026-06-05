@@ -45,13 +45,31 @@ const resume: Resume = {
         currency: 'RUB',
         salary: '200 000'
     },
-    experience: {
-        education: [],
-        jobs: [],
-        langs: [],
-        projects: [],
-        skills: []
-    },
+    education: [
+        { 
+            id: '1',
+            program: '02.03.01 Математика и компьютерные науки',
+            org: 'Кубанский государственный университет',
+            faculty: 'Математики и компьютерных наук', 
+            grade: 'bachelor', 
+            dateFrom: '2019-08-08',
+            dateTo: '2023-08-07',
+            city: 'Krasnodar'
+        },
+        { 
+            id: '2',
+            program: '02.04.01 Математика и компьютерные науки',
+            org: 'Кубанский государственный университет',
+            faculty: 'Математики и компьютерных наук', 
+            grade: 'phd', 
+            dateFrom: '2023-07-10',
+            city: 'Krasnodar'
+        }
+    ],
+    jobs: [],
+    langs: [],
+    projects: [],
+    skills: []
 }
 
 export const PreviewPage = ({ className }: PreviewPageProps) => {

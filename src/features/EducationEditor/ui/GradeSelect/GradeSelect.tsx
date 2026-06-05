@@ -1,7 +1,7 @@
 import { classNames } from "shared/lib/classNames/classNames";
 import { useTranslation } from "react-i18next";
 import { Select } from "shared/ui/Select/Select";
-import { Education } from "entities/Resume";
+import { EducationData } from "entities/Resume";
 import { gradeOptions } from '../../model/const/educationEditorConsts';
 import { useMemo } from "react";
 
@@ -9,8 +9,8 @@ import { useMemo } from "react";
 interface GradeSelectProps {
     className?: string;
     id: string;
-    value: Education['grade'];
-    onChange: (value: Education['grade']) => void;
+    value: EducationData['grade'];
+    onChange: (value: EducationData['grade']) => void;
 }
 
 export const GradeSelect = (props: GradeSelectProps) => {

@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
 
 export const PersonalInfo = (props: PersonalInfoProps) => {
     const { data } = props;
-    const { t, i18n } = useTranslation('preview');
+    const { t, i18n } = useTranslation('preview', {keyPrefix: 'personalInfo'});
     
     const mappedContacts = useMemo(() => {
         const links = Object.values(data.contacts.links ?? {}).map((item) => ({
@@ -61,13 +61,13 @@ export const PersonalInfo = (props: PersonalInfoProps) => {
         return [
             {
                 id: 'email',
-                displayName: t('personalInfo.email'),
+                displayName: t('email'),
                 value: data.contacts.email,
                 preferred: data.contacts.preferred === 'email',
             },
             {
                 id: 'phone',
-                displayName: t('personalInfo.phone'),
+                displayName: t('phone'),
                 value: data.contacts.phone,
                 preferred: data.contacts.preferred === 'phone',
             },
@@ -94,20 +94,16 @@ export const PersonalInfo = (props: PersonalInfoProps) => {
                     <Text style={styles.row} >
                         { data.personal.sex 
                             ? t(data.personal.sex)
-                            : t('personalInfo.sexEmpty')
+                            : t('sex', { context: 'empty' })
                         }
 
                         { data.personal.birthdate
-                            ? data.personal.sex === 'male'
-                                ? t('personalInfo.birthdateMale', { 
-                                    years: calcYears(data.personal.birthdate),
-                                    birthdate: formatDate(data.personal.birthdate, i18n.language)
-                                })
-                                : t('personalInfo.birthdateFemale', { 
-                                    years: calcYears(data.personal.birthdate),
-                                    birthdate: formatDate(data.personal.birthdate, i18n.language)
-                                })
-                            : t('personalInfo.birthdateEmpty')       
+                            ? t('birthdate', {
+                                context: data.personal.sex,
+                                years: calcYears(data.personal.birthdate),
+                                birthdate: formatDate(data.personal.birthdate, i18n.language)
+                            })
+                            : t('birthdate', { context: 'empty' })       
                         }
                     </Text>
                     
@@ -117,7 +113,7 @@ export const PersonalInfo = (props: PersonalInfoProps) => {
                                 <View style={styles.row}>
                                     <Text>{ item.displayName + ': ' + item.value }</Text>
                                     {   item.preferred &&
-                                        <Text style={styles.preferredMarker}>{ t('personalInfo.preferredContact') }</Text>
+                                        <Text style={styles.preferredMarker}>{ t('preferredContact') }</Text>
                                     }
                                 </View>
                             )})
@@ -126,30 +122,30 @@ export const PersonalInfo = (props: PersonalInfoProps) => {
 
                     <Text  >
                         { data.personal.city && data.personal.country 
-                            ? t('personalInfo.location', { city: data.personal.city, country: data.personal.country }) 
-                            : t('personalInfo.locationEmpty')
+                            ? t('location', { city: data.personal.city, country: data.personal.country }) 
+                            : t('location', { context: 'empty' })
                         }
                     </Text>
 
                     <View style={styles.row}>
                         <Text>
                             { data.objective.readyToRelocate
-                                ? t('personalInfo.readyToRelocate') 
-                                : t('personalInfo.notReadyToRelocate')
+                                ? t('readyToRelocate') 
+                                : t('notReadyToRelocate')
                             }
                         </Text>
                         <Text>
                             { data.objective.readyToBTrip
-                                ? t('personalInfo.readyToBTrip') 
-                                : t('personalInfo.notReadyToBTrip')
+                                ? t('readyToBTrip') 
+                                : t('notReadyToBTrip')
                             }
                         </Text>
                     </View>
 
                     <Text>
                         { data.personal.citizenship 
-                            ? t('personalInfo.citizenship', { citizenship: data.personal.citizenship })
-                            : t('personalInfo.citizenshipEmpty')
+                            ? t('citizenship', { citizenship: data.personal.citizenship })
+                            : t('citizenship', { context: 'empty' })
                         }
                     </Text>
 

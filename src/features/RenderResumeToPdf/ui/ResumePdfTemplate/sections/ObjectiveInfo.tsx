@@ -1,11 +1,11 @@
 import { Text, View, StyleSheet } from '@react-pdf/renderer';
-import { Resume } from "entities/Resume";
+import { ObjectiveData } from "entities/Resume";
 import { useTranslation } from "react-i18next";
 import { Section } from '../layout/Section';
 
 
 interface ObjectiveInfoProps {
-    data: Resume;
+    data: ObjectiveData;
 }
 
 const styles = StyleSheet.create({
@@ -38,21 +38,21 @@ const styles = StyleSheet.create({
 
 export const ObjectiveInfo = (props: ObjectiveInfoProps) => {
     const { data } = props;
-    const { t } = useTranslation('preview');
+    const { t } = useTranslation('preview', {keyPrefix: 'objectiveInfo'});
     
     return (
-        <Section title={t('objectiveInfo.title')}>
+        <Section title={t('title')}>
             <View style={styles.objectiveInfo}>
                 <View style={styles.header}>
                     <Text style={styles.position}>
-                        { data.objective.positions.map(item => item.name).join(', ') }
+                        { data.positions.map(item => item.name).join(', ') }
                     </Text>
 
-                    { data.objective.salary && data.objective.currency &&
-                        <View style={styles.salary} debug>
-                            <Text>{ data.objective.salary }</Text>
+                    { data.salary && data.currency &&
+                        <View style={styles.salary}>
+                            <Text>{ data.salary }</Text>
                             <Text>
-                                { t(data.objective.currency.toLowerCase(), {keyPrefix: 'currencyOptions', ns: 'translation'}) }
+                                { t(data.currency.toLowerCase(), {keyPrefix: 'currencyOptions', ns: 'translation'}) }
                             </Text>
                         </View>
                     }
@@ -60,13 +60,13 @@ export const ObjectiveInfo = (props: ObjectiveInfoProps) => {
                 </View>
                 <View style={styles.details}>
                     <Text>
-                        {t('objectiveInfo.typeOfEmpl', { toe: data.objective.typeOfEmpl.map(item => item.displayName).join(', ') })}
+                        {t('typeOfEmpl', { toe: data.typeOfEmpl.map(item => item.displayName).join(', ') })}
                     </Text>
-                    <Text>{t('objectiveInfo.format', { format: data.objective.format })}</Text>
+                    <Text>{t('format', { format: data.format })}</Text>
                     <Text>
-                        { data.objective.workweek
-                            ? t('objectiveInfo.workweek', { workweek: data.objective.workweek })
-                            : t('objectiveInfo.workweekEmpty')
+                        { data.workweek
+                            ? t('workweek', { workweek: data.workweek })
+                            : t('workweek', { context: 'empty' })
                         }
                     </Text>
                 </View>

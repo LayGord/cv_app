@@ -1,9 +1,14 @@
 export type {
-    ResumeSchema, Resume,
+    ResumeSchema, 
+    Resume,
     PersonalData,
     ContactsData, ContactLink,
     ObjectiveData, Position,
-    ExperienceData, Skill, Job, Education, Project, Language,
+    SkillData, 
+    JobData, 
+    EducationData, 
+    ProjectData, 
+    LanguageData,
 } from './model/types/ResumeSchema';
 export { resumeReducer, resumeActions } from './model/slice/resumeSlice';
 export { getResumePersonal } from './model/selectors/getResumePersonal';

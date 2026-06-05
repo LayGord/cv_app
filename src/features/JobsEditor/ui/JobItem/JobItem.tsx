@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { Job } from "entities/Resume";
+import { JobData } from "entities/Resume";
 import { Input } from "shared/ui/Input/Input";
 import { DatePicker } from "shared/ui/DatePicker/DatePicker";
 import { TextArea } from "shared/ui/TextArea/TextArea";
@@ -12,8 +12,8 @@ import cls from "./JobItem.module.scss";
 
 interface JobItemProps {
     className?: string;
-    data: Job;
-    onUpdate: (data: string, field: keyof Job) => void;
+    data: JobData;
+    onUpdate: (data: string, field: keyof JobData) => void;
     onDelete: () => void;
     index?: number;
 }
@@ -27,7 +27,7 @@ export const JobItem = (props: JobItemProps) => {
         index
     } = props;
 
-    const { t } = useTranslation('resume');
+    const { t } = useTranslation('resume', {keyPrefix: 'JobsEditor.JobItem'});
 
     const onUpdateCompany = useCallback((value: string) => {
         onUpdate(value, 'company');
@@ -59,7 +59,7 @@ export const JobItem = (props: JobItemProps) => {
                 { index && <span className={cls.index}>{index}</span>}
                 <Input
                     id={`company_${data.id}`}
-                    placeholder={t('JobsEditor.JobItem.company')}
+                    placeholder={t('company')}
                     value={data.company}
                     onChange={onUpdateCompany}
                 />
@@ -73,13 +73,13 @@ export const JobItem = (props: JobItemProps) => {
             <div className={cls.row}>
                 <Input
                     id={`position_${data.id}`}
-                    placeholder={t('JobsEditor.JobItem.position')}
+                    placeholder={t('position')}
                     value={data.position}
                     onChange={onUpdatePosition}
                 />
                 <Input
                     id={`location_${data.id}`}
-                    placeholder={t('JobsEditor.JobItem.location')}
+                    placeholder={t('location')}
                     value={data.location}
                     onChange={onUpdateLocation}
                 />
@@ -87,13 +87,13 @@ export const JobItem = (props: JobItemProps) => {
             <div className={cls.row}>
                 <DatePicker
                     id={`dateFrom_${data.id}`}
-                    label={t('JobsEditor.JobItem.dateFrom')}
+                    label={t('dateFrom')}
                     value={data.dateFrom}
                     onChange={onUpdateDateFrom}
                 />
                 <DatePicker
                     id={`dateTo_${data.id}`}
-                    label={t('JobsEditor.JobItem.dateTo')}
+                    label={t('dateTo')}
                     value={data.dateTo}
                     onChange={onUpdateDateTo}
                 />
@@ -101,7 +101,7 @@ export const JobItem = (props: JobItemProps) => {
             <TextArea
                 id={`comment_${data.id}`}
                 className={cls.row}
-                placeholder={t('JobsEditor.JobItem.comment')}
+                placeholder={t('comment')}
                 value={data.comment}
                 onChange={onUpdateComment}
             />

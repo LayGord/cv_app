@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { Education } from "entities/Resume";
+import { EducationData } from "entities/Resume";
 import { Input } from "shared/ui/Input/Input";
 import { ReactComponent as DeleteIcon } from 'shared/assets/icons/delete-outline.svg';
 import { Button, ButtonTheme } from "shared/ui/Button/Button";
@@ -12,8 +12,8 @@ import cls from "./EducationItem.module.scss";
 
 interface EducationItemProps {
     className?: string;
-    data: Education;
-    onUpdate: (value: string, field: keyof Education) => void;
+    data: EducationData;
+    onUpdate: (value: string, field: keyof EducationData) => void;
     onDelete: () => void;
     index?: number;
 }
@@ -27,7 +27,7 @@ export const EducationItem = (props: EducationItemProps) => {
         index
     } = props;
 
-    const { t } = useTranslation('resume');
+    const { t } = useTranslation('resume', {keyPrefix: 'EducationEditor.EducationItem'});
 
     const onUpdateOrg = useCallback((value: string) => {
         onUpdate(value, 'org')
@@ -63,8 +63,8 @@ export const EducationItem = (props: EducationItemProps) => {
                     onChange={onUpdateGrade}
                 />
                 <Input
-                    id={`org_${data.id}`}
-                    placeholder={t('EducationEditor.EducationItem.org')}
+                    id={`city_${data.id}`}
+                    placeholder={t('city')}
                     value={data.org}
                     onChange={onUpdateOrg}
                 />
@@ -76,27 +76,33 @@ export const EducationItem = (props: EducationItemProps) => {
                 </Button>
             </div>
             <Input
+                id={`org_${data.id}`}
+                placeholder={t('org')}
+                value={data.org}
+                onChange={onUpdateOrg}
+            />
+            <Input
                 id={`faculty_${data.id}`}
-                placeholder={t('EducationEditor.EducationItem.faculty')}
+                placeholder={t('faculty')}
                 value={data.faculty}
                 onChange={onUpdateFaculty}
             />
             <Input
                 id={`program_${data.id}`}
-                placeholder={t('EducationEditor.EducationItem.program')}
+                placeholder={t('program')}
                 value={data.program}
                 onChange={onUpdateProgram}
             />
             <div className={cls.row}>
                 <DatePicker
                     id={`dateFrom_${data.id}`}
-                    label={t('EducationEditor.EducationItem.dateFrom')}
+                    label={t('dateFrom')}
                     value={data.dateFrom}
                     onChange={onUpdateDateFrom}
                 />
                 <DatePicker
                     id={`dateTo_${data.id}`}
-                    label={t('EducationEditor.EducationItem.dateTo')}
+                    label={t('dateTo')}
                     value={data.dateTo}
                     onChange={onUpdateDateTo}
                 />

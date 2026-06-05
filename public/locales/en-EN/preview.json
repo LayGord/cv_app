@@ -2,19 +2,19 @@
     "male": "Male, ",
     "female": "Female, ",
     "personalInfo": {
-        "sexEmpty": "Sex not specified,",
-        "birthdateMale": "{{ years}} y.o, born in {{ birthdate }}",
-        "birthdateFemale": "{{ years}} y.o, born in {{ birthdate }}",
-        "birthdateEmpty": "birthdate not specified",
+        "sex_empty": "Sex not specified,",
+        "birthdate_male": "{{ years}} y.o, born in {{ birthdate }}",
+        "birthdate_female": "{{ years}} y.o, born in {{ birthdate }}",
+        "birthdate_empty": "birthdate not specified",
 
         "email": "E-mail",
         "phone": "Phone",
         "preferredContact": " - preferred contact",
 
         "location": "Lives in: {{ city }}, {{ country }}.",
-        "locationEmpty": "Location: not specified.",
+        "location_empty": "Location: not specified.",
         "citizenship": "Citizenship: {{ citizenship }}",
-        "citizenshipEmpty": "Citizenship: not specified",
+        "citizenship_empty": "Citizenship: not specified",
 
         "readyToRelocate": "Ready to relocate,",
         "notReadyToRelocate": "Not ready to relocate,",
@@ -22,10 +22,19 @@
         "notReadyToBTrip": "not ready to business trips."
     },
     "objectiveInfo": {
-        "title": "Expected position and salary",
+        "title": "Expected position and work environment",
         "typeOfEmpl": "Type of employment: {{ toe }}",
         "format": "Format: {{ format }}",
         "workweek": "Workweek: {{ workweek }} hrs.",
-        "workweekEmpty": "Workweek: not specified"
+        "workweek_empty": "Workweek: not specified"
+    },
+    "educationInfo": {
+        "title": "Education",
+        "dateTo_empty": "not finished",
+        "bachelor": "Bachelor",
+        "master": "Master",
+        "ad_fe_short": "College / FE",
+        "phd": "PhD",
+        "specialist": "Specialist"
     }
 }

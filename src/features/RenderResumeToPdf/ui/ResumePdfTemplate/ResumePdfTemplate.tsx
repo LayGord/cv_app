@@ -1,10 +1,11 @@
 import { useTranslation } from 'react-i18next';
 import { Document, Page, Text, View, StyleSheet, Font, Image } from '@react-pdf/renderer';
-import { Resume } from 'entities/Resume';
+import { Resume, ObjectiveData, EducationData } from 'entities/Resume';
 import Regular from 'shared/assets/fonts/Roboto-Regular.ttf';
 import SemiBold from 'shared/assets/fonts/Roboto-SemiBold.ttf';
 import { PersonalInfo } from './sections/PersonalInfo';
 import { ObjectiveInfo } from './sections/ObjectiveInfo';
+import { EducationInfo } from './sections/EducationInfo';
 
 
 /**
@@ -15,7 +16,7 @@ import { ObjectiveInfo } from './sections/ObjectiveInfo';
  **/
 
 interface ResumePdfTemplateProps {
-    data: DeepPartial<Resume>;
+    data: Resume;
 }
 
 Font.register({
@@ -46,7 +47,10 @@ export const ResumePdfTemplate = (props: ResumePdfTemplateProps) => {
         <Document pageLayout='oneColumn'>
             <Page size="A4" style={styles.page}>
                 <PersonalInfo data={data as Resume} />
-                <ObjectiveInfo data={data as Resume} />
+                <ObjectiveInfo data={data.objective as ObjectiveData} />
+                { data.education.length > 0 &&
+                    <EducationInfo data={data.education as EducationData[]}/> 
+                }
             </Page>
         </Document>
     );

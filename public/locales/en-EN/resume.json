@@ -85,10 +85,12 @@
         "titleEducations": "List your education",
         "EducationItem": {
             "org": "Organization name",
+            "city": "City",
             "faculty": "Faculty / department",
             "program": "Program",
             "dateFrom": "DateFrom",
-            "dateTo": "DateTo"
+            "dateTo": "DateTo",
+            "dateTo_empty": "not finished"
         },
         "GradeSelect": {
             "grade": "Grade",

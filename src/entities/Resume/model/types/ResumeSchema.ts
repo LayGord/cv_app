@@ -9,7 +9,11 @@ export interface Resume {
     personal: PersonalData,
     contacts: ContactsData,
     objective: ObjectiveData,
-    experience: ExperienceData,
+    skills: SkillData[];
+    jobs: JobData[];
+    projects: ProjectData[];
+    education: EducationData[];
+    langs: LanguageData[]
 };
 
 // main info
@@ -32,7 +36,7 @@ export interface ContactsData {
     email: string;
     phone?: string;
     links: ContactLink[];
-    preferred?: string; //  'email' | 'phone' or id of link
+    preferred?: string; //  'email' | 'phone' or link id
 }
 
 export interface ContactLink {
@@ -48,7 +52,7 @@ export interface ObjectiveData {
     typeOfEmpl: TypeOfEmpl[];
     format: 'office' | 'remote' | 'hybrid' | 'any';
     salary?: string;
-    currency?: Currency;
+    currency: Currency;
     readyToRelocate: boolean;
     readyToBTrip: boolean;
     workweek?: string;
@@ -70,23 +74,14 @@ export interface Position {
 
 // experience info
 
-export interface ExperienceData {
-    skills: Skill[];
-    jobs: Job[];
-    projects: Project[];
-    education: Education[];
-    langs: Language[]
-}
-
-
-export interface Skill {
+export interface SkillData {
     id: string;
     displayName: string;
     category?: string;
 }
 
 
-export interface Job {
+export interface JobData {
     id: string;
     position: string;
     company: string;
@@ -97,7 +92,7 @@ export interface Job {
 }
 
 
-export interface Project {
+export interface ProjectData {
     id: string;
     title: string;
     link: string;
@@ -105,18 +100,19 @@ export interface Project {
 }
 
 
-export interface Education {
+export interface EducationData {
     id: string;
     faculty: string;
     program: string;
     grade: 'bachelor' | 'master' | 'phd' | 'ad_fe' | 'specialist';
     org: string;
+    city: string;
     dateFrom: string;
     dateTo?: string;
 }
 
 
-export interface Language {
+export interface LanguageData {
     id: string;
     language: string;
     level?: 'a1' | 'a2' | 'b1' | 'b2' | 'c1' | 'c2';
