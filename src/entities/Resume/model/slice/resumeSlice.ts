@@ -10,6 +10,7 @@ import {
     Position,
     EducationData,
     ProjectData,
+    LanguageData,
 } from "../types/ResumeSchema";
 
 const initialState: ResumeSchema = {
@@ -40,11 +41,12 @@ const initialState: ResumeSchema = {
             readyToBTrip: false,
             currency: 'USD'
         },
+        aboutMe: '',
         skills: [],
         jobs: [{id: '1', company: '', position: '', dateFrom: ''}],
         projects: [{id: '1', title: '', link: '', description: ''}],
         education: [{id: '1', org: '', grade: 'bachelor', faculty: '', program: '', dateFrom: '', city: ''}],
-        langs: [],
+        langs: [{id: '1', language: '',  level: 'a1'}],
     }
 };
 
@@ -90,6 +92,10 @@ export const resumeSlice = createSlice({
             state.resumeDraft.contacts.preferred === action.payload 
                 ? state.resumeDraft.contacts.preferred = undefined
                 : state.resumeDraft.contacts.preferred = action.payload
+        },
+
+        updateAboutMe: (state, action: PayloadAction<string>) => {
+            state.resumeDraft.aboutMe = action.payload
         },
 
         // objective Data
@@ -162,8 +168,23 @@ export const resumeSlice = createSlice({
             state.resumeDraft.education = state.resumeDraft.education.filter(
                 (item) => item.id !== action.payload
             )
-        }
+        },
 
+        addLanguage: (state, action: PayloadAction<string>) => {
+            state.resumeDraft.langs.push({
+                id: action.payload, language: '', level: 'a1',
+            })
+        },
+        updateLanguage: (state, action: PayloadAction<LanguageData>) => {
+            state.resumeDraft.langs = state.resumeDraft.langs.map(
+                (item) => item.id === action.payload.id ? action.payload : item
+            )
+        },
+        deleteLanguage: (state, action: PayloadAction<string>) => {
+            state.resumeDraft.langs = state.resumeDraft.langs.filter(
+                (item) => item.id !== action.payload
+            )
+        }
     },
 })
 

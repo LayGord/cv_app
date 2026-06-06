@@ -1,7 +1,7 @@
-import { useMemo } from "react";
-import { Text, View, StyleSheet, Font, Image } from '@react-pdf/renderer';
-import { Resume } from "entities/Resume";
+import { useMemo, memo } from "react";
 import { useTranslation } from "react-i18next";
+import { Text, View, StyleSheet, Image } from '@react-pdf/renderer';
+import { Resume } from "entities/Resume";
 import avatarDefault from 'shared/assets/images/avatar_default.png';
 import { calcYears } from 'shared/lib/calcYears/calcYears';
 import { formatDate } from 'shared/lib/formatDate/formatDate';
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export const PersonalInfo = (props: PersonalInfoProps) => {
+export const PersonalInfo = memo((props: PersonalInfoProps) => {
     const { data } = props;
     const { t, i18n } = useTranslation('preview', {keyPrefix: 'personalInfo'});
     
@@ -93,7 +93,7 @@ export const PersonalInfo = (props: PersonalInfoProps) => {
 
                     <Text style={styles.row} >
                         { data.personal.sex 
-                            ? t(data.personal.sex)
+                            ? t('sex', { context: data.personal.sex })
                             : t('sex', { context: 'empty' })
                         }
 
@@ -156,4 +156,4 @@ export const PersonalInfo = (props: PersonalInfoProps) => {
             </View>
         </Section>
     )
-}
+});

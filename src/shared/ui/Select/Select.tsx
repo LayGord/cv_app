@@ -5,7 +5,7 @@ import { HTMLAttributes, memo, useCallback } from "react";
 
 export interface SelectOption {
     displayName: string;
-    value: string | undefined;
+    value?: string
 }
 
 interface SelectProps extends Omit<HTMLAttributes<HTMLSelectElement>, 'onChange'> {

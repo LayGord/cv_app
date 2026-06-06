@@ -1,6 +1,7 @@
+import { memo } from "react";
+import { useTranslation } from "react-i18next";
 import { Text, View, StyleSheet } from '@react-pdf/renderer';
 import { ObjectiveData } from "entities/Resume";
-import { useTranslation } from "react-i18next";
 import { Section } from '../layout/Section';
 
 
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export const ObjectiveInfo = (props: ObjectiveInfoProps) => {
+export const ObjectiveInfo = memo((props: ObjectiveInfoProps) => {
     const { data } = props;
     const { t } = useTranslation('preview', {keyPrefix: 'objectiveInfo'});
     
@@ -73,4 +74,4 @@ export const ObjectiveInfo = (props: ObjectiveInfoProps) => {
             </View>
         </Section>
     )
-}
+});

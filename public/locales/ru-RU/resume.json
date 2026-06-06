@@ -60,6 +60,10 @@
         "readyToTrip": "Готов к коммандировкам",
         "readyToRelocate": "Готов к переезду"
     },
+    "AboutMeEditor": {
+        "title": "Обо мне",
+        "placeholder": "Напишите пару слов о себе, и, например, чего ищете от новой работы"
+    },
     "JobsEditor": {
         "titleSkills": "Выберите навыки из предложенных",
         "titleJobs": "Расскажите о своем карьерном пути",
@@ -90,6 +94,11 @@
             "dateFrom": "Дата с",
             "dateTo": "Дата по",
             "dateTo_empty": "не окончено"
+        },
+        "titleLanguages": "Владение языками",
+        "LanguageItem": {
+            "language": "Язык",
+            "level": "Уровень"
         },
         "GradeSelect": {
             "grade": "Степень",

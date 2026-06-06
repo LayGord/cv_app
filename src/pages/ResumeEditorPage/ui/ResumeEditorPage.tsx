@@ -11,19 +11,21 @@ import { NavButtons } from "shared/ui/NavButtons/NavButtons";
 import { classNames } from "shared/lib/classNames/classNames";
 import cls from "./ResumeEditorPage.module.scss";
 import { AppRoutes } from "shared/config/router/paths";
+import { AboutMeEditor } from "features/AboutMeEditor";
 
 
 interface ResumeEditorPageProps {
     className?: string;
 }
 
-type ResumeEditorStep = 'personal' | 'contacts' | 'objective' | 'jobs' | 'projects' | 'education';
+type ResumeEditorStep = 'personal' | 'contacts' | 'objective' | 'about' | 'jobs' | 'projects' | 'education';
 
 const resumeEditorConfig: Record<ResumeEditorStep, {prev?: ResumeEditorStep, next?: ResumeEditorStep}> = {
     personal: { next: 'contacts' },
     contacts: { prev: 'personal', next: 'objective' },
-    objective: { prev: 'contacts', next: 'jobs'},
-    jobs: { prev: 'objective', next: 'projects' },
+    about: { prev: 'contacts', next: 'objective'},
+    objective: { prev: 'about', next: 'jobs'},
+    jobs: { prev: 'about', next: 'projects' },
     projects: { prev: 'jobs', next: 'education' },
     education: { prev: 'projects' }
 }
@@ -38,11 +40,12 @@ const ResumeEditorPage = ({ className }: ResumeEditorPageProps) => {
         setSearchParams(searchParams)
     }, [searchParams, setSearchParams]);
 
-    return(
+    return (
         <Page>
             <div className={ classNames(cls.ResumeEditorPage, {}, [className]) }>
                 { step === 'personal' && <PersonalEditor /> }
                 { step === 'contacts' && <ContactsEditor /> }
+                { step === 'about' && <AboutMeEditor /> }
                 { step === 'objective' && <ObjectiveEditor /> }
                 { step === 'jobs' && <JobsEditor /> }
                 { step === 'projects' && <ProjectsEditor /> }

@@ -1,15 +1,15 @@
 {
-    "male": "Мужчина, ",
-    "female": "Женщина, ",
     "personalInfo": {
         "sex_empty": "Пол не указан",
+        "sex_male": "Мужчина, ",
+        "sex_female": "Женщина, ",
         "birthdate_male": "{{ years }} лет, родился {{ birthdate }}",
         "birthdate_female": "{{ years }} лет, родилась {{ birthdate }}",
         "birthdate_empty": "дата рождения не указана",
 
         "email": "E-mail",
         "phone": "Телефон",
-        "preferredContact": " - предпочитаемый способ связи",
+        "preferredContact": " — предпочитаемый способ связи",
 
         "location": "Город проживания: {{ city }}, {{ country }}.",
         "location_empty": "Город проживания: не указан.",
@@ -28,6 +28,9 @@
         "workweek": "Рабочая неделя: {{ workweek }} ч.",
         "workweek_empty": "Рабочая неделя: не указано"
     },
+    "aboutMeInfo": {
+        "title": "Обо мне"
+    },
     "educationInfo": {
         "title": "Образование",
         "dateTo_empty": "не окончено",
@@ -36,5 +39,15 @@
         "ad_fe_short": "Среднее (СПО)",
         "phd": "Кандидат наук",
         "specialist": "Специалист"
+    },
+    "jobInfo": {
+        "dateTo_empty": "сейчас",
+        "title": "Предыдущие места работы"
+    },
+    "skillsInfo": {
+        "title": "Навыки"
+    },
+    "projectsInfo": {
+        "title": "Pet-проекты"
     }
 }

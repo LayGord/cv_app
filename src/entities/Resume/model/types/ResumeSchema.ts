@@ -9,11 +9,12 @@ export interface Resume {
     personal: PersonalData,
     contacts: ContactsData,
     objective: ObjectiveData,
+    aboutMe: string;
     skills: SkillData[];
     jobs: JobData[];
     projects: ProjectData[];
     education: EducationData[];
-    langs: LanguageData[]
+    langs: LanguageData[];
 };
 
 // main info

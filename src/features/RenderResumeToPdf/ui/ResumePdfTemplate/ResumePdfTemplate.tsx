@@ -6,6 +6,10 @@ import SemiBold from 'shared/assets/fonts/Roboto-SemiBold.ttf';
 import { PersonalInfo } from './sections/PersonalInfo';
 import { ObjectiveInfo } from './sections/ObjectiveInfo';
 import { EducationInfo } from './sections/EducationInfo';
+import { AboutMeInfo } from './sections/AboutMeInfo';
+import { JobInfo } from './sections/JobInfo';
+import { SkillsInfo } from './sections/SkillsInfo';
+import { ProjectsInfo } from './sections/ProjectsInfo';
 
 
 /**
@@ -48,9 +52,11 @@ export const ResumePdfTemplate = (props: ResumePdfTemplateProps) => {
             <Page size="A4" style={styles.page}>
                 <PersonalInfo data={data as Resume} />
                 <ObjectiveInfo data={data.objective as ObjectiveData} />
-                { data.education.length > 0 &&
-                    <EducationInfo data={data.education as EducationData[]}/> 
-                }
+                { data.aboutMe && <AboutMeInfo data={data.aboutMe} />}
+                { data.skills.length > 0 && <SkillsInfo data={data.skills}/>}
+                { data.education.length > 0 && <EducationInfo data={data.education as EducationData[]}/> }
+                { data.jobs.length > 0 && <JobInfo data={data.jobs}/>}
+                { data.projects.length > 0 && <ProjectsInfo data={data.projects}/>}
             </Page>
         </Document>
     );

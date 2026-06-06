@@ -61,6 +61,10 @@
         "readyToTrip": "Ready to business trip",
         "readyToRelocate": "Ready to relocate"
     },
+    "AboutMeEditor": {
+        "title": "About me",
+        "placeholder": "Tell us a little about yourself"
+    },
     "JobsEditor": {
         "titleSkills": "Select skills from list",
         "titleJobs": "Write about your career path",
@@ -91,6 +95,11 @@
             "dateFrom": "DateFrom",
             "dateTo": "DateTo",
             "dateTo_empty": "not finished"
+        },
+        "titleLanguages": "Languages you can speak",
+        "LanguageItem": {
+            "language": "Language",
+            "level": "Level"
         },
         "GradeSelect": {
             "grade": "Grade",

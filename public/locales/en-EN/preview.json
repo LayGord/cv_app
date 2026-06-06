@@ -1,15 +1,15 @@
 {
-    "male": "Male, ",
-    "female": "Female, ",
     "personalInfo": {
         "sex_empty": "Sex not specified,",
+        "sex_male": "Male, ",
+        "sex_female": "Female, ",
         "birthdate_male": "{{ years}} y.o, born in {{ birthdate }}",
         "birthdate_female": "{{ years}} y.o, born in {{ birthdate }}",
         "birthdate_empty": "birthdate not specified",
 
         "email": "E-mail",
         "phone": "Phone",
-        "preferredContact": " - preferred contact",
+        "preferredContact": " — preferred contact",
 
         "location": "Lives in: {{ city }}, {{ country }}.",
         "location_empty": "Location: not specified.",
@@ -28,6 +28,9 @@
         "workweek": "Workweek: {{ workweek }} hrs.",
         "workweek_empty": "Workweek: not specified"
     },
+    "aboutMeInfo": {
+        "title": "About me"
+    },
     "educationInfo": {
         "title": "Education",
         "dateTo_empty": "not finished",
@@ -36,5 +39,15 @@
         "ad_fe_short": "College / FE",
         "phd": "PhD",
         "specialist": "Specialist"
+    },
+    "jobInfo": {
+        "dateTo_empty": "now",
+        "title": "Previous jobs"
+    },
+    "skillsInfo": {
+        "title": "Skills"
+    },
+    "projectsInfo": {
+        "title": "Pet-projects"
     }
 }

@@ -1,29 +1,26 @@
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
 import { Text, View, StyleSheet } from '@react-pdf/renderer';
-import { EducationData } from "entities/Resume";
+import { JobData } from "entities/Resume";
 import { Section } from "../layout/Section";
 
 
-interface EducationInfoProps {
-    data: EducationData[];
+interface JobInfoProps {
+    data: JobData[];
 }
 
 const styles = StyleSheet.create({
-    educationInfo: {
+    jobInfo: {
         flexDirection: 'column',
         gap: 24,
     },
-    educationItem: {
+    jobItem: {
         flexDirection: 'row'
     },
     leftColumn: {
         width: '25%',
         color: '#595959',
         textAlign: 'left'
-    },
-    grade: {
-        fontSize: 14
     },
     period: {
         fontSize: 10
@@ -33,27 +30,25 @@ const styles = StyleSheet.create({
     },
     orgName: {
         fontSize: 14
-    },
+    }
 });
 
-export const EducationInfo = memo((props: EducationInfoProps) => {
+export const JobInfo = memo((props: JobInfoProps) => {
     const { data } = props;
-    const { t, i18n } = useTranslation('preview', {keyPrefix: 'educationInfo'});
+    const { t, i18n } = useTranslation('preview', {keyPrefix: 'jobInfo'});
 
-    const renderEduItem = (item: EducationData) => {
+    const renderJobItem = (item: JobData) => {
         return (
-            <View style={styles.educationItem}>
+            <View style={styles.jobItem}>
                 <View style={styles.leftColumn}>
-                    <Text style={styles.grade}>
-                        { t(item.grade) }
-                    </Text>
                     <Text style={styles.period}>
                         { `${item.dateFrom.slice(0, 4)} — ${ item.dateTo?.slice(0, 4) || t('dateTo', {context: 'empty'})}` }
                     </Text>
                 </View>
                 <View style={styles.mainColumn}>
-                    <Text style={styles.orgName}>{ `${item.org}, ${item.city}` }</Text>
-                    <Text>{ `${item.faculty}, ${item.program}` }</Text>
+                    <Text style={styles.orgName}>{ `${item.company}, ${item.location}` }</Text>
+                    <Text>{ item.position }</Text>
+                    {item.comment && <Text>{ item.comment }</Text>}
                 </View>
             </View>
         )
@@ -61,9 +56,9 @@ export const EducationInfo = memo((props: EducationInfoProps) => {
 
     return (
         <Section title={t('title')}>
-            <View style={styles.educationInfo}>
+            <View style={styles.jobInfo}>
                 {
-                    data.map(item => renderEduItem(item))
+                    data.map(item => renderJobItem(item))
                 }
             </View>
         </Section>
