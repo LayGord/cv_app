@@ -4,27 +4,11 @@
     height: 50px;
     padding: 13px;
     border: none;
-    box-shadow: 0 0 3px 0 var(--shadow-color);
-    background: var(--dark-bg-color);
     width: 100%;
     border-radius: 4px;
     text-align: center;
-    color: var(--primary-color);
     text-align: left;
 
-    &:hover {
-        background-color: var(--light-bg-color);
-        transition: background-color 0.3s;
-    }
-
-    &:focus {
-        background-color: var(--light-bg-color);
-        box-shadow: 0 0 3px 0 var(--accent-shadow-color);
-        outline: none;
-    }
-
-
-    appearance: none;
 }
 
 .datePickerWrapper {
@@ -62,6 +46,54 @@
     top: 13px;
     right: 13px;
     pointer-events: none;
-    fill: var(--secondary-color)
 }
 
+
+.default, 
+.error:focus-within {
+    .DatePicker {
+        box-shadow: 0 0 3px 0 var(--shadow-color);
+        background: var(--dark-bg-color);
+        color: var(--primary-color);
+
+        &:hover {
+            background-color: var(--light-bg-color);
+            transition: background-color 0.3s;
+        }
+        &:focus {
+            background-color: var(--light-bg-color);
+            box-shadow: 0 0 3px 0 var(--accent-shadow-color);
+            outline: none;
+        }
+    }
+    &.hasLabel > .label {
+        color: var(--secondary-color)
+    }
+    .icon {
+        fill: var(--secondary-color)
+    }
+}
+
+.error, .DatePicker:invalid {
+    .DatePicker {
+        box-shadow: 0 0 3px 0 var(--error-shadow-color);
+        background: var(--input-error-bg-color);
+        color: var(--error-color);
+
+        &:hover {
+            background-color: var(--error-bg-color);
+            transition: background-color 0.3s;
+        }
+        &:focus {
+            background-color: var(--error-bg-color);
+            box-shadow: 0 0 3px 0 var(--error-shadow-color);
+            outline: none;
+        }
+    }
+    &.hasLabel > .label {
+        color: var(--error-color)
+    }
+    .icon {
+        fill: var(--error-color)
+    }
+}

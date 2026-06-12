@@ -4,21 +4,30 @@ import { classNames, Mods } from "shared/lib/classNames/classNames";
 import cls from "./DatePicker.module.scss";
 
 
-interface DatePickerProps extends Omit<HTMLAttributes<HTMLInputElement>, 'onChange'> {
+export enum DatePickerTheme {
+    'DEFAULT' = 'default',
+    'ERROR' = 'error',
+}
+
+interface DatePickerProps extends Omit<HTMLAttributes<HTMLInputElement>, 'onChange' | 'onBlur'> {
     id?: string;
+    theme?: DatePickerTheme;
     className?: string;
     label?: string;
     value?: string;
-    onChange?: (value: string) => void
+    onChange?: (value: string) => void;
+    onBlur?: (value: string) => void;
 }
 
 export const DatePicker = memo((props: DatePickerProps) => {
     const {
         id,
+        theme = DatePickerTheme.DEFAULT,
         className,
         label,
         value,
         onChange,
+        onBlur,
         ...otherProps
     } = props;
 
@@ -28,8 +37,12 @@ export const DatePicker = memo((props: DatePickerProps) => {
         onChange?.(e.target.value)
     }, [onChange]);
 
+    const onBlurHandler = useCallback((e: React.FocusEvent<HTMLInputElement>) => {
+        onBlur?.(e.target.value)
+    }, [onBlur]);
+
     return(
-        <div className={classNames(cls.datePickerWrapper, mods, [])}>
+        <div className={classNames(cls.datePickerWrapper, mods, [cls[theme]])}>
             { label && <span className={cls.label}>{ label }</span>}
             <input
                 id={id}
@@ -37,6 +50,7 @@ export const DatePicker = memo((props: DatePickerProps) => {
                 className={ classNames(cls.DatePicker, {}, [className]) }
                 value={value}
                 onChange={onChangeHandler}
+                onBlur={onBlurHandler}
                 {...otherProps}
             />
             <CalendarIcon className={cls.icon}/>

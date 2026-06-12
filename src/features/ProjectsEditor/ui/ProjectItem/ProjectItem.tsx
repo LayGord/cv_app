@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { Project } from "entities/Resume";
+import { ProjectData } from "entities/Resume";
 import { Input } from "shared/ui/Input/Input";
 import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import { TextArea } from "shared/ui/TextArea/TextArea";
@@ -11,8 +11,8 @@ import cls from "./ProjectItem.module.scss";
 
 interface ProjectItemProps {
     className?: string;
-    data: Project;
-    onUpdate: (value: string, field: keyof Project) => void;
+    data: ProjectData;
+    onUpdate: (value: string, field: keyof ProjectData) => void;
     onDelete: () => void;
     index?: number;
 }

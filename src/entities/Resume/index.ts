@@ -11,11 +11,14 @@ export type {
     LanguageData,
 } from './model/types/ResumeSchema';
 export { resumeReducer, resumeActions } from './model/slice/resumeSlice';
-export { getResumePersonal } from './model/selectors/getResumePersonal';
-export { getResumeContacts } from './model/selectors/getResumeContacts';
-export { getResumeObjective } from './model/selectors/getResumeObjective';
-export { getResumeSkills } from './model/selectors/getResumeSkills';
-export { getResumeJobs} from './model/selectors/getResumeJobs';
-export { getResumeProjects } from './model/selectors/getResumeProjects';
-export { getResumeEducation } from './model/selectors/getResumeEducation';
-export { getResumeLanguages } from './model/selectors/getResumeLanguages';
+export { getPersonal } from './model/selectors/personalData/getPersonal';
+export { getPersonalErrors } from './model/selectors/personalData/getPersonalErrors';
+export { getContacts } from './model/selectors/getContacts';
+export { getObjective } from './model/selectors/getObjective';
+export { getSkills } from './model/selectors/getSkills';
+export { getJobs} from './model/selectors/getJobs';
+export { getProjects } from './model/selectors/getProjects';
+export { getEducation } from './model/selectors/getEducation';
+export { getLanguages } from './model/selectors/getLanguages';
+
+export { validatePersonalData, validatePersonalDataField } from './model/services/validation/personalData';

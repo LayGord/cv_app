@@ -12,6 +12,7 @@ import {
     ProjectData,
     LanguageData,
 } from "../types/ResumeSchema";
+import { PersonalDataErrors, PersonalDataErrorTypes } from "../types/resumeValidationSchema";
 
 const initialState: ResumeSchema = {
     resumeDraft: {
@@ -47,6 +48,9 @@ const initialState: ResumeSchema = {
         projects: [{id: '1', title: '', link: '', description: ''}],
         education: [{id: '1', org: '', grade: 'bachelor', faculty: '', program: '', dateFrom: '', city: ''}],
         langs: [{id: '1', language: '',  level: 'a1'}],
+        valErrors: {
+            personal: {}
+        }
     }
 };
 
@@ -65,7 +69,17 @@ export const resumeSlice = createSlice({
                 ...action.payload,
             }
         },
-
+        setPersonalDataFieldError: (state, action: PayloadAction<{field: keyof PersonalData; error?: PersonalDataErrorTypes}>) => {
+            const { field, error } = action.payload;
+            if (error) {
+                state.resumeDraft.valErrors.personal[field] = error;
+            } else {
+                delete state.resumeDraft.valErrors.personal[field];
+            }
+        },
+        setPersonalDataErrors: (state, action: PayloadAction<PersonalDataErrors>) => {
+            state.resumeDraft.valErrors.personal = action.payload
+        },
         //contactsData
         updateContactsData: (state, action: PayloadAction<Partial<ContactsData>>) => {
             state.resumeDraft.contacts = {

@@ -5,7 +5,7 @@ import { TextArea } from "shared/ui/TextArea/TextArea";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { useSelector } from "react-redux";
-import { getResumeAboutMe } from "entities/Resume/model/selectors/getResumeAboutMe";
+import { getAboutMe } from "entities/Resume/model/selectors/getAboutMe";
 import { useCallback } from "react";
 import { resumeActions } from "entities/Resume";
 
@@ -17,7 +17,7 @@ interface AboutMeEditorProps {
 export const AboutMeEditor = ({ className }: AboutMeEditorProps) => {
     const { t } = useTranslation('resume', {keyPrefix: 'AboutMeEditor'});
     const dispatch = useAppDispatch();
-    const aboutMe = useSelector(getResumeAboutMe);
+    const aboutMe = useSelector(getAboutMe);
 
     const onChange = useCallback((value: string) => {
         dispatch(resumeActions.updateAboutMe(value))

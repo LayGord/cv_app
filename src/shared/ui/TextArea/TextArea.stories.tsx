@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 
-import { TextArea } from './TextArea';
+import { TextArea, TextAreaTheme } from './TextArea';
 
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -28,3 +28,8 @@ export const Default: Story = {
     },
 };
 
+export const Error: Story = {
+    args: {
+        theme: TextAreaTheme.ERROR
+    },
+};

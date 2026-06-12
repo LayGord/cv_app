@@ -61,3 +61,11 @@ export const Accent: Story = {
         size: ButtonSize.M
     },
 };
+
+export const Error: Story = {
+    args: {
+        children: 'text',
+        theme: ButtonTheme.ERROR,
+        size: ButtonSize.M
+    },
+};

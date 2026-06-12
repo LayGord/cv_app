@@ -67,6 +67,17 @@
     box-shadow: 0px 0px 3px 0px var(--accent-shadow-color);
 }
 
+.error {
+    color: var(--error-color);
+    background-color: var(--input-error-bg-color);
+    padding: 13px;
+    box-shadow: 0px 0px 3px 0px var(--error-shadow-color);
+
+    &:hover {
+        background-color: var(--error-bg-color);
+    }
+}
+
 .size_s {
     font: var(--font-s);
     height: calc(var(--font-line-s) + 26px);

@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { EducationData, getResumeEducation, getResumeLanguages, LanguageData, resumeActions } from "entities/Resume";
+import { EducationData, getEducation, getLanguages, LanguageData, resumeActions } from "entities/Resume";
 import { FormArray } from "shared/ui/FormArray/FormArray";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { classNames } from "shared/lib/classNames/classNames";
@@ -16,8 +16,8 @@ interface EducationEditorProps {
 
 export const EducationEditor = ({ className }: EducationEditorProps) => {
     const { t } = useTranslation('resume');
-    const educations = useSelector(getResumeEducation);
-    const languages = useSelector(getResumeLanguages);
+    const educations = useSelector(getEducation);
+    const languages = useSelector(getLanguages);
     const dispatch = useAppDispatch();
 
     const onAddEducation = useCallback(() => {

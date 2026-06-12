@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 
-import { DatePicker } from './DatePicker';
+import { DatePicker, DatePickerTheme } from './DatePicker';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -28,8 +28,21 @@ export const Default: Story = {
     },
 };
 
-export const WithLabel: Story = {
+export const DefaultWithLabel: Story = {
     args: {
-        label: 'Дата рождения'
+        label: 'Birthdate'
+    },
+};
+
+export const Error: Story = {
+    args: {
+        theme: DatePickerTheme.ERROR
+    },
+};
+
+export const ErrorWithLabel: Story = {
+    args: {
+        label: 'Birthdate',
+        theme: DatePickerTheme.ERROR
     },
 };

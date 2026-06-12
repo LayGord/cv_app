@@ -3,8 +3,14 @@ import { classNames } from "shared/lib/classNames/classNames";
 import cls from "./TextArea.module.scss";
 
 
+export enum TextAreaTheme {
+    'DEFAULT' = 'default',
+    'ERROR' = 'error',
+}
+
 interface TextAreaProps extends Omit<HTMLAttributes<HTMLTextAreaElement>, 'onChange'> {
     className?: string;
+    theme?: TextAreaTheme;
     value?: string;
     onChange?: (value: string) => void;
     placeholder?: string,
@@ -14,6 +20,7 @@ interface TextAreaProps extends Omit<HTMLAttributes<HTMLTextAreaElement>, 'onCha
 export const TextArea = memo((props: TextAreaProps) =>{
     const {
         className,
+        theme = TextAreaTheme.DEFAULT,
         value,
         onChange,
         placeholder,
@@ -37,7 +44,7 @@ export const TextArea = memo((props: TextAreaProps) =>{
 
     return(
         <textarea
-            className={ classNames(cls.TextArea, {}, [className]) }
+            className={ classNames(cls.TextArea, {}, [className, cls[theme]]) }
             ref={textareaRef}
             value={value}
             onChange={onChangeHandler}

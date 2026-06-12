@@ -12,33 +12,17 @@
     padding: 13px;
     border-radius: 4px;
     border:  none;
-    box-shadow: 0px 0px 3px 0px var(--shadow-color);
-    background-color: var(--input-bg-color);
-    color: var(--primary-color);
 }
 
-.inputField:hover,
-.inputField:focus {
-    background-color: var(--light-bg-color);
-    transition: background-color 0.2s;
-}
-
-.inputField:focus {
-    box-shadow: 0px 0px 3px 0px var(--accent-shadow-color);
-    color: var(--accent-color);
-}
-
-.inputField:focus + .inputLabel {
-    color: var(--accent-color);
-}
 
 .hasLabel {
     .inputField {
         padding: 19px 13px 7px 13px;
     }
+
     .inputLabel {
+        display: flex;
         position: absolute;
-        color: var(--secondary-color);
         font: var(--font-m);
         top: 13px;
         left: 13px;
@@ -54,4 +38,123 @@
     }
 }
 
+.errorIcon {
+    position: absolute;
+    color: var(--error-color);
+    top: 13px;
+    right: 10px;
+    pointer-events: none;
+}
 
+.popupContainer {
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+}
+
+.errorPopup {
+    opacity: 0;
+    box-shadow: 0px 0px 3px 0px var(--error-shadow-color);
+    border-radius: 4px;
+    color: var(--error-color);
+    background-color: var(--error-bg-color);
+    margin-top: 12px;
+    
+    padding: 13px;
+    width: fit-content;
+    align-content: center;
+    height: 50px;
+    z-index: var(--popup-z-index);
+}
+
+.errorPopup::before {
+  content: '';
+  position: absolute;
+  bottom: -12px ;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid rgb(from var(--error-shadow-color) r g b /0.3);
+}
+
+.errorPopup::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid var(--error-bg-color);
+}
+
+.Input:hover:not(:focus-within) * .errorPopup {
+    opacity: 1;
+    transition: opacity 0.2s;
+}
+
+.default, 
+.error:focus-within {
+    .inputField {
+        box-shadow: 0px 0px 3px 0px var(--shadow-color);
+        background-color: var(--input-bg-color);
+        color: var(--primary-color);
+    }
+    .inputField:hover,
+    .inputField:focus {
+        background-color: var(--light-bg-color);
+        transition: background-color 0.2s;
+    }
+    .inputField:focus {
+        box-shadow: 0px 0px 3px 0px var(--accent-shadow-color);
+        color: var(--accent-color);
+    }
+    .inputField:focus::placeholder {
+        color: var(--accent-color);
+    }
+    .inputField:focus + .inputLabel {
+        color: var(--accent-color);
+    }
+    &.hasLabel > .inputLabel {
+        color: var(--secondary-color);
+    }
+    .errorIcon {
+        display: none;
+    }
+}
+
+
+.error {
+    .inputField {
+        box-shadow: 0px 0px 3px 0px var(--error-shadow-color);
+        background-color: var(--input-error-bg-color);
+        color: var(--error-color);
+    }
+    .inputField:hover,
+    .inputField:focus {
+        background-color: var(--error-bg-color);
+        transition: background-color 0.2s;
+    }
+    .inputField:focus {
+        box-shadow: 0px 0px 3px 0px var(--error-shadow-color);
+        color: var(--error-color);
+    }
+    .inputField::placeholder {
+        color: var(--error-color);
+    }
+    .inputField:focus::placeholder {
+        color: var(--error-color);
+    }
+    .inputField:focus + .inputLabel {
+        color: var(--error-color);
+    }
+    &.hasLabel > .inputLabel {
+        color: var(--error-color);
+    }
+
+}

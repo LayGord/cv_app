@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { JobData, SkillData, getResumeJobs, getResumeSkills, resumeActions } from "entities/Resume";
+import { JobData, SkillData, getJobs, getSkills, resumeActions } from "entities/Resume";
 import { Group } from "shared/ui/Group/Group";
 import { MultiSelect } from "shared/ui/MultiSelect/MultiSelect";
 import { FormArray } from "shared/ui/FormArray/FormArray";
@@ -23,8 +23,8 @@ const skillsList = [
 export const JobsEditor = ({ className }: JobsEditorProps) => {
     const { t } = useTranslation('resume', {keyPrefix: 'JobsEditor'});
 
-    const skills = useSelector(getResumeSkills);
-    const jobs = useSelector(getResumeJobs);
+    const skills = useSelector(getSkills);
+    const jobs = useSelector(getJobs);
     const dispatch = useAppDispatch();
 
     const onUpdateSkills = useCallback((value: SkillData[]) => {

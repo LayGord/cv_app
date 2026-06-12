@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { getResumeContacts, resumeActions, ContactLink } from "entities/Resume";
+import { getContacts, resumeActions, ContactLink } from "entities/Resume";
 import { classNames } from "shared/lib/classNames/classNames";
 import { Group } from "shared/ui/Group/Group";
 import { Input } from "shared/ui/Input/Input";
@@ -19,7 +19,7 @@ interface ContactsEditorProps {
 
 export const ContactsEditor = ({ className }: ContactsEditorProps) => {
     const { t } = useTranslation('resume');
-    const contactsData = useSelector(getResumeContacts);
+    const contactsData = useSelector(getContacts);
     const dispatch = useAppDispatch();
 
     const onChangeEmail = useCallback((value: string) => {

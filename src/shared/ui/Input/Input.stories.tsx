@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 
-import { Input } from './Input';
+import { Input, InputTheme } from './Input';
 
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -16,7 +16,8 @@ const meta = {
     // More on argTypes: https://storybook.js.org/docs/api/argtypes
     argTypes: {},
     // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#story-args
-    args: { },
+    args: {
+    },
 } satisfies Meta<typeof Input>;
 
 export default meta;
@@ -27,13 +28,13 @@ export const Default: Story = {
     args: {},
 };
 
-export const WithPlaceholder: Story = {
+export const DefaultWithPlaceholder: Story = {
     args: {
         placeholder: "Search"
     },
 };
 
-export const WithLabel: Story = {
+export const DefaultWithLabel: Story = {
     args: {
 
         placeholder: 'Username',
@@ -41,3 +42,32 @@ export const WithLabel: Story = {
     },
 };
 
+export const Error: Story = {
+    args: {
+        theme: InputTheme.ERROR 
+    },
+};
+
+export const ErrorWithPlaceholder: Story = {
+    args: {
+        placeholder: "Search",
+        theme: InputTheme.ERROR
+    },
+};
+
+export const ErrorWithLabel: Story = {
+    args: {
+        placeholder: 'Username',
+        id: 'test_input3',
+        theme: InputTheme.ERROR
+    },
+};
+
+export const WithErrorMessage: Story = {
+    args: {
+        placeholder: 'Username',
+        id: 'test_input3',
+        theme: InputTheme.ERROR,
+        error: 'Error'
+    },
+};

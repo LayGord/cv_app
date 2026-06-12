@@ -5,7 +5,7 @@ import { Group } from "shared/ui/Group/Group";
 import { Input } from "shared/ui/Input/Input";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { useSelector } from "react-redux";
-import { getResumeObjective, ObjectiveData, resumeActions } from "entities/Resume";
+import { getObjective, ObjectiveData, resumeActions } from "entities/Resume";
 import { FormArray } from "shared/ui/FormArray/FormArray";
 import { useCallback, useMemo } from "react";
 import { Position } from "entities/Resume";
@@ -24,7 +24,7 @@ interface ObjectiveEditorProps {
 export const ObjectiveEditor = ({ className }: ObjectiveEditorProps) => {
     const { t, i18n } = useTranslation('resume');
 
-    const objective = useSelector(getResumeObjective);
+    const objective = useSelector(getObjective);
     const dispatch = useAppDispatch();
 
     const typeOfEmplOptionsTr = useMemo( () => typeOfEmplOptions.map(

@@ -1,4 +1,5 @@
 import { Currency } from "entities/Currency";
+import { PersonalDataErrors, PersonalDataErrorTypes } from "./resumeValidationSchema";
 
 export interface ResumeSchema {
     resumeDraft: Resume;
@@ -15,6 +16,7 @@ export interface Resume {
     projects: ProjectData[];
     education: EducationData[];
     langs: LanguageData[];
+    valErrors: ValidationErrors;
 };
 
 // main info
@@ -117,4 +119,8 @@ export interface LanguageData {
     id: string;
     language: string;
     level?: 'a1' | 'a2' | 'b1' | 'b2' | 'c1' | 'c2';
+}
+
+export interface ValidationErrors {
+    personal: Partial<Record<keyof PersonalData, PersonalDataErrorTypes>>,
 }
