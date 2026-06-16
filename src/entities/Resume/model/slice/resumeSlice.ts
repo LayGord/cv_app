@@ -12,7 +12,18 @@ import {
     ProjectData,
     LanguageData,
 } from "../types/ResumeSchema";
-import { PersonalDataErrors, PersonalDataErrorTypes } from "../types/resumeValidationSchema";
+import {
+    ErrorTypes,
+    LinkErrors,
+    LinkErrorsPayload,
+    LinkErrorTypes,
+    ObjectiveDataErrors,
+    PersonalDataErrors,
+    PositionErrors,
+    SkillsDataErrors,
+    TypeOfEmplErrors,
+} from "../types/resumeValidationSchema";
+import { isEmptyObj } from "shared/lib/isEmptyObj/isEmptyObj";
 
 const initialState: ResumeSchema = {
     resumeDraft: {
@@ -49,7 +60,15 @@ const initialState: ResumeSchema = {
         education: [{id: '1', org: '', grade: 'bachelor', faculty: '', program: '', dateFrom: '', city: ''}],
         langs: [{id: '1', language: '',  level: 'a1'}],
         valErrors: {
-            personal: {}
+            personal: {},
+            contacts: {},
+            aboutMe: {},
+            objective: {},
+            skills: {},
+            jobs: {},
+            projects: {},
+            education: {},
+            languages: {}
         }
     }
 };
@@ -62,6 +81,7 @@ export const resumeSlice = createSlice({
         setResumeId: (state, action: PayloadAction<string>) => {
             state.resumeDraft.id = action.payload;
         },
+
         // personalData
         updatePersonalData: (state, action: PayloadAction<Partial<PersonalData>>) => {
             state.resumeDraft.personal = {
@@ -69,7 +89,7 @@ export const resumeSlice = createSlice({
                 ...action.payload,
             }
         },
-        setPersonalDataFieldError: (state, action: PayloadAction<{field: keyof PersonalData; error?: PersonalDataErrorTypes}>) => {
+        setPersonalDataFieldError: (state, action: PayloadAction<{field: keyof PersonalData; error?: ErrorTypes}>) => {
             const { field, error } = action.payload;
             if (error) {
                 state.resumeDraft.valErrors.personal[field] = error;
@@ -80,7 +100,8 @@ export const resumeSlice = createSlice({
         setPersonalDataErrors: (state, action: PayloadAction<PersonalDataErrors>) => {
             state.resumeDraft.valErrors.personal = action.payload
         },
-        //contactsData
+
+        // contactsData
         updateContactsData: (state, action: PayloadAction<Partial<ContactsData>>) => {
             state.resumeDraft.contacts = {
                 ...state.resumeDraft.contacts,
@@ -101,15 +122,55 @@ export const resumeSlice = createSlice({
             if (action.payload === state.resumeDraft.contacts.preferred) {
                 state.resumeDraft.contacts.preferred = undefined
             }
+            if ( state.resumeDraft.valErrors?.contacts.links?.[action.payload]) {
+                delete state.resumeDraft.valErrors.contacts.links[action.payload];
+                // cleanup empty error records ( records like { 97bbaf2d-3cee: {} } should be removed)
+                if (isEmptyObj(state.resumeDraft.valErrors.contacts.links)) delete state.resumeDraft.valErrors.contacts.links;
+            }
         },
         preferContact: (state, action: PayloadAction<string>) => {
             state.resumeDraft.contacts.preferred === action.payload 
                 ? state.resumeDraft.contacts.preferred = undefined
                 : state.resumeDraft.contacts.preferred = action.payload
         },
+        setContactsDataFieldError: 
+            (state, action: PayloadAction<{ field: Exclude<keyof ContactsData, 'links'>, error?: ErrorTypes }>) => {
+                const { field, error } = action.payload;
 
+                if (error) {
+                    state.resumeDraft.valErrors.contacts[field] = error
+                } else {
+                    delete state.resumeDraft.valErrors.contacts[field]
+                }
+            },
+        setContactLinkError: (state, action: PayloadAction<LinkErrorsPayload>) => {
+            const { id, field, error } = action.payload;
+
+            if (!state.resumeDraft.valErrors.contacts.links)
+                state.resumeDraft.valErrors.contacts.links = {};
+
+            const mergedContactLinkErrItem = {
+                ...state.resumeDraft.valErrors.contacts.links[id], [field]: error
+            };
+
+            if (!error) delete mergedContactLinkErrItem[field];
+
+            !isEmptyObj(mergedContactLinkErrItem)
+                ? state.resumeDraft.valErrors.contacts.links[id] = mergedContactLinkErrItem
+                : delete state.resumeDraft.valErrors.contacts.links[id];
+
+            console.log(Boolean(mergedContactLinkErrItem))
+
+            // cleanup empty error records ( records like { 97bbaf2d-3cee: {} } should be removed)
+            if (isEmptyObj(state.resumeDraft.valErrors.contacts.links)) delete state.resumeDraft.valErrors.contacts.links;
+        },
+
+        // aboutMe
         updateAboutMe: (state, action: PayloadAction<string>) => {
             state.resumeDraft.aboutMe = action.payload
+        },
+        setAboutMeError: (state, action: PayloadAction<string | undefined>) => {
+            state.resumeDraft.valErrors.aboutMe.aboutMe = action.payload as ErrorTypes | undefined; 
         },
 
         // objective Data
@@ -122,7 +183,7 @@ export const resumeSlice = createSlice({
                 (item) => item.id === action.payload.id ? action.payload : item
             );
         },
-        deletePosition: (state, action: PayloadAction<string>) => {
+        deletePosition: (state, action: PayloadAction<string>) => { // PayloadAction<string> = id
             state.resumeDraft.objective.positions = 
             state.resumeDraft.objective.positions.filter(
                 (item) => item.id !== action.payload
@@ -134,13 +195,16 @@ export const resumeSlice = createSlice({
                 ...action.payload
             };
         },
+        
 
-        //experienceData
+        // skills
         updateSkillsList: (state, action: PayloadAction<SkillData[]>) => {
             state.resumeDraft.skills = action.payload
         },
+        
 
-        addJob: (state, action: PayloadAction<string>) => {
+        // jobs
+        addJob: (state, action: PayloadAction<string>) => { // PayloadAction<string> = id
             state.resumeDraft.jobs.push({id: action.payload, company: '', position: '', dateFrom: ''})
         },
         updateJob: (state, action: PayloadAction<JobData>) => {
@@ -154,6 +218,7 @@ export const resumeSlice = createSlice({
             )
         },
 
+        // projects
         addProject: (state, action: PayloadAction<string>) => {
             state.resumeDraft.projects.push({id: action.payload, title: '', link: '', description: ''})
         },
@@ -168,6 +233,7 @@ export const resumeSlice = createSlice({
             )
         },
 
+        // education
         addEducation: (state, action: PayloadAction<string>) => {
             state.resumeDraft.education.push({
                 id: action.payload, org: '', faculty: '', program: '', dateFrom: '', grade: 'bachelor', city: ''
@@ -184,6 +250,7 @@ export const resumeSlice = createSlice({
             )
         },
 
+        // languages
         addLanguage: (state, action: PayloadAction<string>) => {
             state.resumeDraft.langs.push({
                 id: action.payload, language: '', level: 'a1',

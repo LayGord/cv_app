@@ -8,11 +8,12 @@ export enum TextAreaTheme {
     'ERROR' = 'error',
 }
 
-interface TextAreaProps extends Omit<HTMLAttributes<HTMLTextAreaElement>, 'onChange'> {
+interface TextAreaProps extends Omit<HTMLAttributes<HTMLTextAreaElement>, 'onChange' | 'onBlur'> {
     className?: string;
     theme?: TextAreaTheme;
     value?: string;
     onChange?: (value: string) => void;
+    onBlur?: (value: string) => void;
     placeholder?: string,
     minHeight?: number; // 24 * rownum + 26;
 }
@@ -23,13 +24,19 @@ export const TextArea = memo((props: TextAreaProps) =>{
         theme = TextAreaTheme.DEFAULT,
         value,
         onChange,
+        onBlur,
         placeholder,
         minHeight=76,
         ...otherProps
     } = props;
 
     const textareaRef = useRef<HTMLTextAreaElement>(null);
+
     const onChangeHandler = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        return onChange?.(e.target.value);
+    }, [onChange]);
+
+    const onBlurHandler = useCallback((e: React.FocusEvent<HTMLTextAreaElement>) => {
         return onChange?.(e.target.value);
     }, [onChange]);
 
@@ -48,6 +55,7 @@ export const TextArea = memo((props: TextAreaProps) =>{
             ref={textareaRef}
             value={value}
             onChange={onChangeHandler}
+            onBlur={onBlurHandler}
             placeholder={placeholder}
             style={{minHeight: minHeight}}
             {...otherProps}

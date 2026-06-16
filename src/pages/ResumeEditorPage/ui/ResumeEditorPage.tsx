@@ -22,7 +22,7 @@ type ResumeEditorStep = 'personal' | 'contacts' | 'objective' | 'about' | 'jobs'
 
 const resumeEditorConfig: Record<ResumeEditorStep, {prev?: ResumeEditorStep, next?: ResumeEditorStep}> = {
     personal: { next: 'contacts' },
-    contacts: { prev: 'personal', next: 'objective' },
+    contacts: { prev: 'personal', next: 'about' },
     about: { prev: 'contacts', next: 'objective'},
     objective: { prev: 'about', next: 'jobs'},
     jobs: { prev: 'about', next: 'projects' },

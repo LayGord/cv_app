@@ -1,7 +1,8 @@
 import { InputHTMLAttributes, memo, useCallback, useMemo } from "react";
 import { classNames, Mods } from "shared/lib/classNames/classNames";
-import { ReactComponent as ErrorIcon } from 'shared/assets/icons/alert-circle-outline.svg';
+import { ReactComponent as InfoIcon } from 'shared/assets/icons/alert-circle-outline.svg';
 import cls from "./Input.module.scss";
+import { Popup, PopupTheme } from "../Popup/Popup";
 
 
 export enum InputTheme {
@@ -18,6 +19,7 @@ interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChan
     onBlur?: (value: string) => void;
     placeholder?: string;
     error?: string;
+    hint?: string;
 }
 
 export const Input = memo((props: InputProps) =>{
@@ -30,6 +32,7 @@ export const Input = memo((props: InputProps) =>{
         onBlur,
         placeholder,
         error,
+        hint,
         ...otherProps
     } = props;
 
@@ -69,13 +72,27 @@ export const Input = memo((props: InputProps) =>{
             { error && 
                 <>
                     <div className={cls.errorIcon}>
-                        <ErrorIcon />
+                        <InfoIcon />
                     </div>
-                    <div className={cls.popupContainer}>
-                        <div className={cls.errorPopup}>
-                            { error }
-                        </div>
+                    <Popup
+                        className={cls.popup}
+                        theme={PopupTheme.ERROR}
+                    >
+                        {error}
+                    </Popup>
+                </>
+            }
+            { hint && 
+                <>
+                    <div className={cls.hintIcon}>
+                        <InfoIcon />
                     </div>
+                    <Popup
+                        className={cls.popup}
+                        theme={PopupTheme.DEFAULT}
+                    >
+                        {hint}
+                    </Popup>
                 </>
             }
         </div>

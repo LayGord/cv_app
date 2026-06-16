@@ -5,14 +5,14 @@ import { PDFViewer } from "@react-pdf/renderer";
 import { Page } from "widgets/Page";
 import { ResumePdfTemplate } from "features/RenderResumeToPdf";
 import { useSelector } from "react-redux";
-import { getResume } from "entities/Resume/model/selectors/getResume";
+import { getResume } from "entities/Resume/model/selectors/resumeData";
 import { Resume } from "entities/Resume";
 
 interface PreviewPageProps {
     className?: string;
 }
 
-
+// @ts-ignore
 const resume: Resume = {
     id: '1',
     personal: {

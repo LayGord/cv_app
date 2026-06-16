@@ -29,6 +29,10 @@ export const EducationItem = (props: EducationItemProps) => {
 
     const { t } = useTranslation('resume', {keyPrefix: 'EducationEditor.EducationItem'});
 
+    const onUpdateCity = useCallback((value: string) => {
+        onUpdate(value, 'city')
+    }, [onUpdate]);
+
     const onUpdateOrg = useCallback((value: string) => {
         onUpdate(value, 'org')
     }, [onUpdate]);
@@ -65,8 +69,8 @@ export const EducationItem = (props: EducationItemProps) => {
                 <Input
                     id={`city_${data.id}`}
                     placeholder={t('city')}
-                    value={data.org}
-                    onChange={onUpdateOrg}
+                    value={data.city}
+                    onChange={onUpdateCity}
                 />
                 <Button
                     theme={ButtonTheme.SECONDARY}

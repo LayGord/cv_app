@@ -38,62 +38,23 @@
     }
 }
 
-.errorIcon {
+.errorIcon,
+.hintIcon {
     position: absolute;
-    color: var(--error-color);
     top: 13px;
     right: 10px;
     pointer-events: none;
 }
 
-.popupContainer {
-    pointer-events: none;
-    display: flex;
-    justify-content: center;
-}
-
-.errorPopup {
-    opacity: 0;
-    box-shadow: 0px 0px 3px 0px var(--error-shadow-color);
-    border-radius: 4px;
+.errorIcon {
     color: var(--error-color);
-    background-color: var(--error-bg-color);
-    margin-top: 12px;
-    
-    padding: 13px;
-    width: fit-content;
-    align-content: center;
-    height: 50px;
-    z-index: var(--popup-z-index);
 }
 
-.errorPopup::before {
-  content: '';
-  position: absolute;
-  bottom: -12px ;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-bottom: 8px solid rgb(from var(--error-shadow-color) r g b /0.3);
+.hintIcon {
+    color: var(--primary-color);
 }
 
-.errorPopup::after {
-  content: '';
-  position: absolute;
-  bottom: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-bottom: 6px solid var(--error-bg-color);
-}
-
-.Input:hover:not(:focus-within) * .errorPopup {
+.Input:hover:not(:focus-within) * .popup {
     opacity: 1;
     transition: opacity 0.2s;
 }

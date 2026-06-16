@@ -1,13 +1,16 @@
-import { classNames } from "shared/lib/classNames/classNames";
-import cls from "./AboutMeEditor.module.scss";
+import { useCallback } from "react";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import {
+    getAboutMe,
+    aboutMeValidation as val,
+    resumeActions,
+} from "entities/Resume";
 import { Group } from "shared/ui/Group/Group";
 import { TextArea } from "shared/ui/TextArea/TextArea";
-import { useTranslation } from "react-i18next";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
-import { useSelector } from "react-redux";
-import { getAboutMe } from "entities/Resume/model/selectors/getAboutMe";
-import { useCallback } from "react";
-import { resumeActions } from "entities/Resume";
+import { classNames } from "shared/lib/classNames/classNames";
+import cls from "./AboutMeEditor.module.scss";
 
 
 interface AboutMeEditorProps {
@@ -23,6 +26,11 @@ export const AboutMeEditor = ({ className }: AboutMeEditorProps) => {
         dispatch(resumeActions.updateAboutMe(value))
     }, [dispatch])  
 
+    const onBlur = useCallback((value: string) => {
+        const valResult = val.validateAboutMe(value);
+        dispatch(resumeActions.setAboutMeError(valResult))
+    }, [dispatch])
+
     return (
         <div className={ classNames(cls.AboutMeEditor, {}, [className]) }>
             <Group title={t('title')}>
@@ -30,6 +38,7 @@ export const AboutMeEditor = ({ className }: AboutMeEditorProps) => {
                     placeholder={t('placeholder')}
                     value={aboutMe}
                     onChange={onChange}
+                    onBlur={onBlur}
                 />
             </Group>
         </div>

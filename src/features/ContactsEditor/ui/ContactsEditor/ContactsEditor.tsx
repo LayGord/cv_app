@@ -1,16 +1,23 @@
+import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { getContacts, resumeActions, ContactLink } from "entities/Resume";
+import {
+    getContacts,
+    getContactsErrors,
+    resumeActions,
+    ContactLink,
+    ContactsData,
+    contactsDataValidation as val,
+} from "entities/Resume";
 import { classNames } from "shared/lib/classNames/classNames";
 import { Group } from "shared/ui/Group/Group";
-import { Input } from "shared/ui/Input/Input";
+import { Input, InputTheme } from "shared/ui/Input/Input";
 import { FormArray } from "shared/ui/FormArray/FormArray";
+import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { ReactComponent as HeartIcon  } from 'shared/assets/icons/heart-outline.svg';
 import { ContactLinkItem } from "../ContactLinkItem/ContactLinkItem";
 import cls from "./ContactsEditor.module.scss";
-import { useCallback } from "react";
-import { Button, ButtonTheme } from "shared/ui/Button/Button";
 
 
 interface ContactsEditorProps {
@@ -20,6 +27,7 @@ interface ContactsEditorProps {
 export const ContactsEditor = ({ className }: ContactsEditorProps) => {
     const { t } = useTranslation('resume');
     const contactsData = useSelector(getContacts);
+    const errors = useSelector(getContactsErrors);
     const dispatch = useAppDispatch();
 
     const onChangeEmail = useCallback((value: string) => {
@@ -38,6 +46,20 @@ export const ContactsEditor = ({ className }: ContactsEditorProps) => {
         const newId = crypto.randomUUID();
         dispatch(resumeActions.addContactLink(newId));
     }, [dispatch])
+
+    const onBlurField = useCallback((field: keyof ContactsData) => 
+        (value: string) => {
+            const valResult = val.validateContactsDataField(field, value);
+            dispatch(resumeActions.setContactsDataFieldError(
+                { field: field as Exclude<keyof ContactsData, 'links'>, error: valResult }
+            ))
+        }, [dispatch])
+    
+    const onBlurContactLinkField = useCallback((id: string) => (field: keyof ContactLink) => 
+        (value: string) => {
+            const error = val.validateContactLinkField(field as keyof ContactLink, value);
+            dispatch(resumeActions.setContactLinkError({ id, field, error }));
+        }, [dispatch])
 
     const renderContactLinks = useCallback((links: ContactLink[]) => {
         return links?.map((contact) => {
@@ -68,10 +90,12 @@ export const ContactsEditor = ({ className }: ContactsEditorProps) => {
                     onDelete={onDeleteLink}
                     prefer={ contact.id === contactsData.preferred }
                     onPrefer={onPreferContact(contact.id)}
+                    validateCb={onBlurContactLinkField(contact.id)}
+                    errors={errors.links?.[contact.id]}
                 />
             )
         })
-    }, [contactsData.preferred, dispatch, onPreferContact])
+    }, [contactsData.preferred, dispatch, onPreferContact, onBlurContactLinkField, errors.links])
 
     return (
         <div className={ classNames(cls.ContactsEditor, {}, [className]) }>
@@ -79,9 +103,12 @@ export const ContactsEditor = ({ className }: ContactsEditorProps) => {
                 <div className={cls.row}>
                     <Input 
                         id={'email'}
+                        theme={ errors.email ? InputTheme.ERROR : InputTheme.DEFAULT}
                         placeholder={t('ContactsEditor.email')}
                         value={contactsData.email}
                         onChange={onChangeEmail}
+                        onBlur={onBlurField('email')}
+                        error={errors.email}
                     />
                 
                     <Button
@@ -95,9 +122,12 @@ export const ContactsEditor = ({ className }: ContactsEditorProps) => {
                 <div className={cls.row}>
                     <Input 
                         id={'phone'}
+                        theme={ errors.phone ? InputTheme.ERROR : InputTheme.DEFAULT}
                         placeholder={t('ContactsEditor.phone')}
                         value={contactsData.phone}
                         onChange={onChangePhone}
+                        onBlur={onBlurField('phone')}
+                        error={errors.phone}
                     />
 
                     <Button

@@ -1,5 +1,15 @@
 import { Currency } from "entities/Currency";
-import { PersonalDataErrors, PersonalDataErrorTypes } from "./resumeValidationSchema";
+import { 
+    PersonalDataErrors, 
+    ContactsDataErrors, 
+    AboutMeDataErrors, 
+    ObjectiveDataErrors, 
+    SkillsDataErrors, 
+    JobsDataErrros, 
+    ProjectsDataErrors, 
+    EducationDataErrors, 
+    LanguagesDataErrors,
+} from "./resumeValidationSchema";
 
 export interface ResumeSchema {
     resumeDraft: Resume;
@@ -62,7 +72,7 @@ export interface ObjectiveData {
 }
 
 
-interface TypeOfEmpl {
+export interface TypeOfEmpl {
     id: string;
     displayName: string;
     value: 'fulltime' | 'partial' | 'internship' | 'watch'
@@ -78,7 +88,7 @@ export interface Position {
 // experience info
 
 export interface SkillData {
-    id: string;
+    id: string; // here id goes as value;
     displayName: string;
     category?: string;
 }
@@ -122,5 +132,13 @@ export interface LanguageData {
 }
 
 export interface ValidationErrors {
-    personal: Partial<Record<keyof PersonalData, PersonalDataErrorTypes>>,
+    personal: PersonalDataErrors;
+    contacts: ContactsDataErrors;
+    aboutMe: AboutMeDataErrors;
+    objective: ObjectiveDataErrors;
+    skills: SkillsDataErrors;
+    jobs: JobsDataErrros;
+    projects: ProjectsDataErrors;
+    education: EducationDataErrors;
+    languages: LanguagesDataErrors;
 }

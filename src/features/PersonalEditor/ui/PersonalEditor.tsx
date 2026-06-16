@@ -1,7 +1,13 @@
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { resumeActions, PersonalData, getPersonal, getPersonalErrors, validatePersonalDataField } from "entities/Resume";
+import {
+    resumeActions,
+    PersonalData,
+    getPersonal,
+    getPersonalErrors,
+    personalDataValidation as val,
+} from "entities/Resume";
 import { FileUploader } from "shared/ui/FileUploader/FileUploader";
 import { Input, InputTheme } from "shared/ui/Input/Input";
 import { Group } from "shared/ui/Group/Group";
@@ -41,7 +47,7 @@ export const PersonalEditor = ({ className }: PersonalEditorProps) => {
     const onClearPhoto = useCallback(() => dispatch(resumeActions.updatePersonalData({ 'photo': '' })), [dispatch]);
 
     const onBlurField = useCallback((field: keyof PersonalData) => (value: PersonalData[keyof PersonalData]) => {
-        const valResult = validatePersonalDataField(field, value);
+        const valResult = val.validatePersonalDataField(field, value);
         dispatch(resumeActions.setPersonalDataFieldError({ field: field, error: valResult }))
     }, [dispatch])
 
@@ -55,7 +61,7 @@ export const PersonalEditor = ({ className }: PersonalEditorProps) => {
                     value={personalData.lastname}
                     onChange={onChangeTextField('lastname')}
                     onBlur={onBlurField('lastname')}
-                    error={errors.lastname}
+                    error={errors.lastname && t(errors.lastname, {keyPrefix: 'errors'})}
                 />
                 <Input
                     id="firstname"
@@ -64,7 +70,7 @@ export const PersonalEditor = ({ className }: PersonalEditorProps) => {
                     value={personalData.firstname}
                     onChange={onChangeTextField('firstname')}
                     onBlur={onBlurField('firstname')}
-                    error={errors.firstname}
+                    error={errors.firstname && t(errors.firstname, {keyPrefix: 'errors'})}
                 />
                 <Input
                     id="patronymic"
@@ -73,7 +79,7 @@ export const PersonalEditor = ({ className }: PersonalEditorProps) => {
                     value={personalData.patronymic}
                     onChange={onChangeTextField('patronymic')}
                     onBlur={onBlurField('patronymic')}
-                    error={errors.patronymic}
+                    error={errors.patronymic && t(errors.patronymic, {keyPrefix: 'errors'})}
                 />
                 <Group direction={'row'}>
                     <SexSelect 
@@ -98,7 +104,7 @@ export const PersonalEditor = ({ className }: PersonalEditorProps) => {
                         value={personalData.citizenship}
                         onChange={onChangeTextField('citizenship')}
                         onBlur={onBlurField('citizenship')}
-                        error={errors.citizenship}
+                        error={errors.citizenship && t(errors.citizenship, {keyPrefix: 'errors'})}
                     />
                     <Input
                         id="country"
@@ -107,7 +113,7 @@ export const PersonalEditor = ({ className }: PersonalEditorProps) => {
                         value={personalData.country}
                         onChange={onChangeTextField('country')}
                         onBlur={onBlurField('country')}
-                        error={errors.country}
+                        error={errors.country && t(errors.country, {keyPrefix: 'errors'})}
                     />
                     <Input
                         id="city"
@@ -116,7 +122,7 @@ export const PersonalEditor = ({ className }: PersonalEditorProps) => {
                         value={personalData.city}
                         onChange={onChangeTextField('city')}
                         onBlur={onBlurField('city')}
-                        error={errors.city}
+                        error={errors.city && t(errors.city, {keyPrefix: 'errors'})}
                     />
                 </Group>
             </Group>

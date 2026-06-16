@@ -16,7 +16,6 @@
                 "female": "Female"
             }
         }
-        
     },
     "ContactsEditor": {
         "titleContacts": "Contacts information",
@@ -111,5 +110,9 @@
                 "specialist": "Specialist"
             }
         }
+    },
+    "errors": {
+        "REQUIRED": "Missing data in required field",
+        "TOO_SHORT": "Too short string, at least 2 characters required"
     }
 }

@@ -71,3 +71,12 @@ export const WithErrorMessage: Story = {
         error: 'Error'
     },
 };
+
+export const WithHintMessage: Story = {
+    args: {
+        placeholder: 'Username',
+        id: 'test_input3',
+        theme: InputTheme.DEFAULT,
+        hint: 'Error'
+    },
+};
