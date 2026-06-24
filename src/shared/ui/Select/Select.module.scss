@@ -2,32 +2,15 @@
     width: 100%;
     border: none;
     border-radius: 4px;
-    box-shadow: 0px 0px 3px 0px var(--shadow-color);
     height: 50px;
     padding: 13px;
     appearance: none;
 
     text-overflow: ellipsis;
-    color: var(--primary-color);
-    background-color: var(--dark-bg-color);
 
     &:focus {
         outline: none;
     }
-}
-
-.Select:hover,
-.Select:focus {
-    background-color: var(--light-bg-color);
-    transition: background-color 0.2s;
-}
-
-.Select:focus {
-    box-shadow: 0px 0px 3px 0px var(--accent-shadow-color);
-}
-
-.SelectOption {
-    color: var(--primary-color);
 }
 
 .emptyValue,
@@ -47,8 +30,6 @@
     position: absolute;
     left: 13px;
     top: 2px;
-    font: var(--font-s);
-    color: var(--shadow-color);
     pointer-events: none;
     
 }
@@ -57,4 +38,85 @@
     .Select {
         padding: 19px 13px 7px 13px;
     }
+}
+
+.default,
+.error:focus-within {
+    .Select {
+        box-shadow: 0px 0px 3px 0px var(--shadow-color);
+        color: var(--primary-color);
+        background-color: var(--dark-bg-color);
+    }
+
+    .Select:hover,
+    .Select:focus {
+        background-color: var(--light-bg-color);
+        transition: background-color 0.2s;
+    }
+
+    .Select:focus {
+        box-shadow: 0px 0px 3px 0px var(--accent-shadow-color);
+    }
+
+    .SelectOption {
+        color: var(--primary-color);
+    }
+
+    .placeholder {
+        font: var(--font-s);
+        color: var(--shadow-color);
+    }
+    .errorIcon {
+        display: none;
+    }
+    .hintIcon {
+        display: none;
+    }
+}
+
+.error {
+    .Select {
+        box-shadow: 0px 0px 3px 0px var(--error-shadow-color);
+        color: var(--error-color);
+        background-color: var(--input-error-bg-color);;
+        padding-right: 35px;
+    }
+
+    .Select:hover,
+    .Select:focus {
+        background-color: var(--error-bg-color);
+        transition: background-color 0.2s;
+    }
+
+    .SelectOption {
+        color: var(--primary-color);
+    }
+
+    .placeholder {
+        font: var(--font-s);
+        color: rgb( from var(--error-shadow-color) r g b / 0.7);
+    }
+}
+
+
+
+.Select:hover:not(:focus) ~* .popup {
+    opacity: 1;
+    transition: opacity 0.2s;
+}
+
+.errorIcon,
+.hintIcon {
+    position: absolute;
+    top: 13px;
+    right: 10px;
+    pointer-events: none;
+}
+
+.hintIcon {
+    color: var(--primary-color);
+}
+
+.errorIcon {
+    color: var(--error-color);
 }

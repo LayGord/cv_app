@@ -33,3 +33,17 @@ export const Error: Story = {
         theme: TextAreaTheme.ERROR
     },
 };
+
+export const WithErrorPopup: Story = {
+    args: {
+        theme: TextAreaTheme.ERROR,
+        error: 'error'
+    },
+};
+
+export const WithHintPopup: Story = {
+    args: {
+        theme: TextAreaTheme.DEFAULT,
+        hint: 'hint'
+    },
+};

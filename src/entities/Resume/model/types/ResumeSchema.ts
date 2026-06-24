@@ -1,11 +1,14 @@
 import { Currency } from "entities/Currency";
+import { TypeOfEmplValue } from "entities/TypeOfEmpl";
+
+
 import { 
     PersonalDataErrors, 
     ContactsDataErrors, 
     AboutMeDataErrors, 
     ObjectiveDataErrors, 
     SkillsDataErrors, 
-    JobsDataErrros, 
+    JobsDataErrors, 
     ProjectsDataErrors, 
     EducationDataErrors, 
     LanguagesDataErrors,
@@ -21,7 +24,7 @@ export interface Resume {
     contacts: ContactsData,
     objective: ObjectiveData,
     aboutMe: string;
-    skills: SkillData[];
+    skills: string[];
     jobs: JobData[];
     projects: ProjectData[];
     education: EducationData[];
@@ -62,7 +65,7 @@ export interface ContactLink {
 
 export interface ObjectiveData {
     positions: Position[];
-    typeOfEmpl: TypeOfEmpl[];
+    typeOfEmpl: TypeOfEmplValue[];
     format: 'office' | 'remote' | 'hybrid' | 'any';
     salary?: string;
     currency: Currency;
@@ -72,27 +75,13 @@ export interface ObjectiveData {
 }
 
 
-export interface TypeOfEmpl {
-    id: string;
-    displayName: string;
-    value: 'fulltime' | 'partial' | 'internship' | 'watch'
-};
-
-
 export interface Position {
     id: string;
     name: string;
 }
 
 
-// experience info
-
-export interface SkillData {
-    id: string; // here id goes as value;
-    displayName: string;
-    category?: string;
-}
-
+// jobData
 
 export interface JobData {
     id: string;
@@ -104,6 +93,7 @@ export interface JobData {
     comment?: string;
 }
 
+// projectsData
 
 export interface ProjectData {
     id: string;
@@ -112,6 +102,7 @@ export interface ProjectData {
     description?: string;
 }
 
+// educatiuonData
 
 export interface EducationData {
     id: string;
@@ -124,6 +115,7 @@ export interface EducationData {
     dateTo?: string;
 }
 
+// languagesData
 
 export interface LanguageData {
     id: string;
@@ -136,8 +128,8 @@ export interface ValidationErrors {
     contacts: ContactsDataErrors;
     aboutMe: AboutMeDataErrors;
     objective: ObjectiveDataErrors;
-    skills: SkillsDataErrors;
-    jobs: JobsDataErrros;
+    skills?: SkillsDataErrors;
+    jobs: JobsDataErrors;
     projects: ProjectsDataErrors;
     education: EducationDataErrors;
     languages: LanguagesDataErrors;

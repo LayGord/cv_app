@@ -1,13 +1,23 @@
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { EducationData, getEducation, getLanguages, LanguageData, resumeActions } from "entities/Resume";
+import { 
+    EducationData,
+    LanguageData, 
+    educationDataValidation as eduVal,
+    languagesDataValidation as langVal,
+    getEducation, 
+    getEducationErrors, 
+    getLanguages, 
+    getLanguagesErrors,  
+    resumeActions,
+} from "entities/Resume";
 import { FormArray } from "shared/ui/FormArray/FormArray";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { classNames } from "shared/lib/classNames/classNames";
 import { EducationItem } from "../EducationItem/EducationItem";
-import cls from "./EducationEditor.module.scss";
 import { LanguageItem } from "../LanguageItem/LanguageItem";
+import cls from "./EducationEditor.module.scss";
 
 
 interface EducationEditorProps {
@@ -17,7 +27,11 @@ interface EducationEditorProps {
 export const EducationEditor = ({ className }: EducationEditorProps) => {
     const { t } = useTranslation('resume');
     const educations = useSelector(getEducation);
+    const educationErrors = useSelector(getEducationErrors);
+
     const languages = useSelector(getLanguages);
+    const languagesErrors = useSelector(getLanguagesErrors);
+
     const dispatch = useAppDispatch();
 
     const onAddEducation = useCallback(() => {
@@ -28,6 +42,16 @@ export const EducationEditor = ({ className }: EducationEditorProps) => {
     const onAddLanguage= useCallback(() => {
         let id = crypto.randomUUID();
         dispatch(resumeActions.addLanguage(id))
+    }, [dispatch]);
+
+    const onValidateEducationItemField = useCallback((id: string) => (field: keyof EducationData) => (value?: string) => {
+        const error = eduVal.validateEducationItemField(field, value);
+        dispatch(resumeActions.setEducationItemFieldError({ id, field, error }));
+    }, [dispatch]);
+
+    const onValidateLanguageItemField = useCallback((id: string) => (field: keyof LanguageData) => (value?: string) => {
+        const error = langVal.validateLanguageItemField(field, value);
+        dispatch(resumeActions.setLanguageItemFieldError({ id, field, error }));
     }, [dispatch]);
 
     const renderEducation = useCallback((items: EducationData[]) => {
@@ -51,10 +75,12 @@ export const EducationEditor = ({ className }: EducationEditorProps) => {
                     data={item}
                     onDelete={onDelete}
                     onUpdate={onUpdateEducation}
+                    validateCb={onValidateEducationItemField(item.id)}
+                    errors={educationErrors[item.id]}
                 />
             )
         })
-    }, [dispatch]);
+    }, [dispatch, educationErrors, onValidateEducationItemField]);
 
     const renderLanguage = useCallback((items: LanguageData[]) => {
         return items?.map((item) => {
@@ -73,10 +99,12 @@ export const EducationEditor = ({ className }: EducationEditorProps) => {
                     data={item}
                     onDelete={onDelete}
                     onUpdate={onUpdateLanguage}
+                    validateCb={onValidateLanguageItemField(item.id)}
+                    errors={languagesErrors[item.id]}
                 />
             )
         })
-    }, [dispatch]);
+    }, [dispatch, languagesErrors, onValidateLanguageItemField]);
 
     return (
         <div className={ classNames(cls.EducationEditor, {}, [className]) }>

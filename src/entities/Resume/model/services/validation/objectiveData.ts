@@ -1,6 +1,12 @@
-import { ObjectiveData, TypeOfEmpl } from "../../types/ResumeSchema";
-import { ErrorTypes, ObjectiveDataErrors, PositionErrors, TypeOfEmplErrors, TypeOfEmplErrorTypes} from "../../types/resumeValidationSchema";
 import { isEmpty, isNumber, isShorterThan } from "shared/lib/validation/validation";
+import { ObjectiveData, Position } from "../../types/ResumeSchema";
+import { TypeOfEmpl, TypeOfEmplValue } from "entities/TypeOfEmpl";
+
+import { 
+    ErrorTypes, 
+    ObjectiveDataErrors, 
+    TypeOfEmplErrors, 
+} from "../../types/resumeValidationSchema";
 
 
 const validateObjectiveDataField = (
@@ -40,20 +46,47 @@ const validateObjectiveDataField = (
 }
 
 // basically you cant manipulate with typeOfEmpl fields, only choose one of. So, mostly, this is for safety 
-const validateTypeOfEmplItem = ( value: TypeOfEmpl ): TypeOfEmplErrors | undefined => { 
-    const errors: TypeOfEmplErrorTypes = { };
+const validatePositionItemField = (
+    field: keyof Position, value: string
+): ErrorTypes | undefined => {
+    switch (field) {
 
-    if (!value.displayName || isEmpty(value.displayName)) errors.displayName = 'REQUIRED';
-    if (!value.value || isEmpty(value.displayName)) errors.displayName = 'REQUIRED';
+    case 'id':
+        if (!value || isShorterThan(value, 2)) return 'REQUIRED'
+        return;
 
-    return Object.entries(errors).length > 0 ? { [value.id]: errors } : undefined;
+    case 'name':
+        if (!value || isEmpty(value)) return 'REQUIRED';
+        if (isShorterThan(value, 2)) return 'TOO_SHORT';
+        return;
+
+    };
 };
 
-const validatePosition = (
-    value: string
+const validateTypeOfEmplField = ( // not really needed, just 4 safety
+    field: keyof TypeOfEmpl, value: string
 ): ErrorTypes | undefined => {
-    if (!value || isEmpty(value)) return 'REQUIRED';
-    if (isShorterThan(value, 2)) return 'TOO_SHORT';
+    switch (field) {
+
+    case 'id':
+        if (!value || isShorterThan(value, 2)) return 'REQUIRED'
+        return;
+
+    case 'displayName':
+        if (!value || isEmpty(value)) return 'REQUIRED';
+        if (isShorterThan(value, 2)) return 'TOO_SHORT';
+        return;
+
+    case 'value':
+        if (!value || isEmpty(value)) return 'REQUIRED';
+        if (isShorterThan(value, 2)) return 'TOO_SHORT';
+        return;
+
+    };
+}
+
+const validateTypeOfEmpl = (data: TypeOfEmplValue[]) => {
+    if (data.length === 0) return { 'empty': { 'id': 'REQUIRED'} } as TypeOfEmplErrors;
     return;
 };
 
@@ -66,26 +99,29 @@ const validateObjectiveData = (data: ObjectiveData): ObjectiveDataErrors => {
         }
     });
 
-    if (data.positions) {
-        errors.positions = data.positions.reduce((acc: PositionErrors, position) => {
-            acc[position.id] = { name: validatePosition(position.name)}
-            return acc
-        }, {})
-    }
+    // if (data.positions) {
+    //     errors.positions = data.positions.reduce((acc: PositionErrors, position) => {
+    //         const err = validatePositionItem(position);
+    //         if (err) acc = { ...acc, ...err};
+    //         return acc
+    //     }, {})
+    // }
 
-    if (data.typeOfEmpl) {
-        errors.typeOfEmpl = data.typeOfEmpl.reduce((acc: TypeOfEmplErrors, typeOfEmpl) => {
-            acc[typeOfEmpl.id] = validateTypeOfEmplItem(typeOfEmpl)
-            return acc
-        }, {})
-    }
+    // if (data.typeOfEmpl) {
+    //     errors.typeOfEmpl = data.typeOfEmpl.reduce((acc: TypeOfEmplErrors, typeOfEmpl) => {
+    //         const err = validateTypeOfEmplItem(typeOfEmpl);
+    //         if (err) acc = { ...acc, ...err };
+    //         return acc
+    //     }, {})
+    // }
     
     return errors;
 }
 
 export const objectiveDataValidation = {
     validateObjectiveDataField,
-    validateTypeOfEmplItem,
-    validatePosition,
+    validatePositionItemField,
+    validateTypeOfEmplField,
+    validateTypeOfEmpl,
     validateObjectiveData,
 };

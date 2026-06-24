@@ -5,7 +5,6 @@ import {
     ContactsData,
     ContactLink,
     ObjectiveData,
-    SkillData,
     JobData,
     Position,
     EducationData,
@@ -13,17 +12,20 @@ import {
     LanguageData,
 } from "../types/ResumeSchema";
 import {
+    EducationDataErrors,
     ErrorTypes,
-    LinkErrors,
-    LinkErrorsPayload,
-    LinkErrorTypes,
-    ObjectiveDataErrors,
+    ItemErrorsPayload,
+    JobsDataErrors,
+    LanguagesDataErrors,
+
     PersonalDataErrors,
-    PositionErrors,
+    ProjectsDataErrors,
     SkillsDataErrors,
     TypeOfEmplErrors,
+
 } from "../types/resumeValidationSchema";
 import { isEmptyObj } from "shared/lib/isEmptyObj/isEmptyObj";
+
 
 const initialState: ResumeSchema = {
     resumeDraft: {
@@ -143,25 +145,22 @@ export const resumeSlice = createSlice({
                     delete state.resumeDraft.valErrors.contacts[field]
                 }
             },
-        setContactLinkError: (state, action: PayloadAction<LinkErrorsPayload>) => {
+        setContactLinkError: (state, action: PayloadAction<ItemErrorsPayload<ContactLink>>) => {
             const { id, field, error } = action.payload;
 
             if (!state.resumeDraft.valErrors.contacts.links)
                 state.resumeDraft.valErrors.contacts.links = {};
 
-            const mergedContactLinkErrItem = {
+            const mergedContactLinkErr = {
                 ...state.resumeDraft.valErrors.contacts.links[id], [field]: error
             };
 
-            if (!error) delete mergedContactLinkErrItem[field];
+            if (!error) delete mergedContactLinkErr[field];
 
-            !isEmptyObj(mergedContactLinkErrItem)
-                ? state.resumeDraft.valErrors.contacts.links[id] = mergedContactLinkErrItem
+            !isEmptyObj(mergedContactLinkErr)
+                ? state.resumeDraft.valErrors.contacts.links[id] = mergedContactLinkErr
                 : delete state.resumeDraft.valErrors.contacts.links[id];
 
-            console.log(Boolean(mergedContactLinkErrItem))
-
-            // cleanup empty error records ( records like { 97bbaf2d-3cee: {} } should be removed)
             if (isEmptyObj(state.resumeDraft.valErrors.contacts.links)) delete state.resumeDraft.valErrors.contacts.links;
         },
 
@@ -195,14 +194,44 @@ export const resumeSlice = createSlice({
                 ...action.payload
             };
         },
-        
+        setPositionError: (state, action: PayloadAction<ItemErrorsPayload<Position>>) => {
+            const { id, field, error } = action.payload;
 
+            if (!state.resumeDraft.valErrors.objective.positions)
+                state.resumeDraft.valErrors.objective.positions = {};
+
+            const mergedPositionItemErrs = {
+                ...state.resumeDraft.valErrors.objective.positions[id], [field]: error 
+            };
+
+            if (!error) delete mergedPositionItemErrs[field];
+
+            !isEmptyObj(mergedPositionItemErrs)
+                ? state.resumeDraft.valErrors.objective.positions[id] = mergedPositionItemErrs
+                : delete state.resumeDraft.valErrors.objective.positions[id];
+
+            if (isEmptyObj(state.resumeDraft.valErrors.objective.positions)) delete state.resumeDraft.valErrors.objective.positions;
+        },
+        setTypeOfEmplErrors: (state, action: PayloadAction<TypeOfEmplErrors | undefined>) => {
+            state.resumeDraft.valErrors.objective.typeOfEmpl = action.payload;
+        },
+        setObjectiveDataFieldError:
+        (state, action: PayloadAction<{field: Exclude<keyof ObjectiveData, 'positions' | 'typeOfEmpl'>, error?: ErrorTypes}>) => {
+            const { field, error } = action.payload;
+            if (error) {
+                state.resumeDraft.valErrors.objective[field] = error;
+            } else {
+                delete state.resumeDraft.valErrors.objective[field]
+            }
+        },
         // skills
-        updateSkillsList: (state, action: PayloadAction<SkillData[]>) => {
+        updateSkillsList: (state, action: PayloadAction<string[]>) => {
             state.resumeDraft.skills = action.payload
         },
-        
-
+        setSkillsErrors: (state, action: PayloadAction<SkillsDataErrors | undefined>) => {
+            state.resumeDraft.valErrors.skills = action.payload;
+        },
+    
         // jobs
         addJob: (state, action: PayloadAction<string>) => { // PayloadAction<string> = id
             state.resumeDraft.jobs.push({id: action.payload, company: '', position: '', dateFrom: ''})
@@ -216,6 +245,28 @@ export const resumeSlice = createSlice({
             state.resumeDraft.jobs = state.resumeDraft.jobs.filter(
                 (item) => item.id !== action.payload
             )
+            if (state.resumeDraft.valErrors.jobs[action.payload]) {
+                delete state.resumeDraft.valErrors.jobs[action.payload];
+            };
+        },
+        setJobItemFieldError: (state, action: PayloadAction<ItemErrorsPayload<JobData>>) => {
+            const { id, field, error } = action.payload;
+
+            if (!state.resumeDraft.valErrors.jobs)
+                state.resumeDraft.valErrors.jobs = {};
+
+            const mergedJobItemErrs = {
+                ...state.resumeDraft.valErrors.jobs[id], [field]: error 
+            };
+
+            if (!error) delete mergedJobItemErrs[field];
+
+            !isEmptyObj(mergedJobItemErrs)
+                ? state.resumeDraft.valErrors.jobs[id] = mergedJobItemErrs
+                : delete state.resumeDraft.valErrors.jobs[id];
+        },
+        setJobsDataErrors: (state, action: PayloadAction<JobsDataErrors | undefined>) => {
+            state.resumeDraft.valErrors.jobs = action.payload || {};
         },
 
         // projects
@@ -230,7 +281,29 @@ export const resumeSlice = createSlice({
         deleteProject: (state, action: PayloadAction<string>) => {
             state.resumeDraft.projects = state.resumeDraft.projects.filter(
                 (item) => item.id !== action.payload
-            )
+            );
+            if (state.resumeDraft.valErrors.projects[action.payload]) {
+                delete state.resumeDraft.valErrors.projects[action.payload];
+            };
+        },
+        setProjectItemFieldError: (state, action: PayloadAction<ItemErrorsPayload<ProjectData>>) => {
+            const { id, field, error } = action.payload;
+
+            if (!state.resumeDraft.valErrors.projects)
+                state.resumeDraft.valErrors.projects = {};
+
+            const mergedProjectItemErrs = {
+                ...state.resumeDraft.valErrors.projects[id], [field]: error 
+            };
+
+            if (!error) delete mergedProjectItemErrs[field];
+
+            !isEmptyObj(mergedProjectItemErrs)
+                ? state.resumeDraft.valErrors.projects[id] = mergedProjectItemErrs
+                : delete state.resumeDraft.valErrors.projects[id];
+        },
+        setProjectsDataErrors: (state, action: PayloadAction<ProjectsDataErrors | undefined>) => {
+            state.resumeDraft.valErrors.projects = action.payload || {};
         },
 
         // education
@@ -247,7 +320,29 @@ export const resumeSlice = createSlice({
         deleteEducation: (state, action: PayloadAction<string>) => {
             state.resumeDraft.education = state.resumeDraft.education.filter(
                 (item) => item.id !== action.payload
-            )
+            );
+            if (state.resumeDraft.valErrors.education[action.payload]) {
+                delete state.resumeDraft.valErrors.education[action.payload];
+            };
+        },
+        setEducationItemFieldError: (state, action: PayloadAction<ItemErrorsPayload<EducationData>>) => {
+            const { id, field, error } = action.payload;
+
+            if (!state.resumeDraft.valErrors.education)
+                state.resumeDraft.valErrors.education = {};
+
+            const mergedEducationItemErrs = {
+                ...state.resumeDraft.valErrors.education[id], [field]: error 
+            };
+
+            if (!error) delete mergedEducationItemErrs[field];
+
+            !isEmptyObj(mergedEducationItemErrs)
+                ? state.resumeDraft.valErrors.education[id] = mergedEducationItemErrs
+                : delete state.resumeDraft.valErrors.education[id];
+        },
+        setEducationDataErrors: (state, action: PayloadAction<EducationDataErrors | undefined>) => {
+            state.resumeDraft.valErrors.education = action.payload || {};
         },
 
         // languages
@@ -264,8 +359,30 @@ export const resumeSlice = createSlice({
         deleteLanguage: (state, action: PayloadAction<string>) => {
             state.resumeDraft.langs = state.resumeDraft.langs.filter(
                 (item) => item.id !== action.payload
-            )
-        }
+            );
+            if (state.resumeDraft.valErrors.languages[action.payload]) {
+                delete state.resumeDraft.valErrors.languages[action.payload];
+            };
+        },
+        setLanguageItemFieldError: (state, action: PayloadAction<ItemErrorsPayload<LanguageData>>) => {
+            const { id, field, error } = action.payload;
+
+            if (!state.resumeDraft.valErrors.languages)
+                state.resumeDraft.valErrors.languages = {};
+
+            const mergedLanguageItemErrs = {
+                ...state.resumeDraft.valErrors.languages[id], [field]: error 
+            };
+
+            if (!error) delete mergedLanguageItemErrs[field];
+
+            !isEmptyObj(mergedLanguageItemErrs)
+                ? state.resumeDraft.valErrors.languages[id] = mergedLanguageItemErrs
+                : delete state.resumeDraft.valErrors.languages[id];
+        },
+        setLanguageDataErrors: (state, action: PayloadAction<LanguagesDataErrors | undefined>) => {
+            state.resumeDraft.valErrors.languages = action.payload || {};
+        },
     },
 })
 

@@ -1,3 +1,7 @@
+.textAreaWrapper {
+    position: relative;
+}
+
 .TextArea {
     width: 100%;
     padding: 13px 13px;
@@ -19,6 +23,27 @@
     box-shadow: 0px 0px 3px 0px var(--accent-shadow-color);
 }
 
+.errorIcon,
+.hintIcon {
+    position: absolute;
+    top: 13px;
+    right: 10px;
+    pointer-events: none;
+}
+
+.errorIcon {
+    color: var(--error-color);
+}
+
+.hintIcon {
+    color: var(--primary-color);
+}
+
+.TextArea:hover:not(:focus) ~* .popup {
+    opacity: 1;
+    transition: opacity 0.2s;
+}
+
 .default, 
 .error:focus-within {
     box-shadow: 0px 0px 3px 0px var(--shadow-color);
@@ -31,6 +56,12 @@
 
     &.TextArea:focus {
         box-shadow: 0px 0px 3px 0px var(--accent-shadow-color);
+    }
+    ~ .errorIcon {
+        display: none;
+    }
+    ~ .hintIcon {
+        display: none;
     }
 }
 

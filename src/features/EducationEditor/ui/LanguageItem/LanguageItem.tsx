@@ -1,9 +1,9 @@
 import { memo, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { LanguageData } from "entities/Resume";
+import { LanguageData, LanguagesErrorTypes } from "entities/Resume";
 import { classNames } from "shared/lib/classNames/classNames";
-import { Input } from "shared/ui/Input/Input";
-import { Select } from "shared/ui/Select/Select";
+import { Input, InputTheme } from "shared/ui/Input/Input";
+import { Select, SelectTheme } from "shared/ui/Select/Select";
 import { ReactComponent as DeleteIcon } from 'shared/assets/icons/delete-outline.svg';
 import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import cls from "./LanguageItem.module.scss";
@@ -14,6 +14,8 @@ interface LanguageItemProps {
     data: LanguageData;
     onUpdate: (value: string, field: keyof LanguageData) => void;
     onDelete: () => void;
+    validateCb?: (field: keyof LanguageData) => (value?: string) => void;
+    errors?: LanguagesErrorTypes;
 }
 
 const lvlOptions: { displayName: string, value: LanguageData['level'] }[] = [
@@ -31,6 +33,8 @@ export const LanguageItem = memo((props: LanguageItemProps) => {
         data,
         onUpdate,
         onDelete,
+        validateCb,
+        errors,
     } = props;
 
     const  { t } = useTranslation('resume', {keyPrefix: 'EducationEditor.LanguageItem'});
@@ -47,16 +51,22 @@ export const LanguageItem = memo((props: LanguageItemProps) => {
         <div className={ classNames(cls.LanguageItem, {}, [className]) }>
             <Input
                 className={cls.language}
+                theme={errors?.language ? InputTheme.ERROR : InputTheme.DEFAULT }
                 placeholder={t('language')}
                 value={data.language}
                 onChange={onUpdateLang}
+                onBlur={validateCb?.('language')}
+                error={errors?.language && t(errors.language, {keyPrefix: 'errors'})}
             />
             <Select
                 className={cls.level}
+                theme={errors?.level ? SelectTheme.ERROR : SelectTheme.DEFAULT }
                 placeholder={t('level')}
                 options={lvlOptions}
                 value={data.level}
                 onChange={onUpdateLvl}
+                onBlur={validateCb?.('level')}
+                error={errors?.level && t(errors.level, {keyPrefix: 'errors'})}
             />
             <Button
                 theme={ButtonTheme.SECONDARY}

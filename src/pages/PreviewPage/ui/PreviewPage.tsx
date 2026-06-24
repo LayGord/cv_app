@@ -117,7 +117,7 @@ export const PreviewPage = ({ className }: PreviewPageProps) => {
         <Page >
             <div className={ classNames(cls.PreviewPage, {}, [className]) }>
                 <PDFViewer style={{ width: '100%', height: '100%' }}>
-                    <ResumePdfTemplate data={resume}/>
+                    <ResumePdfTemplate data={resumeData}/>
                 </PDFViewer>
             </div>
         </Page>

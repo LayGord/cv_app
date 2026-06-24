@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 
-import { Select } from './Select';
+import { Select, SelectTheme } from './Select';
 
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -27,33 +27,47 @@ export const Default: Story = {
     args: {
         value: '1',
         options: [
-            {displayValue: 'Option 1', value: '1'},
-            {displayValue: 'Option 2', value: '2'},
-            {displayValue: 'Option 3', value: '3'},
+            {displayName: 'Option 1', value: '1'},
+            {displayName: 'Option 2', value: '2'},
+            {displayName: 'Option 3', value: '3'},
         ]
     },
 };
 
-export const WithEmptyValue: Story = {
+export const DefaultWithEmptyValue: Story = {
     args: {
         value: '',
         emptyValue: 'select an item',
         options: [
-            {displayValue: 'Option 1', value: '1'},
-            {displayValue: 'Option 2', value: '2'},
-            {displayValue: 'Option 3', value: '3'},
+            {displayName: 'Option 1', value: '1'},
+            {displayName: 'Option 2', value: '2'},
+            {displayName: 'Option 3', value: '3'},
         ]
     },
 };
 
-export const WithPlaceholder: Story = {
+export const DefaultWithPlaceholder: Story = {
     args: {
         value: '',
         placeholder: 'Color',
         options: [
-            {displayValue: 'Red', value: '1'},
-            {displayValue: 'Green', value: '2'},
-            {displayValue: 'Blue', value: '3'},
+            {displayName: 'Red', value: '1'},
+            {displayName: 'Green', value: '2'},
+            {displayName: 'Blue', value: '3'},
+        ]
+    },
+};
+
+export const Error: Story = {
+    args: {
+        value: '',
+        theme: SelectTheme.ERROR,
+        error: 'error',
+        placeholder: 'Color',
+        options: [
+            {displayName: 'Red', value: '1'},
+            {displayName: 'Green', value: '2'},
+            {displayName: 'Blue', value: '3'},
         ]
     },
 };

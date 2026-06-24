@@ -1,4 +1,7 @@
-import { ContactLink } from "./ResumeSchema"
+import { SkillData } from "entities/Skill";
+import { ContactLink, EducationData, JobData, LanguageData, Position, ProjectData } from "./ResumeSchema"
+import { TypeOfEmpl } from "entities/TypeOfEmpl";
+
 
 export type ErrorTypes =
   | 'REQUIRED'
@@ -10,6 +13,13 @@ export type ErrorTypes =
   | 'INVALID_LINK'
   | 'LESS_THAN_ZERO'
   | 'IS_NAN'
+  | 'DATE_TO_LESS_THAN_DATE_FROM'
+
+export interface ItemErrorsPayload<T> {
+    id: string;
+    field: keyof T;
+    error?: ErrorTypes;
+};
 
 export interface PersonalDataErrors {
     firstname?: ErrorTypes
@@ -25,40 +35,29 @@ export interface PersonalDataErrors {
 
 // contactsData
 
-export interface LinkErrorsPayload {
-    id: string;
-    field: keyof ContactLink;
-    error?: ErrorTypes;
-}
-
-export type LinkErrorTypes = { [K in keyof ContactLink]?: ErrorTypes}
-
-export type LinkErrors = Record<string, LinkErrorTypes>
+export type LinkErrorTypes = { [K in keyof ContactLink]?: ErrorTypes };
+export type LinkErrors = Record<string, LinkErrorTypes>;
 
 export interface ContactsDataErrors {
     email?: ErrorTypes;
     phone?: ErrorTypes;
     links?: LinkErrors;
     preferred?: ErrorTypes;
-}
+};
 
 // aboutMeData
 
 export interface AboutMeDataErrors {
     aboutMe?: ErrorTypes
-}
-
-export interface TypeOfEmplErrorTypes {
-    displayName?: ErrorTypes;
-    value?: ErrorTypes
 };
 
-export interface PositionErrorTypes {
-    name?: ErrorTypes;
-}
+// objectiveData
 
-export type TypeOfEmplErrors = Record<string, TypeOfEmplErrorTypes | undefined>
-export type PositionErrors = Record<string, PositionErrorTypes | undefined>
+export type PositionErrorTypes = {[K in keyof Position]?: ErrorTypes};
+export type PositionErrors = Record<string, PositionErrorTypes>;
+
+export type TypeOfEmplErrorTypes = {[K in keyof TypeOfEmpl]?: ErrorTypes}; // or 'empty': {id: '', name: ''}
+export type TypeOfEmplErrors = Record<string, TypeOfEmplErrorTypes>;
 
 export interface ObjectiveDataErrors {
     positions?: PositionErrors;
@@ -71,15 +70,22 @@ export interface ObjectiveDataErrors {
     workweek?: ErrorTypes;
 }
 
-export interface SkillsDataErrorTypes {
-    id?: ErrorTypes;
-    displayName?: ErrorTypes;
-    category?: ErrorTypes;
-}
+// skillData
+export type SkillsDataErrorTypes = {[K in keyof SkillData]?: ErrorTypes};
+export type SkillsDataErrors = Record<string, SkillsDataErrorTypes>;
 
-export type SkillsDataErrors = Record<string, SkillsDataErrorTypes | undefined>
+// jobData
+export type JobErrorTypes = { [K in keyof JobData]?: ErrorTypes };
+export type JobsDataErrors = Record<string, JobErrorTypes>;
 
-export interface JobsDataErrros {}
-export interface ProjectsDataErrors {}
-export interface EducationDataErrors {}
-export interface LanguagesDataErrors {}
+// projectsData 
+export type ProjectErrorTypes = { [K in keyof ProjectData]?: ErrorTypes };
+export type ProjectsDataErrors = Record<string, ProjectErrorTypes>;
+
+// educationsData
+export type EducationErrorTypes = { [K in keyof EducationData]?: ErrorTypes };
+export type EducationDataErrors = Record<string, EducationErrorTypes>;
+
+// languagesData
+export type LanguagesErrorTypes = { [K in keyof LanguageData]?: ErrorTypes };
+export type LanguagesDataErrors = Record<string, LanguagesErrorTypes>;

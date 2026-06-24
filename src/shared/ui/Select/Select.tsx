@@ -1,19 +1,30 @@
-import { classNames, Mods } from "shared/lib/classNames/classNames";
-import cls from "./Select.module.scss";
-import { HTMLAttributes, memo, useCallback } from "react";
 
+import { HTMLAttributes, memo, useCallback } from "react";
+import { ReactComponent as InfoIcon } from 'shared/assets/icons/alert-circle-outline.svg';
+import { classNames, Mods } from "shared/lib/classNames/classNames";
+import { Popup, PopupTheme } from "../Popup/Popup";
+import cls from "./Select.module.scss";
 
 export interface SelectOption {
     displayName: string;
     value?: string
 }
 
-interface SelectProps extends Omit<HTMLAttributes<HTMLSelectElement>, 'onChange'> {
+export enum SelectTheme {
+    'DEFAULT' = 'default',
+    'ERROR' = 'error',
+}
+
+interface SelectProps extends Omit<HTMLAttributes<HTMLSelectElement>, 'onChange' | 'onBlur'> {
     id?: string;
     className?: string;
+    theme?: SelectTheme;
     options: SelectOption[];
     value?: string;
     onChange?: (value: string) => void;
+    onBlur?: (value: string) => void;
+    error?: string;
+    hint?: string;
     emptyValue?: string;
     placeholder?: string;
 };
@@ -22,9 +33,13 @@ export const Select = memo((props: SelectProps) => {
     const {
         id,
         className,
+        theme = SelectTheme.DEFAULT,
         options,
         value,
         onChange,
+        onBlur,
+        error,
+        hint,
         emptyValue,
         placeholder,
         ...otherProps
@@ -34,10 +49,15 @@ export const Select = memo((props: SelectProps) => {
         return onChange?.(e.target.value);
     }, [onChange]);
     
+    const onBlurHandler = useCallback((e: React.FocusEvent<HTMLSelectElement>) => {
+        console.log(e.target.value)
+        return onBlur?.(e.target.value);
+    }, [onBlur]);
+
     const mods: Mods = {[cls.hasPlaceholder]: Boolean(placeholder)}
 
-    return(
-        <div className={classNames(cls.selectWrapper, mods, [])}>
+    return (
+        <div className={classNames(cls.selectWrapper, mods, [cls[theme]])}>
             { placeholder && 
                 <div className={cls.placeholder}>{ placeholder }</div>
             }
@@ -46,6 +66,7 @@ export const Select = memo((props: SelectProps) => {
                 className={ classNames(cls.Select, {}, [className]) }
                 value={value}
                 onChange={onChangeHandler}
+                onBlur={onBlurHandler}
                 {...otherProps}
             >
                 { emptyValue && 
@@ -63,6 +84,19 @@ export const Select = memo((props: SelectProps) => {
                     })
                 }
             </select>
+            { error && 
+                <>
+                    <div className={cls.errorIcon}>
+                        <InfoIcon />
+                    </div>
+                    <Popup
+                        className={cls.popup}
+                        theme={PopupTheme.ERROR}
+                    >
+                        {error}
+                    </Popup>
+                </>
+            }
         </div>
     );
 });

@@ -46,3 +46,11 @@ export const ErrorWithLabel: Story = {
         theme: DatePickerTheme.ERROR
     },
 };
+
+export const ErrorWithLabelAndPopup: Story = {
+    args: {
+        error: 'error',
+        label: 'Birthdate',
+        theme: DatePickerTheme.ERROR
+    },
+};

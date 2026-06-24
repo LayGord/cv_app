@@ -1,9 +1,9 @@
-import { classNames } from "shared/lib/classNames/classNames";
-import { sexOptions } from "../../model/const/personalEditorConst";
+import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { PersonalData } from "entities/Resume";
 import { Select } from "shared/ui/Select/Select";
-import { useTranslation } from "react-i18next";
-import { useMemo } from "react";
+import { classNames } from "shared/lib/classNames/classNames";
+import { sexOptions } from "../../model/const/personalEditorConst";
 
 
 interface SexSelectProps {

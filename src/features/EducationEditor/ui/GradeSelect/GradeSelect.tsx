@@ -1,9 +1,9 @@
-import { classNames } from "shared/lib/classNames/classNames";
-import { useTranslation } from "react-i18next";
-import { Select } from "shared/ui/Select/Select";
-import { EducationData } from "entities/Resume";
-import { gradeOptions } from '../../model/const/educationEditorConsts';
 import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
+import { EducationData } from "entities/Resume";
+import { classNames } from "shared/lib/classNames/classNames";
+import { Select, SelectTheme } from "shared/ui/Select/Select";
+import { gradeOptions } from '../../model/const/educationEditorConsts';
 
 
 interface GradeSelectProps {
@@ -11,6 +11,8 @@ interface GradeSelectProps {
     id: string;
     value: EducationData['grade'];
     onChange: (value: EducationData['grade']) => void;
+    onBlur?: (value: string) => void;
+    error?: string;
 }
 
 export const GradeSelect = (props: GradeSelectProps) => {
@@ -19,7 +21,9 @@ export const GradeSelect = (props: GradeSelectProps) => {
         className,
         id,
         value,
-        onChange
+        onChange,
+        onBlur,
+        error,
     } = props;
 
     const options = useMemo(() => 
@@ -33,10 +37,13 @@ export const GradeSelect = (props: GradeSelectProps) => {
         <Select
             className={ classNames('', {}, [className]) }
             id={id}
+            theme={error ? SelectTheme.ERROR : SelectTheme.DEFAULT }
             placeholder={t('EducationEditor.GradeSelect.grade')}
             value={value}
             onChange={onChange as (value: string) => void}
             options={options}
+            onBlur={onBlur}
+            error={error && t(error, {keyPrefix: 'errors'})}
         />
     );
 };

@@ -1,42 +1,59 @@
-import { classNames } from "shared/lib/classNames/classNames";
-import cls from "./ObjectiveEditor.module.scss";
-import { useTranslation } from "react-i18next";
-import { Group } from "shared/ui/Group/Group";
-import { Input } from "shared/ui/Input/Input";
-import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
+import { useCallback } from "react";
 import { useSelector } from "react-redux";
-import { getObjective, ObjectiveData, resumeActions } from "entities/Resume";
-import { FormArray } from "shared/ui/FormArray/FormArray";
-import { useCallback, useMemo } from "react";
-import { Position } from "entities/Resume";
-import { PositionItem } from "../PositionItem/PositionItem";
+import { useTranslation } from "react-i18next";
 import { Currency, CurrencySelect } from "entities/Currency";
+import { TypeOfEmplSelect, TypeOfEmplValue } from "entities/TypeOfEmpl";
+import {
+    Position, ObjectiveData,
+    getObjective, getObjectiveErrors,
+    objectiveDataValidation as val, 
+    resumeActions, 
+} from "entities/Resume";
+import { Group } from "shared/ui/Group/Group";
+import { Input, InputTheme } from "shared/ui/Input/Input";
+import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
+import { FormArray } from "shared/ui/FormArray/FormArray";
 import { Checkbox, CheckboxTheme } from "shared/ui/Checkbox/Checkbox";
+import { classNames } from "shared/lib/classNames/classNames";
+import { PositionItem } from "../PositionItem/PositionItem";
 import { FormatSelect } from "../FormatSelect/FormatSelect";
 import { WorkweekInput } from "../WorkweekInput/WorkweekInput";
-import { MultiSelect } from "shared/ui/MultiSelect/MultiSelect";
-import { typeOfEmplOptions } from "../../model/const/objectiveEditorConsts";
+import cls from "./ObjectiveEditor.module.scss";
+
 
 interface ObjectiveEditorProps {
     className?: string;
 }
 
 export const ObjectiveEditor = ({ className }: ObjectiveEditorProps) => {
-    const { t, i18n } = useTranslation('resume');
+    const { t } = useTranslation('resume');
 
     const objective = useSelector(getObjective);
     const dispatch = useAppDispatch();
-
-    const typeOfEmplOptionsTr = useMemo( () => typeOfEmplOptions.map(
-        (item) => ({ id: item.id, displayName: i18n.t(item.displayName, {ns: 'resume'}), value: item.value})
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    ), [i18n.language])
+    const errors = useSelector(getObjectiveErrors);
 
     const onAddPosition = useCallback(() => {
         let id = crypto.randomUUID();
         dispatch(resumeActions.addPosition(id));
     }, [dispatch]);
     
+    const onValidatePosition = useCallback((id: string) => (field: keyof Position) => 
+        (value: string) => {
+            const error = val.validatePositionItemField('name', value);
+            dispatch(resumeActions.setPositionError({id, field, error}));
+        }, [dispatch]);
+
+    const onValidateTypeOfEmpl = useCallback((data: TypeOfEmplValue[]) => {
+        const valResult = val.validateTypeOfEmpl(data);
+        dispatch(resumeActions.setTypeOfEmplErrors(valResult));
+    }, [dispatch]);
+
+    const onValidateField = useCallback((field: Exclude<keyof ObjectiveData, 'positions' | 'typeOfEmpl'>) => (value: string) => {
+        const error = val.validateObjectiveDataField(field, value);
+        dispatch(resumeActions.setObjectiveDataFieldError({ field, error}))
+    }, [dispatch]);
+
+
     const renderPositions = useCallback((items: Position[]) => {
 
         return items?.map((item, index) => {
@@ -54,10 +71,12 @@ export const ObjectiveEditor = ({ className }: ObjectiveEditorProps) => {
                     data={item}
                     onDelete={onDelete}
                     onUpdate={onUpdatePosition}
+                    validateCb={onValidatePosition(item.id)}
+                    errors={errors.positions?.[item.id]}
                 />
             )
         })
-    }, [dispatch]);
+    }, [dispatch, onValidatePosition, errors.positions]);
 
     const onChangeTypeOfEmpl = (value: ObjectiveData['typeOfEmpl']) => {
         dispatch(resumeActions.updateObjectiveData({ typeOfEmpl: value}))
@@ -97,25 +116,25 @@ export const ObjectiveEditor = ({ className }: ObjectiveEditorProps) => {
                     renderFunction={renderPositions}
                 />
                 <Group title={t('ObjectiveEditor.titleTypeOfEmpl')}>
-                    <MultiSelect 
-                        id={'typeOfemployment'}
-                        options={typeOfEmplOptionsTr}
+                    <TypeOfEmplSelect 
                         value={objective.typeOfEmpl}
-                        onChange={
-                            onChangeTypeOfEmpl as 
-                            unknown as (value: {id: string, displayName: string, category?: string}[]) => void
-                        }
-                    /> 
+                        onChange={onChangeTypeOfEmpl}
+                        onBlur={onValidateTypeOfEmpl}
+                        errors={errors.typeOfEmpl}
+                    />
                 </Group>
                 <Group title={t('ObjectiveEditor.titleSalary')}>
                     <div className={cls.inputRow}>
                         <Input
                             className={cls.salary}
+                            theme={ errors.salary ? InputTheme.ERROR : InputTheme.DEFAULT }
                             id={'salary'}
                             type="number"
                             placeholder={t('ObjectiveEditor.salary')}
                             value={objective.salary}
                             onChange={onChangeSalary}
+                            onBlur={onValidateField('salary')}
+                            error={errors.salary && t(errors.salary, {keyPrefix: 'errors'})}
                         />
                         <CurrencySelect
                             value={objective.currency}
@@ -128,10 +147,14 @@ export const ObjectiveEditor = ({ className }: ObjectiveEditorProps) => {
                     <FormatSelect 
                         value={objective.format}
                         onChange={onChangeFormat}
+                        onBlur={onValidateField('format')}
+                        error={errors.format && t(errors.format, {keyPrefix: 'errors'})}
                     />
                     <WorkweekInput 
                         value={objective.workweek}
                         onChange={onChangeWorkweek}
+                        onBlur={onValidateField('workweek')}
+                        error={errors.workweek && t(errors.workweek, {keyPrefix: 'errors'})}
                     />
                     <div className={cls.inputRow}>
                         <Checkbox

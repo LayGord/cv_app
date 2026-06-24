@@ -1,7 +1,12 @@
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { ProjectData, getProjects, resumeActions } from "entities/Resume";
+import {
+    ProjectData,
+    getProjects, getProjectsErrors,
+    projectsDataValidation as val,
+    resumeActions,
+} from "entities/Resume";
 import { FormArray } from "shared/ui/FormArray/FormArray";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { classNames } from "shared/lib/classNames/classNames";
@@ -16,11 +21,17 @@ interface ProjectsEditorProps {
 export const ProjectsEditor = ({ className }: ProjectsEditorProps) => {
     const { t } = useTranslation('resume');
     const projects = useSelector(getProjects);
+    const errors = useSelector(getProjectsErrors);
     const dispatch = useAppDispatch();
 
     const onAddProject = useCallback(() => {
         let id = crypto.randomUUID();
         dispatch(resumeActions.addProject(id))
+    }, [dispatch]);
+
+    const onValidateProjectItemField = useCallback((id: string) => (field: keyof ProjectData) => (value: string) => {
+        const error = val.validateProjectItemField(field, value);
+        dispatch(resumeActions.setProjectItemFieldError({ id, field, error }))
     }, [dispatch]);
     
     const renderProjects = useCallback((items: ProjectData[]) => {
@@ -44,10 +55,12 @@ export const ProjectsEditor = ({ className }: ProjectsEditorProps) => {
                     data={item}
                     onDelete={onDelete}
                     onUpdate={onUpdateJob}
+                    validateCb={onValidateProjectItemField(item.id)}
+                    errors={errors[item.id]}
                 />
             )
         })
-    }, [dispatch]);
+    }, [dispatch, onValidateProjectItemField, errors]);
 
     return (
         <div className={ classNames(cls.ProjectsEditor, {}, [className]) }>

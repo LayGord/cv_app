@@ -1,18 +1,28 @@
+import { memo, useMemo } from "react";
+import { useTranslation } from "react-i18next";
+import { ObjectiveData } from 'entities/Resume';
+import { formatOptions } from '../../model/const/objectiveEditorConsts';
 import { classNames } from "shared/lib/classNames/classNames";
 import { Select } from "shared/ui/Select/Select";
-import { ObjectiveData } from 'entities/Resume';
-import { memo, useMemo } from "react";
-import { formatOptions } from '../../model/const/objectiveEditorConsts';
-import { useTranslation } from "react-i18next";
+
 
 interface FormatSelectProps {
     className?: string;
     value: ObjectiveData['format'];
     onChange: (value: ObjectiveData['format']) => void;
+    onBlur?: (value: string) => void;
+    error?: string;
 }
 
+export const FormatSelect = memo((props: FormatSelectProps) => {
+    const {
+        className,
+        value,
+        onChange,
+        onBlur,
+        error,
+    } = props;
 
-export const FormatSelect = memo(({ className, value, onChange }: FormatSelectProps) => {
     const { t, i18n } = useTranslation('resume');
 
     const options = useMemo(() => formatOptions.map(
@@ -27,6 +37,8 @@ export const FormatSelect = memo(({ className, value, onChange }: FormatSelectPr
             value={value}
             options={options}
             onChange={onChange as (value: string) => void}
+            onBlur={onBlur}
+            error={error && t(error, {keyPrefix: 'errors'})}
         />
     );
 });

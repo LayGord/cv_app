@@ -1,12 +1,19 @@
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { JobData, SkillData, getJobs, getSkills, resumeActions } from "entities/Resume";
+import { 
+    JobData, 
+    getJobs, getJobsErrors,
+    getSkills, getSkillsErrors, 
+    jobsDataValidation as val, 
+    resumeActions, 
+} from "entities/Resume";
+import { SkillsSelect } from "entities/Skill";
 import { Group } from "shared/ui/Group/Group";
-import { MultiSelect } from "shared/ui/MultiSelect/MultiSelect";
 import { FormArray } from "shared/ui/FormArray/FormArray";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { classNames } from "shared/lib/classNames/classNames";
+import { isEmptyObj } from "shared/lib/isEmptyObj/isEmptyObj";
 import { JobItem } from "../JobItem/JobItem";
 import cls from "./JobsEditor.module.scss";
 
@@ -15,19 +22,16 @@ interface JobsEditorProps {
     className?: string;
 };
 
-const skillsList = [
-    {"id": "test", "displayName": "test", "category": "test"},
-   
-];
-
 export const JobsEditor = ({ className }: JobsEditorProps) => {
     const { t } = useTranslation('resume', {keyPrefix: 'JobsEditor'});
 
     const skills = useSelector(getSkills);
+    const skillsErrors = useSelector(getSkillsErrors);
     const jobs = useSelector(getJobs);
+    const jobsErrors = useSelector(getJobsErrors);
     const dispatch = useAppDispatch();
 
-    const onUpdateSkills = useCallback((value: SkillData[]) => {
+    const onUpdateSkills = useCallback((value: string[]) => {
         dispatch(resumeActions.updateSkillsList(value))
     }, [dispatch]);
 
@@ -36,6 +40,10 @@ export const JobsEditor = ({ className }: JobsEditorProps) => {
         dispatch(resumeActions.addJob(id))
     }, [dispatch]);
     
+    const onValidateJobItemField = useCallback((id: string) => (field: keyof JobData) =>(value: string) => {
+        const error = val.validateJobItemField(field, value);
+        dispatch(resumeActions.setJobItemFieldError({ id, field, error }));
+    }, [dispatch]);
 
     const renderJobs = useCallback((items: JobData[]) => {
         let withIndexes = items.length > 1;
@@ -58,20 +66,20 @@ export const JobsEditor = ({ className }: JobsEditorProps) => {
                     data={item}
                     onDelete={onDelete}
                     onUpdate={onUpdateJob}
+                    validateCb={onValidateJobItemField(item.id)}
+                    errors={jobsErrors[item.id]}
                 />
             )
         })
-    }, [dispatch]);
+    }, [dispatch, jobsErrors, onValidateJobItemField]);
 
     return (
         <div className={ classNames(cls.JobsEditor, {}, [className]) }>
             <Group title={t("titleSkills")}>
-                <MultiSelect
-                    id={"skills"}
-                    options={skillsList}
+                <SkillsSelect
                     value={skills}
                     onChange={onUpdateSkills}
-                    groupByCategories
+                    errors={isEmptyObj(skillsErrors) ? undefined : skillsErrors}
                 />
             </Group>
             <FormArray

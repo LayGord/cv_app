@@ -1,12 +1,12 @@
 import { classNames } from "shared/lib/classNames/classNames";
 import cls from "./MultiSelect.module.scss";
 import { useCallback, useMemo, useState } from "react";
-import { Input } from "../Input/Input";
+import { Input, InputTheme } from "../Input/Input";
 import { Button, ButtonTheme } from "../Button/Button";
-import { ReactComponent as CloseIcon } from 'shared/assets/icons/x-icon.svg';
 import { useTranslation } from "react-i18next";
 
-interface MultiSelectOption {
+
+export interface MultiSelectOption {
     id: string;
     displayName: string;
     category?: string;
@@ -18,9 +18,11 @@ interface MultiSelectProps {
     id: string
     className?: string;
     options: MultiSelectOption[];
-    value?: MultiSelectOption[]; // id`s of options
-    onChange?: (value: MultiSelectOption[]) => void;
+    value: string[]; // id`s of options
+    onChange?: (value: string[]) => void;
     groupByCategories?: boolean;
+    onBlur?: (value: string[]) => void;
+    errors?: Record<string, any>;
 }
 
 export const MultiSelect = (props: MultiSelectProps) => {
@@ -29,6 +31,8 @@ export const MultiSelect = (props: MultiSelectProps) => {
         options,
         value=[],
         onChange,
+        onBlur,
+        errors,
         groupByCategories=false,
     } = props;
 
@@ -49,7 +53,9 @@ export const MultiSelect = (props: MultiSelectProps) => {
         setTimeout(() => {
             setVisibility('closed');
         }, 250)
-    }, []);
+        onBlur?.(value)
+    }, [value, onBlur]);
+
 
     // filtration logic
     const [search, setSearch] = useState('');
@@ -68,16 +74,17 @@ export const MultiSelect = (props: MultiSelectProps) => {
 
     // render logic
     const onOptionClick = useCallback((option: MultiSelectOption) => {
-        let valueDraft;
-        if (value.includes(option)) {
+        let valueDraft: string[];
+        if (value.includes(option.id)) {
             valueDraft = value.filter(
-                (optionFromValue) => optionFromValue.id !== option.id
+                (optionFromValue) => optionFromValue !== option.id
             );
         } else {
-            valueDraft = [...value, option];
+            valueDraft = [...value, option.id];
         }
         onChange?.(valueDraft);
-    }, [onChange, value]);
+        onBlur?.(valueDraft)
+    }, [onChange, onBlur, value]);
 
     const groupOptionsByCategory = useCallback((options: MultiSelectOption[]): Record<string, MultiSelectOption[]>  => {
         return options.reduce<Record<string, MultiSelectOption[]>>(
@@ -95,15 +102,16 @@ export const MultiSelect = (props: MultiSelectProps) => {
         );
     }, [i18n]);
 
-    const renderOption = useCallback((option: MultiSelectOption) => {
+    const renderOption = useCallback((option?: MultiSelectOption) => {
+        if (!option) return
         const onClick = () => onOptionClick(option);
 
         return (
             <Button
                 key={option.id}
                 className={cls.option}
-                theme={ value.includes(option) ? ButtonTheme.ACCENT : ButtonTheme.DEFAULT}
-                onClick={onClick} 
+                theme={ value.includes(option.id) ? ButtonTheme.ACCENT : ButtonTheme.DEFAULT}
+                onClick={onClick}
             >
                 { option?.displayName }
             </Button>
@@ -128,39 +136,42 @@ export const MultiSelect = (props: MultiSelectProps) => {
     }, [groupOptionsByCategory, renderOption]);
 
     return(
-        <div className={ classNames(cls.MultiSelect, {}, [className, cls[visibility]]) }>
-
-            { value.length > 0 && 
-                <div className={cls.selectedList}>
-                    { value.map((option) => renderOption(option)) }
-                </div>
-            }
-
-            <div className={cls.searchBlock}>
-                <Input
-                    className={cls.searchInput}
-                    placeholder={t('MultiSelect.search')}
-                    value={search}
-                    onChange={onSearchChange}
-                    onClick={onOpenClick}
+        <>  
+            { visibility === 'opened' && 
+                <div
+                    className={cls.overlay}
+                    onClick={onCloseClick} 
                 />
+            }
+            <div className={ classNames(cls.MultiSelect, {}, [className, cls[visibility]]) }>
 
-                <Button
-                    className={cls.closeBtn}
-                    theme={ButtonTheme.CLEAR}
-                    onClick={onCloseClick}
-                >
-                    <CloseIcon />
-                </Button>
-            </div>
- 
-            <div className={cls.optionsList} >
-                { filteredOptions.length
-                    ? renderOptionsList(filteredOptions, groupByCategories)
-                    : <span className={cls.searchNotFound}>{t('MultiSelect.notFound')}</span> 
+                { value.length > 0 && 
+                    <div className={cls.selectedList}>
+                        { value.map((option) => renderOption(options.find(item => item.id === option))) }
+                    </div>
                 }
+                
+                <div className={cls.searchBlock}>
+                    <Input
+                        className={cls.searchInput}
+                        theme={ errors ? InputTheme.ERROR : InputTheme.DEFAULT }
+                        placeholder={t('MultiSelect.search')}
+                        value={search}
+                        onChange={onSearchChange}
+                        onClick={onOpenClick}
+                        //onBlur={() => onBlur?.(value)}
+                        error={errors?.['empty']?.id || undefined}
+                    />
+                </div>
+
+                <div className={cls.optionsList} >
+                    { filteredOptions.length
+                        ? renderOptionsList(filteredOptions, groupByCategories)
+                        : <span className={cls.searchNotFound}>{t('MultiSelect.notFound')}</span> 
+                    }
+                </div>
+
             </div>
-   
-        </div>
+        </>
     );
 };

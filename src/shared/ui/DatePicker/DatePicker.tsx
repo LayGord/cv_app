@@ -1,7 +1,9 @@
 import { HTMLAttributes, memo, useCallback, useMemo } from "react";
 import { ReactComponent as CalendarIcon } from 'shared/assets/icons/calendar-blank-icon.svg';
+import { ReactComponent as InfoIcon } from 'shared/assets/icons/alert-circle-outline.svg';
 import { classNames, Mods } from "shared/lib/classNames/classNames";
 import cls from "./DatePicker.module.scss";
+import { Popup, PopupTheme } from "../Popup/Popup";
 
 
 export enum DatePickerTheme {
@@ -17,6 +19,8 @@ interface DatePickerProps extends Omit<HTMLAttributes<HTMLInputElement>, 'onChan
     value?: string;
     onChange?: (value: string) => void;
     onBlur?: (value: string) => void;
+    error?: string;
+    hint?: string;
 }
 
 export const DatePicker = memo((props: DatePickerProps) => {
@@ -28,6 +32,8 @@ export const DatePicker = memo((props: DatePickerProps) => {
         value,
         onChange,
         onBlur,
+        error,
+        hint,
         ...otherProps
     } = props;
 
@@ -41,7 +47,7 @@ export const DatePicker = memo((props: DatePickerProps) => {
         onBlur?.(e.target.value)
     }, [onBlur]);
 
-    return(
+    return (
         <div className={classNames(cls.datePickerWrapper, mods, [cls[theme]])}>
             { label && <span className={cls.label}>{ label }</span>}
             <input
@@ -54,6 +60,26 @@ export const DatePicker = memo((props: DatePickerProps) => {
                 {...otherProps}
             />
             <CalendarIcon className={cls.icon}/>
+            { error && 
+                <>
+                    <Popup
+                        className={cls.popup}
+                        theme={PopupTheme.ERROR}
+                    >
+                        {error}
+                    </Popup>
+                </>
+            }
+            { hint && 
+                <>
+                    <Popup
+                        className={cls.popup}
+                        theme={PopupTheme.DEFAULT}
+                    >
+                        {hint}
+                    </Popup>
+                </>
+            }
         </div>
     );
 });

@@ -1,13 +1,12 @@
 import { memo, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ContactLink } from 'entities/Resume';
+import { ContactLink, LinkErrorTypes } from 'entities/Resume';
 import { Input, InputTheme } from "shared/ui/Input/Input";
 import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import { ReactComponent as DeleteIcon } from 'shared/assets/icons/delete-outline.svg';
 import { ReactComponent as HeartIcon  } from 'shared/assets/icons/heart-outline.svg';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from "./ContactLinkItem.module.scss";
-import { LinkErrorTypes } from 'entities/Resume/model/types/resumeValidationSchema';
 
 
 interface ContactLinkItemItemProps {
@@ -54,7 +53,7 @@ export const ContactLinkItem = memo((props: ContactLinkItemItemProps) => {
                 onChange={onUpdateTitle}
                 placeholder={t("ContactsEditor.ContactLinkItem.name")}
                 onBlur={validateCb?.('title')}
-                error={errors?.title}
+                error={errors?.title && t(errors.title, {keyPrefix: 'errors'})}
             />
             <Input 
                 className={cls.link}
@@ -63,7 +62,7 @@ export const ContactLinkItem = memo((props: ContactLinkItemItemProps) => {
                 onChange={onUpdateLink}
                 placeholder={t("ContactsEditor.ContactLinkItem.link")}
                 onBlur={validateCb?.('link')}
-                error={errors?.link}
+                error={errors?.link && t(errors.link, {keyPrefix: 'errors'})}
             />
             { onPrefer && 
                 <Button

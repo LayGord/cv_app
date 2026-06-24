@@ -14,6 +14,11 @@
     border:  none;
 }
 
+.inputField[type='number']::-webkit-inner-spin-button,
+.inputField[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
 .hasLabel {
     .inputField {
@@ -85,6 +90,9 @@
         color: var(--secondary-color);
     }
     .errorIcon {
+        display: none;
+    }
+    .hintIcon {
         display: none;
     }
 }

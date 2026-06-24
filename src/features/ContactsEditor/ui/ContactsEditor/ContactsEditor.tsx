@@ -55,7 +55,7 @@ export const ContactsEditor = ({ className }: ContactsEditorProps) => {
             ))
         }, [dispatch])
     
-    const onBlurContactLinkField = useCallback((id: string) => (field: keyof ContactLink) => 
+    const onValidateContactLink = useCallback((id: string) => (field: keyof ContactLink) => 
         (value: string) => {
             const error = val.validateContactLinkField(field as keyof ContactLink, value);
             dispatch(resumeActions.setContactLinkError({ id, field, error }));
@@ -90,12 +90,12 @@ export const ContactsEditor = ({ className }: ContactsEditorProps) => {
                     onDelete={onDeleteLink}
                     prefer={ contact.id === contactsData.preferred }
                     onPrefer={onPreferContact(contact.id)}
-                    validateCb={onBlurContactLinkField(contact.id)}
+                    validateCb={onValidateContactLink(contact.id)}
                     errors={errors.links?.[contact.id]}
                 />
             )
         })
-    }, [contactsData.preferred, dispatch, onPreferContact, onBlurContactLinkField, errors.links])
+    }, [contactsData.preferred, dispatch, onPreferContact, onValidateContactLink, errors.links])
 
     return (
         <div className={ classNames(cls.ContactsEditor, {}, [className]) }>
@@ -108,7 +108,7 @@ export const ContactsEditor = ({ className }: ContactsEditorProps) => {
                         value={contactsData.email}
                         onChange={onChangeEmail}
                         onBlur={onBlurField('email')}
-                        error={errors.email}
+                        error={errors.email && t(errors.email, {keyPrefix: 'errors'})}
                     />
                 
                     <Button
@@ -127,7 +127,7 @@ export const ContactsEditor = ({ className }: ContactsEditorProps) => {
                         value={contactsData.phone}
                         onChange={onChangePhone}
                         onBlur={onBlurField('phone')}
-                        error={errors.phone}
+                        error={errors.phone && t(errors.phone, {keyPrefix: 'errors'})}
                     />
 
                     <Button

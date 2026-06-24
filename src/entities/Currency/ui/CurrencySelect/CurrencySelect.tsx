@@ -9,9 +9,10 @@ interface CurrencySelectProps {
     className?: string;
     value?: Currency
     onChange?: (value: Currency) => void;
+    onBlur?: (value: string) => void;
 }
 
-export const CurrencySelect = ({ className, onChange, value='EUR' }: CurrencySelectProps) => {
+export const CurrencySelect = ({ className, onChange, value='EUR', onBlur }: CurrencySelectProps) => {
     const { t, i18n } = useTranslation();
 
     const options = useMemo(() => 
@@ -28,6 +29,7 @@ export const CurrencySelect = ({ className, onChange, value='EUR' }: CurrencySel
             options={options}
             value={value}
             onChange={onChange as (value: string) => void}
+            onBlur={onBlur}
         />
     );
 };

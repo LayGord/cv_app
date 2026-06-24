@@ -16,6 +16,10 @@
     width: 100%;
 }
 
+.DatePicker:hover:not(:focus-within) ~* .popup {
+    opacity: 1;
+    transition: opacity 0.2s;
+}
 
 .hasLabel {
     .label {

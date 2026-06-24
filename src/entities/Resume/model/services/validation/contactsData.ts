@@ -35,7 +35,7 @@ const validateContactLinkField = (
 
     case 'link':
         if (!value || isEmpty(value)) return 'REQUIRED'
-        if (!isValidLink(value)) return 'INVALID_LINK'
+        if (isShorterThan(value, 2)) return 'TOO_SHORT'
         return;
     };
 };

@@ -113,6 +113,14 @@
     },
     "errors": {
         "REQUIRED": "Missing data in required field",
-        "TOO_SHORT": "Too short string, at least 2 characters required"
+        "TOO_SHORT": "Too short string, at least 2 characters required",
+        "INVALID_DATE": "Incorrect date",
+        "INVALID_PHOTO": "Photo link invalid or doesnt exists",
+        "INVALID_EMAIL": "Incorect e-mail",
+        "INVALID_PHONE": "Incorrect phone number",
+        "INVALID_LINK": "Incorrect link",
+        "LESS_THAN_ZERO": "Valie must be greater than or equal zero",
+        "IS_NAN": "Value is not a number",
+        "DATE_TO_LESS_THAN_DATE_FROM": "Date from must be less than Date to"
     }
 }

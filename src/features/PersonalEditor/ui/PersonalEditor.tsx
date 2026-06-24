@@ -4,8 +4,7 @@ import { useTranslation } from "react-i18next";
 import {
     resumeActions,
     PersonalData,
-    getPersonal,
-    getPersonalErrors,
+    getPersonal, getPersonalErrors,
     personalDataValidation as val,
 } from "entities/Resume";
 import { FileUploader } from "shared/ui/FileUploader/FileUploader";
