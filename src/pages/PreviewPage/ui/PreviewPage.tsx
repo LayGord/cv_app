@@ -1,18 +1,20 @@
 import { classNames } from "shared/lib/classNames/classNames";
 import cls from "./PreviewPage.module.scss";
-import { PDFViewer } from "@react-pdf/renderer";
-
 import { Page } from "widgets/Page";
-import { ResumePdfTemplate } from "features/RenderResumeToPdf";
 import { useSelector } from "react-redux";
-import { getResume } from "entities/Resume/model/selectors/resumeData";
-import { Resume } from "entities/Resume";
+import { Resume, getResume, getResumeErrors, validateResumeData } from "entities/Resume";
+import { PreviewErrors } from "./PreviewErrors/PreviewErrors";
+import { PreviewPdf } from "./PreviewPdf/PreviewPdf";
+import { isEmptyObj } from "shared/lib/isEmptyObj/isEmptyObj";
+import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
+import { PageLoader } from "widgets/PageLoader";
+import { useEffect, useLayoutEffect } from "react";
 
 interface PreviewPageProps {
     className?: string;
 }
 
-// @ts-ignore
+
 const resume: Resume = {
     id: '1',
     personal: {
@@ -39,7 +41,7 @@ const resume: Resume = {
         readyToBTrip: false,
         format: 'any',
         positions: [{ id: '1', name: 'Trainee'}, { id: '1', name: 'Engineer'}],
-        typeOfEmpl: [{id: '1', displayName: 'Fulltime', value: 'fulltime'}],
+        typeOfEmpl: ['fulltime'],
         currency: 'RUB',
         salary: '200 000'
     },
@@ -95,30 +97,45 @@ const resume: Resume = {
         // eslint-disable-next-line max-len
         {id: '2', title: `Blog app`, description: `Comfortable forum, where you can read articles for lots of categories, or write your own`, link: 'https://github.com/LayGord/production-project'}
     ],
-    skills: [
-        {id: '1', displayName: 'React'},
-        {id: '2', displayName: 'Webpack/Vite'},
-        {id: '3', displayName: 'Node.js'},
-        {id: '4', displayName: 'Typescript'},
-        {id: '5', displayName: 'Jest'},
-        {id: '6', displayName: 'Storybook / screenshot testing'},
-        {id: '1', displayName: 'HTML/CSS'},
-        {id: '2', displayName: 'Styled components'},
-        {id: '3', displayName: 'ReduxToolkit'},
-        {id: '4', displayName: 'RTK Querry'},
-        {id: '5', displayName: 'Next.js'},
-        {id: '6', displayName: 'System design'},
-    ]
+    skills: [],
+    valErrors: {
+        personal: {},
+        contacts: {},
+        aboutMe: {},
+        objective: {},
+        skills: {},
+        jobs: {},
+        projects: {},
+        education: {},
+        languages: {}
+    }
 }
 
 export const PreviewPage = ({ className }: PreviewPageProps) => {
-    const resumeData = useSelector(getResume);
+    const { isLodaing, isValidating, resumeDraft } = useSelector(getResume);
+    const valErrors = useSelector(getResumeErrors);
+    const dispatch = useAppDispatch();
+
+    console.log(valErrors)
+    console.log(`is empty: ${isEmptyObj(valErrors)}`)
+
+    useEffect(() => {
+        dispatch(validateResumeData(resumeDraft))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dispatch])
+    
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+
     return (
         <Page >
             <div className={ classNames(cls.PreviewPage, {}, [className]) }>
-                <PDFViewer style={{ width: '100%', height: '100%' }}>
-                    <ResumePdfTemplate data={resumeData}/>
-                </PDFViewer>
+                { isValidating 
+                    ? <PageLoader />
+                    : isEmptyObj(valErrors) 
+                        ?  <PreviewPdf resumeData={resumeDraft}/>
+                        : <PreviewErrors />
+                }   
             </div>
         </Page>
     );

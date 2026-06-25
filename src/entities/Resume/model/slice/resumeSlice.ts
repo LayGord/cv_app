@@ -10,6 +10,7 @@ import {
     EducationData,
     ProjectData,
     LanguageData,
+    ValidationErrors,
 } from "../types/ResumeSchema";
 import {
     EducationDataErrors,
@@ -25,42 +26,146 @@ import {
 
 } from "../types/resumeValidationSchema";
 import { isEmptyObj } from "shared/lib/isEmptyObj/isEmptyObj";
+import { validateResumeData } from "../services/validation/validateResumeData";
 
+
+// const initialState: ResumeSchema = {
+//     isLodaing: false,
+//     isValidating: true,
+//     resumeDraft: {
+//         id: '',
+//         personal: {
+//             firstname: '',
+//             lastname: '',
+//             patronymic: undefined,
+//             birthdate: undefined,
+//             photo: undefined,
+//             sex: 'male',
+//             citizenship: '',
+//             country: '',
+//             city: '',
+//         },
+//         contacts: {
+//             email: 'example@mail.com',
+//             phone: undefined,
+//             links: [{id: '1', title: 'Telegram', link: ''}, {id: '2', title: 'LinkedIn', link: ''}],
+//             preferred: 'email',
+//         },
+//         objective: {
+//             positions: [{id: '1', name: ''}],
+//             typeOfEmpl: [],
+//             format: 'any',
+//             readyToRelocate: false,
+//             readyToBTrip: false,
+//             currency: 'USD'
+//         },
+//         aboutMe: '',
+//         skills: [],
+//         jobs: [{id: '1', company: '', position: '', dateFrom: ''}],
+//         projects: [{id: '1', title: '', link: '', description: ''}],
+//         education: [{id: '1', org: '', grade: 'bachelor', faculty: '', program: '', dateFrom: '', city: ''}],
+//         langs: [{id: '1', language: '',  level: 'a1'}],
+//         valErrors: {
+//             personal: {},
+//             contacts: {},
+//             aboutMe: {},
+//             objective: {},
+//             skills: {},
+//             jobs: {},
+//             projects: {},
+//             education: {},
+//             languages: {}
+//         }
+//     }
+// };
 
 const initialState: ResumeSchema = {
+    isLodaing: false,
+    isValidating: true,
+    error: undefined,
     resumeDraft: {
-        id: '',
+        id: '1',
         personal: {
-            firstname: '',
-            lastname: '',
-            patronymic: undefined,
-            birthdate: undefined,
-            photo: undefined,
+            lastname: 'Lastname',
+            firstname: 'Firstname',
+            patronymic: 'Patronymic',
             sex: 'male',
-            citizenship: '',
-            country: '',
-            city: '',
+            birthdate: '2026-05-01',
+            city: 'Somecity',
+            country: 'Russia',
+            citizenship: 'Russia',
+            photo: '',
         },
         contacts: {
+            phone: '',//'+7-900-99-99-99',
             email: 'example@mail.com',
-            phone: undefined,
-            links: [{id: '1', title: 'Telegram', link: ''}, {id: '2', title: 'LinkedIn', link: ''}],
-            preferred: 'email',
+            links: [
+                { id: '1', title: 'Telegram', link: '@**********'},
+            ],
+            preferred: 'email'
         },
         objective: {
-            positions: [{id: '1', name: ''}],
-            typeOfEmpl: [],
-            format: 'any',
-            readyToRelocate: false,
+            readyToRelocate: true,
             readyToBTrip: false,
-            currency: 'USD'
+            format: 'any',
+            positions: [{ id: '1', name: 'Trainee'}, { id: '1', name: 'Engineer'}],
+            typeOfEmpl: ['fulltime'],
+            currency: 'RUB',
+            salary: '200000'
         },
-        aboutMe: '',
+        aboutMe: `Test automation engineer (QA Automation) with over 4 years of experience.
+            I specialize in Python and building robust frameworks from scratch.
+            I'm skilled at reducing regression testing time and building CI/CD processes.
+            I'm focused on improving product stability in rapidly growing teams.`,
+        education: [
+            { 
+                id: '1',
+                program: '02.03.01 Math and Computer sciences',
+                org: 'Kuban State University',
+                faculty: 'Math and Computer sciences', 
+                grade: 'bachelor', 
+                dateFrom: '2019-08-08',
+                dateTo: '2023-08-07',
+                city: 'Somecity'
+            },
+            { 
+                id: '2',
+                program: '02.04.01 Math and Computer sciences',
+                org: 'Kuban State University',
+                faculty: 'Math and Computer sciences', 
+                grade: 'master', 
+                dateFrom: '2023-07-10',
+                city: 'Somecity'
+            }
+        ],
+        jobs: [
+            {
+                id: '1',
+                company: 'SomeCompany LLC',
+                dateFrom: '2023-08-07',
+                dateTo: '2024-06-07',
+                location: 'SomeCity',
+                position: 'Junior QA automation',
+                comment: 'Build a testing framework from scratch',
+            },
+            {
+                id: '2',
+                company: 'AnotherCompany Ltd.',
+                dateFrom: '2024-07-01',
+                dateTo: undefined,
+                location: 'SomeCity2',
+                position: 'Middle QA automation',
+                comment: 'Build a e2e test pipeline for web-application',
+            }
+        ],
+        langs: [{ id: '1', language: 'English', level: 'b2'}, {id: '2', language: 'Russian', level: 'c2'}],
+        projects: [
+            // eslint-disable-next-line max-len
+            {id: '1', title: `CV generator App`, description: `Small and easy to use web app for making cv writing process as easy as possible`, link: 'https://github.com/LayGord/cv_app'},
+            // eslint-disable-next-line max-len
+            {id: '2', title: `Blog app`, description: `Comfortable forum, where you can read articles for lots of categories, or write your own`, link: 'https://github.com/LayGord/production-project'}
+        ],
         skills: [],
-        jobs: [{id: '1', company: '', position: '', dateFrom: ''}],
-        projects: [{id: '1', title: '', link: '', description: ''}],
-        education: [{id: '1', org: '', grade: 'bachelor', faculty: '', program: '', dateFrom: '', city: ''}],
-        langs: [{id: '1', language: '',  level: 'a1'}],
         valErrors: {
             personal: {},
             contacts: {},
@@ -73,7 +178,7 @@ const initialState: ResumeSchema = {
             languages: {}
         }
     }
-};
+}
 
 
 export const resumeSlice = createSlice({
@@ -210,7 +315,8 @@ export const resumeSlice = createSlice({
                 ? state.resumeDraft.valErrors.objective.positions[id] = mergedPositionItemErrs
                 : delete state.resumeDraft.valErrors.objective.positions[id];
 
-            if (isEmptyObj(state.resumeDraft.valErrors.objective.positions)) delete state.resumeDraft.valErrors.objective.positions;
+            if (isEmptyObj(state.resumeDraft.valErrors.objective.positions)) 
+                delete state.resumeDraft.valErrors.objective.positions;
         },
         setTypeOfEmplErrors: (state, action: PayloadAction<TypeOfEmplErrors | undefined>) => {
             state.resumeDraft.valErrors.objective.typeOfEmpl = action.payload;
@@ -384,6 +490,22 @@ export const resumeSlice = createSlice({
             state.resumeDraft.valErrors.languages = action.payload || {};
         },
     },
+    extraReducers: (builder) => {
+        builder
+            .addCase(validateResumeData.pending, (state) => {
+                state.isValidating = true;
+                state.error = undefined
+            })
+            .addCase(validateResumeData.fulfilled, (state, action: PayloadAction<ValidationErrors>) => {
+                state.isValidating = false;
+                state.resumeDraft.valErrors = action.payload;
+            })
+            .addCase(validateResumeData.rejected, (state, action) => {
+                state.isValidating = false;
+                state.error = action.payload;
+            })
+    }
+    
 })
 
 export const { actions: resumeActions } = resumeSlice;

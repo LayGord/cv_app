@@ -1,6 +1,7 @@
 import { isEmpty, isShorterThan } from "shared/lib/validation/validation";
 import { EducationData } from "../../types/ResumeSchema";
 import { EducationDataErrors, EducationErrorTypes, ErrorTypes } from "../../types/resumeValidationSchema";
+import { isEmptyObj } from "shared/lib/isEmptyObj/isEmptyObj";
 
 
 const validateEducationItemField = (
@@ -44,24 +45,24 @@ const validateEducationItem = (
 ): EducationErrorTypes | undefined => {
     const errors: EducationErrorTypes = {};
 
-    errors.id = validateEducationItemField('id', errors.id)
-    errors.faculty = validateEducationItemField('faculty', errors.faculty)
-    errors.program = validateEducationItemField('program', errors.program)
-    errors.grade = validateEducationItemField('grade', errors.grade)
-    errors.org = validateEducationItemField('org', errors.org)
-    errors.city = validateEducationItemField('city', errors.city)
-    errors.dateFrom = validateEducationItemField('dateFrom', errors.dateFrom)
-    errors.dateTo = validateEducationItemField('dateTo', errors.dateTo)
+    errors.id = validateEducationItemField('id', value.id)
+    errors.faculty = validateEducationItemField('faculty', value.faculty)
+    errors.program = validateEducationItemField('program', value.program)
+    errors.grade = validateEducationItemField('grade', value.grade)
+    errors.org = validateEducationItemField('org', value.org)
+    errors.city = validateEducationItemField('city', value.city)
+    errors.dateFrom = validateEducationItemField('dateFrom', value.dateFrom)
+    errors.dateTo = validateEducationItemField('dateTo', value.dateTo)
 
-    if (value.dateTo && new Date(value.dateFrom) > new Date(value.dateTo)) errors.dateFrom = 'DATE_TO_LESS_THAN_DATE_FROM';
+    if (value.dateTo && new Date(value.dateFrom) > new Date(value.dateTo)) value.dateFrom = 'DATE_TO_LESS_THAN_DATE_FROM';
 
-    return Object.values(errors).length > 0 ? { [value.id]: errors} : undefined
+    return Object.values(errors).length > 0 ? errors : undefined
 }
 
 const validateEducationData = (data: EducationData[]): EducationDataErrors => {
     return data.reduce<EducationDataErrors>((acc, educationItem) => {
         const educationErrors = validateEducationItem(educationItem);
-        if (educationErrors) {
+        if (educationErrors && !isEmptyObj(educationErrors)) {
             acc[educationItem.id] = educationErrors;
         }
         return acc;

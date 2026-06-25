@@ -11,20 +11,22 @@
         "phone": "Phone",
         "preferredContact": " — preferred contact",
 
-        "location": "Lives in: {{ city }}, {{ country }}.",
-        "location_empty": "Location: not specified.",
+        "location": "Lives in: {{ city }}, {{ country }}",
+        "location_empty": "Location: not specified",
         "citizenship": "Citizenship: {{ citizenship }}",
         "citizenship_empty": "Citizenship: not specified",
 
         "readyToRelocate": "Ready to relocate,",
         "notReadyToRelocate": "Not ready to relocate,",
-        "readyToBTrip": "ready to business trips.",
-        "notReadyToBTrip": "not ready to business trips."
+        "readyToBTrip": "ready to business trips",
+        "notReadyToBTrip": "not ready to business trips"
     },
     "objectiveInfo": {
         "title": "Expected position and work environment",
         "typeOfEmpl": "Type of employment: {{ toe }}",
+        "toeOptions": {"fulltime": "fulltime", "partial": "partial", "internship": "internship", "watch": "watch"},
         "format": "Format: {{ format }}",
+        "formatOptions": {"any": "any", "office": "office", "hybrid": "hybrid", "remote": "remote" },
         "workweek": "Workweek: {{ workweek }} hrs.",
         "workweek_empty": "Workweek: not specified"
     },

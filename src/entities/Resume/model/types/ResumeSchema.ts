@@ -16,6 +16,9 @@ import {
 
 export interface ResumeSchema {
     resumeDraft: Resume;
+    isLodaing: boolean;
+    isValidating: boolean;
+    error?: string;
 }
 
 export interface Resume {

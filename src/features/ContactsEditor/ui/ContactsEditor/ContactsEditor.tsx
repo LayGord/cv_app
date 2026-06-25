@@ -69,10 +69,6 @@ export const ContactsEditor = ({ className }: ContactsEditorProps) => {
             };
 
             const onUpdateLink = (value: string, field: 'title' | 'link',) => {
-                console.log({
-                    ...contact,
-                    [field]: value,
-                })
                 dispatch(
                     resumeActions.updateContactLink({
                         ...contact,

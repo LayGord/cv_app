@@ -1,6 +1,7 @@
 import { isEmpty, isShorterThan } from "shared/lib/validation/validation";
 import { JobData } from "../../types/ResumeSchema";
 import { ErrorTypes, JobErrorTypes, JobsDataErrors } from "../../types/resumeValidationSchema";
+import { isEmptyObj } from "shared/lib/isEmptyObj/isEmptyObj";
 
 
 
@@ -51,13 +52,13 @@ const validateJobItem = (
     
     if (value.dateTo && new Date(value.dateFrom) > new Date(value.dateTo)) errors.dateFrom = 'DATE_TO_LESS_THAN_DATE_FROM';
 
-    return Object.values(errors).length > 0 ? { [value.id]: errors} : undefined
+    return Object.values(errors).length > 0 ? errors: undefined
 }
 
 const validateJobsData = (data: JobData[]): JobsDataErrors => {
     return data.reduce<JobsDataErrors>((acc, jobItem) => {
         const jobErrors = validateJobItem(jobItem);
-        if (jobErrors) {
+        if (jobErrors && !isEmptyObj(jobErrors)) {
             acc[jobItem.id] = jobErrors;
         }
         return acc;

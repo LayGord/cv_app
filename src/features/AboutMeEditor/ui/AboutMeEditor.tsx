@@ -29,7 +29,7 @@ export const AboutMeEditor = ({ className }: AboutMeEditorProps) => {
     }, [dispatch])  
 
     const onBlur = useCallback((value: string) => {
-        const valResult = val.validateAboutMe(value);
+        const valResult = val.validateAboutMeField(value);
         dispatch(resumeActions.setAboutMeError(valResult))
     }, [dispatch])
 

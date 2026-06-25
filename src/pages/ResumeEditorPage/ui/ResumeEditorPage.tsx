@@ -25,7 +25,7 @@ const resumeEditorConfig: Record<ResumeEditorStep, {prev?: ResumeEditorStep, nex
     contacts: { prev: 'personal', next: 'about' },
     about: { prev: 'contacts', next: 'objective'},
     objective: { prev: 'about', next: 'jobs'},
-    jobs: { prev: 'about', next: 'projects' },
+    jobs: { prev: 'objective', next: 'projects' },
     projects: { prev: 'jobs', next: 'education' },
     education: { prev: 'projects' }
 }

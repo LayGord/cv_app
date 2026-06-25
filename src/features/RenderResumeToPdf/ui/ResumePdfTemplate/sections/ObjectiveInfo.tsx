@@ -61,9 +61,9 @@ export const ObjectiveInfo = memo((props: ObjectiveInfoProps) => {
                 </View>
                 <View style={styles.details}>
                     <Text>
-                        {t('typeOfEmpl', { toe: data.typeOfEmpl.map(item => item.displayName).join(', ') })}
+                        {t('typeOfEmpl', { toe: data.typeOfEmpl.map(item => t(item, {keyPrefix: 'objectiveInfo.toeOptions'})).join(', ') })}
                     </Text>
-                    <Text>{t('format', { format: data.format })}</Text>
+                    <Text>{t('format', { format: t(data.format, {keyPrefix: 'objectiveInfo.formatOptions'}) })}</Text>
                     <Text>
                         { data.workweek
                             ? t('workweek', { workweek: data.workweek })

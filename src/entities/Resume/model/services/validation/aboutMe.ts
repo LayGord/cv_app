@@ -1,9 +1,14 @@
-import { ErrorTypes } from "../../types/resumeValidationSchema";
+import { AboutMeDataErrors, ErrorTypes } from "../../types/resumeValidationSchema";
 import { isEmpty, isShorterThan } from "shared/lib/validation/validation";
 
-const validateAboutMe = (value?: string): ErrorTypes | undefined => {
+const validateAboutMeField = (value?: string): ErrorTypes | undefined => {
     if (!value) return;
     if (!isEmpty(value) && isShorterThan(value, 2)) return 'TOO_SHORT';
 };
 
-export const aboutMeValidation = { validateAboutMe };
+const validateAboutMe = (value: string): AboutMeDataErrors => {
+    const valResult = validateAboutMeField(value);
+    return valResult ? { aboutMe: valResult } : {}
+}
+
+export const aboutMeValidation = { validateAboutMeField, validateAboutMe };

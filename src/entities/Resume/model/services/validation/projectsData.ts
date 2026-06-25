@@ -1,6 +1,7 @@
 import { isEmpty, isShorterThan, isValidLink } from "shared/lib/validation/validation";
 import { ProjectData } from "../../types/ResumeSchema";
 import { ErrorTypes, ProjectErrorTypes, ProjectsDataErrors } from "../../types/resumeValidationSchema";
+import { isEmptyObj } from "shared/lib/isEmptyObj/isEmptyObj";
 
 
 const validateProjectItemField = (
@@ -35,13 +36,13 @@ const validateProjectItem = (
     errors.link = validateProjectItemField('link', value.link);
     errors.description = validateProjectItemField('description', value.description);
 
-    return Object.values(errors).length > 0 ? { [value.id]: errors} : undefined
+    return Object.values(errors).length > 0 ? errors : undefined
 }
 
 const validateProjectsData = (data: ProjectData[]): ProjectsDataErrors => {
     return data.reduce<ProjectsDataErrors>((acc, projectItem) => {
         const projectErrors = validateProjectItem(projectItem);
-        if (projectErrors) {
+        if (projectErrors && !isEmptyObj(projectErrors)) {
             acc[projectItem.id] = projectErrors;
         }
         return acc;

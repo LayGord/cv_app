@@ -21,6 +21,7 @@ export type {
 
 export { resumeReducer, resumeActions } from './model/slice/resumeSlice';
 
+export { getResume, getResumeDraft, getResumeErrors} from './model/selectors/resumeData';
 export { getPersonal, getPersonalErrors } from './model/selectors/personalData';
 export { getContacts, getContactsErrors } from './model/selectors/contactsData';
 export { getAboutMe, getAboutMeErrors} from './model/selectors/aboutMeData';
@@ -39,3 +40,5 @@ export { jobsDataValidation } from './model/services/validation/jobsData';
 export { projectsDataValidation } from './model/services/validation/projectsData';
 export { educationDataValidation } from './model/services/validation/educationData';
 export { languagesDataValidation } from './model/services/validation/languagesData';
+
+export { validateResumeData } from './model/services/validation/validateResumeData';

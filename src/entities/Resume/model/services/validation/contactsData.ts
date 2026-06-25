@@ -1,3 +1,4 @@
+import { isEmptyObj } from "shared/lib/isEmptyObj/isEmptyObj";
 import { ContactsData, ContactLink } from "../../types/ResumeSchema";
 import { ContactsDataErrors, LinkErrorTypes, ErrorTypes, LinkErrors } from "../../types/resumeValidationSchema";
 import { isEmpty, isShorterThan, isValidEmail, isValidLink, isValidPhoneNumber } from "shared/lib/validation/validation";
@@ -48,10 +49,10 @@ const validateContactLinkItem = (
     errors.title = validateContactLinkField('title', value.title);
     errors.link = validateContactLinkField('link', value.link);
 
-    return Object.values(errors).length > 0 ? { [value.id]: errors} : undefined
+    return !isEmptyObj(errors) ? errors : undefined
 }
 
-const validateContactsData = (data: ContactsData): ContactsDataErrors => {
+const validateContactsData = (data: ContactsData): ContactsDataErrors | undefined => {
     const errors: ContactsDataErrors = {};
 
     errors.email = validateContactsDataField('email', data.email);
@@ -59,12 +60,13 @@ const validateContactsData = (data: ContactsData): ContactsDataErrors => {
 
     if (data.links) {
         errors.links = data.links.reduce((acc: LinkErrors, link) => {
-            acc[link.id] = { ...validateContactLinkItem(link)}
+            const valResult = validateContactLinkItem(link)
+            if (!isEmptyObj(valResult)) acc[link.id] = { ...validateContactLinkItem(link)}
             return acc
         }, {})
+        if (isEmptyObj(errors)) errors.links = undefined;
     }
-    
-    return errors;
+    return isEmptyObj(errors) ? undefined : errors;
 }
 
 export const contactsDataValidation = {

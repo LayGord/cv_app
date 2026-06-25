@@ -49,7 +49,6 @@ export const TextArea = memo((props: TextAreaProps) =>{
 
     // dynamically adjust textarea height
     useLayoutEffect(() => {
-        console.log(textareaRef.current?.scrollHeight);
         if (textareaRef.current && wrapperRef.current) {
             textareaRef.current.style.height = "inherit";
             wrapperRef.current.style.height = "inherit";

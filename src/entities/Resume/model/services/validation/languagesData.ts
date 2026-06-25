@@ -1,6 +1,7 @@
 import { isEmpty, isShorterThan } from "shared/lib/validation/validation";
 import { LanguageData } from "../../types/ResumeSchema";
 import { ErrorTypes, LanguagesDataErrors, LanguagesErrorTypes } from "../../types/resumeValidationSchema";
+import { isEmptyObj } from "shared/lib/isEmptyObj/isEmptyObj";
 
 
 const validateLanguageItemField = (
@@ -25,17 +26,17 @@ const validateLanguageItem = (
 ): LanguagesErrorTypes | undefined => {
     const errors: LanguagesErrorTypes = {};
 
-    errors.id = validateLanguageItemField('id', errors.id)
-    errors.language = validateLanguageItemField('language', errors.language)
-    errors.level = validateLanguageItemField('level', errors.level)
+    errors.id = validateLanguageItemField('id', value.id)
+    errors.language = validateLanguageItemField('language', value.language)
+    errors.level = validateLanguageItemField('level', value.level)
 
-    return Object.values(errors).length > 0 ? { [value.id]: errors} : undefined
+    return Object.values(errors).length > 0 ? errors : undefined
 }
 
 const validateLanguageData = (data: LanguageData[]): LanguagesDataErrors => {
     return data.reduce<LanguagesDataErrors>((acc, languageItem) => {
         const languageErrors = validateLanguageItem(languageItem);
-        if (languageErrors) {
+        if (languageErrors && !isEmptyObj(languageErrors)) {
             acc[languageItem.id] = languageErrors;
         }
         return acc;

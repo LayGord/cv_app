@@ -7,6 +7,7 @@ import {
     ObjectiveDataErrors, 
     TypeOfEmplErrors, 
 } from "../../types/resumeValidationSchema";
+import { isEmptyObj } from "shared/lib/isEmptyObj/isEmptyObj";
 
 
 const validateObjectiveDataField = (
@@ -29,11 +30,11 @@ const validateObjectiveDataField = (
         return;
 
     case 'readyToRelocate':
-        if (!value || isEmpty(value)) return 'REQUIRED';
+        if (value === undefined) return 'REQUIRED';
         return;
 
     case 'readyToBTrip':
-        if (!value || isEmpty(value)) return 'REQUIRED';
+        if (value === undefined) return 'REQUIRED';
         return;
 
     case 'workweek':
@@ -90,7 +91,7 @@ const validateTypeOfEmpl = (data: TypeOfEmplValue[]) => {
     return;
 };
 
-const validateObjectiveData = (data: ObjectiveData): ObjectiveDataErrors => {
+const validateObjectiveData = (data: ObjectiveData): ObjectiveDataErrors | undefined => {
     const errors: ObjectiveDataErrors = {};
 
     Object.entries(data).forEach(([key, value]) => {
@@ -98,24 +99,8 @@ const validateObjectiveData = (data: ObjectiveData): ObjectiveDataErrors => {
             errors[key as keyof Omit<ObjectiveDataErrors, 'typeOfEmpl' | 'positions'>] = validateObjectiveDataField(key, value);
         }
     });
-
-    // if (data.positions) {
-    //     errors.positions = data.positions.reduce((acc: PositionErrors, position) => {
-    //         const err = validatePositionItem(position);
-    //         if (err) acc = { ...acc, ...err};
-    //         return acc
-    //     }, {})
-    // }
-
-    // if (data.typeOfEmpl) {
-    //     errors.typeOfEmpl = data.typeOfEmpl.reduce((acc: TypeOfEmplErrors, typeOfEmpl) => {
-    //         const err = validateTypeOfEmplItem(typeOfEmpl);
-    //         if (err) acc = { ...acc, ...err };
-    //         return acc
-    //     }, {})
-    // }
     
-    return errors;
+    return isEmptyObj(errors) ? undefined : errors;
 }
 
 export const objectiveDataValidation = {

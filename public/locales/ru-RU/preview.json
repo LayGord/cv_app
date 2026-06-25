@@ -11,20 +11,22 @@
         "phone": "Телефон",
         "preferredContact": " — предпочитаемый способ связи",
 
-        "location": "Город проживания: {{ city }}, {{ country }}.",
-        "location_empty": "Город проживания: не указан.",
+        "location": "Город проживания: {{ city }}, {{ country }}",
+        "location_empty": "Город проживания: не указан",
         "citizenship": "Гражданство: {{ citizenship }}",
         "citizenship_empty": "Гражданство: не указано",
 
         "readyToRelocate": "Готов к переезду,",
         "notReadyToRelocate": "Не готов к переезду,",
-        "readyToBTrip": "готов к коммандировкам.",
-        "notReadyToBTrip": "не готов к коммандировкам."
+        "readyToBTrip": "готов к коммандировкам",
+        "notReadyToBTrip": "не готов к коммандировкам"
     },
     "objectiveInfo": {
         "title": "Ожидаемая должность и условия",
         "typeOfEmpl": "Тип занятости: {{ toe }}",
+        "toeOptions": {"fulltime": "полная занятость", "partial": "частичная занятость", "internship": "стажировка", "watch": "вахта"},
         "format": "Формат работы: {{ format }}",
+        "formatOptions": {"any": "любой", "office": "офис", "hybrid": "гибридный", "remote": "удалённо" },
         "workweek": "Рабочая неделя: {{ workweek }} ч.",
         "workweek_empty": "Рабочая неделя: не указано"
     },

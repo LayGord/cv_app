@@ -31,6 +31,7 @@ export const JobsEditor = ({ className }: JobsEditorProps) => {
     const jobsErrors = useSelector(getJobsErrors);
     const dispatch = useAppDispatch();
 
+
     const onUpdateSkills = useCallback((value: string[]) => {
         dispatch(resumeActions.updateSkillsList(value))
     }, [dispatch]);
