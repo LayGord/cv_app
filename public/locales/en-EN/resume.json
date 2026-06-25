@@ -111,6 +111,53 @@
             }
         }
     },
+    "sections": {
+        "personal": "\"Personal information\" section", 
+        "contacts": "\"Contacts information\" section", 
+        "aboutMe": "\"About Me information\" section", 
+        "objective": "\"Objective information\" section", 
+        "skills": "\"Skills infiormation\" section", 
+        "jobs": "\"Jobs information\" section", 
+        "projects": "\"Projects information\" section", 
+        "education": "\"Education information\" section", 
+        "languages": "\"Languages information\" section"
+    },
+    "fields": {
+        "id": "Id:",
+        "lastname": "Lastname:",
+        "firstname": "Firstname:",
+        "patronymic": "Patronymic:",
+        "sex": "Sex:",
+        "birthdate": "Birthdate:",
+        "citizenship": "Citizenship:",
+        "country": "Country:",
+        "city": "City:",
+        "photo": "Photo:",
+        "email": "E-mail:",
+        "phone": "Phone number:",
+        "title": "Title:",
+        "link": "Link \\ ID:",
+        "aboutMe": "About me:",
+        "position": "Position:",
+        "typeOfEmpl": "Type of employment:",
+        "salary": "Salary:",
+        "currency": "Currency:",
+        "format": "Format:",
+        "workweek": "Workweek:",
+        "readyToBTrip": "Ready to business trip:",
+        "readyToRelocate": "Ready to relocate:",
+        "company": "Company:",
+        "location": "Location:",
+        "dateFrom": "Date from:",
+        "dateTo": "Date to:",
+        "description": "Description:",
+        "grade": "Garde:",
+        "org": "Org:",
+        "faculty": "Faculty:",
+        "program": "Program:",
+        "language": "Language:",
+        "level": "Level:"
+    },
     "errors": {
         "REQUIRED": "Missing data in required field",
         "TOO_SHORT": "Too short string, at least 2 characters required",
@@ -119,8 +166,11 @@
         "INVALID_EMAIL": "Incorect e-mail",
         "INVALID_PHONE": "Incorrect phone number",
         "INVALID_LINK": "Incorrect link",
-        "LESS_THAN_ZERO": "Valie must be greater than or equal zero",
+        "LESS_THAN_ZERO": "Value must be greater than or equal zero",
         "IS_NAN": "Value is not a number",
         "DATE_TO_LESS_THAN_DATE_FROM": "Date from must be less than Date to"
+    },
+    "PreviewErrors": {
+        "header": "Failed to render your CV. Some validation errors occured, fix and try again:"
     }
 }

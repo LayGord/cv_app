@@ -18,5 +18,8 @@
     },
     "FileUploader": {
         "chooseFile": "Choose file to upload"
+    },
+    "PageLoader": {
+        "loading": "Loading"
     }
 }

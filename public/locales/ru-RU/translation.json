@@ -18,5 +18,8 @@
     },
     "FileUploader": {
         "chooseFile": "Выбрать файл"
+    },
+    "PageLoader": {
+        "loading": "Загрузка"
     }
 }

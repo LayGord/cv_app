@@ -29,143 +29,42 @@ import { isEmptyObj } from "shared/lib/isEmptyObj/isEmptyObj";
 import { validateResumeData } from "../services/validation/validateResumeData";
 
 
-// const initialState: ResumeSchema = {
-//     isLodaing: false,
-//     isValidating: true,
-//     resumeDraft: {
-//         id: '',
-//         personal: {
-//             firstname: '',
-//             lastname: '',
-//             patronymic: undefined,
-//             birthdate: undefined,
-//             photo: undefined,
-//             sex: 'male',
-//             citizenship: '',
-//             country: '',
-//             city: '',
-//         },
-//         contacts: {
-//             email: 'example@mail.com',
-//             phone: undefined,
-//             links: [{id: '1', title: 'Telegram', link: ''}, {id: '2', title: 'LinkedIn', link: ''}],
-//             preferred: 'email',
-//         },
-//         objective: {
-//             positions: [{id: '1', name: ''}],
-//             typeOfEmpl: [],
-//             format: 'any',
-//             readyToRelocate: false,
-//             readyToBTrip: false,
-//             currency: 'USD'
-//         },
-//         aboutMe: '',
-//         skills: [],
-//         jobs: [{id: '1', company: '', position: '', dateFrom: ''}],
-//         projects: [{id: '1', title: '', link: '', description: ''}],
-//         education: [{id: '1', org: '', grade: 'bachelor', faculty: '', program: '', dateFrom: '', city: ''}],
-//         langs: [{id: '1', language: '',  level: 'a1'}],
-//         valErrors: {
-//             personal: {},
-//             contacts: {},
-//             aboutMe: {},
-//             objective: {},
-//             skills: {},
-//             jobs: {},
-//             projects: {},
-//             education: {},
-//             languages: {}
-//         }
-//     }
-// };
-
 const initialState: ResumeSchema = {
     isLodaing: false,
     isValidating: true,
-    error: undefined,
     resumeDraft: {
-        id: '1',
+        id: '',
         personal: {
-            lastname: 'Lastname',
-            firstname: 'Firstname',
-            patronymic: 'Patronymic',
+            firstname: '',
+            lastname: '',
+            patronymic: undefined,
+            birthdate: undefined,
+            photo: undefined,
             sex: 'male',
-            birthdate: '2026-05-01',
-            city: 'Somecity',
-            country: 'Russia',
-            citizenship: 'Russia',
-            photo: '',
+            citizenship: '',
+            country: '',
+            city: '',
         },
         contacts: {
-            phone: '',//'+7-900-99-99-99',
             email: 'example@mail.com',
-            links: [
-                { id: '1', title: 'Telegram', link: '@**********'},
-            ],
-            preferred: 'email'
+            phone: undefined,
+            links: [{id: '1', title: 'Telegram', link: ''}, {id: '2', title: 'LinkedIn', link: ''}],
+            preferred: 'email',
         },
         objective: {
-            readyToRelocate: true,
-            readyToBTrip: false,
+            positions: [{id: '1', name: ''}],
+            typeOfEmpl: [],
             format: 'any',
-            positions: [{ id: '1', name: 'Trainee'}, { id: '1', name: 'Engineer'}],
-            typeOfEmpl: ['fulltime'],
-            currency: 'RUB',
-            salary: '200000'
+            readyToRelocate: false,
+            readyToBTrip: false,
+            currency: 'USD'
         },
-        aboutMe: `Test automation engineer (QA Automation) with over 4 years of experience.
-            I specialize in Python and building robust frameworks from scratch.
-            I'm skilled at reducing regression testing time and building CI/CD processes.
-            I'm focused on improving product stability in rapidly growing teams.`,
-        education: [
-            { 
-                id: '1',
-                program: '02.03.01 Math and Computer sciences',
-                org: 'Kuban State University',
-                faculty: 'Math and Computer sciences', 
-                grade: 'bachelor', 
-                dateFrom: '2019-08-08',
-                dateTo: '2023-08-07',
-                city: 'Somecity'
-            },
-            { 
-                id: '2',
-                program: '02.04.01 Math and Computer sciences',
-                org: 'Kuban State University',
-                faculty: 'Math and Computer sciences', 
-                grade: 'master', 
-                dateFrom: '2023-07-10',
-                city: 'Somecity'
-            }
-        ],
-        jobs: [
-            {
-                id: '1',
-                company: 'SomeCompany LLC',
-                dateFrom: '2023-08-07',
-                dateTo: '2024-06-07',
-                location: 'SomeCity',
-                position: 'Junior QA automation',
-                comment: 'Build a testing framework from scratch',
-            },
-            {
-                id: '2',
-                company: 'AnotherCompany Ltd.',
-                dateFrom: '2024-07-01',
-                dateTo: undefined,
-                location: 'SomeCity2',
-                position: 'Middle QA automation',
-                comment: 'Build a e2e test pipeline for web-application',
-            }
-        ],
-        langs: [{ id: '1', language: 'English', level: 'b2'}, {id: '2', language: 'Russian', level: 'c2'}],
-        projects: [
-            // eslint-disable-next-line max-len
-            {id: '1', title: `CV generator App`, description: `Small and easy to use web app for making cv writing process as easy as possible`, link: 'https://github.com/LayGord/cv_app'},
-            // eslint-disable-next-line max-len
-            {id: '2', title: `Blog app`, description: `Comfortable forum, where you can read articles for lots of categories, or write your own`, link: 'https://github.com/LayGord/production-project'}
-        ],
+        aboutMe: '',
         skills: [],
+        jobs: [{id: '1', company: '', position: '', dateFrom: ''}],
+        projects: [{id: '1', title: '', link: '', description: ''}],
+        education: [{id: '1', org: '', grade: 'bachelor', faculty: '', program: '', dateFrom: '', city: ''}],
+        langs: [{id: '1', language: '',  level: 'a1'}],
         valErrors: {
             personal: {},
             contacts: {},
@@ -178,7 +77,105 @@ const initialState: ResumeSchema = {
             languages: {}
         }
     }
-}
+};
+
+// const initialState: ResumeSchema = {
+//     isLodaing: false,
+//     isValidating: true,
+//     error: undefined,
+//     resumeDraft: {
+//         id: '1',
+//         personal: {
+//             lastname: 'Lastname',
+//             firstname: '',
+//             patronymic: 'P',
+//             sex: 'male',
+//             birthdate: '2026-05-01',
+//             city: 'S',
+//             country: 'Russia',
+//             citizenship: 'Russia',
+//             photo: '',
+//         },
+//         contacts: {
+//             phone: '',//'+7-900-99-99-99',
+//             email: 'exampl',
+//             links: [
+//                 { id: '1', title: 'Telegram', link: ''},
+//             ],
+//             preferred: 'email'
+//         },
+//         objective: {
+//             readyToRelocate: true,
+//             readyToBTrip: false,
+//             format: 'any',
+//             positions: [{ id: '1', name: 'T'}, { id: '1', name: ''}],
+//             typeOfEmpl: ['fulltime'],
+//             currency: 'RUB',
+//             salary: '-100'
+//         },
+//         aboutMe: `T`,
+//         education: [
+//             { 
+//                 id: '1',
+//                 program: '02',
+//                 org: 'Kuban State University',
+//                 faculty: 'M', 
+//                 grade: 'bachelor', 
+//                 dateFrom: '2019-08-08',
+//                 dateTo: '2023-08-07',
+//                 city: 'Somecity'
+//             },
+//             { 
+//                 id: '2',
+//                 program: '02.04.01 Math and Computer sciences',
+//                 org: '',
+//                 faculty: 'Math and Computer sciences', 
+//                 grade: 'master', 
+//                 dateFrom: '2023-07-10',
+//                 city: 'S'
+//             }
+//         ],
+//         jobs: [
+//             {
+//                 id: '1',
+//                 company: 'SomeCompany LLC',
+//                 dateFrom: '2023-08-07',
+//                 dateTo: '2024-06-07',
+//                 location: 'S',
+//                 position: 'Junior QA automation',
+//                 comment: 'B',
+//             },
+//             {
+//                 id: '2',
+//                 company: 'A',
+//                 dateFrom: '2024-07-01',
+//                 dateTo: undefined,
+//                 location: 'SomeCity2',
+//                 position: 'Middle QA automation',
+//                 comment: 'Build a e2e test pipeline for web-application',
+//             }
+//         ],
+//         langs: [{ id: '1', language: 'E', level: 'b2'}, {id: '2', language: 'Russian', level: 'c2'}],
+//         projects: [
+//             // eslint-disable-next-line max-len
+//             {id: '1', title: `C`, description: `Small and easy to use web app for making cv writing process as easy as possible`, link: 'https://github.com/LayGord/cv_app'},
+//             // eslint-disable-next-line max-len
+//             {id: '2', title: `Blog app`, description: `C`, link: 'http'}
+//         ],
+//         skills: [],
+//         valErrors: {
+//             personal: {},
+//             contacts: {},
+//             aboutMe: {},
+//             objective: {},
+//             skills: {},
+//             jobs: {},
+//             projects: {},
+//             education: {},
+//             languages: {}
+//         }
+//     }
+// }
 
 
 export const resumeSlice = createSlice({

@@ -8,6 +8,7 @@ export type {
     EducationData, 
     ProjectData, 
     LanguageData,
+    ValidationErrors
 } from './model/types/ResumeSchema';
 
 export type {

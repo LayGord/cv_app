@@ -1,9 +1,48 @@
 .PreviewErrors {
     width: 800px;
-    height: 100%;
+    height: fit-content;
     overflow: visible;
-    padding-bottom: 30px;
+    padding-block: 30px;
     padding-inline: 60px;
     background-color: var(--dark-bg-color);
     box-shadow: 0px 0px 1px 0px var(--shadow-color);
+    display: flex;
+    flex-direction: column;
 }
+
+.header {
+    display: flex;
+    padding-bottom: 30px;
+    font-size: 20px;
+}
+
+.link {
+    //margin-left: auto;
+    width: 50px !important;
+}
+
+.errorItem {
+    padding-left: 13px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    height: 50px;
+    box-shadow: 0px 0px 3px 0px var(--error-shadow-color);
+    background-color: var(--input-error-bg-color);
+    color: var(--error-color);
+}
+
+.errorsSection {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sectionHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
