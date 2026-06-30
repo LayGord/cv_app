@@ -11,6 +11,7 @@ import {
     ProjectData,
     LanguageData,
     ValidationErrors,
+    Resume,
 } from "../types/ResumeSchema";
 import {
     EducationDataErrors,
@@ -27,9 +28,14 @@ import {
 } from "../types/resumeValidationSchema";
 import { isEmptyObj } from "shared/lib/isEmptyObj/isEmptyObj";
 import { validateResumeData } from "../services/validation/validateResumeData";
+import { fetchResumeIds } from "../services/fetchResumeIds/fetchResumeIds";
+import { fetchResumeById } from "../services/fetchResumeById/fetchResumeById";
+import { updateResume } from "../services/updateResume/updateResume";
+import { deleteResumeById } from "../services/deleteResumeById/deleteResumeById";
 
 
 const initialState: ResumeSchema = {
+    resumeIds: [],
     isLodaing: false,
     isValidating: true,
     resumeDraft: {
@@ -48,7 +54,7 @@ const initialState: ResumeSchema = {
         contacts: {
             email: 'example@mail.com',
             phone: undefined,
-            links: [{id: '1', title: 'Telegram', link: ''}, {id: '2', title: 'LinkedIn', link: ''}],
+            links: [{id: '1', title: 'Telegram', link: ''}],
             preferred: 'email',
         },
         objective: {
@@ -75,117 +81,19 @@ const initialState: ResumeSchema = {
             projects: {},
             education: {},
             languages: {}
-        }
+        },
+        createdAt: '',
     }
 };
-
-// const initialState: ResumeSchema = {
-//     isLodaing: false,
-//     isValidating: true,
-//     error: undefined,
-//     resumeDraft: {
-//         id: '1',
-//         personal: {
-//             lastname: 'Lastname',
-//             firstname: '',
-//             patronymic: 'P',
-//             sex: 'male',
-//             birthdate: '2026-05-01',
-//             city: 'S',
-//             country: 'Russia',
-//             citizenship: 'Russia',
-//             photo: '',
-//         },
-//         contacts: {
-//             phone: '',//'+7-900-99-99-99',
-//             email: 'exampl',
-//             links: [
-//                 { id: '1', title: 'Telegram', link: ''},
-//             ],
-//             preferred: 'email'
-//         },
-//         objective: {
-//             readyToRelocate: true,
-//             readyToBTrip: false,
-//             format: 'any',
-//             positions: [{ id: '1', name: 'T'}, { id: '1', name: ''}],
-//             typeOfEmpl: ['fulltime'],
-//             currency: 'RUB',
-//             salary: '-100'
-//         },
-//         aboutMe: `T`,
-//         education: [
-//             { 
-//                 id: '1',
-//                 program: '02',
-//                 org: 'Kuban State University',
-//                 faculty: 'M', 
-//                 grade: 'bachelor', 
-//                 dateFrom: '2019-08-08',
-//                 dateTo: '2023-08-07',
-//                 city: 'Somecity'
-//             },
-//             { 
-//                 id: '2',
-//                 program: '02.04.01 Math and Computer sciences',
-//                 org: '',
-//                 faculty: 'Math and Computer sciences', 
-//                 grade: 'master', 
-//                 dateFrom: '2023-07-10',
-//                 city: 'S'
-//             }
-//         ],
-//         jobs: [
-//             {
-//                 id: '1',
-//                 company: 'SomeCompany LLC',
-//                 dateFrom: '2023-08-07',
-//                 dateTo: '2024-06-07',
-//                 location: 'S',
-//                 position: 'Junior QA automation',
-//                 comment: 'B',
-//             },
-//             {
-//                 id: '2',
-//                 company: 'A',
-//                 dateFrom: '2024-07-01',
-//                 dateTo: undefined,
-//                 location: 'SomeCity2',
-//                 position: 'Middle QA automation',
-//                 comment: 'Build a e2e test pipeline for web-application',
-//             }
-//         ],
-//         langs: [{ id: '1', language: 'E', level: 'b2'}, {id: '2', language: 'Russian', level: 'c2'}],
-//         projects: [
-//             // eslint-disable-next-line max-len
-//             {id: '1', title: `C`, description: `Small and easy to use web app for making cv writing process as easy as possible`, link: 'https://github.com/LayGord/cv_app'},
-//             // eslint-disable-next-line max-len
-//             {id: '2', title: `Blog app`, description: `C`, link: 'http'}
-//         ],
-//         skills: [],
-//         valErrors: {
-//             personal: {},
-//             contacts: {},
-//             aboutMe: {},
-//             objective: {},
-//             skills: {},
-//             jobs: {},
-//             projects: {},
-//             education: {},
-//             languages: {}
-//         }
-//     }
-// }
 
 
 export const resumeSlice = createSlice({
     name: 'resume',
     initialState: initialState,
     reducers: {
-        setResumeId: (state, action: PayloadAction<string>) => {
-            state.resumeDraft.id = action.payload;
+        setCurrentId: (state, action: PayloadAction<string | undefined>) => {
+            state.currentId = action.payload;
         },
-
         // personalData
         updatePersonalData: (state, action: PayloadAction<Partial<PersonalData>>) => {
             state.resumeDraft.personal = {
@@ -500,6 +408,46 @@ export const resumeSlice = createSlice({
             .addCase(validateResumeData.rejected, (state, action) => {
                 state.isValidating = false;
                 state.error = action.payload;
+            })
+            .addCase(fetchResumeIds.pending, (state) => {
+                state.isLodaing = true;
+                state.error = undefined;
+            })
+            .addCase(fetchResumeIds.fulfilled, 
+                (state, 
+                    action: PayloadAction<{id: string, objective: Partial<Resume['objective']>, createdAt: string, updatedAt?: string}[]>
+                ) => {
+                    state.isLodaing = false;
+                    state.resumeIds = action.payload
+                })
+            .addCase(updateResume.pending, (state) => {
+                state.isLodaing = true;
+                state.error = undefined;
+            })
+            .addCase(updateResume.fulfilled, (state, action: PayloadAction<Resume>) => {
+
+                const { id, objective, createdAt, updatedAt = createdAt, } = action.payload;
+
+                state.isLodaing = false;
+                state.resumeIds.push({id, objective, updatedAt, createdAt})
+            })
+            .addCase(deleteResumeById.fulfilled, (state, action: PayloadAction<string> ) => {
+                state.resumeIds = state.resumeIds.filter(item => item.id !== action.payload);
+                if (state.resumeDraft.id == action.payload) {
+                    state.resumeDraft = initialState.resumeDraft;
+                }
+            })
+            .addCase(fetchResumeById.pending, (state) => {
+                state.isLodaing = true;
+                state.error = undefined
+            })
+            .addCase(fetchResumeById.fulfilled, (state, action: PayloadAction<Resume>) => {
+                state.resumeDraft = action.payload
+                state.isLodaing = false;
+            })
+            .addCase(fetchResumeById.rejected, (state, action) => {
+                state.error = action.payload
+                state.isLodaing = false;
             })
     }
     

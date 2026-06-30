@@ -1,3 +1,72 @@
 .ResumeCard {
-    
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 3px 0px var(--shadow-color);
+    background-color: var(--input-bg-color);
+    color: var(--primary-color);
+}
+
+.ResumeCard:hover  {
+        //transform: scale(1.02);
+        transition: transform 0.2s;
+        box-shadow: 0px 0px 3px 0px var(--accent-shadow-color);;
+}
+
+
+.image {
+    height: 180px;
+    width: 160px;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 2px 0px var(--shadow-color);
+    height: 80px;
+    padding: 13px;
+}
+
+.title {
+    text-overflow: ellipsis;
+}
+
+.extras {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.updDate {
+    color: var(--shadow-color);
+    font-size: 14px;
+}
+
+.extrasBtn {
+    padding: 0 !important;
+    margin: 0;
+    height: 30px !important;
+    width: 30px !important;
+}
+
+.overlay {
+    top: 0;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: var(--multi-select-overlay-z-index);
+}
+
+.contextMenu {
+    position: absolute;
+    right: -25px;
+    bottom: 50px;
+    z-index: var(--multi-select-list-z-index);
+    background-color: var(--dark-bg-color);
+} 
+
+.contextMenu * {
+    position: relative;
+    z-index: var(--popup-z-index);
 }

@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5';
 
-import { Button, ButtonSize, ButtonTheme } from 'shared/ui/Button/Button';
+import { ResumeCard } from './ResumeCard';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
-    title: 'shared/Button',
-    component: Button,
+    title: 'entities/Resume/ResumeCard',
+    component: ResumeCard,
     parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
         layout: 'centered',
@@ -16,7 +16,7 @@ const meta = {
     argTypes: {},
     // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#story-args
     args: { },
-} satisfies Meta<typeof Button>;
+} satisfies Meta<typeof ResumeCard>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -24,48 +24,11 @@ type Story = StoryObj<typeof meta>;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Default: Story = {
     args: {
-        children: 'text',
-        theme: ButtonTheme.DEFAULT,
-        size: ButtonSize.M
-    },
-};
+        data: {
+            id: '1',
+            objective: {},
+            updatedAt: '2024-06-07'
+        },
 
-export const Secondary: Story = {
-    args: {
-        children: 'text',
-        theme: ButtonTheme.SECONDARY,
-        size: ButtonSize.M
-    },
-};
-
-export const Clear: Story = {
-    args: {
-        children: 'text',
-        theme: ButtonTheme.CLEAR,
-        size: ButtonSize.M
-    },
-};
-
-export const Outline: Story = {
-    args: {
-        children: 'text',
-        theme: ButtonTheme.OUTLINE,
-        size: ButtonSize.M
-    },
-};
-
-export const Accent: Story = {
-    args: {
-        children: 'text',
-        theme: ButtonTheme.ACCENT,
-        size: ButtonSize.M
-    },
-};
-
-export const Error: Story = {
-    args: {
-        children: 'text',
-        theme: ButtonTheme.ERROR,
-        size: ButtonSize.M
     },
 };

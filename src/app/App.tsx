@@ -2,11 +2,14 @@ import { Navbar } from 'widgets/Navbar';
 import { AppRouter } from './providers/RouterProvider';
 import { ThemeSwitcher } from 'widgets/ThemeSwitcher';
 import { LangSwitcher } from 'widgets/LangSwitcher';
+import { ResumeSaveBtn } from 'features/SaveResumeToIdb';
+
 
 function App() {
     return (
         <div className="App">
-            <Navbar 
+            <Navbar
+                ResumeSaveBtn={<ResumeSaveBtn />}
                 ThemeSwitcher={<ThemeSwitcher />}
                 LangSwitcher={<LangSwitcher />}
             />

@@ -15,6 +15,8 @@ import {
 } from "./resumeValidationSchema";
 
 export interface ResumeSchema {
+    resumeIds: {id: string, objective: Partial<ObjectiveData>, updatedAt?: string, createdAt: string}[];
+    currentId?: string;
     resumeDraft: Resume;
     isLodaing: boolean;
     isValidating: boolean;
@@ -33,6 +35,8 @@ export interface Resume {
     education: EducationData[];
     langs: LanguageData[];
     valErrors: ValidationErrors;
+    createdAt: string;
+    updatedAt?: string;
 };
 
 // main info
