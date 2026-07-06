@@ -1,2 +1,2 @@
 export const LOCAL_STORAGE_THEME_KEY = 'theme';
-export const LOCAL_STORAGE_RESUME_IDS = 'resumeIds';
+export const LANG_KEY = 'lng';

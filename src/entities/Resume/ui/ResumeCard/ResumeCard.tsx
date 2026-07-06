@@ -1,11 +1,13 @@
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { classNames } from "shared/lib/classNames/classNames";
-import cls from "./ResumeCard.module.scss";
-import { Resume } from "../../model/types/ResumeSchema";
 import { ReactComponent as ExtrasIcon } from 'shared/assets/icons/dots-vertical.svg';
 import { ReactComponent as DeleteIcon } from 'shared/assets/icons/delete-outline.svg';
 import { Button, ButtonTheme } from "shared/ui/Button/Button";
-import { useState } from "react";
 import { Portal } from "shared/ui/Portal/Portal";
+import cls from "./ResumeCard.module.scss";
+import { Resume } from "../../model/types/ResumeSchema";
+
 
 interface ResumeCardProps {
     className?: string;
@@ -22,6 +24,8 @@ export const ResumeCard = (props: ResumeCardProps) => {
         onOpen,
         onDelete,
     } = props;
+
+    const { t } = useTranslation();
 
     const { id, objective, updatedAt, createdAt } = data;
     const [showContextMenu, setShowContextMenu] = useState(false);
@@ -75,7 +79,7 @@ export const ResumeCard = (props: ResumeCardProps) => {
                                     onClick={onDeleteHandler}
                                 >
                                     <DeleteIcon />
-                                    Delete
+                                    {t('ResumeCard.deleteBtn')}
                                 </Button>
                             </div>
                             <Portal>

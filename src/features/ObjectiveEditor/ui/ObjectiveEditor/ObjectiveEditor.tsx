@@ -120,7 +120,7 @@ export const ObjectiveEditor = ({ className }: ObjectiveEditorProps) => {
                         value={objective.typeOfEmpl}
                         onChange={onChangeTypeOfEmpl}
                         onBlur={onValidateTypeOfEmpl}
-                        errors={errors.typeOfEmpl}
+                        error={errors.typeOfEmpl}
                     />
                 </Group>
                 <Group title={t('ObjectiveEditor.titleSalary')}>

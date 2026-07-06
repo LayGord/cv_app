@@ -61,7 +61,7 @@ export type TypeOfEmplErrors = Record<string, TypeOfEmplErrorTypes>;
 
 export interface ObjectiveDataErrors {
     positions?: PositionErrors;
-    typeOfEmpl?: TypeOfEmplErrors;
+    typeOfEmpl?: ErrorTypes;
     format?: ErrorTypes
     salary?: ErrorTypes;
     currency?: ErrorTypes;

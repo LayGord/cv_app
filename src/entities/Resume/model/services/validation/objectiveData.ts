@@ -86,20 +86,29 @@ const validateTypeOfEmplField = ( // not really needed, just 4 safety
     };
 }
 
-const validateTypeOfEmpl = (data: TypeOfEmplValue[]) => {
-    if (data.length === 0) return { 'empty': { 'id': 'REQUIRED'} } as TypeOfEmplErrors;
+const validateTypeOfEmpl = (data: TypeOfEmplValue[]): ErrorTypes | undefined => {
+    if (data.length === 0) return 'REQUIRED';
     return;
 };
 
 const validateObjectiveData = (data: ObjectiveData): ObjectiveDataErrors | undefined => {
-    const errors: ObjectiveDataErrors = {};
+    const errors: ObjectiveDataErrors = { };
+
+    data.positions.forEach(position => {
+        const valErr = validatePositionItemField('name', position.name);
+        if (valErr) {
+            errors['positions'] = {...errors['positions'], [position.id]: { 'name': valErr }}
+        }
+    });
+
+    errors.typeOfEmpl = validateTypeOfEmpl(data.typeOfEmpl);
 
     Object.entries(data).forEach(([key, value]) => {
         if (key !== 'typeOfEmpl' && key !== 'positions' ) {
             errors[key as keyof Omit<ObjectiveDataErrors, 'typeOfEmpl' | 'positions'>] = validateObjectiveDataField(key, value);
         }
     });
-    
+    console.log(errors)
     return isEmptyObj(errors) ? undefined : errors;
 }
 

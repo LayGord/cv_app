@@ -8,6 +8,7 @@ const AppRouter = () => {
     const renderRoute = useCallback((route: AppRouteProps) => {
         return (
             <Route
+                key={route.path}
                 path={route.path}
                 element={route.element}
             />

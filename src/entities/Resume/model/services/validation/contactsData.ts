@@ -1,7 +1,7 @@
 import { isEmptyObj } from "shared/lib/isEmptyObj/isEmptyObj";
+import { isEmpty, isShorterThan, isValidEmail, isValidPhoneNumber } from "shared/lib/validation/validation";
 import { ContactsData, ContactLink } from "../../types/ResumeSchema";
 import { ContactsDataErrors, LinkErrorTypes, ErrorTypes, LinkErrors } from "../../types/resumeValidationSchema";
-import { isEmpty, isShorterThan, isValidEmail, isValidLink, isValidPhoneNumber } from "shared/lib/validation/validation";
 
 
 const validateContactsDataField = (
@@ -45,7 +45,7 @@ const validateContactLinkItem = (
     value: ContactLink
 ): LinkErrorTypes | undefined => {
     const errors: LinkErrorTypes = { };
-    errors.id = validateContactLinkField('id', value.title);
+    errors.id = validateContactLinkField('id', value.id);
     errors.title = validateContactLinkField('title', value.title);
     errors.link = validateContactLinkField('link', value.link);
 
@@ -59,12 +59,12 @@ const validateContactsData = (data: ContactsData): ContactsDataErrors | undefine
     errors.phone = validateContactsDataField('phone', data.phone);
 
     if (data.links) {
-        errors.links = data.links.reduce((acc: LinkErrors, link) => {
-            const valResult = validateContactLinkItem(link)
-            if (!isEmptyObj(valResult)) acc[link.id] = { ...validateContactLinkItem(link)}
-            return acc
-        }, {})
-        if (isEmptyObj(errors)) errors.links = undefined;
+        errors.links = data.links.reduce<LinkErrors>((acc, link) => {
+            const valResult = validateContactLinkItem(link);
+            if (valResult && !isEmptyObj(valResult)) acc[link.id] = valResult;
+            return acc;
+        }, {});
+        if (isEmptyObj(errors.links)) delete errors.links;
     }
     return isEmptyObj(errors) ? undefined : errors;
 }

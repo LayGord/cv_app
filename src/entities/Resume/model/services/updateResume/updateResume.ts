@@ -4,7 +4,7 @@ import { resumeRepository } from "../../storage/resumeIdbStorage";
 
 
 export const updateResume = createAsyncThunk<Resume, Resume>(
-    'resumeActions/updateResume',
+    'resume/updateResume',
     async (resume) => {
         await resumeRepository.save(resume);
         return resume;

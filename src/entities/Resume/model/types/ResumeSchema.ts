@@ -15,11 +15,11 @@ import {
 } from "./resumeValidationSchema";
 
 export interface ResumeSchema {
-    resumeIds: {id: string, objective: Partial<ObjectiveData>, updatedAt?: string, createdAt: string}[];
     currentId?: string;
+    resumeIds: {id: string, objective: Partial<ObjectiveData>, updatedAt?: string, createdAt: string}[];
+    resumeIdsStatus: 'isLoading' | 'idle' | 'succeeded' | 'failed';
     resumeDraft: Resume;
-    isLodaing: boolean;
-    isValidating: boolean;
+    resumeDraftStatus: 'isLoading' | 'idle' | 'succeeded' | 'failed' | 'validating';
     error?: string;
 }
 

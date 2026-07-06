@@ -23,7 +23,7 @@ export type {
 export { resumeReducer, resumeActions } from './model/slice/resumeSlice';
 
 export { 
-    getResume, getResumeDraft, getResumeErrors, getResumeIds, getResumeIsLoading, getResumeIsValidating, getResumeCurrentId
+    getResume, getResumeDraft, getResumeErrors, getResumeIds, getResumeDraftStatus, getResumeIdsStatus, getResumeCurrentId
 } from './model/selectors/resumeData';
 export { getPersonal, getPersonalErrors } from './model/selectors/personalData';
 export { getContacts, getContactsErrors } from './model/selectors/contactsData';

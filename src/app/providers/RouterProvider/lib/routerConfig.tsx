@@ -1,6 +1,6 @@
 import { MainPage } from "pages/MainPage";
 import { NotFoundPage } from "pages/NotFoundPage";
-import { PreviewPage } from "pages/PreviewPage/ui/PreviewPage";
+import { PreviewPage } from "pages/PreviewPage";
 import { ResumeEditorPage } from "pages/ResumeEditorPage";
 import { RouteProps } from "react-router";
 import { AppRoutes, RouterPaths } from "shared/config/router/paths";

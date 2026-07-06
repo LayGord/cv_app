@@ -1,4 +1,4 @@
-import { AsyncThunkConfig, createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Resume, ValidationErrors } from "../../types/ResumeSchema";
 import { personalDataValidation } from "./personalData";
 import { contactsDataValidation } from "./contactsData";
@@ -12,7 +12,7 @@ import { languagesDataValidation } from "./languagesData";
 
 
 export const validateResumeData = createAsyncThunk<ValidationErrors, Resume, { rejectValue: string }>(
-    'resumeActions/validateResumeData',
+    'resume/validateResumeData',
     async (resumeDraft, thunkApi) => {
         const { rejectWithValue } = thunkApi
         try {
@@ -27,9 +27,6 @@ export const validateResumeData = createAsyncThunk<ValidationErrors, Resume, { r
                 education: educationDataValidation.validateEducationData(resumeDraft.education) || {},
                 languages: languagesDataValidation.validateLanguageData(resumeDraft.langs) || {},
             };
-            await new Promise((resolve) => {
-                setTimeout(resolve, 1000)
-            });
             return errors;
         } catch (err) {
             console.log(err)

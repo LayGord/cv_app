@@ -3,6 +3,7 @@ import cls from "./ResumeList.module.scss";
 import { Resume, ResumeCard } from "entities/Resume";
 import { ReactComponent as AddFileIcon } from 'shared/assets/icons/file-plus-outline.svg'
 import { Button, ButtonTheme } from "shared/ui/Button/Button";
+import { useTranslation } from "react-i18next";
 
 
 interface ResumeListProps {
@@ -23,6 +24,8 @@ export const ResumeList = (props: ResumeListProps) => {
         onDelete,
     } = props;
 
+    const { t } = useTranslation();
+
     return (
         <div className={ classNames(cls.ResumeList, {}, [className]) }>
             <div className={cls.header}>
@@ -30,18 +33,21 @@ export const ResumeList = (props: ResumeListProps) => {
                     theme={ButtonTheme.CLEAR}
                     onClick={onAddNew}
                 >
-                    Создать новый файл <AddFileIcon />
+                    {t('ResumeList.createNew')} <AddFileIcon />
                 </Button>
             </div>
             <div className={cls.cardsContainer}>
                 {
-                    resumeIds.map(item => (
-                        <ResumeCard
-                            data={item}
-                            onOpen={() => onOpen?.(item.id)}
-                            onDelete={() => onDelete?.(item.id)}
-                        />
-                    ))
+                    resumeIds.length > 0 
+                        ? resumeIds.map(item => (
+                            <ResumeCard
+                                key={item.id}
+                                data={item}
+                                onOpen={() => onOpen?.(item.id)}
+                                onDelete={() => onDelete?.(item.id)}
+                            />
+                        ))
+                        : <div className={cls.emptyList}>{t('ResumeList.empty')}</div>
                 }
             </div>
         </div>

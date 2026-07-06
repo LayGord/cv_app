@@ -3,7 +3,7 @@ import { resumeRepository } from "../../storage/resumeIdbStorage";
 
 
 export const deleteResumeById = createAsyncThunk<string, string>(
-    'resumeActions/deleteResumeById',
+    'resume/deleteResumeById',
     async (id) => {
         await resumeRepository.remove(id);
         return id;

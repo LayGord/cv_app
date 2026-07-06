@@ -1,9 +1,9 @@
+import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { classNames } from "shared/lib/classNames/classNames";
 import cls from "./MultiSelect.module.scss";
-import { useCallback, useMemo, useState } from "react";
 import { Input, InputTheme } from "../Input/Input";
 import { Button, ButtonTheme } from "../Button/Button";
-import { useTranslation } from "react-i18next";
 
 
 export interface MultiSelectOption {
@@ -22,8 +22,8 @@ interface MultiSelectProps {
     onChange?: (value: string[]) => void;
     groupByCategories?: boolean;
     onBlur?: (value: string[]) => void;
-    errors?: Record<string, any>;
-}
+    error?: string;
+};
 
 export const MultiSelect = (props: MultiSelectProps) => {
     const {
@@ -32,25 +32,28 @@ export const MultiSelect = (props: MultiSelectProps) => {
         value=[],
         onChange,
         onBlur,
-        errors,
+        error,
         groupByCategories=false,
     } = props;
 
     const { t, i18n } = useTranslation();
+    const timerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
     // display logic 
     const [visibility, setVisibility] = useState<MultiSelectVisibility>('closed');
 
     const onOpenClick = useCallback(() => {
         if (visibility !== 'opened') {setVisibility('opening')};
-        setTimeout(() => {
+        clearTimeout(timerRef.current);
+        timerRef.current = setTimeout(() => {
             setVisibility('opened');
         }, 10)
     }, [visibility]);
 
     const onCloseClick = useCallback(() => {
         setVisibility('closing');
-        setTimeout(() => {
+        clearTimeout(timerRef.current);
+        timerRef.current = setTimeout(() => {
             setVisibility('closed');
         }, 250)
         onBlur?.(value)
@@ -65,9 +68,8 @@ export const MultiSelect = (props: MultiSelectProps) => {
 
     const filteredOptions = useMemo(
         () => {
-            return  Object.values(options).filter(
-                (option) => option.displayName.includes(search)
-            );
+            const q = search.trim().toLowerCase();
+            return Object.values(options).filter(o => o.displayName.toLowerCase().includes(q));
         },
         [options, search]
     );
@@ -122,12 +124,12 @@ export const MultiSelect = (props: MultiSelectProps) => {
         if (grouped) {
             return Object.entries(groupOptionsByCategory(options)).map(([category, options]) => {
                 return (
-                    <>
+                    <Fragment key={category}>
                         <div key={category} className={cls.categoryName}>{ category }</div>
                         {
                             options.map((option) => renderOption(option))
                         }
-                    </>
+                    </Fragment>
                 )
             })
         } else {
@@ -135,7 +137,7 @@ export const MultiSelect = (props: MultiSelectProps) => {
         }
     }, [groupOptionsByCategory, renderOption]);
 
-    return(
+    return (
         <>  
             { visibility === 'opened' && 
                 <div
@@ -154,13 +156,12 @@ export const MultiSelect = (props: MultiSelectProps) => {
                 <div className={cls.searchBlock}>
                     <Input
                         className={cls.searchInput}
-                        theme={ errors ? InputTheme.ERROR : InputTheme.DEFAULT }
+                        theme={ error ? InputTheme.ERROR : InputTheme.DEFAULT }
                         placeholder={t('MultiSelect.search')}
                         value={search}
                         onChange={onSearchChange}
                         onClick={onOpenClick}
-                        //onBlur={() => onBlur?.(value)}
-                        error={errors?.['empty']?.id || undefined}
+                        error={error}
                     />
                 </div>
 

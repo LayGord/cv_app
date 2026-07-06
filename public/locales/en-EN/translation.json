@@ -21,5 +21,12 @@
     },
     "PageLoader": {
         "loading": "Loading"
+    },
+    "ResumeList": {
+        "createNew": "Create new",
+        "empty": "There is no saved resume`s found. Add your first"
+    },
+    "ResumeCard": {
+        "deleteBtn": "Delete"
     }
 }

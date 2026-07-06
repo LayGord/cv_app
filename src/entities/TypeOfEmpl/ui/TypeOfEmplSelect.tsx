@@ -1,19 +1,20 @@
+import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
+import i18n from "shared/config/i18n/i18n";
 import { classNames } from "shared/lib/classNames/classNames";
 import { MultiSelect } from "shared/ui/MultiSelect/MultiSelect";
 import cls from "./TypeOfEmplSelect.module.scss";
 import { TypeOfEmplValue } from "../model/types/typeOfEmpl";
-import i18n from "shared/config/i18n/i18n";
 import { typeOfEmplOptions } from "../model/const/typeOfEmpl";
-import { useMemo } from "react";
-import { useTranslation } from "react-i18next";
+
 
 interface TypeOfEmplSelectProps {
     className?: string;
     value: TypeOfEmplValue[]
     onChange?: (value: TypeOfEmplValue[]) => void;
     onBlur?: (value: TypeOfEmplValue[]) => void;
-    errors?: Record<string, any>
-}
+    error?: string
+};
 
 export const TypeOfEmplSelect = (props: TypeOfEmplSelectProps) => {
     
@@ -22,7 +23,7 @@ export const TypeOfEmplSelect = (props: TypeOfEmplSelectProps) => {
         value,
         onChange,
         onBlur,
-        errors,
+        error,
     } = props;
 
     const { t } = useTranslation('resume');
@@ -33,11 +34,6 @@ export const TypeOfEmplSelect = (props: TypeOfEmplSelectProps) => {
             // eslint-disable-next-line react-hooks/exhaustive-deps
         ), [i18n.language])
 
-    const errorsTr = useMemo(() => 
-        errors ? { empty: { id: t('REQUIRED', {keyPrefix: 'errors'}) } } : undefined
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    , [i18n.language, errors])
-
     return (
         <MultiSelect
             className={classNames(cls.TypeOfEmplSelect, {}, [className])}
@@ -46,7 +42,7 @@ export const TypeOfEmplSelect = (props: TypeOfEmplSelectProps) => {
             value={value}
             onChange={onChange as (value: string[]) => void}
             onBlur={onBlur as (value: string[]) => void}
-            errors={errorsTr}
+            error={error? t(error, {keyPrefix: 'errors'}) : undefined}
         /> 
     );
 };

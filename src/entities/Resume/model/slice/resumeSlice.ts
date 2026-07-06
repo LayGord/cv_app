@@ -36,8 +36,7 @@ import { deleteResumeById } from "../services/deleteResumeById/deleteResumeById"
 
 const initialState: ResumeSchema = {
     resumeIds: [],
-    isLodaing: false,
-    isValidating: true,
+    resumeIdsStatus: 'idle',
     resumeDraft: {
         id: '',
         personal: {
@@ -83,7 +82,8 @@ const initialState: ResumeSchema = {
             languages: {}
         },
         createdAt: '',
-    }
+    },
+    resumeDraftStatus: 'idle',
 };
 
 
@@ -223,7 +223,7 @@ export const resumeSlice = createSlice({
             if (isEmptyObj(state.resumeDraft.valErrors.objective.positions)) 
                 delete state.resumeDraft.valErrors.objective.positions;
         },
-        setTypeOfEmplErrors: (state, action: PayloadAction<TypeOfEmplErrors | undefined>) => {
+        setTypeOfEmplErrors: (state, action: PayloadAction<ErrorTypes | undefined>) => {
             state.resumeDraft.valErrors.objective.typeOfEmpl = action.payload;
         },
         setObjectiveDataFieldError:
@@ -398,56 +398,57 @@ export const resumeSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(validateResumeData.pending, (state) => {
-                state.isValidating = true;
+                state.resumeDraftStatus = 'validating';
                 state.error = undefined
             })
             .addCase(validateResumeData.fulfilled, (state, action: PayloadAction<ValidationErrors>) => {
-                state.isValidating = false;
+                state.resumeDraftStatus = 'succeeded';
                 state.resumeDraft.valErrors = action.payload;
             })
             .addCase(validateResumeData.rejected, (state, action) => {
-                state.isValidating = false;
+                state.resumeDraftStatus = 'succeeded';
                 state.error = action.payload;
             })
             .addCase(fetchResumeIds.pending, (state) => {
-                state.isLodaing = true;
+                state.resumeIdsStatus = 'isLoading';
                 state.error = undefined;
             })
             .addCase(fetchResumeIds.fulfilled, 
                 (state, 
                     action: PayloadAction<{id: string, objective: Partial<Resume['objective']>, createdAt: string, updatedAt?: string}[]>
                 ) => {
-                    state.isLodaing = false;
+                    state.resumeIdsStatus = 'succeeded';
                     state.resumeIds = action.payload
                 })
             .addCase(updateResume.pending, (state) => {
-                state.isLodaing = true;
+                state.resumeIdsStatus = 'isLoading';
                 state.error = undefined;
             })
             .addCase(updateResume.fulfilled, (state, action: PayloadAction<Resume>) => {
 
                 const { id, objective, createdAt, updatedAt = createdAt, } = action.payload;
 
-                state.isLodaing = false;
+                state.resumeDraftStatus = 'succeeded';
+                state.resumeIdsStatus = 'succeeded';
                 state.resumeIds.push({id, objective, updatedAt, createdAt})
             })
             .addCase(deleteResumeById.fulfilled, (state, action: PayloadAction<string> ) => {
                 state.resumeIds = state.resumeIds.filter(item => item.id !== action.payload);
-                if (state.resumeDraft.id == action.payload) {
+                if (state.resumeDraft.id === action.payload) {
                     state.resumeDraft = initialState.resumeDraft;
                 }
             })
             .addCase(fetchResumeById.pending, (state) => {
-                state.isLodaing = true;
+                state.resumeDraftStatus = 'isLoading';
                 state.error = undefined
             })
             .addCase(fetchResumeById.fulfilled, (state, action: PayloadAction<Resume>) => {
+                state.resumeDraftStatus = 'succeeded';
                 state.resumeDraft = action.payload
-                state.isLodaing = false;
             })
             .addCase(fetchResumeById.rejected, (state, action) => {
+                state.resumeIdsStatus = 'failed';
                 state.error = action.payload
-                state.isLodaing = false;
             })
     }
     

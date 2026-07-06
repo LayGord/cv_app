@@ -85,7 +85,7 @@ const MainPage = ({ className }: MainPageProps) => {
     };
 
     const onOpen = (id: string) => {
-        navigate(`/${id}/edit`);
+        navigate(`/${id}/edit?step=personal`);
     }
 
     useEffect(() => {
@@ -97,7 +97,7 @@ const MainPage = ({ className }: MainPageProps) => {
         <Page>
             <div className={ classNames(cls.MainPage, {}, [className]) }>
                 <ResumeList
-                    resumeIds={resumeIds}
+                    resumeIds={resumeIds || []}
                     onAddNew={onAddNew}
                     onOpen={onOpen}
                     onDelete={onDelete}

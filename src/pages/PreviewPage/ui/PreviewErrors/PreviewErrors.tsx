@@ -6,9 +6,11 @@ import { ReactComponent as GoToIcon } from 'shared/assets/icons/arrow-top-right-
 import { AppLink, AppLinkTheme } from "shared/ui/AppLink/AppLink";
 import { AppRoutes, RouterPaths } from "shared/config/router/paths";
 import { TFunction, useTranslation } from "react-i18next";
+import { generatePath } from "react-router";
 
 interface PreviewErrorsProps {
     className?: string;
+    id: string;
     errors: ValidationErrors;
 }
 
@@ -59,6 +61,7 @@ const ErrorItem = (
 export const PreviewErrors = (props: PreviewErrorsProps) => {
     const {
         className,
+        id,
         errors,
     } = props;
 
@@ -77,6 +80,8 @@ export const PreviewErrors = (props: PreviewErrorsProps) => {
                         
                         if (sectionErrs.length === 0) return null
 
+                        const pathToEditor = `${generatePath(RouterPaths.editor, {id: id})}?step=${step}`;
+
                         return (
                             <div>
                                 <div className={cls.sectionHeader}>
@@ -84,7 +89,7 @@ export const PreviewErrors = (props: PreviewErrorsProps) => {
                                     <AppLink
                                         className={cls.link}
                                         theme={AppLinkTheme.CLEAR}
-                                        to={`${RouterPaths.editor}?step=${step}`}
+                                        to={pathToEditor}
                                     >
                                         <GoToIcon />
                                     </AppLink>

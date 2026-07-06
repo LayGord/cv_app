@@ -1,12 +1,13 @@
-import { classNames } from "shared/lib/classNames/classNames";
-import cls from "./ResumeSaveBtn.module.scss";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
+import { getResumeCurrentId, getResumeDraft, updateResume } from "entities/Resume";
 import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import { ReactComponent as SaveIcon } from 'shared/assets/icons/content-save-outline.svg';
 import { ReactComponent as SaveIconSuccess } from 'shared/assets/icons/content-save-check-outline.svg';
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
-import { getResumeCurrentId, getResumeDraft, updateResume } from "entities/Resume";
-import { useSelector } from "react-redux";
-import { useCallback, useRef, useState } from "react";
+import { classNames } from "shared/lib/classNames/classNames";
+import cls from "./ResumeSaveBtn.module.scss";
+
 
 interface ResumeSaveBtnProps {
     className?: string;
@@ -29,6 +30,7 @@ export const ResumeSaveBtn = ({ className }: ResumeSaveBtnProps) => {
         timerRef.current = setTimeout(() => setIsSaved(false), 2000)
     }, [dispatch, resumeDraft])
 
+    useEffect(() => () => clearTimeout(timerRef.current), [])
 
     return (
         <div className={ classNames(cls.ResumeSaveBtn, {}, [className]) }>
