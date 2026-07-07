@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { classNames } from "shared/lib/classNames/classNames";
 import { ReactComponent as ExtrasIcon } from 'shared/assets/icons/dots-vertical.svg';
@@ -11,7 +11,7 @@ import { Resume } from "../../model/types/ResumeSchema";
 
 interface ResumeCardProps {
     className?: string;
-    data: { id: string, objective: Partial<Resume['objective']>, updatedAt?: string, createdAt?: string };
+    data: { id: string, objective: Partial<Resume['objective']>, updatedAt?: string, createdAt?: string, prevImg?: string };
     onOpen?: (id: string) => void;
     onDelete?: (id: string) => void;
 }
@@ -42,7 +42,25 @@ export const ResumeCard = (props: ResumeCardProps) => {
         e.stopPropagation();
     }
 
-    const title = objective?.positions?.map((item) => item.name).join(', ')
+
+    const title = useMemo(() => objective?.positions?.map((item) => item.name).join(', '), [objective.positions]);
+
+    const dateOfUpdate =  useMemo(() => updatedAt 
+        ? new Date(updatedAt).toLocaleString('ru-RU', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+        }).replace(',', '')
+        : new Date(createdAt!).toLocaleString('ru-RU', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+        }).replace(',', ''),
+    [createdAt, updatedAt]);
 
     return (
         <div 
@@ -50,7 +68,7 @@ export const ResumeCard = (props: ResumeCardProps) => {
             onClick={onOpenHandler}
         >
             <div className={cls.image}>
-
+                <img src={data.prevImg}/>
             </div>
             <div className={cls.footer}>
                 <span className={cls.title}>
@@ -60,10 +78,7 @@ export const ResumeCard = (props: ResumeCardProps) => {
                 </span>
                 <div className={cls.extras}>
                     <span className={cls.updDate}>
-                        { updatedAt 
-                            ? new Date(updatedAt).toLocaleDateString() 
-                            : new Date(createdAt!).toLocaleDateString()
-                        }
+                        { dateOfUpdate }
                     </span>
                     <Button
                         className={cls.extrasBtn}

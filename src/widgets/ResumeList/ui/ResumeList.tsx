@@ -8,7 +8,8 @@ import { useTranslation } from "react-i18next";
 
 interface ResumeListProps {
     className?: string;
-    resumeIds: { id: string, objective: Partial<Resume['objective']>, createdAt: string, updatedAt?: string }[];
+    resumeIds: { id: string, objective: Partial<Resume['objective']>, createdAt: string, updatedAt?: string, prevImg?: string }[];
+    resumeIdsStatus: 'isLoading' | 'idle' | 'succeeded' | 'failed';
     onAddNew?: () => void;
     onOpen?: (id: string) => void;
     onDelete?: (id: string) => void;
@@ -19,11 +20,12 @@ export const ResumeList = (props: ResumeListProps) => {
     const { 
         className,
         resumeIds,
+        resumeIdsStatus,
         onAddNew,
         onOpen,
         onDelete,
     } = props;
-
+    
     const { t } = useTranslation();
 
     return (
@@ -32,8 +34,9 @@ export const ResumeList = (props: ResumeListProps) => {
                 <Button
                     theme={ButtonTheme.CLEAR}
                     onClick={onAddNew}
+                    disabled={resumeIdsStatus === 'isLoading'}
                 >
-                    {t('ResumeList.createNew')} <AddFileIcon />
+                    { t('ResumeList.createNew') } <AddFileIcon />
                 </Button>
             </div>
             <div className={cls.cardsContainer}>

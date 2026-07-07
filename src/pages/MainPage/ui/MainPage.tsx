@@ -3,10 +3,11 @@ import { classNames } from "shared/lib/classNames/classNames";
 import cls from "./MainPage.module.scss";
 import { useEffect } from "react";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
-import { deleteResumeById, fetchResumeIds, getResumeIds, Resume, resumeActions, updateResume } from "entities/Resume";
+import { deleteResumeById, fetchResumeIds, getResumeIds, getResumeIdsStatus, Resume, resumeActions, updateResume } from "entities/Resume";
 import { ResumeList } from "widgets/ResumeList";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { generateResumePreviewUrl } from "features/RenderResumeToPdf";
 
 
 interface MainPageProps {
@@ -65,8 +66,9 @@ const MainPage = ({ className }: MainPageProps) => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const resumeIds = useSelector(getResumeIds);
+    const resumeIdsStatus = useSelector(getResumeIdsStatus);
 
-    const onAddNew = () => {
+    const onAddNew = async () => {
         const id = crypto.randomUUID();
         const createdAt = new Date().toISOString();
 
@@ -76,6 +78,8 @@ const MainPage = ({ className }: MainPageProps) => {
             createdAt: createdAt,
             updatedAt: createdAt,
         }
+        
+        resumeDraft.prevImg = await generateResumePreviewUrl(resumeDraft)
 
         dispatch(updateResume(resumeDraft))
     }
@@ -88,6 +92,7 @@ const MainPage = ({ className }: MainPageProps) => {
         navigate(`/${id}/edit?step=personal`);
     }
 
+
     useEffect(() => {
         dispatch(fetchResumeIds());
         dispatch(resumeActions.setCurrentId())
@@ -98,6 +103,7 @@ const MainPage = ({ className }: MainPageProps) => {
             <div className={ classNames(cls.MainPage, {}, [className]) }>
                 <ResumeList
                     resumeIds={resumeIds || []}
+                    resumeIdsStatus={resumeIdsStatus}
                     onAddNew={onAddNew}
                     onOpen={onOpen}
                     onDelete={onDelete}

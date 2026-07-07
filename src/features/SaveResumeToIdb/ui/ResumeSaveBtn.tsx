@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { getResumeCurrentId, getResumeDraft, updateResume } from "entities/Resume";
+import { getResumeCurrentId, getResumeDraft, Resume, updateResume } from "entities/Resume";
 import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import { ReactComponent as SaveIcon } from 'shared/assets/icons/content-save-outline.svg';
 import { ReactComponent as SaveIconSuccess } from 'shared/assets/icons/content-save-check-outline.svg';
@@ -11,9 +11,10 @@ import cls from "./ResumeSaveBtn.module.scss";
 
 interface ResumeSaveBtnProps {
     className?: string;
+    previewGenerateCb?: (data: Resume) => Promise<string>
 }
 
-export const ResumeSaveBtn = ({ className }: ResumeSaveBtnProps) => {
+export const ResumeSaveBtn = ({ className, previewGenerateCb }: ResumeSaveBtnProps) => {
     const dispatch = useAppDispatch();
 
     const currentResumeId = useSelector(getResumeCurrentId);
@@ -22,13 +23,16 @@ export const ResumeSaveBtn = ({ className }: ResumeSaveBtnProps) => {
     const timerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
     const [isSaved, setIsSaved] = useState(false);
 
-    const onSave = useCallback(() => {
-        const updatedAt = new Date().toISOString()
-        dispatch(updateResume({...resumeDraft, updatedAt}))
+    const onSave = useCallback(async () => {
+        const updatedAt = new Date().toISOString();
+
+        const prevImg = await previewGenerateCb?.(resumeDraft);
+        
+        dispatch(updateResume({...resumeDraft, updatedAt, prevImg}))
 
         setIsSaved(true);
         timerRef.current = setTimeout(() => setIsSaved(false), 2000)
-    }, [dispatch, resumeDraft])
+    }, [dispatch, resumeDraft, previewGenerateCb])
 
     useEffect(() => () => clearTimeout(timerRef.current), [])
 

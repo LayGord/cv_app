@@ -23,7 +23,6 @@ import {
     PersonalDataErrors,
     ProjectsDataErrors,
     SkillsDataErrors,
-    TypeOfEmplErrors,
 
 } from "../types/resumeValidationSchema";
 import { isEmptyObj } from "shared/lib/isEmptyObj/isEmptyObj";
@@ -39,6 +38,7 @@ const initialState: ResumeSchema = {
     resumeIdsStatus: 'idle',
     resumeDraft: {
         id: '',
+        prevImg: undefined,
         personal: {
             firstname: '',
             lastname: '',
@@ -93,6 +93,9 @@ export const resumeSlice = createSlice({
     reducers: {
         setCurrentId: (state, action: PayloadAction<string | undefined>) => {
             state.currentId = action.payload;
+        },
+        setPreviewImg: (state, action: PayloadAction<string | undefined>) => {
+            state.resumeDraft.prevImg = action.payload;
         },
         // personalData
         updatePersonalData: (state, action: PayloadAction<Partial<PersonalData>>) => {
@@ -426,11 +429,11 @@ export const resumeSlice = createSlice({
             })
             .addCase(updateResume.fulfilled, (state, action: PayloadAction<Resume>) => {
 
-                const { id, objective, createdAt, updatedAt = createdAt, } = action.payload;
+                const { id, objective, createdAt, updatedAt = createdAt, prevImg} = action.payload;
 
                 state.resumeDraftStatus = 'succeeded';
                 state.resumeIdsStatus = 'succeeded';
-                state.resumeIds.push({id, objective, updatedAt, createdAt})
+                state.resumeIds.push({id, objective, updatedAt, createdAt, prevImg})
             })
             .addCase(deleteResumeById.fulfilled, (state, action: PayloadAction<string> ) => {
                 state.resumeIds = state.resumeIds.filter(item => item.id !== action.payload);

@@ -14,3 +14,8 @@ declare module '*.png';
 type DeepPartial<T> = T extends object ? {
     [P in keyof T]?: DeepPartial<T[P]>;
 } : T;
+
+declare module '*?url' {
+  const value: string;
+  export default value;
+}
