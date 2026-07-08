@@ -4,12 +4,20 @@ import { Resume } from "../../types/ResumeSchema";
 
 
 export const fetchResumeIds = 
-createAsyncThunk<{id: string, objective: Partial<Resume['objective']>, createdAt: string, updatedAt?: string, prevImg?: string}[], void>
+createAsyncThunk<{
+        id: string, 
+        title: string, 
+        objective: Partial<Resume['objective']>, 
+        createdAt: string, 
+        updatedAt?: string, 
+        prevImg?: string
+    }[], void
+>
 (
     'resume/fetchResumeIds',
     async () => {
         return (await resumeRepository.getAll()).map(
-            ( {id, objective, updatedAt='', createdAt='', prevImg} ) => ({id, objective, updatedAt, createdAt, prevImg})
+            ( {id, title, objective, updatedAt='', createdAt='', prevImg} ) => ({id, title, objective, updatedAt, createdAt, prevImg})
         )
     }
 );

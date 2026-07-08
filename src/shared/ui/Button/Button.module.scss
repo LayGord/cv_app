@@ -19,6 +19,10 @@
     }
 }
 
+.Button:disabled {
+    opacity: 0.5;
+}
+
 .default {
     color: var(--primary-color);
     background-color: var(--dark-bg-color);

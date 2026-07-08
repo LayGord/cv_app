@@ -11,12 +11,14 @@
 }
 
 .header {
+    color: var(--secondary-color);
     display: flex;
     padding-bottom: 30px;
     font-size: 20px;
 }
 
 .link {
+    color: var(--secondary-color);
     //margin-left: auto;
     width: 50px !important;
 }
@@ -40,6 +42,7 @@
 }
 
 .sectionHeader {
+    color: var(--secondary-color);
     display: flex;
     flex-direction: row;
     align-items: center;

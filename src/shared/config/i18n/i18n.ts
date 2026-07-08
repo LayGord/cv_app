@@ -7,9 +7,9 @@ i18n
     .use(Backend)
     .use(initReactI18next)
     .init({
-        lng: localStorage.getItem(LANG_KEY) || 'en-EN',
-        fallbackLng: 'en-EN',
-        supportedLngs: ['en-EN', 'ru-RU'],
+        lng: localStorage.getItem(LANG_KEY) || 'en',
+        fallbackLng: 'en',
+        supportedLngs: ['en', 'ru'],
         ns: ['translation', 'resume', 'preview'],
         defaultNS: 'translation',
         debug: process.env.NODE_ENV === 'development',

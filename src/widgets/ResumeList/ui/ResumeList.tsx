@@ -8,7 +8,14 @@ import { useTranslation } from "react-i18next";
 
 interface ResumeListProps {
     className?: string;
-    resumeIds: { id: string, objective: Partial<Resume['objective']>, createdAt: string, updatedAt?: string, prevImg?: string }[];
+    resumeIds: { 
+        id: string, 
+        title: string, 
+        objective: Partial<Resume['objective']>, 
+        createdAt: string, 
+        updatedAt?: string, 
+        prevImg?: string 
+    }[];
     resumeIdsStatus: 'isLoading' | 'idle' | 'succeeded' | 'failed';
     onAddNew?: () => void;
     onOpen?: (id: string) => void;

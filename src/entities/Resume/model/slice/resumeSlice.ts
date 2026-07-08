@@ -31,6 +31,7 @@ import { fetchResumeIds } from "../services/fetchResumeIds/fetchResumeIds";
 import { fetchResumeById } from "../services/fetchResumeById/fetchResumeById";
 import { updateResume } from "../services/updateResume/updateResume";
 import { deleteResumeById } from "../services/deleteResumeById/deleteResumeById";
+import { patchResume } from "../services/renameResumeById/renameResumeById";
 
 
 const initialState: ResumeSchema = {
@@ -38,6 +39,7 @@ const initialState: ResumeSchema = {
     resumeIdsStatus: 'idle',
     resumeDraft: {
         id: '',
+        title: 'New resume',
         prevImg: undefined,
         personal: {
             firstname: '',
@@ -93,6 +95,9 @@ export const resumeSlice = createSlice({
     reducers: {
         setCurrentId: (state, action: PayloadAction<string | undefined>) => {
             state.currentId = action.payload;
+        },
+        setResumeTitle: (state, action: PayloadAction<string>) => {
+            state.resumeDraft.title = action.payload;
         },
         setPreviewImg: (state, action: PayloadAction<string | undefined>) => {
             state.resumeDraft.prevImg = action.payload;
@@ -418,7 +423,13 @@ export const resumeSlice = createSlice({
             })
             .addCase(fetchResumeIds.fulfilled, 
                 (state, 
-                    action: PayloadAction<{id: string, objective: Partial<Resume['objective']>, createdAt: string, updatedAt?: string}[]>
+                    action: PayloadAction<{
+                        id: string, 
+                        title: string, 
+                        objective: Partial<Resume['objective']>, 
+                        createdAt: string, 
+                        updatedAt?: string
+                    }[]>
                 ) => {
                     state.resumeIdsStatus = 'succeeded';
                     state.resumeIds = action.payload
@@ -429,11 +440,11 @@ export const resumeSlice = createSlice({
             })
             .addCase(updateResume.fulfilled, (state, action: PayloadAction<Resume>) => {
 
-                const { id, objective, createdAt, updatedAt = createdAt, prevImg} = action.payload;
+                const { id, title, objective, createdAt, updatedAt = createdAt, prevImg} = action.payload;
 
                 state.resumeDraftStatus = 'succeeded';
                 state.resumeIdsStatus = 'succeeded';
-                state.resumeIds.push({id, objective, updatedAt, createdAt, prevImg})
+                state.resumeIds.push({id, title, objective, updatedAt, createdAt, prevImg})
             })
             .addCase(deleteResumeById.fulfilled, (state, action: PayloadAction<string> ) => {
                 state.resumeIds = state.resumeIds.filter(item => item.id !== action.payload);
@@ -453,6 +464,16 @@ export const resumeSlice = createSlice({
                 state.resumeIdsStatus = 'failed';
                 state.error = action.payload
             })
+            .addCase(patchResume.pending, (state) => {
+                state.error = undefined;
+                state.resumeIdsStatus = 'isLoading';
+            })
+            .addCase(patchResume.fulfilled, (state, action: PayloadAction<Resume>) => {
+                const { id, title, updatedAt } = action.payload;
+                state.error = undefined;
+                state.resumeIdsStatus = 'succeeded';
+                state.resumeIds = state.resumeIds.map(item => item.id === id ? {...item, title, updatedAt} : item);
+            });
     }
     
 })

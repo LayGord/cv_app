@@ -17,6 +17,7 @@ interface MainPageProps {
 
 const resumeTemplate: Resume = {
     id: '',
+    title: 'New resume',
     personal: {
         firstname: '',
         lastname: '',

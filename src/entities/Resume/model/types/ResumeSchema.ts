@@ -16,7 +16,7 @@ import {
 
 export interface ResumeSchema {
     currentId?: string;
-    resumeIds: {id: string, objective: Partial<ObjectiveData>, updatedAt?: string, createdAt: string, prevImg?: string}[];
+    resumeIds: {id: string, title: string, objective: Partial<ObjectiveData>, updatedAt?: string, createdAt: string, prevImg?: string}[];
     resumeIdsStatus: 'isLoading' | 'idle' | 'succeeded' | 'failed';
     resumeDraft: Resume;
     resumeDraftStatus: 'isLoading' | 'idle' | 'succeeded' | 'failed' | 'validating';
@@ -25,6 +25,7 @@ export interface ResumeSchema {
 
 export interface Resume {
     id: string;
+    title: string;
     prevImg?: string;
     personal: PersonalData,
     contacts: ContactsData,

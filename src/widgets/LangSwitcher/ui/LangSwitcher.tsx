@@ -15,7 +15,7 @@ export const LangSwitcher = ({ className }: LangSwitcherProps) => {
     const { t, i18n } = useTranslation();
 
     const onChangeLanguage = useCallback(() => {
-        const next = i18n.language === 'en-EN' ? 'ru-RU' : 'en-EN'
+        const next = i18n.language === 'en' ? 'ru' : 'en'
         i18n.changeLanguage(next);
         localStorage.setItem(LANG_KEY, next)
     }, [i18n]);

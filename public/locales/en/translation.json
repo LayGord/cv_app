@@ -27,6 +27,12 @@
         "empty": "There is no saved resume`s found. Add your first"
     },
     "ResumeCard": {
-        "deleteBtn": "Delete"
+        "previewAlt": "Your resume preview image",
+        "deleteBtn": "Delete",
+        "renameBtn": "Rename",
+        "renameSaveBtn": "Save",
+        "renameCancelBtn": "Cancel",
+        "TOO_SHORT_TITLE": "Title is too short. At least 3 characters required"
     }
+
 }

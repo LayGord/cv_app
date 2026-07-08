@@ -31,14 +31,16 @@
 
 
     /* Z-indexes */
+    --select-z-index: 30;
+    --select-placeholder-z-index: 31;
+
+
     --multi-select-overlay-z-index: 119;
     --multi-select-list-z-index: 120;
     --popup-z-index: 121;
     --multi-select-input-z-index: 122;
     --multi-select-closeBtn-z-index: 123;
-
-    --select-z-index: 30;
-    --select-placeholder-z-index: 31;
+    --modal-z-index: 200;
 
     --navbar-z-index: 1100;
 

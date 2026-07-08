@@ -40,15 +40,19 @@ export const ResumeSaveBtn = ({ className, previewGenerateCb }: ResumeSaveBtnPro
         <div className={ classNames(cls.ResumeSaveBtn, {}, [className]) }>
             { currentResumeId
                 ? 
-                <Button
-                    theme={ButtonTheme.CLEAR}
-                    onClick={onSave}
-                >
-                    { isSaved 
-                        ? <SaveIconSuccess />
-                        : <SaveIcon />
-                    }
-                </Button>
+                <>
+                    <Button
+                        theme={ButtonTheme.CLEAR}
+                        onClick={onSave}
+                    >
+                        { isSaved 
+                            ? <SaveIconSuccess />
+                            : <SaveIcon />
+                        }
+                    </Button>
+                    
+                </>
+
                 : <div></div>
             }
         </div>

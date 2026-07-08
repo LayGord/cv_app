@@ -24,7 +24,7 @@ const validateJobItemField = (
         if (value && isShorterThan(value, 2)) return 'TOO_SHORT';
         return;
     case 'dateFrom':
-        if (!value || !isEmpty(value)) return 'REQUIRED';
+        if (!value) return 'REQUIRED';
         if (Number.isNaN(Date.parse(value))) return 'INVALID_DATE'
         return;
     case 'dateTo':
