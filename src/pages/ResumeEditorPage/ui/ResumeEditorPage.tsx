@@ -43,7 +43,10 @@ const ResumeEditorPage = ({ className }: ResumeEditorPageProps) => {
     }, [dispatch, resumeDraft, setSearchParams]);
 
 
-    const onFinish = () => navigate(`/${id}/${AppRoutes.PREVIEW}`);
+    const onFinish = useCallback(() => {
+        dispatch(updateResume(resumeDraft));
+        navigate(`/${id}/${AppRoutes.PREVIEW}`)
+    }, [dispatch, id, navigate, resumeDraft]);
 
     useEffect(() => {
         if (!id) {
