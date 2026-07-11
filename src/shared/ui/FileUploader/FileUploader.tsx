@@ -48,7 +48,7 @@ export const FileUploader = memo((props: FileUploaderProps) => {
 
             {value ? (
                 <label htmlFor={id} className={cls.label}>
-                    {value}
+                    Удалить фото
                     <Button
                         className={cls.cancelButton}
                         theme={ButtonTheme.CLEAR}

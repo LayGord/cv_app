@@ -1,0 +1,25 @@
+.ResumeSaveBtn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.resumeInfo {
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 3px 0px var(--shadow-color);
+    border-radius: 4px;
+    padding-inline: 8px;
+}
+
+.resumeTitle {
+    font-size: 14px;
+    height: 16px;
+}
+
+.resumeUpdAt {
+    font-size: 11px;
+    height: 13px;
+    color: var(--secondary-color);
+}

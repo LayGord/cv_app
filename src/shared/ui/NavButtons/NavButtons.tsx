@@ -3,65 +3,64 @@ import { ReactComponent as ChevronRight } from 'shared/assets/icons/chevron-righ
 import { ReactComponent as ChevronLeft } from 'shared/assets/icons/chevron-left.svg';
 import { classNames } from "shared/lib/classNames/classNames";
 import { Button, ButtonTheme } from "../Button/Button";
-import { AppLink, AppLinkTheme } from "../AppLink/AppLink";
 import cls from "./NavButtons.module.scss";
 
 
 interface NavButtonsProps {
-    className?: string;
-    prev?: string;
-    next?: string;
-    onSwitchStep: (step: string) => void;
-    lastLink?: string;
+  className?: string;
+  hasPrev?: boolean;
+  hasNext?: boolean;
+  onPrev?: () => void | Promise<void>;
+  onNext?: () => void | Promise<void>;
+  onFinish?: () => void | Promise<void>;
 }
 
 export const NavButtons = (props: NavButtonsProps) => {
     const {
         className,
-        prev,
-        next,
-        onSwitchStep,
-        lastLink,
+        hasPrev,
+        hasNext,
+        onPrev,
+        onNext,
+        onFinish,
     } = props;
 
     const { t } = useTranslation();
 
-
-    const onNext = () => onSwitchStep(next || '');
-    const onPrev = () => onSwitchStep(prev || '');
-
     return (
-        <div className={ classNames(cls.NavButtons, {}, [className]) }>
-            { prev && 
+        <div className={classNames(cls.NavButtons, {}, [className])}>
+            {hasPrev && (
                 <Button
                     className={cls.prev}
                     onClick={onPrev}
                     theme={ButtonTheme.CLEAR}
                 >
                     <ChevronLeft />
-                    <span>{t('NavButtons.previous')}</span>
+                    <span>{t("NavButtons.previous")}</span>
                 </Button>
-            }
-            { next && 
+            )}
+
+            {hasNext && (
                 <Button
                     className={cls.next}
                     onClick={onNext}
                     theme={ButtonTheme.CLEAR}
                 >
-                    <span>{t('NavButtons.next')}</span>
+                    <span>{t("NavButtons.next")}</span>
                     <ChevronRight />
                 </Button>
-            }
-            { !next && lastLink &&
-                <AppLink 
-                    to={lastLink}
+            )}
+
+            {!hasNext && onFinish && (
+                <Button
                     className={cls.preview}
-                    theme={AppLinkTheme.CLEAR}
+                    onClick={onFinish}
+                    theme={ButtonTheme.CLEAR}
                 >
-                    <span>{t('NavButtons.preview')}</span>
+                    <span>{t("NavButtons.preview")}</span>
                     <ChevronRight />
-                </AppLink>
-            }
+                </Button>
+            )}
         </div>
     );
 };

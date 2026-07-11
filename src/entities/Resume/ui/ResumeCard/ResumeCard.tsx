@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { classNames } from "shared/lib/classNames/classNames";
 import { ReactComponent as ExtrasIcon } from 'shared/assets/icons/dots-vertical.svg';
 import { ReactComponent as DeleteIcon } from 'shared/assets/icons/delete-outline.svg';
+import { ReactComponent as EditIcon } from 'shared/assets/icons/edit-icon-bold.svg';
 import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import { Portal } from "shared/ui/Portal/Portal";
 import cls from "./ResumeCard.module.scss";
@@ -10,7 +11,7 @@ import { Resume } from "../../model/types/ResumeSchema";
 import { Modal } from "shared/ui/Modal/Modal";
 import { Input, InputTheme } from "shared/ui/Input/Input";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
-import { patchResume } from "../../model/services/renameResumeById/renameResumeById";
+import { patchResume } from "../../model/services/patchResumeById/patchResumeById";
 
 
 interface ResumeCardProps {
@@ -18,7 +19,6 @@ interface ResumeCardProps {
     data: { id: string, title: string, objective: Partial<Resume['objective']>, updatedAt?: string, createdAt?: string, prevImg?: string };
     onOpen?: (id: string) => void;
     onDelete?: (id: string) => void;
-    onRename?: (id: string) => void;
 }
 
 export const ResumeCard = (props: ResumeCardProps) => {
@@ -28,13 +28,12 @@ export const ResumeCard = (props: ResumeCardProps) => {
         data,
         onOpen,
         onDelete,
-        onRename,
     } = props;
 
     const { t } = useTranslation(undefined, {keyPrefix: "ResumeCard"});
     const dispatch = useAppDispatch();
 
-    const { id, objective, updatedAt, createdAt } = data;
+    const { id, updatedAt, createdAt } = data;
     const [isContextMenu, setIsContextMenu] = useState(false);
     const [isModal, setIsModal] = useState(false);
 
@@ -148,7 +147,7 @@ export const ResumeCard = (props: ResumeCardProps) => {
                                     theme={ButtonTheme.CLEAR}
                                     onClick={onOpenRenameModal}
                                 >
-                                    <DeleteIcon />
+                                    <EditIcon />
                                     {t('renameBtn')}
                                 </Button>
                                 <Button

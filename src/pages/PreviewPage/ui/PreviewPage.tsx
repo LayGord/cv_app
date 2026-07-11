@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router";
 import { useSelector } from "react-redux";
 import { PageLoader } from "widgets/PageLoader";
 import { Page } from "widgets/Page";
-import { fetchResumeById, getResume, getResumeErrors, resumeActions, updateResume, validateResumeData } from "entities/Resume";
+import { fetchResumeById, getResume, getResumeErrors, patchResume, resumeActions, validateResumeData } from "entities/Resume";
 import { isEmptyObj } from "shared/lib/isEmptyObj/isEmptyObj";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { classNames } from "shared/lib/classNames/classNames";
@@ -34,16 +34,18 @@ const PreviewPage = ({ className }: PreviewPageProps) => {
             .then((resume) => {
                 dispatch(resumeActions.setCurrentId(id));
                 dispatch(validateResumeData(resume))
+                    .unwrap()
+                    .then((valErrors) => {
+                        dispatch(patchResume({id: resume.id, valErrors}));
+                        console.log('saved')
+                    })
             }) // validate only after fetch current resumeDraft
             .catch(() => {
                 navigate(RouterPaths.not_found); return;
             });
+        
     }, [dispatch, id, navigate]);
 
-    useEffect(() => {
-        console.log('saved')
-        dispatch(updateResume(resumeDraft))
-    }, [resumeDraft, dispatch]);
 
     return (
         <Page >

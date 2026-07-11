@@ -33,6 +33,8 @@
         "renameSaveBtn": "Save",
         "renameCancelBtn": "Cancel",
         "TOO_SHORT_TITLE": "Title is too short. At least 3 characters required"
+    },
+    "ResumeSaveBtn": {
+        "lastUpdate": "Last save: {{updatedAt}}"
     }
-
 }

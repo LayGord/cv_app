@@ -32,6 +32,9 @@
         "renameBtn": "Переименовать",
         "renameSaveBtn": "Сохранить",
         "renameCancelBtn": "Отмена",
-        "TOO_SHORT_TITLE": "Название слишком короткое. Требуется минимум 3 символа"
+        "TOO_SHORT_TITLE": "Название слишком короткое.Требуется минимум 3 символа"
+    },
+    "ResumeSaveBtn": {
+        "lastUpdate": "Последнее сохранение: {{updatedAt}}"
     }
 }

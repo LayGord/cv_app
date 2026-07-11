@@ -14,6 +14,7 @@ import { DatePicker, DatePickerTheme } from "shared/ui/DatePicker/DatePicker";
 import { Avatar, AvatarSize } from "shared/ui/Avatar/Avatar";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { classNames } from "shared/lib/classNames/classNames";
+import { fileToDataUrl } from "shared/lib/fileToDataUrl/fileToDataUrl";
 import { SexSelect } from "./SexSelect/SexSelect";
 import cls from "./PersonalEditor.module.scss";
 
@@ -35,11 +36,11 @@ export const PersonalEditor = ({ className }: PersonalEditorProps) => {
             (value: string) => dispatch(resumeActions.updatePersonalData({[field]: value})), 
         [dispatch]);
 
-    const onChangePhoto = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChangePhoto = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (!file) return;
 
-        const photo = URL.createObjectURL(file);
+        const photo = await fileToDataUrl(file)
         dispatch(resumeActions.updatePersonalData({ photo }));
     }, [dispatch]);
   

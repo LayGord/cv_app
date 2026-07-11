@@ -33,7 +33,7 @@ export const ProjectsInfo = memo((props: ProjectsInfoProps) => {
         return (
             <View style={styles.projectItem}>
                 <View style={styles.mainColumn}>
-                    <Text style={styles.title}>{ item.title }</Text>
+                    <Text style={ styles.title }>{ item.title }</Text>
                     { item.description && <Text>{ item.description }</Text>}
                 </View>
             </View>

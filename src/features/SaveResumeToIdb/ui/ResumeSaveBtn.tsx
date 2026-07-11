@@ -7,6 +7,7 @@ import { ReactComponent as SaveIconSuccess } from 'shared/assets/icons/content-s
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { classNames } from "shared/lib/classNames/classNames";
 import cls from "./ResumeSaveBtn.module.scss";
+import { useTranslation } from "react-i18next";
 
 
 interface ResumeSaveBtnProps {
@@ -16,6 +17,7 @@ interface ResumeSaveBtnProps {
 
 export const ResumeSaveBtn = ({ className, previewGenerateCb }: ResumeSaveBtnProps) => {
     const dispatch = useAppDispatch();
+    const { t } = useTranslation();
 
     const currentResumeId = useSelector(getResumeCurrentId);
     const resumeDraft = useSelector(getResumeDraft);
@@ -34,6 +36,13 @@ export const ResumeSaveBtn = ({ className, previewGenerateCb }: ResumeSaveBtnPro
         timerRef.current = setTimeout(() => setIsSaved(false), 2000)
     }, [dispatch, resumeDraft, previewGenerateCb])
 
+    const updAt =  t('lastUpdate', { 
+        updatedAt: resumeDraft.updatedAt 
+            ? new Date(resumeDraft.updatedAt).toLocaleString().replace(', ', ' ')
+            : new Date(resumeDraft.createdAt).toLocaleString().replace(', ', ' '), 
+        keyPrefix: 'ResumeSaveBtn' 
+    });
+
     useEffect(() => () => clearTimeout(timerRef.current), [])
 
     return (
@@ -50,7 +59,10 @@ export const ResumeSaveBtn = ({ className, previewGenerateCb }: ResumeSaveBtnPro
                             : <SaveIcon />
                         }
                     </Button>
-                    
+                    <div className={cls.resumeInfo}>
+                        <div className={cls.resumeTitle}>{ resumeDraft.title }</div>
+                        <div className={cls.resumeUpdAt}>{ updAt }</div>
+                    </div>
                 </>
 
                 : <div></div>

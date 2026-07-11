@@ -48,6 +48,7 @@ export { validateResumeData } from './model/services/validation/validateResumeDa
 export { fetchResumeIds } from './model/services/fetchResumeIds/fetchResumeIds';
 export { fetchResumeById } from './model/services/fetchResumeById/fetchResumeById';
 export { updateResume } from './model/services/updateResume/updateResume';
+export { patchResume } from './model/services/patchResumeById/patchResumeById';
 export { deleteResumeById } from './model/services/deleteResumeById/deleteResumeById';
 
 export { ResumeCard } from './ui/ResumeCard/ResumeCard';

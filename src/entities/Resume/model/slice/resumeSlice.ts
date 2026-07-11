@@ -31,7 +31,7 @@ import { fetchResumeIds } from "../services/fetchResumeIds/fetchResumeIds";
 import { fetchResumeById } from "../services/fetchResumeById/fetchResumeById";
 import { updateResume } from "../services/updateResume/updateResume";
 import { deleteResumeById } from "../services/deleteResumeById/deleteResumeById";
-import { patchResume } from "../services/renameResumeById/renameResumeById";
+import { patchResume } from "../services/patchResumeById/patchResumeById";
 
 
 const initialState: ResumeSchema = {
