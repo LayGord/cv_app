@@ -4,6 +4,7 @@ import { classNames } from "shared/lib/classNames/classNames";
 import { ReactComponent as ExtrasIcon } from 'shared/assets/icons/dots-vertical.svg';
 import { ReactComponent as DeleteIcon } from 'shared/assets/icons/delete-outline.svg';
 import { ReactComponent as EditIcon } from 'shared/assets/icons/edit-icon-bold.svg';
+import { ReactComponent as DocumentIcon } from 'shared/assets/icons/document.svg';
 import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import { Portal } from "shared/ui/Portal/Portal";
 import cls from "./ResumeCard.module.scss";
@@ -17,6 +18,7 @@ import { patchResume } from "../../model/services/patchResumeById/patchResumeByI
 interface ResumeCardProps {
     className?: string;
     data: { id: string, title: string, objective: Partial<Resume['objective']>, updatedAt?: string, createdAt?: string, prevImg?: string };
+    onPreview?: (id: string) => void;
     onOpen?: (id: string) => void;
     onDelete?: (id: string) => void;
 }
@@ -26,6 +28,7 @@ export const ResumeCard = (props: ResumeCardProps) => {
     const {
         className,
         data,
+        onPreview,
         onOpen,
         onDelete,
     } = props;
@@ -90,6 +93,11 @@ export const ResumeCard = (props: ResumeCardProps) => {
         onCloseRenameModal();
     }, [data.id, dispatch, title, onCloseRenameModal]);
 
+    const onPreviewResume = useCallback((e: React.MouseEvent) => {
+        onPreview?.(id);
+        e.stopPropagation();
+    }, [id, onPreview]);
+
     useEffect(() => {
         if (isContextMenu) {
             window.addEventListener('keydown', keyDownHandler);
@@ -143,6 +151,13 @@ export const ResumeCard = (props: ResumeCardProps) => {
                     { isContextMenu && 
                         <>
                             <div className={cls.contextMenu}>
+                                <Button
+                                    theme={ButtonTheme.CLEAR}
+                                    onClick={onPreviewResume}
+                                >
+                                    <DocumentIcon />
+                                    {t('previewBtn')}
+                                </Button>
                                 <Button
                                     theme={ButtonTheme.CLEAR}
                                     onClick={onOpenRenameModal}

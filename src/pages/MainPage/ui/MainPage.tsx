@@ -1,13 +1,14 @@
 import { Page } from "widgets/Page";
 import { classNames } from "shared/lib/classNames/classNames";
 import cls from "./MainPage.module.scss";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { deleteResumeById, fetchResumeIds, getResumeIds, getResumeIdsStatus, Resume, resumeActions, updateResume } from "entities/Resume";
 import { ResumeList } from "widgets/ResumeList";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { generateResumePreviewUrl } from "features/RenderResumeToPdf";
+import { AppRoutes } from "shared/config/router/paths";
 
 
 interface MainPageProps {
@@ -69,7 +70,7 @@ const MainPage = ({ className }: MainPageProps) => {
     const resumeIds = useSelector(getResumeIds);
     const resumeIdsStatus = useSelector(getResumeIdsStatus);
 
-    const onAddNew = async () => {
+    const onAddNew = useCallback(async () => {
         const id = crypto.randomUUID();
         const createdAt = new Date().toISOString();
 
@@ -83,15 +84,19 @@ const MainPage = ({ className }: MainPageProps) => {
         resumeDraft.prevImg = await generateResumePreviewUrl(resumeDraft)
 
         dispatch(updateResume(resumeDraft))
-    }
+    }, [dispatch])
 
-    const onDelete = (id: string) => {
+    const onPreview = useCallback((id: string) => {
+        navigate(`${id}/${AppRoutes.PREVIEW}`)
+    }, [navigate]);
+
+    const onDelete = useCallback((id: string) => {
         dispatch(deleteResumeById(id))
-    };
+    }, [dispatch]);
 
-    const onOpen = (id: string) => {
+    const onOpen = useCallback((id: string) => {
         navigate(`/${id}/edit?step=personal`);
-    }
+    }, [navigate])
 
 
     useEffect(() => {
@@ -106,6 +111,7 @@ const MainPage = ({ className }: MainPageProps) => {
                     resumeIds={resumeIds || []}
                     resumeIdsStatus={resumeIdsStatus}
                     onAddNew={onAddNew}
+                    onPreview={onPreview}
                     onOpen={onOpen}
                     onDelete={onDelete}
                 />

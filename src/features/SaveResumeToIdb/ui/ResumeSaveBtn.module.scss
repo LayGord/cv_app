@@ -2,24 +2,29 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    gap: 10px;
+}
+.resumeControls {
+    box-shadow: 0px 0px 3px 0px var(--shadow-color);
+    border-radius: 4px;
+    display: flex;
 }
 
 .resumeInfo {
-    height: 40px;
+    padding-block: 5px;
+    height: 50px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0px 0px 3px 0px var(--shadow-color);
-    border-radius: 4px;
-    padding-inline: 8px;
+    padding-inline: 10px;
 }
 
 .resumeTitle {
     font-size: 14px;
-    height: 16px;
+    height: 18px;
 }
 
 .resumeUpdAt {
     font-size: 11px;
-    height: 13px;
+    height: 14px;
     color: var(--secondary-color);
 }

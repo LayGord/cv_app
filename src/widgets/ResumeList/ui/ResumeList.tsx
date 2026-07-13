@@ -18,6 +18,7 @@ interface ResumeListProps {
     }[];
     resumeIdsStatus: 'isLoading' | 'idle' | 'succeeded' | 'failed';
     onAddNew?: () => void;
+    onPreview?: (id: string) => void;
     onOpen?: (id: string) => void;
     onDelete?: (id: string) => void;
 }
@@ -29,6 +30,7 @@ export const ResumeList = (props: ResumeListProps) => {
         resumeIds,
         resumeIdsStatus,
         onAddNew,
+        onPreview,
         onOpen,
         onDelete,
     } = props;
@@ -53,6 +55,7 @@ export const ResumeList = (props: ResumeListProps) => {
                             <ResumeCard
                                 key={item.id}
                                 data={item}
+                                onPreview={onPreview}
                                 onOpen={() => onOpen?.(item.id)}
                                 onDelete={() => onDelete?.(item.id)}
                             />

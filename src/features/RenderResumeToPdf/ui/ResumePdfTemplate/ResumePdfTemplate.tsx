@@ -1,5 +1,4 @@
-import { useTranslation } from 'react-i18next';
-import { Document, Page, Text, View, StyleSheet, Font, Image } from '@react-pdf/renderer';
+import { Document, Page, StyleSheet, Font } from '@react-pdf/renderer';
 import { Resume, ObjectiveData, EducationData } from 'entities/Resume';
 import Regular from 'shared/assets/fonts/Roboto-Regular.ttf';
 import SemiBold from 'shared/assets/fonts/Roboto-SemiBold.ttf';
@@ -45,7 +44,6 @@ const styles = StyleSheet.create({
 
 export const ResumePdfTemplate = (props: ResumePdfTemplateProps) => {
     const { data } = props;
-    const { t, i18n } = useTranslation('preview');
 
     return (
         <Document pageLayout='oneColumn'>

@@ -4,10 +4,13 @@ import { getResumeCurrentId, getResumeDraft, Resume, updateResume } from "entiti
 import { Button, ButtonTheme } from "shared/ui/Button/Button";
 import { ReactComponent as SaveIcon } from 'shared/assets/icons/content-save-outline.svg';
 import { ReactComponent as SaveIconSuccess } from 'shared/assets/icons/content-save-check-outline.svg';
+import { ReactComponent as DocumentIcon } from 'shared/assets/icons/document.svg';
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { classNames } from "shared/lib/classNames/classNames";
 import cls from "./ResumeSaveBtn.module.scss";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
+import { AppRoutes } from "shared/config/router/paths";
 
 
 interface ResumeSaveBtnProps {
@@ -17,6 +20,7 @@ interface ResumeSaveBtnProps {
 
 export const ResumeSaveBtn = ({ className, previewGenerateCb }: ResumeSaveBtnProps) => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const { t } = useTranslation();
 
     const currentResumeId = useSelector(getResumeCurrentId);
@@ -36,6 +40,10 @@ export const ResumeSaveBtn = ({ className, previewGenerateCb }: ResumeSaveBtnPro
         timerRef.current = setTimeout(() => setIsSaved(false), 2000)
     }, [dispatch, resumeDraft, previewGenerateCb])
 
+    const onPreview = useCallback(() => {
+        navigate(`${resumeDraft.id}/${AppRoutes.PREVIEW}`)
+    }, [navigate, resumeDraft.id]);
+
     const updAt =  t('lastUpdate', { 
         updatedAt: resumeDraft.updatedAt 
             ? new Date(resumeDraft.updatedAt).toLocaleString().replace(', ', ' ')
@@ -50,7 +58,7 @@ export const ResumeSaveBtn = ({ className, previewGenerateCb }: ResumeSaveBtnPro
             { currentResumeId
                 ? 
                 <>
-                    <Button
+                    {/* <Button
                         theme={ButtonTheme.CLEAR}
                         onClick={onSave}
                     >
@@ -58,10 +66,28 @@ export const ResumeSaveBtn = ({ className, previewGenerateCb }: ResumeSaveBtnPro
                             ? <SaveIconSuccess />
                             : <SaveIcon />
                         }
-                    </Button>
-                    <div className={cls.resumeInfo}>
-                        <div className={cls.resumeTitle}>{ resumeDraft.title }</div>
-                        <div className={cls.resumeUpdAt}>{ updAt }</div>
+                    </Button> */}
+                    <div className={cls.resumeControls}>
+                        <div className={cls.resumeInfo}>
+                            <div className={cls.resumeTitle}>{ resumeDraft.title }</div>
+                            <div className={cls.resumeUpdAt}>{ updAt }</div>
+                        </div>
+                        
+                        <Button
+                            theme={ButtonTheme.CLEAR}
+                            onClick={onSave}
+                        >
+                            { isSaved 
+                                ? <SaveIconSuccess />
+                                : <SaveIcon />
+                            }
+                        </Button>
+                        <Button
+                            theme={ButtonTheme.CLEAR}
+                            onClick={onPreview}
+                        >
+                            <DocumentIcon />
+                        </Button>
                     </div>
                 </>
 

@@ -27,6 +27,7 @@
         "empty": "There is no saved resume`s found. Add your first"
     },
     "ResumeCard": {
+        "previewBtn": "Resume preview",
         "previewAlt": "Your resume preview image",
         "deleteBtn": "Delete",
         "renameBtn": "Rename",
