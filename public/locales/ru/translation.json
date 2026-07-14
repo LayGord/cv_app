@@ -17,7 +17,8 @@
         "notFound": "Не найдено подходящих вариантов"
     },
     "FileUploader": {
-        "chooseFile": "Выбрать файл"
+        "chooseFile": "Выбрать файл",
+        "deleteFile": "Удалить файл"
     },
     "PageLoader": {
         "loading": "Загрузка"

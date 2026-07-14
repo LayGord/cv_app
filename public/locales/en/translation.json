@@ -17,7 +17,8 @@
         "notFound": "Not found matching options"
     },
     "FileUploader": {
-        "chooseFile": "Choose file to upload"
+        "chooseFile": "Choose file to upload",
+        "deleteFile": "Delete file"
     },
     "PageLoader": {
         "loading": "Loading"
