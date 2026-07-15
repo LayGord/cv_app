@@ -11,6 +11,7 @@ import { SkillsInfo } from './sections/SkillsInfo';
 import { ProjectsInfo } from './sections/ProjectsInfo';
 
 
+
 /**
  *  Font styles for text content
  *    --- name: 22pt semibold 

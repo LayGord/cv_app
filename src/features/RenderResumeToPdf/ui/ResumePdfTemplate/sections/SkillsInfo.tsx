@@ -1,12 +1,13 @@
-import { memo, useCallback } from "react";
+import { memo, useCallback, useState } from "react";
 import { Text, View, StyleSheet } from '@react-pdf/renderer';
 import { useTranslation } from "react-i18next";
-import { SkillData } from "entities/Resume";
+import { SkillData } from "entities/Skill";
 import { Section } from "../layout/Section";
-
+import { loadSkillsByLocale } from 'entities/Skill';
+import { useEffect } from 'react';
 
 interface SkillsInfoProps {
-    data: SkillData[];
+    data: string[];
 }
 
 const styles = StyleSheet.create({
@@ -28,15 +29,36 @@ const styles = StyleSheet.create({
 export const SkillsInfo = memo((props: SkillsInfoProps) => {
     const { data } = props;
     const { t, i18n } = useTranslation('preview', {keyPrefix: 'skillsInfo'});
+    const [skillsList, setSkillsList] = useState<SkillData[]>([]);
+    
+    useEffect(() => {
+        let cancelled = false;
 
-    const renderSkill = useCallback((item: SkillData) => {
-        
+        const loadSkills = async () => {
+            const skills = await loadSkillsByLocale(i18n.language);
+
+            if (!cancelled) {
+                setSkillsList(skills);
+            }
+        };
+
+        loadSkills();
+        return () => {
+            cancelled = true;
+        };
+    }, [i18n.language]);
+
+    const renderSkill = useCallback((id: string) => {
+
+        const skillRecord = skillsList.find(item => item.id === id);
+        if (!skillRecord) return;
+
         return (
             <View style={styles.skill}>
-                <Text >{ item.displayName }</Text>
+                <Text >{ `${skillRecord.displayName}` }</Text>
             </View>
         )
-    }, [])
+    }, [skillsList])
 
     return (
         <Section title={t('title')}>

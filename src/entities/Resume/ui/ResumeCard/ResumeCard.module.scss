@@ -70,8 +70,9 @@
 }
 
 .contextMenu {
+    width: 200px;
     position: absolute;
-    right: -25px;
+    right: -32px;
     bottom: 50px;
     display: flex;
     flex-direction: column;
