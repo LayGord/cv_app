@@ -1,7 +1,9 @@
+import { useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { classNames } from "shared/lib/classNames/classNames";
-import { MultiSelect } from "shared/ui/MultiSelect/MultiSelect";
+import { MultiSelect, MultiSelectOption } from "shared/ui/MultiSelect/MultiSelect";
 import cls from "./SkillsSelect.module.scss";
-import { skillsList } from "../model/const/skills";
+import { loadSkillsByLocale } from "../model/services/loadSkillsByLocale";
 
 
 interface SkillsSelectProps {
@@ -9,7 +11,7 @@ interface SkillsSelectProps {
     value: string[];
     onChange?: (value: string[]) => void;
     onBlur?: (value: string[]) => void;
-    errors?: Record<string, any>
+    error?: string;
 }
 
 export const SkillsSelect = (props: SkillsSelectProps) => {
@@ -18,19 +20,46 @@ export const SkillsSelect = (props: SkillsSelectProps) => {
         value,
         onChange,
         onBlur,
-        errors,
     } = props;
+
+    const { i18n } = useTranslation();
+
+    const [options, setOptions] = useState<MultiSelectOption[]>([]);
+    const [isLoaded, setIsLoaded] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
+
+    const loadOptions = useCallback(async () => {
+        if ( isLoaded || isLoading) return;
+
+        setIsLoading(true);
+
+        try {
+            const skills = await loadSkillsByLocale(i18n.language);
+            setIsLoaded(true);
+            
+            setOptions(skills);
+        } finally {
+            setIsLoading(false);
+        }
+    }, [i18n.language, isLoaded, isLoading]);
+
+    useEffect(() => {
+        setOptions([])
+        setIsLoaded(false);
+    }, [i18n.language]);
 
     return (
         <MultiSelect
             id={"skills"}
             className={ classNames(cls.SkillsSelect, {}, [className]) }
-            options={skillsList}
+            onOpen={loadOptions}
+            isLoading={isLoading}
+            options={options}
             value={value}
             onChange={onChange}
             onBlur={onBlur}
             groupByCategories
-            errors={errors}
         />
     );
 };

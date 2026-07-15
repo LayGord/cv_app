@@ -1,5 +1,6 @@
 import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { ReactComponent as LoadingIcon } from 'shared/assets/icons/ring-resize-icon.svg';
 import { classNames } from "shared/lib/classNames/classNames";
 import cls from "./MultiSelect.module.scss";
 import { Input, InputTheme } from "../Input/Input";
@@ -17,6 +18,8 @@ type MultiSelectVisibility = 'opening' | 'opened' | 'closing' | 'closed';
 interface MultiSelectProps {
     id: string
     className?: string;
+    onOpen?: () => void | Promise<void>;
+    isLoading?: boolean;
     options: MultiSelectOption[];
     value: string[]; // id`s of options
     onChange?: (value: string[]) => void;
@@ -28,6 +31,8 @@ interface MultiSelectProps {
 export const MultiSelect = (props: MultiSelectProps) => {
     const {
         className,
+        onOpen,
+        isLoading,
         options,
         value=[],
         onChange,
@@ -43,12 +48,17 @@ export const MultiSelect = (props: MultiSelectProps) => {
     const [visibility, setVisibility] = useState<MultiSelectVisibility>('closed');
 
     const onOpenClick = useCallback(() => {
-        if (visibility !== 'opened') {setVisibility('opening')};
+        onOpen?.();
+
+        if (visibility !== 'opened') {
+            setVisibility('opening')
+        };
+
         clearTimeout(timerRef.current);
         timerRef.current = setTimeout(() => {
             setVisibility('opened');
         }, 10)
-    }, [visibility]);
+    }, [visibility, onOpen]);
 
     const onCloseClick = useCallback(() => {
         setVisibility('closing');
@@ -137,6 +147,13 @@ export const MultiSelect = (props: MultiSelectProps) => {
         }
     }, [groupOptionsByCategory, renderOption]);
 
+
+    useEffect(() => {
+        if (visibility === 'opened') {
+            onOpen?.()
+        }
+    }, [onOpen, visibility])
+
     return (
         <>  
             { visibility === 'opened' && 
@@ -166,9 +183,13 @@ export const MultiSelect = (props: MultiSelectProps) => {
                 </div>
 
                 <div className={cls.optionsList} >
-                    { filteredOptions.length
-                        ? renderOptionsList(filteredOptions, groupByCategories)
-                        : <span className={cls.searchNotFound}>{t('MultiSelect.notFound')}</span> 
+                    { !isLoading ?
+                        filteredOptions.length
+                            ? renderOptionsList(filteredOptions, groupByCategories)
+                            : <span className={cls.searchNotFound}>{t('MultiSelect.notFound')}</span> 
+                        : <div className={cls.loader}>
+                            <LoadingIcon />
+                        </div>
                     }
                 </div>
 

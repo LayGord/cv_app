@@ -13,7 +13,6 @@ import { Group } from "shared/ui/Group/Group";
 import { FormArray } from "shared/ui/FormArray/FormArray";
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch";
 import { classNames } from "shared/lib/classNames/classNames";
-import { isEmptyObj } from "shared/lib/isEmptyObj/isEmptyObj";
 import { JobItem } from "../JobItem/JobItem";
 import cls from "./JobsEditor.module.scss";
 
@@ -80,7 +79,7 @@ export const JobsEditor = ({ className }: JobsEditorProps) => {
                 <SkillsSelect
                     value={skills}
                     onChange={onUpdateSkills}
-                    errors={isEmptyObj(skillsErrors) ? undefined : skillsErrors}
+                    error={skillsErrors}
                 />
             </Group>
             <FormArray

@@ -6,8 +6,7 @@ import {
     PersonalDataErrors, 
     ContactsDataErrors, 
     AboutMeDataErrors, 
-    ObjectiveDataErrors, 
-    SkillsDataErrors, 
+    ObjectiveDataErrors,  
     JobsDataErrors, 
     ProjectsDataErrors, 
     EducationDataErrors, 
@@ -137,7 +136,7 @@ export interface ValidationErrors {
     contacts: ContactsDataErrors;
     aboutMe: AboutMeDataErrors;
     objective: ObjectiveDataErrors;
-    skills?: SkillsDataErrors;
+    skills?: string;
     jobs: JobsDataErrors;
     projects: ProjectsDataErrors;
     education: EducationDataErrors;
