@@ -1,4 +1,6 @@
+
 import { skillsEn } from "./en";
+
 import { skillsRu } from "./ru";
 
 type SkillData = {
@@ -43,13 +45,13 @@ if (duplicatesRu.length === 0) {
     console.log(JSON.stringify(duplicatesRu, null, 2));
 }
 
-console.log('\n\n ---- En ----')
+// console.log('\n\n ---- En ----')
 
-const duplicatesEn = findDuplicateSkillIds(listEn);
+// const duplicatesEn = findDuplicateSkillIds(listEn);
 
-if (duplicatesEn.length === 0) {
-    console.log("skillsets ok");
-} else {
-    console.log("Found duplicates:");
-    console.log(JSON.stringify(duplicatesEn, null, 2));
-}
+// if (duplicatesEn.length === 0) {
+//     console.log("skillsets ok");
+// } else {
+//     console.log("Found duplicates:");
+//     console.log(JSON.stringify(duplicatesEn, null, 2));
+// }

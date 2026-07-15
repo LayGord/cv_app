@@ -24,8 +24,8 @@ export const skillsEn: SkillData[] = [
     {"id": "typescript", "displayName": "TypeScript", "category": "frontend"},
     {"id": "dom_api", "displayName": "DOM API", "category": "frontend"},
     {"id": "fetch_api", "displayName": "Fetch API", "category": "frontend"},
-    {"id": "rest_api", "displayName": "REST API integration", "category": "frontend"},
-    {"id": "graphql", "displayName": "GraphQL", "category": "frontend"},
+    {"id": "rest_api_int", "displayName": "REST API integration", "category": "frontend"},
+
     {"id": "websockets", "displayName": "WebSockets", "category": "frontend"},
     {"id": "local_storage", "displayName": "LocalStorage / SessionStorage", "category": "frontend"},
     {"id": "cookies", "displayName": "Cookies and browser storage", "category": "frontend"},
@@ -71,16 +71,15 @@ export const skillsEn: SkillData[] = [
     {"id": "lighthouse", "displayName": "Lighthouse", "category": "frontend"},
     {"id": "image_optimization", "displayName": "Image optimization", "category": "frontend"},
     {"id": "rendering_strategies", "displayName": "CSR / SSR / SSG / ISR", "category": "frontend"},
+
     {"id": "testing_frontend", "displayName": "Frontend testing (Jest, React Testing Library, Cypress)", "category": "frontend"},
     {"id": "unit_testing", "displayName": "Unit testing", "category": "frontend"},
     {"id": "integration_testing", "displayName": "Integration testing", "category": "frontend"},
     {"id": "e2e_testing", "displayName": "End-to-end testing", "category": "frontend"},
-    {"id": "jest", "displayName": "Jest", "category": "frontend"},
-    {"id": "vitest", "displayName": "Vitest", "category": "frontend"},
+
     {"id": "react_testing_library", "displayName": "React Testing Library", "category": "frontend"},
-    {"id": "cypress", "displayName": "Cypress", "category": "frontend"},
-    {"id": "playwright", "displayName": "Playwright", "category": "frontend"},
     {"id": "mocking", "displayName": "Mocking and test doubles", "category": "frontend"},
+
     {"id": "webpack", "displayName": "Webpack", "category": "frontend"},
     {"id": "vite", "displayName": "Vite", "category": "frontend"},
     {"id": "babel", "displayName": "Babel", "category": "frontend"},
@@ -90,7 +89,7 @@ export const skillsEn: SkillData[] = [
     {"id": "monorepo", "displayName": "Monorepo tooling", "category": "frontend"},
     {"id": "git", "displayName": "Git", "category": "frontend"},
     {"id": "ci_cd_frontend", "displayName": "CI/CD for frontend", "category": "frontend"},
-    {"id": "github_actions", "displayName": "GitHub Actions", "category": "frontend"},
+    
     {"id": "vercel", "displayName": "Vercel", "category": "frontend"},
     {"id": "netlify", "displayName": "Netlify", "category": "frontend"},
     {"id": "pwa", "displayName": "Progressive Web Apps (PWA)", "category": "frontend"},
@@ -104,6 +103,7 @@ export const skillsEn: SkillData[] = [
     {"id": "web_security_basics", "displayName": "Frontend security basics (XSS, CSRF, CORS)", "category": "frontend"},
     {"id": "authentication_frontend", "displayName": "Authentication flows on the frontend", "category": "frontend"},
     {"id": "authorization_ui", "displayName": "Authorization and role-based UI", "category": "frontend"},
+
     {"id": "nodejs", "displayName": "Node.js", "category": "backend"},
     {"id": "express", "displayName": "Express.js", "category": "backend"},
     {"id": "koa", "displayName": "Koa", "category": "backend"},
@@ -131,34 +131,27 @@ export const skillsEn: SkillData[] = [
     {"id": "rust_backend", "displayName": "Rust for backend", "category": "backend"},
     {"id": "actix", "displayName": "Actix Web", "category": "backend"},
     {"id": "http", "displayName": "HTTP / HTTPS", "category": "backend"},
-    {"id": "rest_api", "displayName": "REST API design", "category": "backend"},
-    {"id": "graphql", "displayName": "GraphQL", "category": "backend"},
+    {"id": "rest_api_proj", "displayName": "REST API design", "category": "backend"},
+    
     {"id": "grpc", "displayName": "gRPC", "category": "backend"},
     {"id": "websockets_backend", "displayName": "WebSockets", "category": "backend"},
     {"id": "server_sent_events", "displayName": "Server-Sent Events (SSE)", "category": "backend"},
     {"id": "openapi", "displayName": "OpenAPI / Swagger", "category": "backend"},
-    {"id": "postman", "displayName": "Postman", "category": "backend"},
-    {"id": "insomnia", "displayName": "Insomnia", "category": "backend"},
+    
+
     {"id": "api_versioning", "displayName": "API versioning", "category": "backend"},
     {"id": "api_documentation", "displayName": "API documentation", "category": "backend"},
     {"id": "webhooks", "displayName": "Webhooks", "category": "backend"},
-    {"id": "postgresql", "displayName": "PostgreSQL", "category": "backend"},
-    {"id": "mysql", "displayName": "MySQL / MariaDB", "category": "backend"},
-    {"id": "sqlite", "displayName": "SQLite", "category": "backend"},
-    {"id": "mssql", "displayName": "Microsoft SQL Server", "category": "backend"},
-    {"id": "oracle_db", "displayName": "Oracle Database", "category": "backend"},
-    {"id": "sql", "displayName": "SQL", "category": "backend"},
+    
     {"id": "database_schema_design", "displayName": "Database schema design", "category": "backend"},
     {"id": "database_normalization", "displayName": "Database normalization", "category": "backend"},
-    {"id": "query_optimization", "displayName": "SQL query optimization", "category": "backend"},
-    {"id": "indexing", "displayName": "Database indexing", "category": "backend"},
-    {"id": "transactions", "displayName": "Transactions and ACID", "category": "backend"},
-    {"id": "mongodb", "displayName": "MongoDB", "category": "backend"},
+    
+
+
+    
     {"id": "redis", "displayName": "Redis", "category": "backend"},
-    {"id": "elasticsearch", "displayName": "Elasticsearch", "category": "backend"},
-    {"id": "cassandra", "displayName": "Cassandra", "category": "backend"},
-    {"id": "dynamodb", "displayName": "DynamoDB", "category": "backend"},
-    {"id": "firebase_firestore", "displayName": "Firebase Firestore", "category": "backend"},
+    
+    
     {"id": "orm", "displayName": "ORM / ODM", "category": "backend"},
     {"id": "typeorm", "displayName": "TypeORM", "category": "backend"},
     {"id": "prisma", "displayName": "Prisma", "category": "backend"},
@@ -201,23 +194,15 @@ export const skillsEn: SkillData[] = [
     {"id": "backend_testing", "displayName": "Backend testing", "category": "backend"},
     {"id": "unit_testing_backend", "displayName": "Unit testing", "category": "backend"},
     {"id": "integration_testing_backend", "displayName": "Integration testing", "category": "backend"},
-    {"id": "contract_testing", "displayName": "Contract testing", "category": "backend"},
-    {"id": "load_testing", "displayName": "Load and stress testing", "category": "backend"},
+
     {"id": "testcontainers", "displayName": "Testcontainers", "category": "backend"},
     {"id": "jest_backend", "displayName": "Jest", "category": "backend"},
     {"id": "pytest", "displayName": "pytest", "category": "backend"},
     {"id": "junit", "displayName": "JUnit", "category": "backend"},
-    {"id": "logging", "displayName": "Logging", "category": "backend"},
+
     {"id": "structured_logging", "displayName": "Structured logging", "category": "backend"},
-    {"id": "monitoring", "displayName": "Monitoring", "category": "backend"},
-    {"id": "metrics", "displayName": "Metrics and alerting", "category": "backend"},
-    {"id": "observability", "displayName": "Observability", "category": "backend"},
-    {"id": "distributed_tracing", "displayName": "Distributed tracing", "category": "backend"},
-    {"id": "opentelemetry", "displayName": "OpenTelemetry", "category": "backend"},
-    {"id": "prometheus", "displayName": "Prometheus", "category": "backend"},
-    {"id": "grafana", "displayName": "Grafana", "category": "backend"},
-    {"id": "docker_backend", "displayName": "Docker", "category": "backend"},
-    {"id": "docker_compose", "displayName": "Docker Compose", "category": "backend"},
+
+
     {"id": "kubernetes_backend", "displayName": "Kubernetes", "category": "backend"},
     {"id": "nginx", "displayName": "NGINX", "category": "backend"},
     {"id": "linux_backend", "displayName": "Linux", "category": "backend"},
@@ -231,6 +216,7 @@ export const skillsEn: SkillData[] = [
     {"id": "file_storage", "displayName": "File storage (S3, object storage)", "category": "backend"},
     {"id": "email_services", "displayName": "Email delivery services", "category": "backend"},
     {"id": "payment_integrations", "displayName": "Payment gateway integrations", "category": "backend"},
+
     {"id": "linux", "displayName": "Linux", "category": "devops"},
     {"id": "bash_scripting", "displayName": "Bash scripting", "category": "devops"},
     {"id": "python_automation", "displayName": "Python for automation", "category": "devops"},
@@ -332,6 +318,8 @@ export const skillsEn: SkillData[] = [
     {"id": "infrastructure_documentation", "displayName": "Infrastructure documentation", "category": "devops"},
     {"id": "architecture_diagrams", "displayName": "Architecture diagrams", "category": "devops"},
     {"id": "platform_engineering", "displayName": "Platform engineering", "category": "devops"},
+    {"id": "elasticsearch", "displayName": "Elasticsearch", "category": "devops"},
+
     {"id": "sql", "displayName": "SQL", "category": "database"},
     {"id": "relational_databases", "displayName": "Relational databases", "category": "database"},
     {"id": "nosql_databases", "displayName": "NoSQL databases", "category": "database"},
@@ -342,9 +330,9 @@ export const skillsEn: SkillData[] = [
     {"id": "mssql", "displayName": "Microsoft SQL Server", "category": "database"},
     {"id": "oracle_db", "displayName": "Oracle Database", "category": "database"},
     {"id": "mongodb", "displayName": "MongoDB", "category": "database"},
-    {"id": "redis", "displayName": "Redis", "category": "database"},
+
     {"id": "cassandra", "displayName": "Cassandra", "category": "database"},
-    {"id": "elasticsearch", "displayName": "Elasticsearch", "category": "database"},
+    
     {"id": "dynamodb", "displayName": "DynamoDB", "category": "database"},
     {"id": "firebase_firestore", "displayName": "Firebase Firestore", "category": "database"},
     {"id": "neo4j", "displayName": "Neo4j", "category": "database"},
@@ -359,21 +347,21 @@ export const skillsEn: SkillData[] = [
     {"id": "denormalization", "displayName": "Denormalization", "category": "database"},
     {"id": "constraints", "displayName": "Database constraints", "category": "database"},
     {"id": "keys_indexes", "displayName": "Keys and indexes", "category": "database"},
-    {"id": "indexing", "displayName": "Indexing", "category": "database"},
-    {"id": "query_optimization", "displayName": "Query optimization", "category": "database"},
+    {"id": "indexing", "displayName": "Database indexes", "category": "database"},
+    {"id": "query_optimization", "displayName": "SQL-query optimization", "category": "database"},
     {"id": "performance_tuning_db", "displayName": "Database performance tuning", "category": "database"},
     {"id": "execution_plans", "displayName": "Query execution plans", "category": "database"},
     {"id": "stored_procedures", "displayName": "Stored procedures", "category": "database"},
     {"id": "triggers", "displayName": "Triggers", "category": "database"},
     {"id": "views", "displayName": "Views", "category": "database"},
     {"id": "materialized_views", "displayName": "Materialized views", "category": "database"},
-    {"id": "transactions", "displayName": "Transactions", "category": "database"},
+    {"id": "transactions", "displayName": "Transactions and ACID", "category": "database"},
     {"id": "acid", "displayName": "ACID properties", "category": "database"},
     {"id": "concurrency_control", "displayName": "Concurrency control", "category": "database"},
     {"id": "isolation_levels", "displayName": "Transaction isolation levels", "category": "database"},
     {"id": "database_migrations", "displayName": "Database migrations", "category": "database"},
     {"id": "seed_data", "displayName": "Seed data management", "category": "database"},
-    {"id": "backup_restore", "displayName": "Backup and restore", "category": "database"},
+
     {"id": "replication", "displayName": "Replication", "category": "database"},
     {"id": "sharding", "displayName": "Sharding", "category": "database"},
     {"id": "partitioning", "displayName": "Partitioning", "category": "database"},
@@ -403,6 +391,7 @@ export const skillsEn: SkillData[] = [
     {"id": "data_migration", "displayName": "Data migration", "category": "database"},
     {"id": "bulk_operations", "displayName": "Bulk operations", "category": "database"},
     {"id": "database_documentation", "displayName": "Database documentation", "category": "database"},
+
     { "id": "software_testing_fundamentals", "displayName": "Software testing fundamentals", "category": "qa" },
     { "id": "test_levels", "displayName": "Test levels (unit, integration, system, acceptance)", "category": "qa" },
     { "id": "test_types", "displayName": "Test types (functional, non-functional, regression)", "category": "qa" },
@@ -427,23 +416,21 @@ export const skillsEn: SkillData[] = [
     { "id": "cross_browser_testing", "displayName": "Cross-browser testing", "category": "qa" },
     { "id": "responsive_testing", "displayName": "Responsive testing", "category": "qa" },
     { "id": "accessibility_testing", "displayName": "Accessibility testing (a11y)", "category": "qa" },
-    { "id": "client_side_validation", "displayName": "Client-side validation testing", "category": "qa" },
+    { "id": "client_side_validation_test", "displayName": "Client-side validation testing", "category": "qa" },
 
     { "id": "api_testing", "displayName": "API testing", "category": "qa" },
-    { "id": "rest_api", "displayName": "REST API testing", "category": "qa" },
+    { "id": "rest_api_test", "displayName": "REST API testing", "category": "qa" },
     { "id": "graphql_api", "displayName": "GraphQL API testing", "category": "qa" },
     { "id": "postman", "displayName": "Postman", "category": "qa" },
     { "id": "insomnia", "displayName": "Insomnia", "category": "qa" },
     { "id": "soapui", "displayName": "SoapUI", "category": "qa" },
 
-    { "id": "sql", "displayName": "SQL", "category": "qa" },
+
     { "id": "database_testing", "displayName": "Database testing", "category": "qa" },
     { "id": "data_validation", "displayName": "Data validation", "category": "qa" },
 
     { "id": "test_automation", "displayName": "Test automation", "category": "qa" },
-    { "id": "javascript", "displayName": "JavaScript", "category": "qa" },
-    { "id": "typescript", "displayName": "TypeScript", "category": "qa" },
-    { "id": "python", "displayName": "Python", "category": "qa" },
+    
     { "id": "playwright", "displayName": "Playwright", "category": "qa" },
     { "id": "cypress", "displayName": "Cypress", "category": "qa" },
     { "id": "selenium", "displayName": "Selenium", "category": "qa" },
@@ -452,18 +439,22 @@ export const skillsEn: SkillData[] = [
     { "id": "testng", "displayName": "TestNG", "category": "qa" },
 
     { "id": "performance_testing", "displayName": "Performance testing", "category": "qa" },
-    { "id": "load_testing", "displayName": "Load testing", "category": "qa" },
+    { "id": "load_testing", "displayName": "Load and stress testing", "category": "qa" },
     { "id": "stress_testing", "displayName": "Stress testing", "category": "qa" },
     { "id": "jmeter", "displayName": "Apache JMeter", "category": "qa" },
+    {"id": "contract_testing", "displayName": "Contract testing", "category": "database"},
 
     { "id": "security_testing", "displayName": "Security testing basics", "category": "qa" },
-    { "id": "xss_csrf_cors", "displayName": "XSS / CSRF / CORS awareness", "category": "qa" },
+    
     { "id": "api_security", "displayName": "API security testing", "category": "qa" },
 
     { "id": "bug_tracking", "displayName": "Bug tracking systems", "category": "qa" },
     { "id": "jira", "displayName": "Jira", "category": "qa" },
     { "id": "testrail", "displayName": "TestRail", "category": "qa" },
-    { "id": "azure_devops", "displayName": "Azure DevOps", "category": "qa" },
 
+
+
+    // common
+    { "id": "graphql","displayName": "GraphQL","category": "common"},
 ];
 

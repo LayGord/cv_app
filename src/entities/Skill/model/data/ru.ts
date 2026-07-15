@@ -24,8 +24,8 @@ export const skillsRu: SkillData[] = [
     {"id": "typescript", "displayName": "TypeScript", "category": "frontend"},
     {"id": "dom_api", "displayName": "DOM API", "category": "frontend"},
     {"id": "fetch_api", "displayName": "Fetch API", "category": "frontend"},
-    {"id": "rest_api", "displayName": "Интеграция с REST API", "category": "frontend"},
-    {"id": "graphql", "displayName": "GraphQL", "category": "frontend"},
+    {"id": "rest_api_int", "displayName": "Интеграция с REST API", "category": "frontend"},
+
     {"id": "websockets", "displayName": "WebSockets", "category": "frontend"},
     {"id": "local_storage", "displayName": "LocalStorage / SessionStorage", "category": "frontend"},
     {"id": "cookies", "displayName": "Cookies и browser storage", "category": "frontend"},
@@ -71,16 +71,15 @@ export const skillsRu: SkillData[] = [
     {"id": "lighthouse", "displayName": "Lighthouse", "category": "frontend"},
     {"id": "image_optimization", "displayName": "Оптимизация изображений", "category": "frontend"},
     {"id": "rendering_strategies", "displayName": "CSR / SSR / SSG / ISR", "category": "frontend"},
+
     {"id": "testing_frontend", "displayName": "Тестирование frontend (Jest, React Testing Library, Cypress)", "category": "frontend"},
     {"id": "unit_testing", "displayName": "Unit-тестирование", "category": "frontend"},
     {"id": "integration_testing", "displayName": "Интеграционное тестирование", "category": "frontend"},
     {"id": "e2e_testing", "displayName": "End-to-end тестирование", "category": "frontend"},
-    {"id": "jest", "displayName": "Jest", "category": "frontend"},
-    {"id": "vitest", "displayName": "Vitest", "category": "frontend"},
+   
     {"id": "react_testing_library", "displayName": "React Testing Library", "category": "frontend"},
-    {"id": "cypress", "displayName": "Cypress", "category": "frontend"},
-    {"id": "playwright", "displayName": "Playwright", "category": "frontend"},
     {"id": "mocking", "displayName": "Моки и test doubles", "category": "frontend"},
+
     {"id": "webpack", "displayName": "Webpack", "category": "frontend"},
     {"id": "vite", "displayName": "Vite", "category": "frontend"},
     {"id": "babel", "displayName": "Babel", "category": "frontend"},
@@ -90,7 +89,7 @@ export const skillsRu: SkillData[] = [
     {"id": "monorepo", "displayName": "Monorepo tooling", "category": "frontend"},
     {"id": "git", "displayName": "Git", "category": "frontend"},
     {"id": "ci_cd_frontend", "displayName": "CI/CD для frontend", "category": "frontend"},
-    {"id": "github_actions", "displayName": "GitHub Actions", "category": "frontend"},
+    
     {"id": "vercel", "displayName": "Vercel", "category": "frontend"},
     {"id": "netlify", "displayName": "Netlify", "category": "frontend"},
     {"id": "pwa", "displayName": "Progressive Web Apps (PWA)", "category": "frontend"},
@@ -104,6 +103,7 @@ export const skillsRu: SkillData[] = [
     {"id": "web_security_basics", "displayName": "Базовая frontend-безопасность (XSS, CSRF, CORS)", "category": "frontend"},
     {"id": "authentication_frontend", "displayName": "Authentication flow на frontend", "category": "frontend"},
     {"id": "authorization_ui", "displayName": "Авторизация и role-based UI", "category": "frontend"},
+
     {"id": "nodejs", "displayName": "Node.js", "category": "backend"},
     {"id": "express", "displayName": "Express.js", "category": "backend"},
     {"id": "koa", "displayName": "Koa", "category": "backend"},
@@ -131,34 +131,27 @@ export const skillsRu: SkillData[] = [
     {"id": "rust_backend", "displayName": "Rust для backend", "category": "backend"},
     {"id": "actix", "displayName": "Actix Web", "category": "backend"},
     {"id": "http", "displayName": "HTTP / HTTPS", "category": "backend"},
-    {"id": "rest_api", "displayName": "Проектирование REST API", "category": "backend"},
-    {"id": "graphql", "displayName": "GraphQL", "category": "backend"},
+    {"id": "rest_api_proj", "displayName": "Проектирование REST API", "category": "backend"},
+    
     {"id": "grpc", "displayName": "gRPC", "category": "backend"},
     {"id": "websockets_backend", "displayName": "WebSockets", "category": "backend"},
     {"id": "server_sent_events", "displayName": "Server-Sent Events (SSE)", "category": "backend"},
     {"id": "openapi", "displayName": "OpenAPI / Swagger", "category": "backend"},
-    {"id": "postman", "displayName": "Postman", "category": "backend"},
-    {"id": "insomnia", "displayName": "Insomnia", "category": "backend"},
+    
+
     {"id": "api_versioning", "displayName": "Версионирование API", "category": "backend"},
     {"id": "api_documentation", "displayName": "Документация API", "category": "backend"},
     {"id": "webhooks", "displayName": "Webhooks", "category": "backend"},
-    {"id": "postgresql", "displayName": "PostgreSQL", "category": "backend"},
-    {"id": "mysql", "displayName": "MySQL / MariaDB", "category": "backend"},
-    {"id": "sqlite", "displayName": "SQLite", "category": "backend"},
-    {"id": "mssql", "displayName": "Microsoft SQL Server", "category": "backend"},
-    {"id": "oracle_db", "displayName": "Oracle Database", "category": "backend"},
-    {"id": "sql", "displayName": "SQL", "category": "backend"},
+    
     {"id": "database_schema_design", "displayName": "Проектирование схемы базы данных", "category": "backend"},
     {"id": "database_normalization", "displayName": "Нормализация базы данных", "category": "backend"},
-    {"id": "query_optimization", "displayName": "Оптимизация SQL-запросов", "category": "backend"},
-    {"id": "indexing", "displayName": "Индексы баз данных", "category": "backend"},
-    {"id": "transactions", "displayName": "Транзакции и ACID", "category": "backend"},
-    {"id": "mongodb", "displayName": "MongoDB", "category": "backend"},
+    
+
+
+    
     {"id": "redis", "displayName": "Redis", "category": "backend"},
-    {"id": "elasticsearch", "displayName": "Elasticsearch", "category": "backend"},
-    {"id": "cassandra", "displayName": "Cassandra", "category": "backend"},
-    {"id": "dynamodb", "displayName": "DynamoDB", "category": "backend"},
-    {"id": "firebase_firestore", "displayName": "Firebase Firestore", "category": "backend"},
+    
+    
     {"id": "orm", "displayName": "ORM / ODM", "category": "backend"},
     {"id": "typeorm", "displayName": "TypeORM", "category": "backend"},
     {"id": "prisma", "displayName": "Prisma", "category": "backend"},
@@ -201,23 +194,15 @@ export const skillsRu: SkillData[] = [
     {"id": "backend_testing", "displayName": "Тестирование backend", "category": "backend"},
     {"id": "unit_testing_backend", "displayName": "Unit-тестирование", "category": "backend"},
     {"id": "integration_testing_backend", "displayName": "Интеграционное тестирование", "category": "backend"},
-    {"id": "contract_testing", "displayName": "Контрактное тестирование", "category": "backend"},
-    {"id": "load_testing", "displayName": "Нагрузочное и stress-тестирование", "category": "backend"},
+
     {"id": "testcontainers", "displayName": "Testcontainers", "category": "backend"},
     {"id": "jest_backend", "displayName": "Jest", "category": "backend"},
     {"id": "pytest", "displayName": "pytest", "category": "backend"},
     {"id": "junit", "displayName": "JUnit", "category": "backend"},
-    {"id": "logging", "displayName": "Логирование", "category": "backend"},
+
     {"id": "structured_logging", "displayName": "Структурированное логирование", "category": "backend"},
-    {"id": "monitoring", "displayName": "Мониторинг", "category": "backend"},
-    {"id": "metrics", "displayName": "Метрики и алертинг", "category": "backend"},
-    {"id": "observability", "displayName": "Наблюдаемость (observability)", "category": "backend"},
-    {"id": "distributed_tracing", "displayName": "Распределённый трейсинг", "category": "backend"},
-    {"id": "opentelemetry", "displayName": "OpenTelemetry", "category": "backend"},
-    {"id": "prometheus", "displayName": "Prometheus", "category": "backend"},
-    {"id": "grafana", "displayName": "Grafana", "category": "backend"},
-    {"id": "docker_backend", "displayName": "Docker", "category": "backend"},
-    {"id": "docker_compose", "displayName": "Docker Compose", "category": "backend"},
+
+
     {"id": "kubernetes_backend", "displayName": "Kubernetes", "category": "backend"},
     {"id": "nginx", "displayName": "NGINX", "category": "backend"},
     {"id": "linux_backend", "displayName": "Linux", "category": "backend"},
@@ -231,6 +216,7 @@ export const skillsRu: SkillData[] = [
     {"id": "file_storage", "displayName": "Файловое хранилище (S3, object storage)", "category": "backend"},
     {"id": "email_services", "displayName": "Сервисы отправки email", "category": "backend"},
     {"id": "payment_integrations", "displayName": "Интеграции с платёжными системами", "category": "backend"},
+
     {"id": "linux", "displayName": "Linux", "category": "devops"},
     {"id": "bash_scripting", "displayName": "Bash-скриптинг", "category": "devops"},
     {"id": "python_automation", "displayName": "Python для автоматизации", "category": "devops"},
@@ -332,6 +318,8 @@ export const skillsRu: SkillData[] = [
     {"id": "infrastructure_documentation", "displayName": "Документация инфраструктуры", "category": "devops"},
     {"id": "architecture_diagrams", "displayName": "Архитектурные диаграммы", "category": "devops"},
     {"id": "platform_engineering", "displayName": "Platform engineering", "category": "devops"},
+    {"id": "elasticsearch", "displayName": "Elasticsearch", "category": "devops"},
+
     {"id": "sql", "displayName": "SQL", "category": "database"},
     {"id": "relational_databases", "displayName": "Реляционные базы данных", "category": "database"},
     {"id": "nosql_databases", "displayName": "NoSQL базы данных", "category": "database"},
@@ -342,9 +330,9 @@ export const skillsRu: SkillData[] = [
     {"id": "mssql", "displayName": "Microsoft SQL Server", "category": "database"},
     {"id": "oracle_db", "displayName": "Oracle Database", "category": "database"},
     {"id": "mongodb", "displayName": "MongoDB", "category": "database"},
-    {"id": "redis", "displayName": "Redis", "category": "database"},
+    
     {"id": "cassandra", "displayName": "Cassandra", "category": "database"},
-    {"id": "elasticsearch", "displayName": "Elasticsearch", "category": "database"},
+    
     {"id": "dynamodb", "displayName": "DynamoDB", "category": "database"},
     {"id": "firebase_firestore", "displayName": "Firebase Firestore", "category": "database"},
     {"id": "neo4j", "displayName": "Neo4j", "category": "database"},
@@ -359,21 +347,21 @@ export const skillsRu: SkillData[] = [
     {"id": "denormalization", "displayName": "Денормализация", "category": "database"},
     {"id": "constraints", "displayName": "Ограничения базы данных", "category": "database"},
     {"id": "keys_indexes", "displayName": "Ключи и индексы", "category": "database"},
-    {"id": "indexing", "displayName": "Индексация", "category": "database"},
-    {"id": "query_optimization", "displayName": "Оптимизация запросов", "category": "database"},
+    {"id": "indexing", "displayName": "Индексы баз данных", "category": "databse"},
+    {"id": "query_optimization", "displayName": "Оптимизация SQL-запросов", "category": "database"},
     {"id": "performance_tuning_db", "displayName": "Тюнинг производительности базы данных", "category": "database"},
     {"id": "execution_plans", "displayName": "Планы выполнения запросов", "category": "database"},
     {"id": "stored_procedures", "displayName": "Хранимые процедуры", "category": "database"},
     {"id": "triggers", "displayName": "Триггеры", "category": "database"},
     {"id": "views", "displayName": "Представления (views)", "category": "database"},
     {"id": "materialized_views", "displayName": "Материализованные представления", "category": "database"},
-    {"id": "transactions", "displayName": "Транзакции", "category": "database"},
+    {"id": "transactions", "displayName": "Транзакции и ACID", "category": "database"},
     {"id": "acid", "displayName": "ACID-свойства", "category": "database"},
     {"id": "concurrency_control", "displayName": "Управление конкурентным доступом", "category": "database"},
     {"id": "isolation_levels", "displayName": "Уровни изоляции транзакций", "category": "database"},
     {"id": "database_migrations", "displayName": "Миграции базы данных", "category": "database"},
     {"id": "seed_data", "displayName": "Управление seed-данными", "category": "database"},
-    {"id": "backup_restore", "displayName": "Резервное копирование и восстановление", "category": "database"},
+
     {"id": "replication", "displayName": "Репликация", "category": "database"},
     {"id": "sharding", "displayName": "Шардирование", "category": "database"},
     {"id": "partitioning", "displayName": "Партиционирование", "category": "database"},
@@ -403,6 +391,7 @@ export const skillsRu: SkillData[] = [
     {"id": "data_migration", "displayName": "Миграция данных", "category": "database"},
     {"id": "bulk_operations", "displayName": "Массовые операции", "category": "database"},
     {"id": "database_documentation", "displayName": "Документация баз данных", "category": "database"},
+
     { "id": "software_testing_fundamentals", "displayName": "Основы тестирования ПО", "category": "qa" },
     { "id": "test_levels", "displayName": "Уровни тестирования (unit, integration, system, acceptance)", "category": "qa" },
     { "id": "test_types", "displayName": "Виды тестирования (functional, non-functional, regression)", "category": "qa" },
@@ -427,23 +416,21 @@ export const skillsRu: SkillData[] = [
     { "id": "cross_browser_testing", "displayName": "Кроссбраузерное тестирование", "category": "qa" },
     { "id": "responsive_testing", "displayName": "Тестирование адаптивности", "category": "qa" },
     { "id": "accessibility_testing", "displayName": "Тестирование доступности (a11y)", "category": "qa" },
-    { "id": "client_side_validation", "displayName": "Проверка клиентской валидации", "category": "qa" },
+    { "id": "client_side_validation_test", "displayName": "Проверка клиентской валидации", "category": "qa" },
 
     { "id": "api_testing", "displayName": "Тестирование API", "category": "qa" },
-    { "id": "rest_api", "displayName": "Тестирование REST API", "category": "qa" },
+    { "id": "rest_api_test", "displayName": "Тестирование REST API", "category": "qa" },
     { "id": "graphql_api", "displayName": "Тестирование GraphQL API", "category": "qa" },
     { "id": "postman", "displayName": "Postman", "category": "qa" },
     { "id": "insomnia", "displayName": "Insomnia", "category": "qa" },
     { "id": "soapui", "displayName": "SoapUI", "category": "qa" },
 
-    { "id": "sql", "displayName": "SQL", "category": "qa" },
+
     { "id": "database_testing", "displayName": "Тестирование баз данных", "category": "qa" },
     { "id": "data_validation", "displayName": "Проверка данных", "category": "qa" },
 
     { "id": "test_automation", "displayName": "Автоматизация тестирования", "category": "qa" },
-    { "id": "javascript", "displayName": "JavaScript", "category": "qa" },
-    { "id": "typescript", "displayName": "TypeScript", "category": "qa" },
-    { "id": "python", "displayName": "Python", "category": "qa" },
+    
     { "id": "playwright", "displayName": "Playwright", "category": "qa" },
     { "id": "cypress", "displayName": "Cypress", "category": "qa" },
     { "id": "selenium", "displayName": "Selenium", "category": "qa" },
@@ -452,18 +439,24 @@ export const skillsRu: SkillData[] = [
     { "id": "testng", "displayName": "TestNG", "category": "qa" },
 
     { "id": "performance_testing", "displayName": "Тестирование производительности", "category": "qa" },
-    { "id": "load_testing", "displayName": "Нагрузочное тестирование", "category": "qa" },
+    { "id": "load_testing", "displayName": "Нагрузочное и stress-тестирование", "category": "qa" },
     { "id": "stress_testing", "displayName": "Стресс-тестирование", "category": "qa" },
     { "id": "jmeter", "displayName": "Apache JMeter", "category": "qa" },
+    {"id": "contract_testing", "displayName": "Контрактное тестирование", "category": "qa"},
+
 
     { "id": "security_testing", "displayName": "Основы security testing", "category": "qa" },
-    { "id": "xss_csrf_cors", "displayName": "Понимание XSS / CSRF / CORS", "category": "qa" },
+
     { "id": "api_security", "displayName": "Тестирование безопасности API", "category": "qa" },
 
     { "id": "bug_tracking", "displayName": "Bug tracking systems", "category": "qa" },
     { "id": "jira", "displayName": "Jira", "category": "qa" },
     { "id": "testrail", "displayName": "TestRail", "category": "qa" },
-    { "id": "azure_devops", "displayName": "Azure DevOps", "category": "qa" },
+
+
+
+    // common
+    { "id": "graphql","displayName": "GraphQL","category": "common"},
 
 ];
 
